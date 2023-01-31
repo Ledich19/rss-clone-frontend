@@ -9,10 +9,10 @@ const initialState = {
 };
 
 const enemySlice = createSlice({
-  name: 'cart',
+  name: 'enemy',
   initialState,
   reducers: {
-    getAllEnemy(state, action) {
+    getAllEnemy(state) {
       return state;
     },
   },

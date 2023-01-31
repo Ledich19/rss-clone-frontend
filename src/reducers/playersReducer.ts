@@ -12,10 +12,10 @@ const initialState: Players = {
 };
 
 const playersSlice = createSlice({
-  name: 'cart',
+  name: 'players',
   initialState,
   reducers: {
-    getAllPlayers(state, action) {
+    getAllPlayers(state) {
       return state;
     },
   },

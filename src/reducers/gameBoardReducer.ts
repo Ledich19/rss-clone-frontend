@@ -524,10 +524,10 @@ const initialState = [
 ];
 
 const gameBoardSlice = createSlice({
-  name: 'cart',
+  name: 'game',
   initialState,
   reducers: {
-    getGameBoard(state, action) {
+    getGameBoard(state) {
       return state;
     },
   },
