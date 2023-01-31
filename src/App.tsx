@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Error404 from './components/Error404/Error404';
 import Tutorial from './Modules/Tutorial/Tutorial';
 import StartPage from './Modules/StartPage/StartPage';
-import Game from './Modules/Game/Game';
+import GameBoard from './Modules/GameBoard/GameBoard';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<StartPage />} />
-        <Route path="/home" element={<Game />} />
+        <Route path="/game" element={<GameBoard />} />
         <Route path="/tutorial" element={<Tutorial />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>

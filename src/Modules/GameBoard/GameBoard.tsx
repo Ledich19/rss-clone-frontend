@@ -1,8 +1,8 @@
 import React from 'react'
-import "./Game.scss";
+import "./GameBoard.scss";
 
 
-const Game = () => {
+const GameBoard = () => {
   return (
     <div className="game">
 
@@ -10,4 +10,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default GameBoard;
