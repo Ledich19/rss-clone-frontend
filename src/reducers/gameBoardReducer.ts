@@ -391,7 +391,6 @@ const initialState = [
     { top: '', right: '', bottom: '', left: '', state: {}, id: '1422' },
     { top: '', right: '', bottom: '', left: '', state: {}, id: '1423' },
   ], //14
-
   [
     { top: '', right: '', bottom: '', left: '', state: {}, id: '150' },
     { top: '', right: '', bottom: '', left: '', state: {}, id: '151' },
