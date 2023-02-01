@@ -9,8 +9,11 @@ const Header = () => {
         <Link rel="stylesheet" to={`/`} className="header__link">
           Home
         </Link>
-        <Link rel="stylesheet" to={`/home`} className="header__link">
-          home
+        <Link rel="stylesheet" to={`/game`} className="header__link">
+          game
+        </Link>
+        <Link rel="stylesheet" to={`/tutorial`} className="header__link">
+        guide
         </Link>
         <Link rel="stylesheet" to={`/404`} className="header__link">
           404
