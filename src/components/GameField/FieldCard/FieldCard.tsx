@@ -8,6 +8,8 @@ type PropsType = {
 };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
+  console.log(item.state);
+  
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,

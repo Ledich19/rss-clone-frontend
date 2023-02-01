@@ -1,18 +1,53 @@
-import React from 'react';
-import { useAppSelector } from '../../app/hooks';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setNewGameField } from '../../reducers/gameBoardReducer';
 import FieldCard from './FieldCard/FieldCard';
 import './GameField.scss';
 
 const GameField = () => {
   const gameFieldMatrix = useAppSelector((state) => state.game);
+  const gameCardsSet = useAppSelector((state) => state.gameSet.cards);
+  const dispatch = useAppDispatch();
   const heightField = gameFieldMatrix.length;
+
+  function shuffleArray<Type>(arr: Type[]): Type[] {
+    return arr.sort(() => Math.round(Math.random() * 100) - 50);
+  }
+
+  useEffect(() => {
+    const gameCards = Object.values(gameCardsSet)
+      .flat(1)
+      .map((card) => Array(card.count).fill(card))
+      .flat(1);
+
+    const emptyCellIds = gameFieldMatrix
+      .flat(1)
+      .filter((ceil) => !ceil.state)
+      .map((ceil) => ceil.id);
+
+    const shuffleEmptyCells = shuffleArray(emptyCellIds).map((ceil, i) => {
+      return { id: ceil, state: gameCards[i] ? gameCards[i] : null };
+    });
+    const newGameField = gameFieldMatrix.map((row) => {
+      return row.map((ceil) => {
+        const emptyCeilContent = shuffleEmptyCells.find((item) => item.id === ceil.id);
+        if (emptyCeilContent) {
+          return { ...ceil, state: emptyCeilContent.state };
+        }
+        return ceil;
+      });
+    });
+    dispatch(setNewGameField(newGameField));
+  }, []);
 
   return (
     <div className="field">
       {gameFieldMatrix.map((row, i) => {
         return (
           <div className="field__row" key={`rowId${i}`}>
-            {row.map((item) => <FieldCard key={item.id} heightField={heightField} item={item}/>)}
+            {row.map((item) => (
+              <FieldCard key={item.id} heightField={heightField} item={item} />
+            ))}
           </div>
         );
       })}
