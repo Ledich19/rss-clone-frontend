@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './FieldCard.scss';
 import { BoardItemType } from './../../../app/types';
+import { useAppSelector } from '../../../app/hooks';
 
 type PropsType = {
   heightField: number;
@@ -8,8 +9,6 @@ type PropsType = {
 };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
-  const [isFront, setISFront] = useState(false);
-  console.log(item.state);
 
   const style = {
     height: `calc(100vh / ${heightField})`,
@@ -21,15 +20,15 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   };
 
   const handleOpen = () => {
-    setISFront(!isFront);
+    //setISFront(!isFront);
   };
   ///
   ///images/${item.state.img}
   return (
     <div onClick={handleOpen} style={style} className="field-card">
-      {item.state ? (
+      {item.state && item.state !== 'player' && item.state !== 'finish' ? (
         <div style={style} className={`flip-container  field-card `}>
-          <div className={`flipper ${isFront ? '_front' : ''}`}>
+          <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
             <div className="front">
               <img src={`./images/backCard.png`} alt="back card" />
             </div>
@@ -39,7 +38,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           </div>
         </div>
       ) : (
-        ''
+        item.id
       )}
     </div>
   );

@@ -7,6 +7,7 @@ import './GameField.scss';
 const GameField = () => {
   const gameFieldMatrix = useAppSelector((state) => state.game);
   const gameCardsSet = useAppSelector((state) => state.gameSet.cards);
+  const { characters } = useAppSelector((state) => state.characters);
   const dispatch = useAppDispatch();
   const heightField = gameFieldMatrix.length;
 
@@ -15,6 +16,27 @@ const GameField = () => {
   }
 
   useEffect(() => {
+    //render characters
+    console.log(characters);
+    const emptyCellIdsForPlayer = gameFieldMatrix
+      .flat(1)
+      .filter((ceil) => ceil.state === 'player')
+      .map((ceil) => ceil.id);
+    const shuffleEmptyCellIdsForPlayer = shuffleArray(emptyCellIdsForPlayer).map((ceil, i) => {
+      return { id: ceil, state: characters[i] ? characters[i] : null };
+    });
+
+    const newGameFieldWithPlayers = gameFieldMatrix.map((row) => {
+      return row.map((ceil) => {
+        const emptyCeilContent = shuffleEmptyCellIdsForPlayer.find((item) => item.id === ceil.id);
+        if (emptyCeilContent) {
+          return { ...ceil, state: emptyCeilContent.state };
+        }
+        return ceil;
+      });
+    });
+
+    //render items
     const gameCards = Object.values(gameCardsSet)
       .flat(1)
       .map((card) => Array(card.count).fill(card))
@@ -28,7 +50,7 @@ const GameField = () => {
     const shuffleEmptyCells = shuffleArray(emptyCellIds).map((ceil, i) => {
       return { id: ceil, state: gameCards[i] ? gameCards[i] : null };
     });
-    const newGameField = gameFieldMatrix.map((row) => {
+    const newGameField = newGameFieldWithPlayers.map((row) => {
       return row.map((ceil) => {
         const emptyCeilContent = shuffleEmptyCells.find((item) => item.id === ceil.id);
         if (emptyCeilContent) {

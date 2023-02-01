@@ -527,6 +527,7 @@ const initialState: GameSetType = {
   cards: {
     characters: [
       {
+        isVisible: false,
         type: 'boris',
         name: 'Борис',
         img: 'characters/boris.png',
@@ -537,6 +538,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        isVisible: false,
         type: 'sasha',
         name: 'Саша',
         img: 'characters/sasha.png',
@@ -547,6 +549,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        isVisible: false,
         type: 'nastya',
         name: 'Настя',
         img: 'characters/nastya.png',
@@ -557,6 +560,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        isVisible: false,
         type: 'maks',
         name: 'Макс',
         img: 'characters/maks.png',
@@ -567,6 +571,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        isVisible: false,
         type: 'nadya',
         name: 'Надя',
         img: 'characters/nadya.png',
@@ -579,6 +584,7 @@ const initialState: GameSetType = {
     ],
     enemies: [
       {
+        isVisible: false,
         type: 'zombie',
         name: 'Зомби',
         img: 'enemies/zombie.png',
@@ -586,6 +592,7 @@ const initialState: GameSetType = {
         count: 17,
       },
       {
+        isVisible: false,
         type: 'hellHound',
         name: 'Дьявольские псы',
         img: 'enemies/hellHound.png',
@@ -593,6 +600,7 @@ const initialState: GameSetType = {
         count: 5,
       },
       {
+        isVisible: false,
         type: 'spiderMutant',
         name: 'Пауки-мутанты',
         img: 'enemies/spiderMutant.png',
@@ -600,6 +608,7 @@ const initialState: GameSetType = {
         count: 5,
       },
       {
+        isVisible: false,
         type: 'boss',
         name: 'Болотный ужас',
         img: 'enemies/boss.png',
@@ -609,6 +618,7 @@ const initialState: GameSetType = {
     ],
     things: [
       {
+        isVisible: false,
         type: 'canister',
         name: 'Канистра',
         img: 'things/canister.png',
@@ -616,6 +626,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'key',
         name: 'Ключ',
         img: 'things/key.png',
@@ -623,6 +634,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'firstAidKit',
         name: 'Аптечка',
         img: 'things/firstAidKit.png',
@@ -630,6 +642,7 @@ const initialState: GameSetType = {
         count: 6,
       },
       {
+        isVisible: false,
         type: 'plank',
         name: 'Доски',
         img: 'things/plank.png',
@@ -640,6 +653,7 @@ const initialState: GameSetType = {
     ],
     weapon: [
       {
+        isVisible: false,
         type: 'axe',
         name: 'Топор',
         img: 'weapon/axe.png',
@@ -648,6 +662,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'crossbow',
         name: 'Арбалет',
         img: 'weapon/crossbow.png',
@@ -656,6 +671,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'grenade',
         name: 'Граната',
         img: 'weapon/grenade.png',
@@ -664,6 +680,7 @@ const initialState: GameSetType = {
         count: 4,
       },
       {
+        isVisible: false,
         type: 'grenadeGun',
         name: 'Гранатомет',
         img: 'weapon/grenadeGun.png',
@@ -672,6 +689,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'gun',
         name: 'Пистолет',
         img: 'weapon/gun.png',
@@ -680,6 +698,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'knife',
         name: 'Нож',
         img: 'weapon/knife.png',
@@ -688,6 +707,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'machineGun',
         name: 'Автомат',
         img: 'weapon/machineGun.png',
@@ -696,6 +716,7 @@ const initialState: GameSetType = {
         count: 1,
       },
       {
+        isVisible: false,
         type: 'shotgun',
         name: 'Дробовик',
         img: 'weapon/shotgun.png',

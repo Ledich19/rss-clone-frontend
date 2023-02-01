@@ -17,12 +17,13 @@ export type Player = {
 }
 
 export type Players = {
-  characters: Player[],
+  characters: CharacterType[],
   active: string,
 }
 
 
 export type CharacterType = {
+  isVisible: boolean;
   type: string,
   name: string,
   img: string,
@@ -33,6 +34,7 @@ export type CharacterType = {
   inventory: [],
 }
 export type EnemyType = {
+  isVisible: boolean;
   type: string,
   name: string,
   img: string,
@@ -40,6 +42,7 @@ export type EnemyType = {
   count: number,
 }
 export type ThingType = {
+  isVisible: boolean;
   type: string,
   name: string,
   img: string,
@@ -47,6 +50,7 @@ export type ThingType = {
   count: number,
 }
 export type WeaponType = {
+  isVisible: boolean;
   type: string,
   name: string,
   img: string,
@@ -60,8 +64,9 @@ export type BoardItemType = {
   bottom: boolean,
   left: boolean,
   state: {
+    isVisible: boolean;
     img: string
-  } | null,
+  } | null | 'player' | 'finish',
   id: string
 }
 
