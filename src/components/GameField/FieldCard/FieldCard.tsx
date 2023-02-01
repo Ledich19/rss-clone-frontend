@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FieldCard.scss';
 import { BoardItemType } from './../../../app/types';
 
@@ -8,20 +8,39 @@ type PropsType = {
 };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
+  const [isFront, setISFront] = useState(false);
   console.log(item.state);
-  
+
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
-    borderLeft: !item.left ? 'solid 4px black' : '',
-    borderRight: !item.right ? 'solid 4px black' : '',
-    borderTop: !item.top ? 'solid 4px black' : '',
-    borderBottom: !item.bottom ? 'solid 4px black' : '',
+    borderLeft: !item.left ? 'solid 2px rgba(0, 0, 0, 0)' : '',
+    borderRight: !item.right ? 'solid 2px rgba(0, 0, 0, 0)' : '',
+    borderTop: !item.top ? 'solid 2px rgba(0, 0, 0, 0)' : '',
+    borderBottom: !item.bottom ? 'solid 2px rgba(0, 0, 0, 0)' : '',
   };
 
+  const handleOpen = () => {
+    setISFront(!isFront);
+  };
+  ///
+  ///images/${item.state.img}
   return (
-    <div style={style} className="field-card">
-      {item.id}
+    <div onClick={handleOpen} style={style} className="field-card">
+      {item.state ? (
+        <div style={style} className={`flip-container  field-card `}>
+          <div className={`flipper ${isFront ? '_front' : ''}`}>
+            <div className="front">
+              <img src={`./images/backCard.png`} alt="back card" />
+            </div>
+            <div className="back">
+              <img src={`./images/${item.state.img}`} alt="back card" />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

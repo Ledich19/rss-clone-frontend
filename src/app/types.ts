@@ -54,13 +54,15 @@ export type WeaponType = {
   use: 'sword' | 'aim' | 'free',
   count: number,
 }
-export type BoardItemType = { 
-  top: boolean, 
-  right: boolean, 
-  bottom: boolean, 
-  left: boolean, 
-  state: object | null, 
-  id: string 
+export type BoardItemType = {
+  top: boolean,
+  right: boolean,
+  bottom: boolean,
+  left: boolean,
+  state: {
+    img: string
+  } | null,
+  id: string
 }
 
 export type GameSetType = {
