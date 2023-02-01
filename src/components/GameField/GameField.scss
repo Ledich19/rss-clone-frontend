@@ -1,5 +1,5 @@
 .field {
-  background-image: url(./../../images/maps/zvdkarta3.jpg);
+  background-image: url(./../../../public/images/maps/zvdkarta3.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   &__row{
@@ -12,5 +12,9 @@
     &:hover{
     background: rgba(217, 220, 7, 0.313);
     }
+  }
+  &__img{
+    height: 50px;
+    width: 50px;
   }
 }

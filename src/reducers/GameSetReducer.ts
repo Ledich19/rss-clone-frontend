@@ -529,6 +529,7 @@ const initialState: GameSetType = {
       {
         type: 'boris',
         name: 'Борис',
+        img: './characters/boris.png',
         playerName: '',
         description: 'Невероятно здоровый и выносливый: в начале игры у него на две жизни больше, чем у остальных',
         count: 1,
@@ -538,6 +539,7 @@ const initialState: GameSetType = {
       {
         type: 'sasha',
         name: 'Саша',
+        img: './characters/sasha.png',
         playerName: '',
         description: 'Увлекается боевыми искусствами: у него всегда есть с собой нож (можно использовать его в любой момент, как если бы у Саши была такая карточка оружия).',
         count: 1,
@@ -547,6 +549,7 @@ const initialState: GameSetType = {
       {
         type: 'nastya',
         name: 'Настя',
+        img: './characters/nastya.png',
         playerName: '',
         description: 'Работает медсестрой: использованная ею аптечка даёт не одну жизнь, а сразу две.',
         count: 1,
@@ -556,6 +559,7 @@ const initialState: GameSetType = {
       {
         type: 'maks',
         name: 'Макс',
+        img: './characters/maks.png',
         playerName: '',
         description: 'Самый младший игрок, зато самый быстрый: к каждому своему ходу при передвижении может (при желании) добавлять +1.',
         count: 1,
@@ -565,6 +569,7 @@ const initialState: GameSetType = {
       {
         type: 'nadya',
         name: 'Надя',
+        img: './characters/nadya.png',
         playerName: '',
         description: 'Работает в Полиции: в начале игры у неё с собой есть пистолет (можно использовать его в любой момент, как если бы у Нади была такая карточка оружия).',
         count: 1,
@@ -576,24 +581,28 @@ const initialState: GameSetType = {
       {
         type: 'zombie',
         name: 'Зомби',
+        img: './enemies/zombie.png',
         description: 'Нападает на игрока и кусает, если вертушка показывает — зубы.',
         count: 17,
       },
       {
         type: 'hellHound',
         name: 'Дьявольские псы',
+        img: './enemies/hellHound.png',
         description: 'Нападает на игрока и кусает, если вертушка показывает — зубы',
         count: 5,
       },
       {
         type: 'spiderMutant',
         name: 'Пауки-мутанты',
+        img: './enemies/spiderMutant.png',
         description: 'Нападает на игрока и кусает, если вертушка показывает — зубы.',
         count: 5,
       },
       {
         type: 'boss',
         name: 'Болотный ужас',
+        img: './enemies/boss.png',
         description: 'Нападает на игрока и кусает, если вертушка показывает — зубы. Это босс. Его можно убить только с помощью гранатомёта.',
         count: 1,
       },
@@ -602,24 +611,28 @@ const initialState: GameSetType = {
       {
         type: 'canister',
         name: 'Канистра',
+        img: './things/canister.png',
         description: 'Нужна, чтобы заправить и завести машину.',
         count: 1,
       },
       {
         type: 'key',
         name: 'Ключ',
+        img: './things/key.png',
         description: 'Нужен, чтобы завести машину.',
         count: 1,
       },
       {
         type: 'firstAidKit',
         name: 'Аптечка',
+        img: './things/firstAidKit.png',
         description: 'Восполняет одну жизнь (а при применении Настей ― сразу две).',
         count: 6,
       },
       {
         type: 'plank',
         name: 'Доски',
+        img: './things/plank.png',
         description: 'С их помощью можно забить окно или дверь. Для этого, пройдя через дверь или окно, игрок кладёт карточку досок (найденную раньше) на клетку с изображением двери или окна',
         count: 8,
       },
@@ -629,6 +642,7 @@ const initialState: GameSetType = {
       {
         type: 'axe',
         name: 'Топор',
+        img: './weapon/axe.png',
         description: 'Холодное оружие: может убить монстра, если вертушка показывает перекрещенные шпаги.',
         use: 'sword',
         count: 1,
@@ -636,6 +650,7 @@ const initialState: GameSetType = {
       {
         type: 'crossbow',
         name: 'Арбалет',
+        img: './weapon/crossbow.png',
         description: 'Холодное оружие: может убить монстра, если вертушка показывает перекрещенные шпаги.',
         use: 'sword',
         count: 1,
@@ -643,6 +658,7 @@ const initialState: GameSetType = {
       {
         type: 'grenade',
         name: 'Граната',
+        img: './weapon/grenade.png',
         description: 'Может сразу взорвать любого монстра, кроме босса ― Болотного ужаса.',
         use: 'free',
         count: 4,
@@ -650,6 +666,7 @@ const initialState: GameSetType = {
       {
         type: 'grenadeGun',
         name: 'Гранатомет',
+        img: './weapon/grenadeGun.png',
         description: 'Единственный способ избавиться от босса ― Болотного ужаса. Нельзя использовать на других врагов.',
         use: 'free',
         count: 1,
@@ -657,6 +674,7 @@ const initialState: GameSetType = {
       {
         type: 'gun',
         name: 'Пистолет',
+        img: './weapon/gun.png',
         description: 'Огнестрельное оружие: может убить одного монстра, если вертушка показывает прицел.',
         use: 'aim',
         count: 1,
@@ -664,6 +682,7 @@ const initialState: GameSetType = {
       {
         type: 'knife',
         name: 'Нож',
+        img: './weapon/knife.png',
         description: 'Холодное оружие: может убить монстра, если вертушка показывает перекрещенные шпаги.',
         use: 'sword',
         count: 1,
@@ -671,6 +690,7 @@ const initialState: GameSetType = {
       {
         type: 'machineGun',
         name: 'Автомат',
+        img: './weapon/machineGun.png',
         description: 'Огнестрельное оружие: может убить одного монстра, если вертушка показывает прицел.',
         use: 'aim',
         count: 1,
@@ -678,6 +698,7 @@ const initialState: GameSetType = {
       {
         type: 'shotgun',
         name: 'Дробовик',
+        img: './weapon/shotgun.png',
         description: 'Огнестрельное оружие: может убить одного монстра, если вертушка показывает прицел.',
         use: 'aim',
         count: 1,

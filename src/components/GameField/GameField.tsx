@@ -25,7 +25,10 @@ const GameField = () => {
                 borderTop: !item.top ? 'solid 4px black' : '',
                 borderBottom: !item.bottom ? 'solid 4px black' : '',
               };
-              return <div style={style} key={item.id} className="field__item">{item.id}</div>;
+              return <div style={style} key={item.id} className="field__item">
+               {/* <img src={`./images/characters/boris.png`} alt="" className='field__img'/> */}
+                
+                {item.id}</div>;
             })}
           </div>
         );
