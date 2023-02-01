@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './FieldCard.scss';
 import { BoardItemType } from './../../../app/types';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { toggleVisibleCard } from '../../../reducers/gameBoardReducer';
 
 type PropsType = {
   heightField: number;
@@ -9,7 +10,7 @@ type PropsType = {
 };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
-
+const dispatch = useAppDispatch()
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
@@ -20,7 +21,8 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   };
 
   const handleOpen = () => {
-    //setISFront(!isFront);
+    console.log(item.id);
+    dispatch(toggleVisibleCard(item.id))
   };
   ///
   ///images/${item.state.img}

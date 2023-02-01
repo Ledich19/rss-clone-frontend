@@ -534,8 +534,25 @@ const gameBoardSlice = createSlice({
     }) {
       return actions.payload;
     },
+    toggleVisibleCard(state, actions: {
+      payload: string;
+      type: string;
+    }) {
+
+      const newState = state.map((row) => {
+        return row.map((ceil) => {
+          if (ceil.state && ceil.id === actions.payload && ceil.state !== 'player' && ceil.state !== 'finish') {
+            const newCeil = { ...ceil, state: { ...ceil.state, isVisible: !ceil.state.isVisible } }
+            return newCeil
+          }
+          return ceil
+        });
+      });
+
+      return newState;
+    },
   },
 });
 
-export const { setNewGameField } = gameBoardSlice.actions;
+export const { setNewGameField, toggleVisibleCard } = gameBoardSlice.actions;
 export default gameBoardSlice.reducer;

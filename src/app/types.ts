@@ -10,6 +10,7 @@ export type PromoCodeState = {
   }[],
 }
 export type Player = {
+  isVisible: boolean;
   playerName: string,
   name: string,
   health: number,
