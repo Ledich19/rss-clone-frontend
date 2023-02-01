@@ -45,9 +45,10 @@ export type ThingType = {
 }
 export type WeaponType = {
   type: string,
+  name: string,
   description: string,
-  use: string,
-  count: 1,
+  use: 'sword' | 'aim' | 'free',
+  count: number,
 }
 export type BoardItemType = { 
   top: boolean, 
