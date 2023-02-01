@@ -1,3 +1,74 @@
-.Main {
-  flex: 1 1 auto;
+$colorText: #6d0101;
+%tableText {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+  padding-left: 20px;
+}
+.rules{
+  padding-top: 50px;
+  &__container{
+    max-width: 1330px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+  &__logo{
+    flex: 1 1 50%;
+  }
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+  }
+  &__info{
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 50px;
+  }
+  &__about-game{
+    color: $colorText;
+    font-weight: 500;
+    font-size: 24px;
+    text-align: left;
+  }
+  &__table{
+    
+  }
+}
+.table{
+  display: flex;
+  justify-content: flex-end;
+  &__wrapper{
+    background-color: rgb(165, 83, 42);
+    transform: rotate(2deg);
+    width: 250px;
+    padding: 20px;
+    
+  }
+  &__list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+
+    // box-shadow: 0px 0px 20px 5px rgba(255,255,255,1);
+
+  }
+  &__item{
+    @extend %tableText;
+    position: relative;
+    &:before{
+      content: '';
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      left: 0;
+    }
+  }
 }
