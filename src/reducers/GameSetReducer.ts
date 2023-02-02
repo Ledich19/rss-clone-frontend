@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { GameSetType } from '../app/types';
+import { GameSetType } from "../app/types";
 
 const initialState: GameSetType = {
   board: [

@@ -5,10 +5,15 @@
     "jest": true
   },
   "extends": [
-    "eslint:recommended",
+    "airbnb-base",
     "plugin:react/recommended",
+    "airbnb/hooks",
+    "airbnb-typescript/base",
     "plugin:@typescript-eslint/recommended"
   ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "plugins": ["react", "@typescript-eslint"],
   "settings": {
     "react": {
@@ -17,14 +22,8 @@
     }
   },
   "rules": {
-    "linebreak-style": [
-        "error",
-        "unix"
-    ],
-    "quotes": [
-        "error",
-        "single"
-    ],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
     // "@typescript-eslint/explicit-function-return-type": 0,
     // "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": 2,
