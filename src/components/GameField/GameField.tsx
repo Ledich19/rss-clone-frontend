@@ -16,7 +16,7 @@ const GameField = () => {
   }
 
   useEffect(() => {
-    //render characters
+    //add characters
 
     const emptyCellIdsForPlayer = gameFieldMatrix
       .flat(1)
@@ -38,7 +38,8 @@ const GameField = () => {
       });
     });
 
-    //render items
+    //add another items
+    const useCharactersTypes = characters.map((character) => character.type)
     const gameCards = Object.values(gameCardsSet)
       .flat(1)
       .map((card) => Array(card.count).fill(card))
@@ -55,7 +56,7 @@ const GameField = () => {
     const newGameField = newGameFieldWithPlayers.map((row) => {
       return row.map((ceil) => {
         const emptyCeilContent = shuffleEmptyCells.find((item) => item.id === ceil.id);
-        if (emptyCeilContent) {
+        if (emptyCeilContent?.state && !useCharactersTypes.includes(emptyCeilContent.state.type) ) {
           return { ...ceil, state: emptyCeilContent.state };
         }
         return ceil;
