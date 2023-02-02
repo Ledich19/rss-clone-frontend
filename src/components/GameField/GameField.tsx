@@ -17,7 +17,7 @@ const GameField = () => {
 
   useEffect(() => {
     //render characters
-    console.log(characters);
+
     const emptyCellIdsForPlayer = gameFieldMatrix
       .flat(1)
       .filter((ceil) => ceil.state === 'player')
@@ -25,11 +25,13 @@ const GameField = () => {
     const shuffleEmptyCellIdsForPlayer = shuffleArray(emptyCellIdsForPlayer).map((ceil, i) => {
       return { id: ceil, state: characters[i] ? characters[i] : null };
     });
+    console.log(shuffleEmptyCellIdsForPlayer);
 
     const newGameFieldWithPlayers = gameFieldMatrix.map((row) => {
       return row.map((ceil) => {
         const emptyCeilContent = shuffleEmptyCellIdsForPlayer.find((item) => item.id === ceil.id);
-        if (emptyCeilContent) {
+        if (emptyCeilContent && emptyCeilContent.state) {
+          console.log({ ...ceil, state: emptyCeilContent.state });
           return { ...ceil, state: emptyCeilContent.state };
         }
         return ceil;

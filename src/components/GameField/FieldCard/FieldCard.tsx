@@ -20,8 +20,7 @@ const dispatch = useAppDispatch()
     borderBottom: !item.bottom ? 'solid 2px rgba(0, 0, 0, 0)' : '',
   };
 
-  const handleOpen = () => {
-    console.log(item.id);
+  const handleOpen = () => {console.log
     dispatch(toggleVisibleCard(item.id))
   };
   ///
@@ -29,7 +28,7 @@ const dispatch = useAppDispatch()
   return (
     <div onClick={handleOpen} style={style} className="field-card">
       {item.state && item.state !== 'player' && item.state !== 'finish' ? (
-        <div style={style} className={`flip-container  field-card `}>
+        <div  className={`flip-container`}>
           <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
             <div className="front">
               <img src={`./images/backCard.png`} alt="back card" />
