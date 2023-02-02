@@ -19,7 +19,10 @@ $colorText: #6d0101;
     display: flex;
     justify-content: space-between;
     gap: 50px;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
+    background-color: #fff;
+    position: relative;
+    z-index: 2;
   }
   &__info{
     flex: 1 1 50%;

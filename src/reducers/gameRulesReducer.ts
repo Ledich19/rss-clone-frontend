@@ -1,17 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { GameSetType } from '../app/types';
+import { Table, Rules } from '../app/types';
 
-type Table = {
-  text: string[],
-}
-type Rules = {
-  aboutGame: string,
-  table: Table,
-  goal: {
-    title: string,
-    text: string,
-  },
-}
 const initialState: Rules = {
   aboutGame : `Всё началось как в фильме ужасов: вы с друзьями
   решили отправиться на пикник, выехали только
@@ -35,6 +24,50 @@ const initialState: Rules = {
     Вам придётся исследовать заброшенный дом, сражаться с зомби
     с помощью оружия, подвернувшегося под руку, а ещё — находить
     и использовать разные полезные вещи.`,
+  },
+  inBox: {
+    title: 'В коробке',
+    cards: {
+      monstrs:{
+        title: '28 карточек монстров',
+        zombie: '17 Зомби',
+        dog: '5 дьявольских псов',
+        spider: '5 пауков-мутантов',
+        boss: 'Босс - болотный ужас',
+      },
+      weapons:{
+        title: '11 карточек оружия',
+        grenade: '4 гранаты',
+        knife: 'Нож',
+        arbalet: 'Арбалет',
+        axe: 'Топор',
+        pistol: 'Пистолет',
+        gun: 'автомат',
+        shotGun: 'дробовик',
+        grenadeLauncher: 'гранатомёт',
+      },
+      clothes:{
+        title: '16 карточек вещей',
+        kits: '6 аптечек',
+        boards: '8 досок',
+        canister: 'Канистра с бензином',
+        key: 'Ключ',
+      },
+      players: {
+        title: '5 карточек игроков',
+        alex: 'Саша',
+        nadya: 'Надя',
+        nastya: 'Настя',
+        maks: 'Макс',
+        borya: 'Боря',
+      },
+      health: {
+        title: '40 фишек здоровья',
+      },
+      spinner: {
+        title: 'Специальная вертушка',
+      },
+    }
   }
 }
 
