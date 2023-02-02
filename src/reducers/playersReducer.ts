@@ -4,6 +4,7 @@ import { Players } from '../app/types';
 const initialState: Players = {
   characters: [{
     isVisible: true,
+    active: true,
     type: 'boris',
     name: 'Борис',
     img: 'characters/boris.png',
@@ -15,6 +16,7 @@ const initialState: Players = {
   },
   {
     isVisible: true,
+    active: true,
     type: 'sasha',
     name: 'Саша',
     img: 'characters/sasha.png',

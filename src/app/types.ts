@@ -11,6 +11,7 @@ export type PromoCodeState = {
 }
 export type Player = {
   isVisible: boolean;
+  active: boolean;
   playerName: string,
   name: string,
   health: number,
@@ -25,6 +26,7 @@ export type Players = {
 
 export type CharacterType = {
   isVisible: boolean;
+  active: boolean;
   type: string,
   name: string,
   img: string,
@@ -36,6 +38,7 @@ export type CharacterType = {
 }
 export type EnemyType = {
   isVisible: boolean;
+  active: boolean;
   type: string,
   name: string,
   img: string,

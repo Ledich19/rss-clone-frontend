@@ -528,6 +528,7 @@ const initialState: GameSetType = {
     characters: [
       {
         isVisible: false,
+        active: false,
         type: 'boris',
         name: 'Борис',
         img: 'characters/boris.png',
@@ -539,6 +540,7 @@ const initialState: GameSetType = {
       },
       {
         isVisible: false,
+        active: false,
         type: 'sasha',
         name: 'Саша',
         img: 'characters/sasha.png',
@@ -550,6 +552,7 @@ const initialState: GameSetType = {
       },
       {
         isVisible: false,
+        active: false,
         type: 'nastya',
         name: 'Настя',
         img: 'characters/nastya.png',
@@ -561,6 +564,7 @@ const initialState: GameSetType = {
       },
       {
         isVisible: false,
+        active: false,
         type: 'maks',
         name: 'Макс',
         img: 'characters/maks.png',
@@ -572,6 +576,7 @@ const initialState: GameSetType = {
       },
       {
         isVisible: false,
+        active: false,
         type: 'nadya',
         name: 'Надя',
         img: 'characters/nadya.png',
@@ -585,6 +590,7 @@ const initialState: GameSetType = {
     enemies: [
       {
         isVisible: false,
+        active: false,
         type: 'zombie',
         name: 'Зомби',
         img: 'enemies/zombie.png',
@@ -593,6 +599,7 @@ const initialState: GameSetType = {
       },
       {
         isVisible: false,
+        active: false,
         type: 'hellHound',
         name: 'Дьявольские псы',
         img: 'enemies/hellHound.png',
@@ -601,6 +608,7 @@ const initialState: GameSetType = {
       },
       {
         isVisible: false,
+        active: false,
         type: 'spiderMutant',
         name: 'Пауки-мутанты',
         img: 'enemies/spiderMutant.png',
@@ -609,6 +617,7 @@ const initialState: GameSetType = {
       },
       {
         isVisible: false,
+        active: false,
         type: 'boss',
         name: 'Болотный ужас',
         img: 'enemies/boss.png',
