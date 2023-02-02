@@ -1,5 +1,5 @@
 import './FieldCardForPlayer.scss';
-import { BoardItemType } from './../../../app/types';
+import { BoardItemType } from '../../../app/types';
 import { useAppDispatch } from '../../../app/hooks';
 import { toggleVisibleCard } from '../../../reducers/gameBoardReducer';
 
@@ -21,7 +21,6 @@ const FieldCardForPlayer = () => {
     };
 
     const handleOpen = () => {
-      console.log;
       dispatch(toggleVisibleCard(item.id));
     };
 
@@ -29,10 +28,10 @@ const FieldCardForPlayer = () => {
       <div className="player-card">
         <div onClick={handleOpen} style={style} className="field-card">
           {item.state && item.state !== 'player' && item.state !== 'finish' ? (
-            <div className={`flip-container`}>
+            <div className={'flip-container'}>
               <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
                 <div className="front">
-                  <img src={`./images/backCard.png`} alt="back card" />
+                  <img src={'./images/backCard.png'} alt="back card" />
                 </div>
                 <div className="back">
                   <img src={`./images/${item.state.img}`} alt="back card" />

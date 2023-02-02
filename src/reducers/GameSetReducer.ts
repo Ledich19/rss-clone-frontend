@@ -1,528 +1,1488 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { GameSetType } from "../app/types";
+import { createSlice } from '@reduxjs/toolkit';
+import { GameSetType } from '../app/types';
 
 const initialState: GameSetType = {
   board: [
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '00' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '01' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '02' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '03' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '04' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '05' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '06' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '07' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '08' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '09' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '010' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '011' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '012' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '013' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '014' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '015' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '016' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '017' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '018' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '019' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '020' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '021' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '022' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '023' },
-    ], //0
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-4',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-5',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-6',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-7',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-8',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-10',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-11',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-12',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-13',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-14',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-15',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '0-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '0-23',
+      },
+    ], //  0
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '10' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '11' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '12' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '13' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '14' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '15' },
-      { top: false, right: true, bottom: true, left: false, state: null, id: '16' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '17' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '18' },
-      { top: false, right: false, bottom: true, left: true, state: null, id: '19' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '110' },
-      { top: false, right: false, bottom: true, left: true, state: null, id: '111' },
-      { top: false, right: true, bottom: true, left: false, state: null, id: '112' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '113' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '114' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '115' },
-      { top: false, right: false, bottom: true, left: true, state: null, id: '116' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '117' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '118' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '119' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '120' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '121' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '122' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '123' },
-    ], //1
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'player', id: '1-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '1-5',
+      },
+      {
+        top: false, right: true, bottom: true, left: false, state: null, id: '1-6',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '1-7',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: 'player', id: '1-8',
+      },
+      {
+        top: false, right: false, bottom: true, left: true, state: null, id: '1-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '1-10',
+      },
+      {
+        top: false, right: false, bottom: true, left: true, state: null, id: '1-11',
+      },
+      {
+        top: false, right: true, bottom: true, left: false, state: null, id: '1-12',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '1-13',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '1-14',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '1-15',
+      },
+      {
+        top: false, right: false, bottom: true, left: true, state: 'player', id: '1-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '1-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-23',
+      },
+    ], //  1
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '20' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '21' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '22' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '23' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '24' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '25' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '26' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '27' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '28' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '29' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '210' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '211' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '212' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '213' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '214' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '215' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '216' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '217' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '218' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '219' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '220' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '221' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '222' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '223' },
-    ], //2
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '2-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '2-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-8',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '2-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '2-10',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '2-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '2-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '2-23',
+      },
+    ], //  2
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '30' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '31' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '32' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '33' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '34' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '35' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '36' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '37' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '38' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '39' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '310' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '311' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '312' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '313' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '314' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '315' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '316' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '317' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '318' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '319' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '320' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '321' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '322' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '323' },
-    ], //3
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '3-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '3-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-8',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '3-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '3-10',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '3-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '3-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '3-23',
+      },
+    ], //  3
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '40' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '41' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '42' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '43' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '44' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '45' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '46' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '47' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '48' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '49' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '410' },
-      { top: true, right: false, bottom: false, left: true, state: null, id: '411' },
-      { top: true, right: true, bottom: false, left: false, state: null, id: '412' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '413' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '414' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '415' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '416' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '417' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '418' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '419' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '420' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '421' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '422' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '423' },
-    ], //4
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-4',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-8',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '4-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '4-10',
+      },
+      {
+        top: true, right: false, bottom: false, left: true, state: null, id: '4-11',
+      },
+      {
+        top: true, right: true, bottom: false, left: false, state: null, id: '4-12',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '4-13',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '4-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-15',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '4-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '4-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '4-23',
+      },
+    ], //  4
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '50' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '51' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '52' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '53' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '54' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '55' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '56' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '57' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '58' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '59' },
-      { top: true, right: false, bottom: true, left: false, state: null, id: '510' },
-      { top: false, right: false, bottom: true, left: false, state: null, id: '511' },
-      { top: false, right: true, bottom: true, left: false, state: null, id: '512' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '513' },
-      { top: false, right: false, bottom: true, left: true, state: null, id: '514' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '515' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '516' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '517' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '518' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '519' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '520' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '521' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '522' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '523' },
-    ], //5
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '5-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '5-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-8',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '5-9',
+      },
+      {
+        top: true, right: false, bottom: true, left: false, state: null, id: '5-10',
+      },
+      {
+        top: false, right: false, bottom: true, left: false, state: 'player', id: '5-11',
+      },
+      {
+        top: false, right: true, bottom: true, left: false, state: null, id: '5-12',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '5-13',
+      },
+      {
+        top: false, right: false, bottom: true, left: true, state: null, id: '5-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '5-15',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '5-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '5-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '5-23',
+      },
+    ], //  5
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '60' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '61' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '62' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '63' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '64' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '65' },
-      { top: true, right: true, bottom: false, left: false, state: null, id: '66' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '67' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '68' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '69' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '610' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '611' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '612' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '613' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '614' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '615' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '616' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '617' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '618' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '619' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '620' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '621' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '622' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '623' },
-    ], //6
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '6-5',
+      },
+      {
+        top: true, right: true, bottom: false, left: false, state: null, id: '6-6',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '6-7',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '6-8',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '6-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'player', id: '6-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-23',
+      },
+    ], //  6
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '70' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '71' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '72' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '73' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '74' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '75' },
-      { top: false, right: true, bottom: true, left: false, state: null, id: '76' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '77' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '78' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '79' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '710' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '711' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '712' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '713' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '714' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '715' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '716' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '717' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '718' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '719' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '720' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '721' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '722' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '723' },
-    ], //7
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '7-5',
+      },
+      {
+        top: false, right: true, bottom: true, left: false, state: null, id: '7-6',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '7-7',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '7-8',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '7-9',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '7-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '7-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-15',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '7-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '7-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '7-23',
+      },
+    ], //  7
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '80' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '81' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '82' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '83' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '84' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '85' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '86' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '87' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '88' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '89' },
-      { top: true, right: false, bottom: false, left: true, state: null, id: '810' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '811' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '812' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '813' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '814' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '815' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '816' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '817' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '818' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '819' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '820' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '821' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '822' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '823' },
-    ], //8
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-4',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-8',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-9',
+      },
+      {
+        top: true, right: false, bottom: false, left: true, state: null, id: '8-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '8-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '8-23',
+      },
+    ], //  8
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '90' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '91' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '92' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '93' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '94' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '95' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '96' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '97' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '98' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '99' },
-      { top: false, right: false, bottom: true, left: true, state: null, id: '910' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '911' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '912' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '913' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '914' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '915' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '916' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '917' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '918' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '919' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '920' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '921' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '922' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '923' },
-    ], //9
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '9-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '9-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-8',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-9',
+      },
+      {
+        top: false, right: false, bottom: true, left: true, state: 'player', id: '9-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '9-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '9-23',
+      },
+    ], //  9
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '100' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '101' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '102' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '103' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '104' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '105' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '106' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '107' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '108' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '109' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '1010' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '1011' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1012' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1013' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1014' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1015' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '1016' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '1017' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1018' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1019' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1020' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1021' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1022' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1023' },
-    ], //10
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '10-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '10-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-8',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-9',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '10-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '10-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-15',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '10-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '10-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '10-23',
+      },
+    ], //  10
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '110' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '111' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '112' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '113' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '114' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '115' },
-      { top: true, right: true, bottom: false, left: false, state: null, id: '116' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '117' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '118' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '119' },
-      { top: true, right: false, bottom: false, left: true, state: null, id: '1110' },
-      { top: true, right: true, bottom: false, left: false, state: null, id: '1111' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1112' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '1113' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '1114' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '1115' },
-      { top: true, right: false, bottom: false, left: true, state: null, id: '1116' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '1117' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1118' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1119' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1120' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1121' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1122' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1123' },
-    ], //11
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-4',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '11-5',
+      },
+      {
+        top: true, right: true, bottom: false, left: false, state: null, id: '11-6',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '11-7',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '11-8',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '11-9',
+      },
+      {
+        top: true, right: false, bottom: false, left: true, state: null, id: '11-10',
+      },
+      {
+        top: true, right: true, bottom: false, left: false, state: null, id: '11-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-12',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '11-13',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '11-14',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '11-15',
+      },
+      {
+        top: true, right: false, bottom: false, left: true, state: null, id: '11-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '11-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '11-23',
+      },
+    ], //  11
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '120' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '121' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '122' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '123' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '124' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '125' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '126' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '127' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '128' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '129' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '1210' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '1211' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1212' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '1213' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '1214' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '1215' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '1216' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1217' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1218' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1219' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1220' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1221' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1222' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1223' },
-    ], //12
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-4',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-5',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-6',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-7',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-8',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-9',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-10',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-12',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-13',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-14',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-15',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '12-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '12-23',
+      },
+    ], //  12
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '130' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '131' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '132' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '133' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '134' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '135' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '136' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '137' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '138' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '139' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1310' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1311' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1312' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1313' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1314' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1315' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1316' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1317' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1318' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1319' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1320' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1321' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1322' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1323' },
-    ], //13
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-3',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '13-4',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '13-5',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '13-6',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '13-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-8',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '13-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '13-23',
+      },
+    ], //  13
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '140' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '141' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '142' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '143' },
-      { top: false, right: true, bottom: true, left: false, state: null, id: '144' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '145' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '146' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '147' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '148' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '149' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1410' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1411' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1412' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1413' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1414' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1415' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1416' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1417' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1418' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1419' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1420' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1421' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1422' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1423' },
-    ], //14
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-2',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '14-3',
+      },
+      {
+        top: false, right: true, bottom: true, left: false, state: null, id: '14-4',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '14-5',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '14-6',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '14-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-8',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '14-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '14-23',
+      },
+    ], //  14
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '150' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '151' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '152' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '153' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '154' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '155' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '156' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '157' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '158' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '159' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1510' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1511' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1512' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1513' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1514' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1515' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1516' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1517' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1518' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1519' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1520' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1521' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1522' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1523' },
-    ], //15
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-2',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '15-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '15-4',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-8',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-23',
+      },
+    ], //  15
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '160' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '161' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '162' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '163' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '164' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '165' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '166' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '167' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '168' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '169' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1610' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1611' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1612' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1613' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1614' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1615' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1616' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1617' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1618' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1619' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1620' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1621' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1622' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1623' },
-    ], //16
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-2',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '16-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: null, id: '16-4',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-8',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'player', id: '16-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-23',
+      },
+    ], //  16
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '170' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '171' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '172' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '173' },
-      { top: true, right: true, bottom: true, left: false, state: null, id: '174' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '175' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '176' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '177' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '178' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '179' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1710' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1711' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1712' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1713' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1714' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1715' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1716' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1717' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1718' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1719' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1720' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1721' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1722' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1723' },
-    ], //17
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-2',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '17-3',
+      },
+      {
+        top: true, right: true, bottom: true, left: false, state: 'player', id: '17-4',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-5',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-6',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-7',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-8',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-23',
+      },
+    ], //  17
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '180' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '181' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '182' },
-      { top: true, right: false, bottom: true, left: true, state: null, id: '183' },
-      { top: true, right: true, bottom: false, left: false, state: null, id: '184' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '185' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '186' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '187' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '188' },
-      { top: true, right: true, bottom: false, left: true, state: null, id: '189' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1810' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1811' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1812' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1813' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1814' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1815' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1816' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1817' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1818' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1819' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1820' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1821' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1822' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1823' },
-    ], //18
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-2',
+      },
+      {
+        top: true, right: false, bottom: true, left: true, state: null, id: '18-3',
+      },
+      {
+        top: true, right: true, bottom: false, left: false, state: null, id: '18-4',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '18-5',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '18-6',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '18-7',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '18-8',
+      },
+      {
+        top: true, right: true, bottom: false, left: true, state: null, id: '18-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '18-23',
+      },
+    ], //  18
     [
-      { top: true, right: true, bottom: true, left: true, state: null, id: '190' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '191' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '192' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '193' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '194' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '195' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '196' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '197' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '198' },
-      { top: false, right: true, bottom: true, left: true, state: null, id: '199' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1910' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1911' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1912' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1913' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1914' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1915' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1916' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1917' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1918' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1919' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1920' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1921' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1922' },
-      { top: true, right: true, bottom: true, left: true, state: null, id: '1923' },
-    ], //19
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-0',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-1',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-2',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-3',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '19-4',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '19-5',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '19-6',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '19-7',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '19-8',
+      },
+      {
+        top: false, right: true, bottom: true, left: true, state: null, id: '19-9',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-10',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-11',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-12',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-13',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-14',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-15',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-16',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-17',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-18',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-19',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-20',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-21',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-22',
+      },
+      {
+        top: true, right: true, bottom: true, left: true, state: null, id: '19-23',
+      },
+    ], //  19
   ],
   cards: {
     characters: [
@@ -733,9 +1693,9 @@ const initialState: GameSetType = {
         use: 'aim',
         count: 1,
       },
-    ]
-  }
-}
+    ],
+  },
+};
 
 const gameSetSlice = createSlice({
   name: 'gameSet',
@@ -746,8 +1706,7 @@ const gameSetSlice = createSlice({
     },
 
   },
-}
-)
+});
 
-export const { getGameBoard } = gameSetSlice.actions
-export default gameSetSlice.reducer
+export const { getGameBoard } = gameSetSlice.actions;
+export default gameSetSlice.reducer;

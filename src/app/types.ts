@@ -1,4 +1,3 @@
-
 export type PromoCodeState = {
   promoCodes: {
     code: string;
@@ -8,7 +7,7 @@ export type PromoCodeState = {
     code: string;
     discount: number;
   }[],
-}
+};
 export type Player = {
   isVisible: boolean;
   active: boolean;
@@ -16,13 +15,12 @@ export type Player = {
   name: string,
   health: number,
   inventory: [],
-}
+};
 
 export type Players = {
   characters: CharacterType[],
   active: string,
-}
-
+};
 
 export type CharacterType = {
   isVisible: boolean;
@@ -35,7 +33,7 @@ export type CharacterType = {
   count: number,
   health: number,
   inventory: [],
-}
+};
 export type EnemyType = {
   isVisible: boolean;
   active: boolean;
@@ -44,7 +42,7 @@ export type EnemyType = {
   img: string,
   description: string,
   count: number,
-}
+};
 export type ThingType = {
   isVisible: boolean;
   type: string,
@@ -52,7 +50,7 @@ export type ThingType = {
   img: string,
   description: string,
   count: number,
-}
+};
 export type WeaponType = {
   isVisible: boolean;
   type: string,
@@ -61,7 +59,7 @@ export type WeaponType = {
   description: string,
   use: 'sword' | 'aim' | 'free',
   count: number,
-}
+};
 export type BoardItemType = {
   top: boolean,
   right: boolean,
@@ -72,7 +70,7 @@ export type BoardItemType = {
     img: string
   } | null | 'player' | 'finish',
   id: string
-}
+};
 
 export type GameSetType = {
   board: BoardItemType[][],
@@ -82,4 +80,4 @@ export type GameSetType = {
     things: ThingType[],
     weapon: WeaponType[]
   }
-}
+};
