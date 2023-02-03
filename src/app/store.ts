@@ -9,6 +9,7 @@ export const store = configureStore({
   reducer: {
     game: gameBoardReducer,
     gameSet: GameSetReducer,
+    characters: playersReducer,
     example: exampleReducer,
     rules: gameRulesReducer,
   },

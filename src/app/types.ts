@@ -8,21 +8,24 @@ export type PromoCodeState = {
     code: string;
     discount: number;
   }[],
-}
+};
 export type Player = {
+  isVisible: boolean;
+  active: boolean;
   playerName: string,
   name: string,
   health: number,
   inventory: [],
-}
+};
 
 export type Players = {
-  characters: Player[],
+  characters: CharacterType[],
   active: string,
-}
-
+};
 
 export type CharacterType = {
+  isVisible: boolean;
+  active: boolean;
   type: string,
   name: string,
   img: string,
@@ -31,37 +34,44 @@ export type CharacterType = {
   count: number,
   health: number,
   inventory: [],
-}
+};
 export type EnemyType = {
+  isVisible: boolean;
+  active: boolean;
   type: string,
   name: string,
   img: string,
   description: string,
   count: number,
-}
+};
 export type ThingType = {
+  isVisible: boolean;
   type: string,
   name: string,
   img: string,
   description: string,
   count: number,
-}
+};
 export type WeaponType = {
+  isVisible: boolean;
   type: string,
   name: string,
   img: string,
   description: string,
   use: 'sword' | 'aim' | 'free',
   count: number,
-}
-export type BoardItemType = { 
-  top: boolean, 
-  right: boolean, 
-  bottom: boolean, 
-  left: boolean, 
-  state: object | null, 
-  id: string 
-}
+};
+export type BoardItemType = {
+  top: boolean,
+  right: boolean,
+  bottom: boolean,
+  left: boolean,
+  state: {
+    isVisible: boolean;
+    img: string
+  } | null | 'player' | 'finish',
+  id: string
+};
 
 export type GameSetType = {
   board: BoardItemType[][],
@@ -71,8 +81,7 @@ export type GameSetType = {
     things: ThingType[],
     weapon: WeaponType[]
   }
-}
-
+};
 export type Table = {
   text: string[],
 }
