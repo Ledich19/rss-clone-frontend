@@ -3,6 +3,7 @@ import './FieldCard.scss';
 import { BoardItemType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, toggleVisibleCard } from '../../../reducers/gameBoardReducer';
+import { decrementSpinerValue } from '../../../reducers/spinnertReducer';
 
 type PropsType = {
   heightField: number;
@@ -34,10 +35,14 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     if (player) {
       const [iFrom, jFrom] = player.id.split('-');
       const [iTo, jTo] = id.split('-');
-
-      console.log(player.id, iFrom, jFrom, iTo, jTo);
-      const body = characters.find((character) => character.type === activePleyr) || null;
-      dispatch(moveCharacter({ from: player.id, to: id, body }));
+      const pathLength = Math.abs(+iFrom - +iTo) + Math.abs(+jFrom - +jTo);
+      if (spinerWalue >= pathLength) {
+        console.log(pathLength, spinerWalue);
+        console.log(player.id, iFrom, jFrom, iTo, jTo);
+        const body = characters.find((character) => character.type === activePleyr) || null;
+        dispatch(moveCharacter({ from: player.id, to: id, body }));
+        dispatch(decrementSpinerValue(pathLength));
+      }
     }
   };
 

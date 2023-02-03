@@ -30,11 +30,14 @@ const spinnerSlice = createSlice({
   name: 'spinner',
   initialState,
   reducers: {
-    setValue(state) {
-      return state;
+    decrementSpinerValue(state, actions: {
+      payload: number;
+      type: string;
+    }) {
+      return { ...state, value: state.value - actions.payload };
     },
   },
 });
 
-export const { setValue } = spinnerSlice.actions;
+export const { decrementSpinerValue } = spinnerSlice.actions;
 export default spinnerSlice.reducer;
