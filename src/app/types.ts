@@ -9,6 +9,7 @@ export type PromoCodeState = {
   }[],
 };
 export type Player = {
+  type: string,
   isVisible: boolean;
   active: boolean;
   playerName: string,
@@ -68,6 +69,7 @@ export type BoardItemType = {
   state: {
     isVisible: boolean;
     img: string
+    type: string;
   } | null | 'player' | 'finish',
   id: string
 };

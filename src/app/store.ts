@@ -4,11 +4,13 @@ import exampleReducer from '../reducers/exampleReducer';
 import gameBoardReducer from '../reducers/gameBoardReducer';
 import GameSetReducer from '../reducers/GameSetReducer';
 import playersReducer from '../reducers/playersReducer';
+import spinnertReducer from '../reducers/spinnertReducer';
 
 export const store = configureStore({
   reducer: {
     game: gameBoardReducer,
     characters: playersReducer,
+    spinner: spinnertReducer,
     gameSet: GameSetReducer,
     example: exampleReducer,
   },

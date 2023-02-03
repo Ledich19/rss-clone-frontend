@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setNewGameField } from '../../reducers/gameBoardReducer';
 import FieldCard from './FieldCard/FieldCard';
+import FieldCardForPlayer from './FieldCardForPlayer/FieldCardForPlayer';
 import './GameField.scss';
 
 const GameField = () => {
@@ -10,6 +11,7 @@ const GameField = () => {
   const { characters } = useAppSelector((state) => state.characters);
   const dispatch = useAppDispatch();
   const heightField = gameFieldMatrix.length;
+  const useCharactersTypes = characters.map((character) => character.type);
 
   function shuffleArray<Type>(arr: Type[]): Type[] {
     return arr.sort(() => Math.round(Math.random() * 100) - 50);
@@ -36,7 +38,6 @@ const GameField = () => {
     }));
 
     //  add another items
-    const useCharactersTypes = characters.map((character) => character.type);
     const gameCards = Object.values(gameCardsSet)
       .flat(1)
       .map((card) => Array(card.count).fill(card))
@@ -66,7 +67,9 @@ const GameField = () => {
       {gameFieldMatrix.map((row, i) => (
           <div className="field__row" key={`rowId${i}`}>
             {row.map((item) => (
-              <FieldCard key={item.id} heightField={heightField} item={item} />
+              item.state && item.state !== 'player' && item.state !== 'finish' && useCharactersTypes.includes(item.state.type)
+                ? <FieldCardForPlayer key={item.id} heightField={heightField} item={item} />
+                : <FieldCard key={item.id} heightField={heightField} item={item} />
             ))}
           </div>
       ))}

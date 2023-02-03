@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './FieldCard.scss';
 import { BoardItemType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { toggleVisibleCard } from '../../../reducers/gameBoardReducer';
+import { moveCharacter, toggleVisibleCard } from '../../../reducers/gameBoardReducer';
 
 type PropsType = {
   heightField: number;
@@ -10,6 +10,11 @@ type PropsType = {
 };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
+  const activePleyr = useAppSelector((state) => state.characters.active);
+  const { characters } = useAppSelector((state) => state.characters);
+  const spinerWalue = useAppSelector((state) => state.spinner.value);
+  const gameField = useAppSelector((state) => state.game);
+
   const dispatch = useAppDispatch();
   const style = {
     height: `calc(100vh / ${heightField})`,
@@ -20,13 +25,30 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     borderBottom: !item.bottom ? 'solid 2px rgba(0, 0, 0, 0)' : '',
   };
 
-  const handleOpen = () => {
-    dispatch(toggleVisibleCard(item.id));
+  const handleMove = (id: string) => {
+    const player = gameField
+      .flat(1)
+      .find(
+        (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === activePleyr,
+      );
+    if (player) {
+      const [iFrom, jFrom] = player.id.split('-');
+      const [iTo, jTo] = id.split('-');
+
+      console.log(player.id, iFrom, jFrom, iTo, jTo);
+      const body = characters.find((character) => character.type === activePleyr) || null;
+      dispatch(moveCharacter({ from: player.id, to: id, body }));
+    }
   };
 
+  const handleOpen = (id: string) => {
+    dispatch(toggleVisibleCard(id));
+  };
+  const handler = item.state ? handleOpen : handleMove;
+
   return (
-    <div onClick={handleOpen} style={style} className="field-card">
-      {item.state && item.state !== 'player' && item.state !== 'finish' ? (
+    <div onClick={() => handler(item.id)} style={style} className="field-card">
+      {item.state && typeof item.state === 'object' ? (
         <div className={'flip-container'}>
           <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
             <div className="front">
