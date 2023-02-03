@@ -51,8 +51,30 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   };
   const handler = item.state ? handleOpen : handleMove;
 
+  const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+    const player = gameField
+      .flat(1)
+      .find(
+        (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === activePleyr,
+      );
+    if (player) {
+      const [iFrom, jFrom] = player.id.split('-');
+      const [iTo, jTo] = item.id.split('-');
+      const pathLength = Math.abs(+iFrom - +iTo) + Math.abs(+jFrom - +jTo);
+      if (spinerWalue >= pathLength) {
+        (e.target as HTMLElement).style.background = ' rgba(16, 240, 16, 0.3)';
+      } else {
+        (e.target as HTMLElement).style.background = 'rgba(248, 5, 5, 0.3)';
+      }
+    }
+  };
+  const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
+    console.log(e);
+
+    (e.target as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
+  };
   return (
-    <div onClick={() => handler(item.id)} style={style} className="field-card">
+    <div onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} onClick={() => handler(item.id)} style={style} className="field-card">
       {item.state && typeof item.state === 'object' ? (
         <div className={'flip-container'}>
           <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
