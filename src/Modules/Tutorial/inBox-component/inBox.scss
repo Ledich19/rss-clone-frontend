@@ -5,7 +5,8 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    padding: 5px;
+    border-radius: 10px;
+    padding: 10px;
     background-color: bisque;
   }
   &__element:hover > .element__list{
@@ -14,7 +15,7 @@
   }
 }
 .element{
-  overflow: hidden;
+  // overflow: hidden;
   position: relative;
   &__title{
     cursor: pointer;
