@@ -2,6 +2,8 @@ import React from 'react'
 import { useAppSelector } from '../../app/hooks';
 import Item from './goal-component/item';
 import InBox from './inBox-component/inBox';
+import Cards from './cards/cards';
+
 import "./Tutorial.scss";
 
 
@@ -23,8 +25,9 @@ const Tutorial = () => {
         </div>
         <Item />
         <InBox />
+        <Cards />
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore labore esse magni ad tempore eius numquam. Cum inventore, quaerat eaque magnam impedit quos modi dolores exercitationem adipisci, aperiam, veritatis sapiente cumque nisi corrupti? Non, recusandae assumenda consequatur corrupti nam dolores debitis modi sed delectus enim vitae, sequi velit, vel temporibus totam dolore quod atque. Illo aliquam, laudantium doloribus fuga consequatur ipsa harum nemo assumenda, voluptatem autem tempore quaerat maxime, molestias eveniet? Optio, perspiciatis? Deserunt possimus saepe suscipit ratione consequuntur illo ipsa. Aut, nam voluptatum, sequi libero veniam, voluptate accusantium sint aperiam perspiciatis maiores quos nisi explicabo consectetur saepe aliquam exercitationem!
       </div>
-      
     </div>
   );
 };

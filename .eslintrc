@@ -4,11 +4,19 @@
     "es6": true,
     "jest": true
   },
-  "extends": [
+  "extends": [ 
+    "airbnb-base",
+    "airbnb-typescript",
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    //"airbnb/hooks",
     "plugin:@typescript-eslint/recommended"
   ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "include": ["src/**/*.ts", "src/**/*.js", "test/**/*.ts"]
+  },
   "plugins": ["react", "@typescript-eslint"],
   "settings": {
     "react": {
@@ -17,6 +25,16 @@
     }
   },
   "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ],
     // "@typescript-eslint/explicit-function-return-type": 0,
     // "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": 2,

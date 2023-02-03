@@ -25,7 +25,7 @@ const Item = () => {
         <h4 className="item__title">{rules.goal.title}</h4>
         <button style={{transform: activity}} className="item__btn" onClick={changeVisibility}></button>
         </div>
-      <p style={{transform: visible}} className={visible}>{rules.goal.text}</p>
+      <p className={visible}>{rules.goal.text}</p>
     </div>
   )
 };

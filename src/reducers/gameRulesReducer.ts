@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Table, Rules } from '../app/types';
+import { Rules } from '../app/types';
 
 const initialState: Rules = {
   aboutGame : `Всё началось как в фильме ужасов: вы с друзьями
