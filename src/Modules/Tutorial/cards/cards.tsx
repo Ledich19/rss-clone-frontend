@@ -4,15 +4,15 @@ import './cards.scss';
 
 
 const Cards = () => {
-  const [visible, setVisibility] = useState('cards__content visible');
+  const [visible, setVisibility] = useState('cards__content');
   const [activity, setActivity] = useState('rotate(0deg)');
   const changeVisibility = () => {
-    if(visible === 'cards__content visible'){
-      setVisibility('cards__content');
+    if(visible === 'cards__content'){
+      setVisibility('cards__content visible-cards');
       setActivity('rotate(180deg)');
     }
     else {
-      setVisibility('cards__content visible');
+      setVisibility('cards__content');
       setActivity('rotate(0deg)');
     }
   }

@@ -4,15 +4,15 @@ import './item.scss';
 
 const Item = () => {
 
-  const [visible, setVisibility] = useState('item__text visible');
+  const [visible, setVisibility] = useState('item__text');
   const [activity, setActivity] = useState('rotate(0deg)');
   const changeVisibility = () => {
-    if(visible === 'item__text visible'){
-      setVisibility('item__text');
+    if(visible === 'item__text'){
+      setVisibility('item__text visible');
       setActivity('rotate(180deg)');
     }
     else {
-      setVisibility('item__text visible');
+      setVisibility('item__text');
       setActivity('rotate(0deg)');
     }
   }

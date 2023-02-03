@@ -6,16 +6,16 @@ const InBox = () => {
   const rules = useAppSelector(state => state.rules);
   const {inBox} = rules;
 
-  const [visible, setVisibility] = useState('inbox__content visible');
+  const [visible, setVisibility] = useState('inbox__content');
   const [activity, setActivity] = useState('rotate(0deg)');
 
   const changeVisibility = () => {
-    if(visible === 'inbox__content visible'){
-      setVisibility('inbox__content');
+    if(visible === 'inbox__content'){
+      setVisibility('inbox__content visible-box');
       setActivity('rotate(180deg)');
     }
     else {
-      setVisibility('inbox__content visible');
+      setVisibility('inbox__content');
       setActivity('rotate(0deg)');
     }
   }
