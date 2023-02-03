@@ -45,13 +45,10 @@ $colorText: #6d0101;
 .table{
   display: flex;
   justify-content: flex-end;
-  &__wrapper{
-    background-color: rgb(165, 83, 42);
-    transform: rotate(2deg);
-    width: 250px;
-    padding: 20px;
-    
-  }
+  background-color: rgb(165, 83, 42);
+  transform: rotate(2deg);
+  width: 250px;
+  padding: 20px;
   &__list{
     display: flex;
     flex-direction: column;

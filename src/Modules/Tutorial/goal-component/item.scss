@@ -1,9 +1,10 @@
 $colorTitle: #6d0101;
 .visible {
-  margin-top: -100px;
+  display: none;
 }
 .item{
   position: relative;
+  overflow: hidden;
   &__title{
     color: $colorTitle;
     font-size: 26px;
@@ -17,6 +18,8 @@ $colorTitle: #6d0101;
     background-color: #fff;
     position: relative;
     z-index: 1;
+    width: 250px;
+    justify-content: space-between;
   }
   &__btn{
     cursor: pointer;
