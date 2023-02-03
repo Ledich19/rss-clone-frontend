@@ -1,137 +1,3 @@
-<<<<<<< HEAD
-
-export type PromoCodeState = {
-  promoCodes: {
-    code: string;
-    discount: number;
-  }[],
-  promoCodeUse: {
-    code: string;
-    discount: number;
-  }[],
-}
-export type Player = {
-  playerName: string,
-  name: string,
-  health: number,
-  inventory: [],
-}
-
-export type Players = {
-  characters: Player[],
-  active: string,
-}
-
-
-export type CharacterType = {
-  type: string,
-  name: string,
-  img: string,
-  playerName: string,
-  description: string,
-  count: number,
-  health: number,
-  inventory: [],
-}
-export type EnemyType = {
-  type: string,
-  name: string,
-  img: string,
-  description: string,
-  count: number,
-}
-export type ThingType = {
-  type: string,
-  name: string,
-  img: string,
-  description: string,
-  count: number,
-}
-export type WeaponType = {
-  type: string,
-  name: string,
-  img: string,
-  description: string,
-  use: 'sword' | 'aim' | 'free',
-  count: number,
-}
-export type BoardItemType = { 
-  top: boolean, 
-  right: boolean, 
-  bottom: boolean, 
-  left: boolean, 
-  state: object | null, 
-  id: string 
-}
-
-export type GameSetType = {
-  board: BoardItemType[][],
-  cards: {
-    characters: CharacterType[],
-    enemies: EnemyType[],
-    things: ThingType[],
-    weapon: WeaponType[]
-  }
-}
-
-export type Table = {
-  text: string[],
-}
-
-export type Rules = {
-  aboutGame: string,
-  table: Table,
-  goal: {
-    title: string,
-    text: string,
-  },
-  inBox: {
-    title: string,
-    cards: {
-      monstrs:{
-        title: string,
-        zombie: string,
-        dog: string,
-        spider: string,
-        boss: string,
-      },
-      weapons: {
-        title: string,
-        grenade: string,
-        knife: string,
-        arbalet: string,
-        axe:string,
-        pistol: string,
-        gun: string,
-        shotGun: string,
-        grenadeLauncher: string,
-      },
-      clothes: {
-        title: string,
-        kits: string,
-        boards: string,
-        canister: string,
-        key: string,
-      },
-      players: {
-        title: string,
-        alex: string,
-        nadya: string,
-        nastya: string,
-        maks: string,
-        borya: string,
-      },
-      health: {
-        title: string,
-      },
-      spinner: {
-        title: string,
-      }
-      
-    }
-  },
-}
-=======
 export type PromoCodeState = {
   promoCodes: {
     code: string;
@@ -215,4 +81,61 @@ export type GameSetType = {
     weapon: WeaponType[]
   }
 };
->>>>>>> 5756bc012cf8ce60e4ed5846fa20e7cf62200bda
+export type Table = {
+  text: string[],
+}
+
+export type Rules = {
+  aboutGame: string,
+  table: Table,
+  goal: {
+    title: string,
+    text: string,
+  },
+  inBox: {
+    title: string,
+    cards: {
+      monstrs:{
+        title: string,
+        zombie: string,
+        dog: string,
+        spider: string,
+        boss: string,
+      },
+      weapons: {
+        title: string,
+        grenade: string,
+        knife: string,
+        arbalet: string,
+        axe:string,
+        pistol: string,
+        gun: string,
+        shotGun: string,
+        grenadeLauncher: string,
+      },
+      clothes: {
+        title: string,
+        kits: string,
+        boards: string,
+        canister: string,
+        key: string,
+      },
+      players: {
+        title: string,
+        alex: string,
+        nadya: string,
+        nastya: string,
+        maks: string,
+        borya: string,
+      },
+      health: {
+        title: string,
+      },
+      spinner: {
+        title: string,
+      }
+      
+    }
+  },
+}
+
