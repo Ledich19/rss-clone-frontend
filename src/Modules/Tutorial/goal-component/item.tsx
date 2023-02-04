@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { useAppSelector } from '../../../app/hooks';
+import { useState } from 'react';
 import './item.scss';
 
-const Item = () => {
+type Content = {
+  title:string,
+  items: string[],
+  text?: string,
+};
+
+const Item = (props:Content) => {
   const [visible, setVisibility] = useState('item__text');
   const [activity, setActivity] = useState('rotate(0deg)');
   const changeVisibility = () => {
@@ -15,15 +20,18 @@ const Item = () => {
     }
   };
 
-  const rules = useAppSelector((state) => state.rules);
-
   return (
     <div className="item">
       <div className="item__top">
-        <h4 className="item__title">{rules.goal.title}</h4>
+        <h4 className="item__title">{props.title}</h4>
         <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
         </div>
-      <p className={visible}>{rules.goal.text}</p>
+      <div className={visible}>
+        {props.text && <p className='item__subtitle'>{props.text}</p>}
+        <ul className='item__list'>
+          {props.items.map((item, index) => <li className='item__element' key={index}>{item}</li>)}
+        </ul>
+      </div>
     </div>
   );
 };

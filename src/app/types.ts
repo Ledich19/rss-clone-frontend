@@ -83,14 +83,14 @@ export type GameSetType = {
 };
 export type Table = {
   text: string[],
-}
+};
 
 export type Rules = {
   aboutGame: string,
   table: Table,
   goal: {
     title: string,
-    text: string,
+    text: string[],
   },
   inBox: {
     title: string,
@@ -134,7 +134,18 @@ export type Rules = {
       spinner: {
         title: string,
       }
-      
     }
   },
-}
+  info: {
+    prepa: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    moves: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+  }
+};

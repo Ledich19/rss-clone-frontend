@@ -42,8 +42,21 @@ $colorTitle: #6d0101;
     z-index: 0;
     // position: absolute;
   }
+  &__element{
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
+  }
+  &__list{
+
+  }
+  &__subtitle{
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+  }
 }
 .visible{
-  max-height: 100px;
+  max-height: 500px;
   padding: 10px;
 }

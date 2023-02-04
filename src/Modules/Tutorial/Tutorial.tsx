@@ -3,6 +3,7 @@ import { useAppSelector } from '../../app/hooks';
 import Item from './goal-component/item';
 import InBox from './inBox-component/inBox';
 import Cards from './cards/cards';
+import Info from './info-component/info';
 
 import './Tutorial.scss';
 
@@ -22,9 +23,10 @@ const Tutorial = () => {
             <p className="rules__about-game">{rules.aboutGame}</p>
           </div>
         </div>
-        <Item />
+        <Item title={rules.goal.title} items={rules.goal.text}/>
         <InBox />
         <Cards />
+        <Info />
       </div>
     </div>
   );
