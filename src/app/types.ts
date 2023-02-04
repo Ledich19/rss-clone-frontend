@@ -20,7 +20,7 @@ export type Player = {
 
 export type Players = {
   characters: CharacterType[],
-  active: string,
+  activePlayer: string,
 };
 
 export type CharacterType = {

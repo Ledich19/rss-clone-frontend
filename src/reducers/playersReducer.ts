@@ -28,7 +28,7 @@ const initialState: Players = {
       inventory: [],
     },
   ],
-  active: 'boris',
+  activePlayer: 'boris',
 };
 
 const playersSlice = createSlice({
