@@ -86,7 +86,7 @@ export type GameSetType = {
 
 export type Table = {
   text: string[],
-}
+};
 
 export type Rules = {
   aboutGame: string,

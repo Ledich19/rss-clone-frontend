@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './FieldCard.scss';
 import { BoardItemType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -16,10 +16,12 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   const spinnerValue = useAppSelector((state) => state.spinner.value);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
-
+  const [info, setInfo] = useState('');
+  const movieInfo = useRef<HTMLDivElement>(null);
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
+    lineHeight: `calc(100vh / ${heightField})`,
   };
 
   const CheckOptionMove = (i: number, j: number, move: number) => {
@@ -91,6 +93,9 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   const handler = item.state ? handleOpen : handleMove;
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
     const player = gameField
       .flat(1)
       .find(
@@ -100,18 +105,32 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       );
     const canMovie = player ? canIMove(player.id) : null;
     if (canMovie) {
-      (e.target as HTMLElement).style.background = ' rgba(16, 240, 16, 0.3)';
+      // setInfo(canMovie.movie.toString());
+      const parentElement = e.target.closest('.field-card');
+      (parentElement as HTMLElement).style.background = 'rgba(0, 255, 26, 0.3';
+
+      if (movieInfo.current) {
+        movieInfo.current.innerHTML = `${canMovie.movie}`;
+      }
     } else {
-      (e.target as HTMLElement).style.background = 'rgba(248, 5, 5, 0.3)';
+      const parentElement = e.target.closest('.field-card');
+      (parentElement as HTMLElement).style.background = 'rgba(248, 5, 5, 0.3)';
     }
   };
   const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
-    (e.target as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
+    const parentElement = e.target.closest('.field-card');
+    (parentElement as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
+    if (movieInfo.current) {
+      movieInfo.current.innerHTML = '';
+    }
   };
   return (
     <div
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
+      onMouseOver={handleMouseEnter}
+      onMouseOut={handleMouseLeave}
       onClick={() => handler(item.id)}
       style={style}
       className="field-card"
@@ -128,7 +147,10 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           </div>
         </div>
       ) : (
-        item.id
+        <div ref={movieInfo}>
+          {/* <div className='_movie-text'>{item.id}</div> */}
+          <div className='_small-text'>{item.id}</div>
+        </div>
       )}
     </div>
   );

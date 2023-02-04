@@ -1,18 +1,24 @@
 .field-card {
   border: solid 2px rgba(0, 0, 0, 0);
-  font-size: 0.6rem;
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  & ._small-text {
+    font-size: 0.6rem;
+  }
   //border: solid 1px yellow;
   //background: rgba(21, 139, 186, 0.313);
-  cursor: pointer;
   img{
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
-  &:hover{
-  background: rgba(217, 220, 7, 0.313);
-  }
 }
+
+
+
 .flip-container {
   perspective: 1000;
   }
