@@ -1171,7 +1171,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-18',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-19',
+      top: true, right: true, bottom: true, left: true, state: null, id: '15-19',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '15-20',
@@ -1319,7 +1319,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-18',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-19',
+      top: true, right: true, bottom: true, left: true, state: null, id: '17-19',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '17-20',
