@@ -3,6 +3,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import exampleReducer from '../reducers/exampleReducer';
 import gameBoardReducer from '../reducers/gameBoardReducer';
 import GameSetReducer from '../reducers/GameSetReducer';
+import gameRulesReducer from '../reducers/gameRulesReducer';
 import playersReducer from '../reducers/playersReducer';
 import spinnertReducer from '../reducers/spinnertReducer';
 
@@ -13,6 +14,7 @@ export const store = configureStore({
     spinner: spinnertReducer,
     gameSet: GameSetReducer,
     example: exampleReducer,
+    rules: gameRulesReducer,
   },
 });
 

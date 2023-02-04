@@ -83,3 +83,60 @@ export type GameSetType = {
     weapon: WeaponType[]
   }
 };
+
+export type Table = {
+  text: string[],
+}
+
+export type Rules = {
+  aboutGame: string,
+  table: Table,
+  goal: {
+    title: string,
+    text: string,
+  },
+  inBox: {
+    title: string,
+    cards: {
+      monstrs:{
+        title: string,
+        zombie: string,
+        dog: string,
+        spider: string,
+        boss: string,
+      },
+      weapons: {
+        title: string,
+        grenade: string,
+        knife: string,
+        arbalet: string,
+        axe:string,
+        pistol: string,
+        gun: string,
+        shotGun: string,
+        grenadeLauncher: string,
+      },
+      clothes: {
+        title: string,
+        kits: string,
+        boards: string,
+        canister: string,
+        key: string,
+      },
+      players: {
+        title: string,
+        alex: string,
+        nadya: string,
+        nastya: string,
+        maks: string,
+        borya: string,
+      },
+      health: {
+        title: string,
+      },
+      spinner: {
+        title: string,
+      }
+    }
+  },
+};
