@@ -72,6 +72,7 @@ export type BoardItemType = {
     type: string;
   } | null | 'player' | 'finish',
   id: string
+  value?: string
 };
 
 export type GameSetType = {

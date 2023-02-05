@@ -22,6 +22,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
     lineHeight: `calc(100vh / ${heightField})`,
+    background: item.value && item.value === 'finish' ? 'rgba(232, 248, 5, 0.3)' : 'rgba(0, 0, 0, 0)',
   };
 
   const CheckOptionMove = (i: number, j: number, move: number) => {
@@ -122,7 +123,11 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       return;
     }
     const parentElement = e.target.closest('.field-card');
-    (parentElement as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
+    if (item.value) {
+      (parentElement as HTMLElement).style.background = 'rgba(232, 248, 5, 0.3)';
+    } else {
+      (parentElement as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
+    }
     if (movieInfo.current) {
       movieInfo.current.innerHTML = '';
     }

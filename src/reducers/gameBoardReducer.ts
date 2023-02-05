@@ -1159,19 +1159,19 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: null, id: '15-14',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-15',
+      top: true, right: true, bottom: true, left: true, state: null, id: '15-15', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-16',
+      top: true, right: true, bottom: true, left: true, state: null, id: '15-16', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-17',
+      top: true, right: true, bottom: true, left: true, state: null, id: '15-17', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-18',
+      top: true, right: true, bottom: true, left: true, state: null, id: '15-18', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: null, id: '15-19',
+      top: true, right: true, bottom: true, left: true, state: null, id: '15-19', value: 'finish',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '15-20',
@@ -1233,19 +1233,19 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: null, id: '16-14',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-15',
+      top: true, right: true, bottom: true, left: true, state: null, id: '16-15', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-16',
+      top: true, right: true, bottom: true, left: true, state: null, id: '16-16', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-17',
+      top: true, right: true, bottom: true, left: true, state: null, id: '16-17', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-18',
+      top: true, right: true, bottom: true, left: true, state: null, id: '16-18', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'player', id: '16-19',
+      top: true, right: true, bottom: true, left: true, state: 'player', id: '16-19', value: 'finish',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '16-20',
@@ -1307,19 +1307,19 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: null, id: '17-14',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-15',
+      top: true, right: true, bottom: true, left: true, state: null, id: '17-15', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-16',
+      top: true, right: true, bottom: true, left: true, state: null, id: '17-16', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-17',
+      top: true, right: true, bottom: true, left: true, state: null, id: '17-17', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-18',
+      top: true, right: true, bottom: true, left: true, state: null, id: '17-18', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: null, id: '17-19',
+      top: true, right: true, bottom: true, left: true, state: null, id: '17-19', value: 'finish',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '17-20',
