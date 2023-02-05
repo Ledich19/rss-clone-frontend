@@ -6,7 +6,7 @@ import { setSpinnerValue } from '../../reducers/spinnertReducer';
 const Spinner = () => {
   const [isNearbyZombie, setIsNearbyZombie] = useState(true);
   const [resultImage, setResultImage] = useState('./images/spinner/push.png');
-  let animation: number;
+  let startTime = performance.now();
   let timeProgress = 0;
   let isSpinning = false;
   const dispatch = useAppDispatch();
@@ -54,36 +54,24 @@ const Spinner = () => {
   }
 
   function renderProgress() {
+    startTime = performance.now();
     setResultImage('./images/spinner/push.png');
     const arrow: HTMLElement | null = document.querySelector('.spinner__arrow');
     if (arrow) {
       arrow.style.transition = '0ms';
       arrow.style.transform = 'rotate(0deg)';
     }
-
-    let start = 0;
     const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
-    function step(timestamp: number): void {
-      if (!start) start = timestamp;
-      timeProgress = timestamp - start;
-      if (progressBar) {
-        let height = 100 - timeProgress / 30;
-        if (height < 0) height = 0;
-        progressBar.style.height = `${height}%`;
-      }
-      if (timeProgress < 3000) {
-        animation = window.requestAnimationFrame(step);
-      }
-    }
-    if (!isSpinning) {
+    if (progressBar && !isSpinning) {
       isSpinning = true;
       timeProgress = 0;
-      window.requestAnimationFrame(step);
+      progressBar.style.transition = '3000ms';
+      progressBar.style.height = '0%';
     }
   }
 
   function startSpin() {
-    window.cancelAnimationFrame(animation);
+    timeProgress = performance.now() - startTime;
     const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
     if (progressBar) {
       progressBar.style.transition = `${timeProgress}ms`;
@@ -93,7 +81,6 @@ const Spinner = () => {
   }
 
   function stopSpin() {
-    window.cancelAnimationFrame(animation);
     const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
     if (progressBar) {
       progressBar.style.transition = `${timeProgress}ms`;
