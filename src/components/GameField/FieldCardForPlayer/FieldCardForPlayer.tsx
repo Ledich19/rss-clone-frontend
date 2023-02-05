@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { BoardItemType, CharacterType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setVisibleCard } from '../../../reducers/gameBoardReducer';
+import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 
 type PropsType = {
   heightField: number;
@@ -17,8 +18,25 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
     width: `calc(100vh / ${heightField})`,
   };
 
-  useEffect(() => {
-    // finish check
+  const checkIsNearEnemy = (id: string) => {
+    const [i, j] = id.split('-');
+    const gameFieldArray = gameField.flat(1);
+
+    const checkItemsId = [
+      `${parseInt(i, 10) - 1}-${j}`,
+      `${parseInt(i, 10) + 1}-${j}`,
+      `${i}-${parseInt(j, 10) + 1}`,
+      `${i}-${parseInt(j, 10) - 1}`,
+    ];
+    const checkItemsEnemy = gameFieldArray.filter((ceil) => checkItemsId
+      .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible);
+
+    if (checkItemsEnemy.length > 0) {
+      dispatch(setIsNearEnemy(true));
+      console.log('danger near is enemy');
+    }
+  };
+  const checkIsFinish = () => {
     if (item.value && item.value === 'finish') {
       const playersOnFinish = gameField
         .flat(1)
@@ -40,6 +58,10 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
         }
       }
     }
+  };
+  useEffect(() => {
+    checkIsNearEnemy(item.id);
+    checkIsFinish();
   });
 
   const handleOpen = () => {
