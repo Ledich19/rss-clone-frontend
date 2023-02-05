@@ -72,6 +72,7 @@ const Spinner = () => {
 
   function startSpin() {
     timeProgress = performance.now() - startTime;
+    if (timeProgress > 3000) timeProgress = 3000;
     const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
     if (progressBar) {
       progressBar.style.transition = `${timeProgress}ms`;
