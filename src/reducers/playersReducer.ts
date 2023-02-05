@@ -4,6 +4,7 @@ import { Players } from '../app/types';
 const initialState: Players = {
   characters: [
     {
+      category: 'character',
       isVisible: true,
       active: true,
       type: 'boris',
@@ -14,6 +15,7 @@ const initialState: Players = {
       count: 1,
       health: 5,
       inventory: [{
+        category: 'weapon',
         isVisible: false,
         type: 'axe',
         name: 'Топор',
@@ -25,6 +27,7 @@ const initialState: Players = {
     },
     {
       isVisible: true,
+      category: 'character',
       active: true,
       type: 'sasha',
       name: 'Саша',
@@ -34,6 +37,7 @@ const initialState: Players = {
       count: 1,
       health: 3,
       inventory: [{
+        category: 'thing',
         isVisible: false,
         type: 'plank',
         name: 'Доски',

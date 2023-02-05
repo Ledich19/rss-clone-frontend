@@ -9,6 +9,7 @@ export type PromoCodeState = {
   }[],
 };
 export type Player = {
+  category: string,
   type: string,
   isVisible: boolean;
   active: boolean;
@@ -24,6 +25,7 @@ export type Players = {
 };
 
 export type CharacterType = {
+  category: string;
   isVisible: boolean;
   active: boolean;
   type: string,
@@ -36,6 +38,7 @@ export type CharacterType = {
   inventory?: Array<ThingType | WeaponType>,
 };
 export type EnemyType = {
+  category: string;
   isVisible: boolean;
   active: boolean;
   type: string,
@@ -45,6 +48,7 @@ export type EnemyType = {
   count: number,
 };
 export type ThingType = {
+  category: string;
   isVisible: boolean;
   type: string,
   name: string,
@@ -53,6 +57,7 @@ export type ThingType = {
   count: number,
 };
 export type WeaponType = {
+  category: string;
   isVisible: boolean;
   type: string,
   name: string,
