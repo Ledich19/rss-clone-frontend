@@ -22,7 +22,7 @@ const GameField = () => {
 
     const emptyCellIdsForPlayer = gameFieldMatrix
       .flat(1)
-      .filter((ceil) => ceil.state === 'player')
+      .filter((ceil) => ceil.value === 'player')
       .map((ceil) => ceil.id);
     const shuffleEmptyCellIdsForPlayer = shuffleArray(emptyCellIdsForPlayer).map((ceil, i) => ({
       id: ceil,
@@ -67,7 +67,7 @@ const GameField = () => {
       {gameFieldMatrix.map((row, i) => (
           <div className="field__row" key={`rowId${i}`}>
             {row.map((item) => (
-              item.state && item.state !== 'player' && item.state !== 'finish' && useCharactersTypes.includes(item.state.type)
+              item.state && useCharactersTypes.includes(item.state.type)
                 ? <FieldCardForPlayer key={item.id} heightField={heightField} item={item} />
                 : <FieldCard key={item.id} heightField={heightField} item={item} />
             ))}

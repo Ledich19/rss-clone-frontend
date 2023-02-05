@@ -10,7 +10,6 @@ type PropsType = {
 };
 
 const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
-  const { characters } = useAppSelector((state) => state.characters);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
   const style = {
@@ -25,19 +24,19 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
         .flat(1)
         .filter(
           (ceil) => ceil.state
-            && typeof ceil.state === 'object'
             && (ceil.state.type === 'boris' || ceil.state.type === 'sasha')
+            && ceil.state.inventory
             && ceil.value === 'finish',
         ).map((ceil) => ceil.state);
 
       if (playersOnFinish.length > 0) {
         const charactersStuff = playersOnFinish
-          .map((character) => character.inventory)
+          .map((player) => player?.inventory)
           .flat(1);
-        const stuffList = charactersStuff.map((thing) => thing.type);
+        const stuffList = charactersStuff.map((thing) => thing?.type);
         if (stuffList.includes('canister') && stuffList.includes('key')) {
-          console.log('playersOnFinish', playersOnFinish);
-          console.log('check finish', stuffList);
+          // console.log('playersOnFinish', playersOnFinish);
+          // console.log('check finish', stuffList);
         }
       }
     }
@@ -49,7 +48,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
 
   return (
     <div onClick={handleOpen} style={style} className="field-player">
-      {item.state && item.state !== 'player' && item.state !== 'finish' ? (
+      {item.state ? (
               <img src={`./images/${item.state.img}`} alt="back card" />
       ) : (
         item.id

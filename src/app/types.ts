@@ -33,7 +33,7 @@ export type CharacterType = {
   description: string,
   count: number,
   health: number,
-  inventory: Array<ThingType | WeaponType>,
+  inventory?: Array<ThingType | WeaponType>,
 };
 export type EnemyType = {
   isVisible: boolean;
@@ -68,9 +68,11 @@ export type BoardItemType = {
   left: boolean,
   state: {
     isVisible: boolean;
-    img: string
-    type: string;
-  } | null | 'player' | 'finish',
+    active: boolean;
+    type: string,
+    img: string,
+    inventory?: Array<ThingType | WeaponType>,
+  } | null,
   id: string
   value?: string
 };
@@ -99,7 +101,7 @@ export type Rules = {
   inBox: {
     title: string,
     cards: {
-      monstrs:{
+      monstrs: {
         title: string,
         zombie: string,
         dog: string,
@@ -111,7 +113,7 @@ export type Rules = {
         grenade: string,
         knife: string,
         arbalet: string,
-        axe:string,
+        axe: string,
         pistol: string,
         gun: string,
         shotGun: string,

@@ -82,7 +82,7 @@ const initialState: GameSetType = {
         top: true, right: true, bottom: true, left: true, state: null, id: '1-0',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'player', id: '1-1',
+        top: true, right: true, bottom: true, left: true, state: null, id: '1-1', value: 'player',
       },
       {
         top: true, right: true, bottom: true, left: true, state: null, id: '1-2',
@@ -103,7 +103,7 @@ const initialState: GameSetType = {
         top: false, right: true, bottom: true, left: true, state: null, id: '1-7',
       },
       {
-        top: false, right: true, bottom: true, left: true, state: 'player', id: '1-8',
+        top: false, right: true, bottom: true, left: true, state: null, id: '1-8', value: 'player',
       },
       {
         top: false, right: false, bottom: true, left: true, state: null, id: '1-9',
@@ -127,7 +127,7 @@ const initialState: GameSetType = {
         top: false, right: true, bottom: true, left: true, state: null, id: '1-15',
       },
       {
-        top: false, right: false, bottom: true, left: true, state: 'player', id: '1-16',
+        top: false, right: false, bottom: true, left: true, state: null, id: '1-16', value: 'player',
       },
       {
         top: true, right: true, bottom: true, left: false, state: null, id: '1-17',
@@ -408,7 +408,7 @@ const initialState: GameSetType = {
         top: true, right: false, bottom: true, left: false, state: null, id: '5-10',
       },
       {
-        top: false, right: false, bottom: true, left: false, state: 'player', id: '5-11',
+        top: false, right: false, bottom: true, left: false, state: null, id: '5-11', value: 'player',
       },
       {
         top: false, right: true, bottom: true, left: false, state: null, id: '5-12',
@@ -512,7 +512,7 @@ const initialState: GameSetType = {
         top: true, right: true, bottom: true, left: true, state: null, id: '6-20',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'player', id: '6-21',
+        top: true, right: true, bottom: true, left: true, state: null, id: '6-21', value: 'player',
       },
       {
         top: true, right: true, bottom: true, left: true, state: null, id: '6-22',
@@ -701,7 +701,7 @@ const initialState: GameSetType = {
         top: true, right: true, bottom: true, left: true, state: null, id: '9-9',
       },
       {
-        top: false, right: false, bottom: true, left: true, state: 'player', id: '9-10',
+        top: false, right: false, bottom: true, left: true, state: null, id: '9-10', value: 'player',
       },
       {
         top: true, right: true, bottom: true, left: false, state: null, id: '9-11',
@@ -1160,19 +1160,19 @@ const initialState: GameSetType = {
         top: true, right: true, bottom: true, left: true, state: null, id: '15-14',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-15',
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-15', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-16',
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-16', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-17',
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-17', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-18',
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-18', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-19',
+        top: true, right: true, bottom: true, left: true, state: null, id: '15-19', value: 'finish',
       },
       {
         top: true, right: true, bottom: true, left: true, state: null, id: '15-20',
@@ -1234,19 +1234,19 @@ const initialState: GameSetType = {
         top: true, right: true, bottom: true, left: true, state: null, id: '16-14',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-15',
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-15', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-16',
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-16', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-17',
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-17', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '16-18',
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-18', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'player', id: '16-19',
+        top: true, right: true, bottom: true, left: true, state: null, id: '16-19', value: 'player',
       },
       {
         top: true, right: true, bottom: true, left: true, state: null, id: '16-20',
@@ -1275,7 +1275,7 @@ const initialState: GameSetType = {
         top: true, right: false, bottom: true, left: true, state: null, id: '17-3',
       },
       {
-        top: true, right: true, bottom: true, left: false, state: 'player', id: '17-4',
+        top: true, right: true, bottom: true, left: false, state: null, id: '17-4', value: 'player',
       },
       {
         top: true, right: true, bottom: true, left: true, state: null, id: '17-5',
@@ -1308,19 +1308,19 @@ const initialState: GameSetType = {
         top: true, right: true, bottom: true, left: true, state: null, id: '17-14',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-15',
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-15', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-16',
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-16', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-17',
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-17', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-18',
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-18', value: 'finish',
       },
       {
-        top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-19',
+        top: true, right: true, bottom: true, left: true, state: null, id: '17-19', value: 'finish',
       },
       {
         top: true, right: true, bottom: true, left: true, state: null, id: '17-20',

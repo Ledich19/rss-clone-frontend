@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import './FieldCard.scss';
 import { BoardItemType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -16,7 +16,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   const spinnerValue = useAppSelector((state) => state.spinner.value);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
-  const [info, setInfo] = useState('');
   const movieInfo = useRef<HTMLDivElement>(null);
   const style = {
     height: `calc(100vh / ${heightField})`,
@@ -36,7 +35,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     ];
     const checkItemsObj = gameFieldArray.filter((ceil) => checkItemsId
       .includes(ceil.id)
-        && ((ceil.state === null || ceil.state === 'player')))
+        && ((ceil.state === null || ceil.value === 'player')))
       .map((e) => ({ id: e.id, movie: move }));
     return checkItemsObj;
   };

@@ -81,7 +81,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: null, id: '1-0',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'player', id: '1-1',
+      top: true, right: true, bottom: true, left: true, state: null, id: '1-1', value: 'player',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '1-2',
@@ -102,7 +102,7 @@ const initialState: BoardItemType[][] = [
       top: false, right: true, bottom: true, left: true, state: null, id: '1-7',
     },
     {
-      top: false, right: true, bottom: true, left: true, state: 'player', id: '1-8',
+      top: false, right: true, bottom: true, left: true, state: null, id: '1-8', value: 'player',
     },
     {
       top: false, right: false, bottom: true, left: true, state: null, id: '1-9',
@@ -126,7 +126,7 @@ const initialState: BoardItemType[][] = [
       top: false, right: true, bottom: true, left: true, state: null, id: '1-15',
     },
     {
-      top: false, right: false, bottom: true, left: true, state: 'player', id: '1-16',
+      top: false, right: false, bottom: true, left: true, state: null, id: '1-16', value: 'player',
     },
     {
       top: true, right: true, bottom: true, left: false, state: null, id: '1-17',
@@ -407,7 +407,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: false, bottom: true, left: false, state: null, id: '5-10',
     },
     {
-      top: false, right: false, bottom: true, left: false, state: 'player', id: '5-11',
+      top: false, right: false, bottom: true, left: false, state: null, id: '5-11', value: 'player',
     },
     {
       top: false, right: true, bottom: true, left: false, state: null, id: '5-12',
@@ -511,7 +511,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: null, id: '6-20',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'player', id: '6-21',
+      top: true, right: true, bottom: true, left: true, state: null, id: '6-21', value: 'player',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '6-22',
@@ -700,7 +700,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: null, id: '9-9',
     },
     {
-      top: false, right: false, bottom: true, left: true, state: 'player', id: '9-10',
+      top: false, right: false, bottom: true, left: true, state: null, id: '9-10', value: 'player',
     },
     {
       top: true, right: true, bottom: true, left: false, state: null, id: '9-11',
@@ -1245,7 +1245,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: null, id: '16-18', value: 'finish',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'player', id: '16-19', value: 'finish',
+      top: true, right: true, bottom: true, left: true, state: null, id: '16-19', value: 'player',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '16-20',
@@ -1274,7 +1274,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: false, bottom: true, left: true, state: null, id: '17-3',
     },
     {
-      top: true, right: true, bottom: true, left: false, state: 'player', id: '17-4',
+      top: true, right: true, bottom: true, left: false, state: null, id: '17-4', value: 'player',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '17-5',
@@ -1499,7 +1499,7 @@ const gameBoardSlice = createSlice({
       type: string;
     }) {
       const newState = state.map((row) => row.map((ceil) => {
-        if (ceil.state && ceil.id === actions.payload && ceil.state !== 'player' && ceil.state !== 'finish') {
+        if (ceil.state && ceil.id === actions.payload) {
           const newCeil = { ...ceil, state: { ...ceil.state, isVisible: !ceil.state.isVisible } };
           return newCeil;
         }
