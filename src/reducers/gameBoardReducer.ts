@@ -1494,18 +1494,17 @@ const gameBoardSlice = createSlice({
     }) {
       return actions.payload;
     },
-    toggleVisibleCard(state, actions: {
+    setVisibleCard(state, actions: {
       payload: string;
       type: string;
     }) {
       const newState = state.map((row) => row.map((ceil) => {
         if (ceil.state && ceil.id === actions.payload) {
-          const newCeil = { ...ceil, state: { ...ceil.state, isVisible: !ceil.state.isVisible } };
+          const newCeil = { ...ceil, state: { ...ceil.state, isVisible: true } };
           return newCeil;
         }
         return ceil;
       }));
-
       return newState;
     },
 
@@ -1531,8 +1530,24 @@ const gameBoardSlice = createSlice({
 
       return newState;
     },
+    removeCardState(state, actions: {
+      payload: string;
+      type: string;
+    }) {
+      const newState = state.map((row) => row.map((ceil) => {
+        if (ceil.id === actions.payload) {
+          const newCeil = { ...ceil, state: null };
+          return newCeil;
+        }
+        return ceil;
+      }));
+
+      return newState;
+    },
   },
 });
 
-export const { setNewGameField, toggleVisibleCard, moveCharacter } = gameBoardSlice.actions;
+export const {
+  setNewGameField, setVisibleCard, moveCharacter, removeCardState,
+} = gameBoardSlice.actions;
 export default gameBoardSlice.reducer;

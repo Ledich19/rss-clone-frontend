@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Players } from '../app/types';
+import { Players, ThingType, WeaponType } from '../app/types';
 
 const initialState: Players = {
   characters: [
@@ -54,11 +54,26 @@ const playersSlice = createSlice({
   name: 'players',
   initialState,
   reducers: {
-    getAllPlayers(state) {
-      return state;
+    addToPlayerInventory(state, actions: {
+      payload: {
+        player: string,
+        value: ThingType | WeaponType,
+      };
+      type: string;
+    }) {
+      const newCharacters = state.characters.map((character) => {
+        if (character.type === actions.payload.player) {
+          return {
+            ...character, inventory: character.inventory?.concat(actions.payload.value),
+          };
+        }
+        return character;
+      });
+      const newState = { ...state, characters: newCharacters };
+      return newState;
     },
   },
 });
 
-export const { getAllPlayers } = playersSlice.actions;
+export const { addToPlayerInventory } = playersSlice.actions;
 export default playersSlice.reducer;

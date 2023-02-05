@@ -16,7 +16,7 @@ export type Player = {
   playerName: string,
   name: string,
   health: number,
-  inventory: Array<ThingType | WeaponType>
+  inventory?: Array<ThingType | WeaponType>
 };
 
 export type Players = {
@@ -71,13 +71,7 @@ export type BoardItemType = {
   right: boolean,
   bottom: boolean,
   left: boolean,
-  state: {
-    isVisible: boolean;
-    active: boolean;
-    type: string,
-    img: string,
-    inventory?: Array<ThingType | WeaponType>,
-  } | null,
+  state: WeaponType | ThingType | EnemyType | CharacterType | null,
   id: string
   value?: string
 };

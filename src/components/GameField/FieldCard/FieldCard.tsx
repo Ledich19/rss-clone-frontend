@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import './FieldCard.scss';
-import { BoardItemType } from '../../../app/types';
+import { BoardItemType, WeaponType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { moveCharacter, toggleVisibleCard } from '../../../reducers/gameBoardReducer';
+import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { decrementSpinnerValue } from '../../../reducers/spinnertReducer';
+import { addToPlayerInventory } from '../../../reducers/playersReducer';
 
 type PropsType = {
   heightField: number;
@@ -88,7 +89,28 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   };
 
   const handleOpen = (id: string) => {
-    dispatch(toggleVisibleCard(id));
+    // open cart
+    const gameFieldArr = gameField.flat(1);
+    const active = characters.find((character) => character.type === activePlayer);
+    const player = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
+    if (player) {
+      const [playerI, playerJ] = player.id.split('-');
+      const [ceilI, ceilJ] = id.split('-');
+      if ((Math.abs(+playerI - +ceilI) === 1 && Math.abs(+playerJ - +ceilJ) === 0)
+      || (Math.abs(+playerI - +ceilI) === 0 && Math.abs(+playerJ - +ceilJ) === 1)) {
+        dispatch(setVisibleCard(id));
+        const thingCeil = gameFieldArr.find((ceil) => ceil.id === id);
+        if (thingCeil && thingCeil.state
+          && (thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing')) {
+          setTimeout(() => dispatch(removeCardState(id)), 5000);
+          dispatch(addToPlayerInventory({
+            player: activePlayer, value: thingCeil.state,
+          }));
+          console.log(characters);
+          // TODO! set spinner value to 0
+        }
+      }
+    }
   };
   const handler = item.state ? handleOpen : handleMove;
 

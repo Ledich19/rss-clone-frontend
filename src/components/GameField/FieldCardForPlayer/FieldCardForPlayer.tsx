@@ -1,8 +1,8 @@
 import './FieldCardForPlayer.scss';
 import { useEffect } from 'react';
-import { BoardItemType } from '../../../app/types';
+import { BoardItemType, CharacterType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { toggleVisibleCard } from '../../../reducers/gameBoardReducer';
+import { setVisibleCard } from '../../../reducers/gameBoardReducer';
 
 type PropsType = {
   heightField: number;
@@ -25,13 +25,13 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
         .filter(
           (ceil) => ceil.state
             && (ceil.state.type === 'boris' || ceil.state.type === 'sasha')
-            && ceil.state.inventory
+            && (ceil.state as CharacterType).inventory
             && ceil.value === 'finish',
         ).map((ceil) => ceil.state);
 
       if (playersOnFinish.length > 0) {
         const charactersStuff = playersOnFinish
-          .map((player) => player?.inventory)
+          .map((player) => (player as CharacterType).inventory)
           .flat(1);
         const stuffList = charactersStuff.map((thing) => thing?.type);
         if (stuffList.includes('canister') && stuffList.includes('key')) {
@@ -43,7 +43,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   });
 
   const handleOpen = () => {
-    dispatch(toggleVisibleCard(item.id));
+    dispatch(setVisibleCard(item.id));
   };
 
   return (
