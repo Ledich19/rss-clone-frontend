@@ -44,21 +44,6 @@ const Spinner = () => {
 
   function spin() {
     const random = Math.random() * 1000;
-    /*     let start = 0;
-    const arrow: HTMLElement | null = document.querySelector('.spinner__arrow');
-    function step(timestamp: number): void {
-      if (!start) start = timestamp;
-      const progress = timestamp - start;
-      if (arrow) {
-        let angle = progress;
-        if (angle > 360) angle = progress % 360;
-        arrow.style.transform = `rotate(${angle}deg)`;
-      }
-      if (progress < timeProgress + random) {
-        window.requestAnimationFrame(step);
-      } else isSpinning = false;
-    }
-    window.requestAnimationFrame(step); */
     const arrow: HTMLElement | null = document.querySelector('.spinner__arrow');
     if (arrow) {
       arrow.style.transition = `${timeProgress + random}ms`;
