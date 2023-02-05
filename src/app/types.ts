@@ -15,7 +15,7 @@ export type Player = {
   playerName: string,
   name: string,
   health: number,
-  inventory: [],
+  inventory: Array<ThingType | WeaponType>
 };
 
 export type Players = {
@@ -33,7 +33,7 @@ export type CharacterType = {
   description: string,
   count: number,
   health: number,
-  inventory: [],
+  inventory: Array<ThingType | WeaponType>,
 };
 export type EnemyType = {
   isVisible: boolean;
