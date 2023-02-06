@@ -1,5 +1,5 @@
-import './questions.scss';
 import { useAppSelector } from '../../../app/hooks';
+import './Questions.scss';
 
 const Questions = () => {
   const { questions } = useAppSelector((state) => state.rules);

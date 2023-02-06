@@ -1,7 +1,6 @@
-import { log } from 'console';
 import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import './inBox.scss';
+import './InBox.scss';
 
 const InBox = () => {
   const rules = useAppSelector((state) => state.rules);
