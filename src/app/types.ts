@@ -9,6 +9,7 @@ export type PromoCodeState = {
   }[],
 };
 export type Player = {
+  type: string,
   isVisible: boolean;
   active: boolean;
   playerName: string,
@@ -19,7 +20,7 @@ export type Player = {
 
 export type Players = {
   characters: CharacterType[],
-  active: string,
+  activePlayer: string,
 };
 
 export type CharacterType = {
@@ -68,6 +69,7 @@ export type BoardItemType = {
   state: {
     isVisible: boolean;
     img: string
+    type: string;
   } | null | 'player' | 'finish',
   id: string
 };
@@ -81,6 +83,7 @@ export type GameSetType = {
     weapon: WeaponType[]
   }
 };
+
 export type Table = {
   text: string[],
 };
@@ -95,7 +98,6 @@ export type QA = {
   question: string,
   answer: string,
 };
-
 export type Rules = {
   aboutGame: string,
   table: Table,
