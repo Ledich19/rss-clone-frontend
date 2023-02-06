@@ -7,8 +7,8 @@ const Spinner = () => {
   const [isNearbyZombie, setIsNearbyZombie] = useState(true);
   const [resultImage, setResultImage] = useState('./images/spinner/push.png');
   let startTime = performance.now();
+  const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
-  let isSpinning = false;
   const dispatch = useAppDispatch();
 
   const topLeftImage = isNearbyZombie ? './images/spinner/run.png' : './images/spinner/number-1.png';
@@ -37,7 +37,6 @@ const Spinner = () => {
         setResultImage(topLeftImage);
       }
       dispatch(setSpinnerValue(result));
-      isSpinning = false;
     }
     setTimeout(delay, time);
   }
@@ -46,10 +45,15 @@ const Spinner = () => {
     const random = Math.random() * 1000;
     const arrow: HTMLElement | null = document.querySelector('.spinner__arrow');
     if (arrow) {
+      if ((timeProgress + random) % 360 < 180) {
+        arrow.style.transition = '180ms';
+        arrow.style.transform = `rotate(${startAngle + 180}deg)`;
+      }
       arrow.style.transition = `${timeProgress + random}ms`;
-      arrow.style.transform = `rotate(${timeProgress + random}deg)`;
+      arrow.style.transform = `rotate(${startAngle + timeProgress + random}deg)`;
     }
-    const angle = (timeProgress + random + 90);
+    const angle = (startAngle + timeProgress + random + 90);
+    setStartAngle((startAngle + timeProgress + random) % 360);
     checkResult(angle);
   }
 
@@ -59,11 +63,10 @@ const Spinner = () => {
     const arrow: HTMLElement | null = document.querySelector('.spinner__arrow');
     if (arrow) {
       arrow.style.transition = '0ms';
-      arrow.style.transform = 'rotate(0deg)';
+      arrow.style.transform = `rotate(${startAngle}deg)`;
     }
     const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
-    if (progressBar && !isSpinning) {
-      isSpinning = true;
+    if (progressBar) {
       timeProgress = 0;
       progressBar.style.transition = '3000ms';
       progressBar.style.height = '0%';
@@ -88,7 +91,6 @@ const Spinner = () => {
       progressBar.style.height = '100%';
     }
     timeProgress = 0;
-    isSpinning = false;
   }
 
   return (

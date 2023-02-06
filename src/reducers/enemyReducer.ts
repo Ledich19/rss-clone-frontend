@@ -1,10 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { EnemyType } from '../app/types';
 
-const initialState = {
-  characters: [{
-    name: '',
-    position: '',
-  }],
+type InitialState = {
+  enemies: EnemyType[]
+  playerName: string
+  active: string
+};
+
+const initialState: InitialState = {
+  enemies: [],
+  playerName: '',
   active: '',
 };
 
@@ -12,11 +17,13 @@ const enemySlice = createSlice({
   name: 'enemy',
   initialState,
   reducers: {
-    getAllEnemy(state) {
-      return state;
+    addEnemyToBoard(state, actions: {
+      payload: EnemyType; type: string;
+    }) {
+      return { ...state, enemies: state.enemies.concat(actions.payload) };
     },
   },
 });
 
-export const { getAllEnemy } = enemySlice.actions;
+export const { addEnemyToBoard } = enemySlice.actions;
 export default enemySlice.reducer;

@@ -9,13 +9,14 @@ export type PromoCodeState = {
   }[],
 };
 export type Player = {
+  category: string,
   type: string,
   isVisible: boolean;
   active: boolean;
   playerName: string,
   name: string,
   health: number,
-  inventory: [],
+  inventory?: Array<ThingType | WeaponType>
 };
 
 export type Players = {
@@ -24,6 +25,7 @@ export type Players = {
 };
 
 export type CharacterType = {
+  category: string;
   isVisible: boolean;
   active: boolean;
   type: string,
@@ -33,9 +35,10 @@ export type CharacterType = {
   description: string,
   count: number,
   health: number,
-  inventory: [],
+  inventory?: Array<ThingType | WeaponType>,
 };
 export type EnemyType = {
+  category: string;
   isVisible: boolean;
   active: boolean;
   type: string,
@@ -45,6 +48,7 @@ export type EnemyType = {
   count: number,
 };
 export type ThingType = {
+  category: string;
   isVisible: boolean;
   type: string,
   name: string,
@@ -53,6 +57,7 @@ export type ThingType = {
   count: number,
 };
 export type WeaponType = {
+  category: string;
   isVisible: boolean;
   type: string,
   name: string,
@@ -66,12 +71,9 @@ export type BoardItemType = {
   right: boolean,
   bottom: boolean,
   left: boolean,
-  state: {
-    isVisible: boolean;
-    img: string
-    type: string;
-  } | null | 'player' | 'finish',
+  state: WeaponType | ThingType | EnemyType | CharacterType | null,
   id: string
+  value?: string
 };
 
 export type GameSetType = {
@@ -109,7 +111,7 @@ export type Rules = {
   inBox: {
     title: string,
     cards: {
-      monstrs:{
+      monstrs: {
         title: string,
         zombie: string,
         dog: string,
@@ -121,7 +123,7 @@ export type Rules = {
         grenade: string,
         knife: string,
         arbalet: string,
-        axe:string,
+        axe: string,
         pistol: string,
         gun: string,
         shotGun: string,

@@ -1,25 +1,30 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './FieldCard.scss';
 import { BoardItemType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { moveCharacter, toggleVisibleCard } from '../../../reducers/gameBoardReducer';
-import { decrementSpinnerValue } from '../../../reducers/spinnertReducer';
+import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
+import { decrementSpinnerValue, setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
+import { addToPlayerInventory } from '../../../reducers/playersReducer';
 
 type PropsType = {
   heightField: number;
   item: BoardItemType;
+  position: { row: number, col: number }
 };
 type ToMovieItem = { id: string, movie: number };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
   const spinnerValue = useAppSelector((state) => state.spinner.value);
+  const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
-
+  const movieInfo = useRef<HTMLDivElement>(null);
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
+    lineHeight: `calc(100vh / ${heightField})`,
+    background: item.value && item.value === 'finish' ? 'rgba(232, 248, 5, 0.3)' : 'rgba(0, 0, 0, 0)',
   };
 
   const CheckOptionMove = (i: number, j: number, move: number) => {
@@ -33,7 +38,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     ];
     const checkItemsObj = gameFieldArray.filter((ceil) => checkItemsId
       .includes(ceil.id)
-        && ((ceil.state === null || ceil.state === 'player')))
+        && ((ceil.state === null || ceil.value === 'player')))
       .map((e) => ({ id: e.id, movie: move }));
     return checkItemsObj;
   };
@@ -76,7 +81,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       );
     const canMovie = player ? canIMove(player.id) : null;
 
-    if (player && canMovie) {
+    if (player && canMovie && !isNearbyEnemy) {
       if (spinnerValue) {
         const body = characters.find((character) => character.type === activePlayer) || null;
         dispatch(moveCharacter({ from: player.id, to: id, body }));
@@ -85,12 +90,51 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     }
   };
 
-  const handleOpen = (id: string) => {
-    dispatch(toggleVisibleCard(id));
+  const canIOpen = (player: string, id: string) => {
+    const [i, j] = player.split('-');
+    const gameFieldArray = gameField.flat(1);
+    const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
+    const checkItemsId = [
+      ceilElement && ceilElement.top ? `${+i - 1}-${j}` : 'none',
+      ceilElement && ceilElement.bottom ? `${+i + 1}-${j}` : 'none',
+      ceilElement && ceilElement.right ? `${i}-${+j + 1}` : 'none',
+      ceilElement && ceilElement.left ? `${i}-${+j - 1}` : 'none',
+    ];
+    const checkItemsObj = gameFieldArray.filter((ceil) => checkItemsId
+      .includes(ceil.id) && ceil.state)
+      .map((e) => e.id);
+    return checkItemsObj.includes(id);
   };
-  const handler = item.state ? handleOpen : handleMove;
+
+  const handleOpenCard = (id: string) => {
+    const gameFieldArr = gameField.flat(1);
+    const player = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
+    const thingCeil = gameFieldArr.find((ceil) => ceil.id === id);
+    const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
+    if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state) {
+      dispatch(setVisibleCard(id));
+      dispatch(setSpinnerValue(0));
+      if ((thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing')) {
+        setTimeout(() => {
+          dispatch(removeCardState(id));
+          const body = characters.find((character) => character.type === activePlayer) || null;
+          dispatch(moveCharacter({ from: player.id, to: id, body }));
+        }, 5000);
+        dispatch(addToPlayerInventory({
+          player: activePlayer, value: thingCeil.state,
+        }));
+      }
+      if (thingCeil.state.category === 'enemy') {
+        dispatch(setIsNearEnemy([thingCeil.id]));
+      }
+    }
+  };
+  const handler = item.state ? handleOpenCard : handleMove;
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
     const player = gameField
       .flat(1)
       .find(
@@ -99,19 +143,37 @@ const FieldCard = ({ heightField, item }: PropsType) => {
         && ceil.state.type === activePlayer,
       );
     const canMovie = player ? canIMove(player.id) : null;
-    if (canMovie) {
-      (e.target as HTMLElement).style.background = ' rgba(16, 240, 16, 0.3)';
+    if (canMovie && !isNearbyEnemy) {
+      // setInfo(canMovie.movie.toString());
+      const parentElement = e.target.closest('.field-card');
+      (parentElement as HTMLElement).style.background = 'rgba(0, 255, 26, 0.3';
+
+      if (movieInfo.current) {
+        movieInfo.current.innerHTML = `${canMovie.movie}`;
+      }
     } else {
-      (e.target as HTMLElement).style.background = 'rgba(248, 5, 5, 0.3)';
+      const parentElement = e.target.closest('.field-card');
+      (parentElement as HTMLElement).style.background = 'rgba(248, 5, 5, 0.3)';
     }
   };
   const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
-    (e.target as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
+    if (!(e.target instanceof HTMLElement)) {
+      return;
+    }
+    const parentElement = e.target.closest('.field-card');
+    if (item.value) {
+      (parentElement as HTMLElement).style.background = 'rgba(232, 248, 5, 0.3)';
+    } else {
+      (parentElement as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
+    }
+    if (movieInfo.current) {
+      movieInfo.current.innerHTML = '';
+    }
   };
   return (
     <div
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
+      onMouseOver={handleMouseEnter}
+      onMouseOut={handleMouseLeave}
       onClick={() => handler(item.id)}
       style={style}
       className="field-card"
@@ -128,7 +190,10 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           </div>
         </div>
       ) : (
-        item.id
+        <div ref={movieInfo}>
+          {/* <div className='_movie-text'>{item.id}</div> */}
+          {/* <div className='_small-text'>{item.id}</div> */}
+        </div>
       )}
     </div>
   );
