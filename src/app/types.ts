@@ -85,6 +85,12 @@ export type Table = {
   text: string[],
 };
 
+export type ContentRules = {
+  title:string,
+  items: string[],
+  text?: string,
+};
+
 export type Rules = {
   aboutGame: string,
   table: Table,
@@ -147,5 +153,30 @@ export type Rules = {
       text: string,
       items: string[],
     },
+    fight: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    eaten: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    attack: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    win: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    breakeBoards: {
+      title: string,
+      text: string,
+      items: string[],
+    }
   }
 };

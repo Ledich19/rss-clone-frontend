@@ -1,13 +1,8 @@
 import { useState } from 'react';
+import { ContentRules } from '../../../app/types';
 import './item.scss';
 
-type Content = {
-  title:string,
-  items: string[],
-  text?: string,
-};
-
-const Item = (props:Content) => {
+const Item = (props:ContentRules) => {
   const [visible, setVisibility] = useState('item__text');
   const [activity, setActivity] = useState('rotate(0deg)');
   const changeVisibility = () => {
