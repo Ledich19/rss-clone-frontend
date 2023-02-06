@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import './Spinner.scss';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setSpinnerValue } from '../../reducers/spinnertReducer';
 
 const Spinner = () => {
-  const [isNearbyZombie, setIsNearbyZombie] = useState(true);
+  const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const [resultImage, setResultImage] = useState('./images/spinner/push.png');
   let startTime = performance.now();
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
   const dispatch = useAppDispatch();
 
-  const topLeftImage = isNearbyZombie ? './images/spinner/run.png' : './images/spinner/number-1.png';
-  const topRightImage = isNearbyZombie ? './images/spinner/bite.png' : './images/spinner/number-2.png';
-  const bottomLeftImage = isNearbyZombie ? './images/spinner/rifle.png' : './images/spinner/number-4.png';
-  const bottomRightImage = isNearbyZombie ? './images/spinner/knife.png' : './images/spinner/number-3.png';
+  const topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/number-1.png';
+  const topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/number-2.png';
+  const bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/number-4.png';
+  const bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/number-3.png';
 
   function checkResult(time: number) {
     const angle = time % 360;

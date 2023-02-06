@@ -94,8 +94,16 @@ const playersSlice = createSlice({
     }) {
       return { ...state, canPlayerMove: actions.payload };
     },
+    setNextActivePlayer(state) {
+      const activeIndex = state.characters.map((ch) => ch.type).indexOf(state.activePlayer);
+      const nextPlayerIndex = activeIndex === state.characters.length ? activeIndex + 1 : 0;
+      const activePlayer = state.characters[nextPlayerIndex].type;
+      return { ...state, activePlayer };
+    },
   },
 });
 
-export const { addToPlayerInventory, decrementHealth, setCanPlayerMove } = playersSlice.actions;
+export const {
+  addToPlayerInventory, decrementHealth, setCanPlayerMove, setNextActivePlayer,
+} = playersSlice.actions;
 export default playersSlice.reducer;
