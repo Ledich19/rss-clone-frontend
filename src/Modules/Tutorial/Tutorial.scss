@@ -7,6 +7,7 @@ $colorText: #6d0101;
 }
 .rules{
   padding-top: 50px;
+  background-color: #d7f35d;
   &__container{
     // max-width: 1330px;
     margin: 0 auto;
@@ -15,25 +16,30 @@ $colorText: #6d0101;
     display: flex;
   }
   &__logo{
-    flex: 1 1 50%;
+    flex: 0 0 50%;
+  }
+  &__img{
+    max-width: 250px;
   }
   &__header{
     display: flex;
     justify-content: space-between;
     gap: 50px;
     margin-bottom: 40px;
-    background-color: #fff;
     position: relative;
     z-index: 2;
     padding: 0 15px;
   }
-  &__info{
+  &__block{
+    display: flex;
     flex: 1 1 50%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    gap: 50px;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+  }
+  &__table{
+    border-radius: 10px;
   }
   &__about-game{
     color: $colorText;
@@ -41,18 +47,13 @@ $colorText: #6d0101;
     font-size: 24px;
     text-align: left;
   }
-  &__table{
-    
-  }
   &__items{
     flex: 0 1 51%;
     padding: 20px;
-    background-color: #0073ff
   }
   &__answer{
     flex: 0 1 49%;
     padding: 20px;
-    background-color: #d7f35d;
   }
 }
 .table{

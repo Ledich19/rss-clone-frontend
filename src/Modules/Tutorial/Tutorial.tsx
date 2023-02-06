@@ -15,11 +15,14 @@ const Tutorial = () => {
         <div className="rules__header">
           <img src="images/tutorial_page/logo.png" alt="logo" className="rules__logo" />
           <div className='rules__info'>
-            <div className="rules__table table">
-              <ul className="table__list">
-                {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
-              </ul>
-            </div>
+            <div className='rules__block'>
+              <img src="images/tutorial_page/zombie.png" alt="zombie" className="rules__img" />
+              <div className="rules__table table">
+                            <ul className="table__list">
+                              {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
+                            </ul>
+              </div>
+            </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
           </div>
         </div>
