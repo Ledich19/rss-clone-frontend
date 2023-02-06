@@ -48,6 +48,7 @@ const initialState: Players = {
     },
   ],
   activePlayer: 'boris',
+  canPlayerMove: true,
 };
 
 const playersSlice = createSlice({
@@ -87,8 +88,14 @@ const playersSlice = createSlice({
       const newState = { ...state, characters: newCharacters };
       return newState;
     },
+    setCanPlayerMove(state, actions: {
+      payload: boolean;
+      type: string;
+    }) {
+      return { ...state, canPlayerMove: actions.payload };
+    },
   },
 });
 
-export const { addToPlayerInventory, decrementHealth } = playersSlice.actions;
+export const { addToPlayerInventory, decrementHealth, setCanPlayerMove } = playersSlice.actions;
 export default playersSlice.reducer;

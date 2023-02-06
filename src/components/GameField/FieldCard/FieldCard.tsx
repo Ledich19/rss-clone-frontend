@@ -4,7 +4,7 @@ import { BoardItemType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { decrementSpinnerValue, setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
-import { addToPlayerInventory } from '../../../reducers/playersReducer';
+import { addToPlayerInventory, setCanPlayerMove } from '../../../reducers/playersReducer';
 
 type PropsType = {
   heightField: number;
@@ -14,9 +14,8 @@ type PropsType = {
 type ToMovieItem = { id: string, movie: number };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
-  const { characters, activePlayer } = useAppSelector((state) => state.characters);
+  const { characters, activePlayer, canPlayerMove } = useAppSelector((state) => state.characters);
   const spinnerValue = useAppSelector((state) => state.spinner.value);
-  const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
   const movieInfo = useRef<HTMLDivElement>(null);
@@ -27,27 +26,39 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     background: item.value && item.value === 'finish' ? 'rgba(232, 248, 5, 0.3)' : 'rgba(0, 0, 0, 0)',
   };
 
+  const createNearCeil = (element: BoardItemType | undefined, i:number, j:number) => [
+    element && element.top ? `${i - 1}-${j}` : 'none',
+    element && element.bottom ? `${i + 1}-${j}` : 'none',
+    element && element.right ? `${i}-${j + 1}` : 'none',
+    element && element.left ? `${i}-${j - 1}` : 'none',
+  ];
+
   const CheckOptionMove = (i: number, j: number, move: number) => {
     const gameFieldArray = gameField.flat(1);
-    const CeilElement = gameFieldArray.find((ceil) => ceil.id === `${i}-${j}`);
-    const checkItemsId = [
-      CeilElement && CeilElement.top ? `${i - 1}-${j}` : 'none',
-      CeilElement && CeilElement.bottom ? `${i + 1}-${j}` : 'none',
-      CeilElement && CeilElement.right ? `${i}-${j + 1}` : 'none',
-      CeilElement && CeilElement.left ? `${i}-${j - 1}` : 'none',
-    ];
+    const ceilElement = gameFieldArray.find((ceil) => ceil.id === `${i}-${j}`);
+    const checkItemsId = createNearCeil(ceilElement, i, j);
+    const checkItemsObj = gameFieldArray
+      .filter((ceil) => checkItemsId
+        .includes(ceil.id) && (ceil.state === null));
+    return checkItemsObj.map((e) => ({ id: e.id, movie: move }));
+  };
+
+  const canIOpen = (player: string, id: string) => {
+    const [i, j] = player.split('-');
+    const gameFieldArray = gameField.flat(1);
+    const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
+    const checkItemsId = createNearCeil(ceilElement, +i, +j);
     const checkItemsObj = gameFieldArray.filter((ceil) => checkItemsId
-      .includes(ceil.id)
-        && ((ceil.state === null || ceil.value === 'player')))
-      .map((e) => ({ id: e.id, movie: move }));
-    return checkItemsObj;
+      .includes(ceil.id) && ceil.state)
+      .map((e) => e.id);
+    return checkItemsObj.includes(id);
   };
 
   const checkPossibilityMoveArray = (arr: ToMovieItem[], move: number): ToMovieItem[] => {
     let resultArray: ToMovieItem[] = [];
     arr.forEach((e) => {
       const [i, j] = e.id.split('-');
-      resultArray = resultArray.concat(CheckOptionMove(+i, +j, move));
+      resultArray = resultArray.concat(CheckOptionMove(parseInt(i, 10), parseInt(j, 10), move));
     });
     return resultArray;
   };
@@ -81,29 +92,13 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       );
     const canMovie = player ? canIMove(player.id) : null;
 
-    if (player && canMovie && !isNearbyEnemy) {
+    if (player && canMovie && canPlayerMove) {
       if (spinnerValue) {
         const body = characters.find((character) => character.type === activePlayer) || null;
         dispatch(moveCharacter({ from: player.id, to: id, body }));
         dispatch(decrementSpinnerValue(canMovie.movie));
       }
     }
-  };
-
-  const canIOpen = (player: string, id: string) => {
-    const [i, j] = player.split('-');
-    const gameFieldArray = gameField.flat(1);
-    const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
-    const checkItemsId = [
-      ceilElement && ceilElement.top ? `${+i - 1}-${j}` : 'none',
-      ceilElement && ceilElement.bottom ? `${+i + 1}-${j}` : 'none',
-      ceilElement && ceilElement.right ? `${i}-${+j + 1}` : 'none',
-      ceilElement && ceilElement.left ? `${i}-${+j - 1}` : 'none',
-    ];
-    const checkItemsObj = gameFieldArray.filter((ceil) => checkItemsId
-      .includes(ceil.id) && ceil.state)
-      .map((e) => e.id);
-    return checkItemsObj.includes(id);
   };
 
   const handleOpenCard = (id: string) => {
@@ -126,6 +121,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       }
       if (thingCeil.state.category === 'enemy') {
         dispatch(setIsNearEnemy([thingCeil.id]));
+        dispatch(setCanPlayerMove(false));
       }
     }
   };
@@ -143,7 +139,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
         && ceil.state.type === activePlayer,
       );
     const canMovie = player ? canIMove(player.id) : null;
-    if (canMovie && !isNearbyEnemy) {
+    if (canMovie && canPlayerMove) {
       // setInfo(canMovie.movie.toString());
       const parentElement = e.target.closest('.field-card');
       (parentElement as HTMLElement).style.background = 'rgba(0, 255, 26, 0.3';

@@ -22,7 +22,6 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   const checkIsNearEnemy = (id: string) => {
     const [i, j] = id.split('-');
     const gameFieldArray = gameField.flat(1);
-
     const checkItemsId = [
       `${parseInt(i, 10) - 1}-${j}`,
       `${parseInt(i, 10) + 1}-${j}`,
@@ -36,6 +35,8 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
     if (checkItemsEnemy.length > 0) {
       dispatch(setIsNearEnemy(checkItemsEnemy));
       console.log('danger near is enemy');
+    } else {
+      dispatch(setIsNearEnemy(null));
     }
   };
   const checkIsFinish = () => {
