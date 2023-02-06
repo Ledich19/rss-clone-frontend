@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 5,
+  value: 4,
   ranges: [
     {
       range: [0, 30],
@@ -30,11 +30,20 @@ const spinnerSlice = createSlice({
   name: 'spinner',
   initialState,
   reducers: {
-    setValue(state) {
-      return state;
+    decrementSpinnerValue(state, actions: {
+      payload: number;
+      type: string;
+    }) {
+      return { ...state, value: state.value - actions.payload };
+    },
+    setSpinnerValue(state, actions: {
+      payload: number;
+      type: string;
+    }) {
+      return { ...state, value: actions.payload };
     },
   },
 });
 
-export const { setValue } = spinnerSlice.actions;
+export const { decrementSpinnerValue, setSpinnerValue } = spinnerSlice.actions;
 export default spinnerSlice.reducer;

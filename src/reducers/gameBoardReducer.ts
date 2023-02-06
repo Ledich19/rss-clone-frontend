@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BoardItemType } from '../app/types';
+import { BoardItemType, CharacterType, Player } from '../app/types';
 
 const initialState: BoardItemType[][] = [
   [
@@ -1171,7 +1171,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-18',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '15-19',
+      top: true, right: true, bottom: true, left: true, state: null, id: '15-19',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '15-20',
@@ -1319,7 +1319,7 @@ const initialState: BoardItemType[][] = [
       top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-18',
     },
     {
-      top: true, right: true, bottom: true, left: true, state: 'finish', id: '17-19',
+      top: true, right: true, bottom: true, left: true, state: null, id: '17-19',
     },
     {
       top: true, right: true, bottom: true, left: true, state: null, id: '17-20',
@@ -1508,8 +1508,31 @@ const gameBoardSlice = createSlice({
 
       return newState;
     },
+
+    moveCharacter(state, actions: {
+      payload: {
+        from: string,
+        to: string,
+        body: CharacterType | null
+      };
+      type: string;
+    }) {
+      const newState = state.map((row) => row.map((ceil) => {
+        if (ceil.id === actions.payload.from) {
+          const newCeil = { ...ceil, state: null };
+          return newCeil;
+        }
+        if (ceil.id === actions.payload.to) {
+          const newCeil = { ...ceil, state: actions.payload.body };
+          return newCeil;
+        }
+        return ceil;
+      }));
+
+      return newState;
+    },
   },
 });
 
-export const { setNewGameField, toggleVisibleCard } = gameBoardSlice.actions;
+export const { setNewGameField, toggleVisibleCard, moveCharacter } = gameBoardSlice.actions;
 export default gameBoardSlice.reducer;

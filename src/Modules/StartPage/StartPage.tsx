@@ -1,13 +1,10 @@
-import React from 'react'
-import "./StartPage.scss";
+import './StartPage.scss';
+import Spinner from '../spinner/Spinner';
 
-
-const StartPage = () => {
-  return (
+const StartPage = () => (
     <div className="game">
-
+      {<Spinner />}
     </div>
-  );
-};
+);
 
 export default StartPage;
