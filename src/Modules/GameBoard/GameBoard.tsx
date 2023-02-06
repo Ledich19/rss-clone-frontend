@@ -1,6 +1,6 @@
 import React from 'react';
 import GameField from '../../components/GameField/GameField';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../../components/Spinner/Spinner';
 import './GameBoard.scss';
 
 const GameBoard = () => (
