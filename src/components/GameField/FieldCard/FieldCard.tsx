@@ -90,40 +90,46 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     }
   };
 
-  const handleOpen = (id: string) => {
-    // open cart
+  const canIOpen = (player: string, id: string) => {
+    const [i, j] = player.split('-');
+    const gameFieldArray = gameField.flat(1);
+    const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
+    const checkItemsId = [
+      ceilElement && ceilElement.top ? `${+i - 1}-${j}` : 'none',
+      ceilElement && ceilElement.bottom ? `${+i + 1}-${j}` : 'none',
+      ceilElement && ceilElement.right ? `${i}-${+j + 1}` : 'none',
+      ceilElement && ceilElement.left ? `${i}-${+j - 1}` : 'none',
+    ];
+    const checkItemsObj = gameFieldArray.filter((ceil) => checkItemsId
+      .includes(ceil.id) && ceil.state)
+      .map((e) => e.id);
+    return checkItemsObj.includes(id);
+  };
+
+  const handleOpenCard = (id: string) => {
     const gameFieldArr = gameField.flat(1);
     const player = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
-    if (player && spinnerValue > 0) {
-      const [playerI, playerJ] = player.id.split('-');
-      const [ceilI, ceilJ] = id.split('-');
-      if ((Math.abs(+playerI - +ceilI) === 1 && Math.abs(+playerJ - +ceilJ) === 0)
-      || (Math.abs(+playerI - +ceilI) === 0 && Math.abs(+playerJ - +ceilJ) === 1)) {
-        dispatch(setVisibleCard(id));
-        dispatch(setSpinnerValue(0));
-
-        const thingCeil = gameFieldArr.find((ceil) => ceil.id === id);
-
-        if (thingCeil && thingCeil.state) {
-          if ((thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing')) {
-            setTimeout(() => {
-              dispatch(removeCardState(id));
-              const body = characters.find((character) => character.type === activePlayer) || null;
-              dispatch(moveCharacter({ from: player.id, to: id, body }));
-            }, 5000);
-            dispatch(addToPlayerInventory({
-              player: activePlayer, value: thingCeil.state,
-            }));
-          }
-          if (thingCeil.state.category === 'enemy') {
-            console.log('this enemy');
-            dispatch(setIsNearEnemy([thingCeil.id]));
-          }
-        }
+    const thingCeil = gameFieldArr.find((ceil) => ceil.id === id);
+    const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
+    if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state) {
+      dispatch(setVisibleCard(id));
+      dispatch(setSpinnerValue(0));
+      if ((thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing')) {
+        setTimeout(() => {
+          dispatch(removeCardState(id));
+          const body = characters.find((character) => character.type === activePlayer) || null;
+          dispatch(moveCharacter({ from: player.id, to: id, body }));
+        }, 5000);
+        dispatch(addToPlayerInventory({
+          player: activePlayer, value: thingCeil.state,
+        }));
+      }
+      if (thingCeil.state.category === 'enemy') {
+        dispatch(setIsNearEnemy([thingCeil.id]));
       }
     }
   };
-  const handler = item.state ? handleOpen : handleMove;
+  const handler = item.state ? handleOpenCard : handleMove;
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
     if (!(e.target instanceof HTMLElement)) {
