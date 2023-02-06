@@ -15,6 +15,7 @@ type ToMovieItem = { id: string, movie: number };
 const FieldCard = ({ heightField, item }: PropsType) => {
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
   const spinnerValue = useAppSelector((state) => state.spinner.value);
+  const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
   const movieInfo = useRef<HTMLDivElement>(null);
@@ -79,7 +80,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       );
     const canMovie = player ? canIMove(player.id) : null;
 
-    if (player && canMovie) {
+    if (player && canMovie && !isNearbyEnemy) {
       if (spinnerValue) {
         const body = characters.find((character) => character.type === activePlayer) || null;
         dispatch(moveCharacter({ from: player.id, to: id, body }));
@@ -92,7 +93,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     // open cart
     const gameFieldArr = gameField.flat(1);
     const player = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
-    if (player) {
+    if (player && spinnerValue > 0) {
       const [playerI, playerJ] = player.id.split('-');
       const [ceilI, ceilJ] = id.split('-');
       if ((Math.abs(+playerI - +ceilI) === 1 && Math.abs(+playerJ - +ceilJ) === 0)
@@ -104,14 +105,18 @@ const FieldCard = ({ heightField, item }: PropsType) => {
 
         if (thingCeil && thingCeil.state) {
           if ((thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing')) {
-            setTimeout(() => dispatch(removeCardState(id)), 5000);
+            setTimeout(() => {
+              dispatch(removeCardState(id));
+              const body = characters.find((character) => character.type === activePlayer) || null;
+              dispatch(moveCharacter({ from: player.id, to: id, body }));
+            }, 5000);
             dispatch(addToPlayerInventory({
               player: activePlayer, value: thingCeil.state,
             }));
           }
           if (thingCeil.state.category === 'enemy') {
             console.log('this enemy');
-            dispatch(setIsNearEnemy(true));
+            dispatch(setIsNearEnemy([thingCeil.id]));
           }
         }
       }
@@ -131,7 +136,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
         && ceil.state.type === activePlayer,
       );
     const canMovie = player ? canIMove(player.id) : null;
-    if (canMovie) {
+    if (canMovie && !isNearbyEnemy) {
       // setInfo(canMovie.movie.toString());
       const parentElement = e.target.closest('.field-card');
       (parentElement as HTMLElement).style.background = 'rgba(0, 255, 26, 0.3';

@@ -72,8 +72,23 @@ const playersSlice = createSlice({
       const newState = { ...state, characters: newCharacters };
       return newState;
     },
+    decrementHealth(state, actions: {
+      payload: string;
+      type: string;
+    }) {
+      const newCharacters = state.characters.map((character) => {
+        if (character.type === actions.payload) {
+          return {
+            ...character, health: character.health - 1,
+          };
+        }
+        return character;
+      });
+      const newState = { ...state, characters: newCharacters };
+      return newState;
+    },
   },
 });
 
-export const { addToPlayerInventory } = playersSlice.actions;
+export const { addToPlayerInventory, decrementHealth } = playersSlice.actions;
 export default playersSlice.reducer;

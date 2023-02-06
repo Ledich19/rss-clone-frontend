@@ -29,10 +29,11 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
       `${i}-${parseInt(j, 10) - 1}`,
     ];
     const checkItemsEnemy = gameFieldArray.filter((ceil) => checkItemsId
-      .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible);
+      .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
+      .map((e) => e.id);
 
     if (checkItemsEnemy.length > 0) {
-      dispatch(setIsNearEnemy(true));
+      dispatch(setIsNearEnemy(checkItemsEnemy));
       console.log('danger near is enemy');
     }
   };
@@ -62,7 +63,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   useEffect(() => {
     checkIsNearEnemy(item.id);
     checkIsFinish();
-  });
+  }, []);
 
   const handleOpen = () => {
     dispatch(setVisibleCard(item.id));

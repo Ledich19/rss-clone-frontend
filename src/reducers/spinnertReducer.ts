@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type InitialState = {
   value: number,
-  isNearbyZombi: boolean,
+  isNearbyEnemy: string[] | null,
   ranges: {
     range: number[],
     value: number,
@@ -12,7 +12,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   value: 4,
-  isNearbyZombi: false,
+  isNearbyEnemy: null,
   ranges: [
     {
       range: [0, 30],
@@ -54,9 +54,9 @@ const spinnerSlice = createSlice({
       return { ...state, value: actions.payload };
     },
     setIsNearEnemy(state, actions: {
-      payload: boolean; type: string;
+      payload: string[] | null; type: string;
     }) {
-      return { ...state, isNearbyZombi: actions.payload };
+      return { ...state, isNearbyEnemy: actions.payload };
     },
   },
 });
