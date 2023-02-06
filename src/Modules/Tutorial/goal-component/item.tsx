@@ -18,7 +18,7 @@ const Item = (props:ContentRules) => {
   return (
     <div className="item">
       <div className="item__top">
-        <h4 className="item__title">{props.title}</h4>
+        <h4 className="item__title" onClick={changeVisibility}>{props.title}</h4>
         <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
         </div>
       <div className={visible}>

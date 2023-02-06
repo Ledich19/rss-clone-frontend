@@ -20,7 +20,7 @@ const Cards = () => {
   return (
     <div className="item cards">
       <div className="item__top">
-        <h4 className="item__title">Карточки</h4>
+        <h4 className="item__title" onClick={changeVisibility}>Карточки</h4>
         <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
         </div>
       <div className={visible}>

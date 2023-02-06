@@ -1,6 +1,6 @@
 .cards{
   &__content{
-    background-color: bisque;
+    background-color: rgb(245, 174, 87);
     border-radius: 10px;
     padding: 0px;
     max-height: 0;
@@ -15,19 +15,18 @@
   &__label{
     font-weight: 500;
     margin-bottom: 20px;
-    // padding-left: 40px;
     font-size: 18px;
   }
   &__list{
     display: flex;
     flex-wrap: wrap;
-    row-gap: 20px;
-    column-gap: 55px;
+    gap: 20px;
+    justify-content: center;
   }
   &__item{
-    flex: 0 0 200px;
+    flex: 0 0 31%;
     text-align: center;
-    padding: 25px;
+    padding: 15px;
     border-radius: 10px;
     background-color: burlywood;
     position: relative;

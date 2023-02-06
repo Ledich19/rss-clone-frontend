@@ -1,3 +1,4 @@
+import { log } from 'console';
 import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import './inBox.scss';
@@ -5,7 +6,7 @@ import './inBox.scss';
 const InBox = () => {
   const rules = useAppSelector((state) => state.rules);
   const { inBox } = rules;
-
+  const cardsKeys = Object.keys(inBox.cards);
   const [visible, setVisibility] = useState('inbox__content');
   const [activity, setActivity] = useState('rotate(0deg)');
 
@@ -21,7 +22,7 @@ const InBox = () => {
   return (
     <div className="inbox item">
       <div className="item__top">
-        <h4 className="item__title">{inBox.title}</h4>
+        <h4 className="item__title" onClick={changeVisibility}>{inBox.title}</h4>
         <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
       </div >
       <div className={visible}>
@@ -30,7 +31,7 @@ const InBox = () => {
                 <h5 className="element__title">{category.title}</h5>
                 <ul className="element__list">
                   {Object.values(category).slice(1).map((item, key) => (
-                    <li key={key} className="element__item-list">{item}</li>
+                    <li key={key} className={`element__item-list element__item-list_${cardsKeys[index]}`}>{item}</li>
                   ))}
                 </ul>
               </div>

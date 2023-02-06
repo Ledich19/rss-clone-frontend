@@ -1,4 +1,4 @@
-$colorTitle: #6d0101;
+$colorTitle: rgb(245, 174, 87);
 
 .item{
   position: relative;
@@ -11,14 +11,27 @@ $colorTitle: #6d0101;
     font-size: 26px;
     font-weight: 500;
     margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    &::before{
+      content: '';
+      width: 0px;
+      height: 2px;
+      background-color: rgb(245, 174, 87);
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      transition: all 0.5s ease;
+    }
+    &:hover::before {
+      width: 100%;
+    }
   }
   &__top{
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: #fff;
     position: relative;
-    width: 250px;
     justify-content: space-between;
   }
   &__btn{
@@ -29,11 +42,11 @@ $colorTitle: #6d0101;
     margin-top: -5px;
     width: 20px;
     height: 20px;
-    background: url(../../../../public/images/tutorial_page/arrow-down.png)center no-repeat;
+    background: url(../../../../public/images/tutorial_page/arrow-down.svg)center/ 20px 20px no-repeat;
     transition: all 0.5s ease;
   }
   &__text{
-    background-color:bisque;
+    background-color:rgb(255, 187, 104);
     border-radius: 10px;
     padding: 0px;
     max-height: 0;
