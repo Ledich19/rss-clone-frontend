@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import './cards.scss';
+import './Cards.scss';
 
 const Cards = () => {
   const [visible, setVisibility] = useState('cards__content');
@@ -20,7 +20,7 @@ const Cards = () => {
   return (
     <div className="item cards">
       <div className="item__top">
-        <h4 className="item__title">Карточки</h4>
+        <h4 className="item__title" onClick={changeVisibility}>Карточки</h4>
         <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
         </div>
       <div className={visible}>
@@ -46,7 +46,7 @@ const Cards = () => {
                 <li key={index} className="cards__item">
                   <img src={`images/${item.img}`} alt={item.name} className="cards__img" />
                   <div className="cards__info-item">
-                    <h6 className="cards__name-item">Имя: {item.name}</h6>
+                    <h6 className="cards__name-item">{item.name}</h6>
                     <span className="cards__health-item">Количество: {item.count}</span>
                   </div >
                   <p className="cards__desc">{item.description}</p>

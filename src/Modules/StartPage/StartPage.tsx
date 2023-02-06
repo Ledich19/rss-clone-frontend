@@ -1,5 +1,5 @@
 import './StartPage.scss';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../../components/Spinner/Spinner';
 
 const StartPage = () => (
     <div className="game">

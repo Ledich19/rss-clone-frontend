@@ -91,12 +91,23 @@ export type Table = {
   text: string[],
 };
 
+export type ContentRules = {
+  title:string,
+  text: string,
+  items?: string[],
+};
+
+export type QA = {
+  question: string,
+  answer: string,
+};
 export type Rules = {
   aboutGame: string,
   table: Table,
   goal: {
     title: string,
     text: string,
+    items: string[],
   },
   inBox: {
     title: string,
@@ -141,5 +152,46 @@ export type Rules = {
         title: string,
       }
     }
+  },
+  info: {
+    prepa: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    moves: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    fight: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    eaten: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    attack: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    win: {
+      title:string,
+      text: string,
+      items: string[],
+    },
+    breakeBoards: {
+      title: string,
+      text: string,
+      items: string[],
+    }
+  },
+  questions: {
+    title: string,
+    text: QA[],
   },
 };

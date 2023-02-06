@@ -11,6 +11,12 @@
   z-index: 0;
   position: relative;
   overflow: hidden;
+  -moz-user-select: none;
+  -o-user-select:none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+   user-select: none;
 
   &__field {
     width: 95%;
@@ -164,6 +170,7 @@
     height: 100%;
     top: 3%;
     right: -7%;
+    pointer-events: none;
   }
 
   &__result {
