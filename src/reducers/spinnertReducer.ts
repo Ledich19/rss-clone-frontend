@@ -61,5 +61,7 @@ const spinnerSlice = createSlice({
   },
 });
 
-export const { decrementSpinnerValue, setSpinnerValue, setIsNearEnemy } = spinnerSlice.actions;
+export const {
+  decrementSpinnerValue, setSpinnerValue, setIsNearEnemy,
+} = spinnerSlice.actions;
 export default spinnerSlice.reducer;

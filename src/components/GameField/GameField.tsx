@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { WeaponType } from '../../app/types';
 import { moveCharacter, removeCardState, setNewGameField } from '../../reducers/gameBoardReducer';
-import { decrementHealth } from '../../reducers/playersReducer';
+import { decrementHealth, setCanPlayerMove } from '../../reducers/playersReducer';
 import { setIsNearEnemy, setSpinnerValue } from '../../reducers/spinnertReducer';
 import FieldCard from './FieldCard/FieldCard';
 import FieldCardForPlayer from './FieldCardForPlayer/FieldCardForPlayer';
@@ -11,7 +11,7 @@ import './GameField.scss';
 const GameField = () => {
   const gameFieldMatrix = useAppSelector((state) => state.game);
   const gameCardsSet = useAppSelector((state) => state.gameSet.cards);
-  const { characters, activePlayer } = useAppSelector((state) => state.characters);
+  const { characters, activePlayer, canPlayerMove } = useAppSelector((state) => state.characters);
   const { isNearbyEnemy, value, ranges } = useAppSelector((state) => state.spinner);
   const dispatch = useAppDispatch();
   const heightField = gameFieldMatrix.length;
@@ -77,11 +77,11 @@ const GameField = () => {
     const playerWeapon = (player?.inventory?.filter((e) => e.category === 'weapon') as WeaponType[])
       .map((weapon) => weapon.use);
     // fight
+    console.log(isNearbyEnemy, player, playerPosition);
     if (isNearbyEnemy && player && playerPosition) {
-      console.log('start fight', ranges);
       switch (true) {
         case value === 1:
-          dispatch(setIsNearEnemy(null));
+          dispatch(setCanPlayerMove(true));
           break;
         case value === 2:
           dispatch(decrementHealth(activePlayer));
