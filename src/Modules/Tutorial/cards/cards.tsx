@@ -46,7 +46,7 @@ const Cards = () => {
                 <li key={index} className="cards__item">
                   <img src={`images/${item.img}`} alt={item.name} className="cards__img" />
                   <div className="cards__info-item">
-                    <h6 className="cards__name-item">Имя: {item.name}</h6>
+                    <h6 className="cards__name-item">{item.name}</h6>
                     <span className="cards__health-item">Количество: {item.count}</span>
                   </div >
                   <p className="cards__desc">{item.description}</p>

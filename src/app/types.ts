@@ -87,8 +87,13 @@ export type Table = {
 
 export type ContentRules = {
   title:string,
-  items: string[],
-  text?: string,
+  text: string,
+  items?: string[],
+};
+
+export type QA = {
+  question: string,
+  answer: string,
 };
 
 export type Rules = {
@@ -96,7 +101,8 @@ export type Rules = {
   table: Table,
   goal: {
     title: string,
-    text: string[],
+    text: string,
+    items: string[],
   },
   inBox: {
     title: string,
@@ -178,5 +184,9 @@ export type Rules = {
       text: string,
       items: string[],
     }
-  }
+  },
+  questions: {
+    title: string,
+    text: QA[],
+  },
 };
