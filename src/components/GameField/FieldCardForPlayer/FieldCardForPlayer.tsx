@@ -8,6 +8,7 @@ import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 type PropsType = {
   heightField: number;
   item: BoardItemType;
+  position: { row: number, col: number }
 };
 
 const FieldCardForPlayer = ({ heightField, item }: PropsType) => {

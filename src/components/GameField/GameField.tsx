@@ -23,18 +23,18 @@ const GameField = () => {
 
   useEffect(() => {
     //  add characters
-
-    const emptyCellIdsForPlayer = gameFieldMatrix
+    const emptyCeilIdsForPlayer = gameFieldMatrix
       .flat(1)
       .filter((ceil) => ceil.value === 'player')
       .map((ceil) => ceil.id);
-    const shuffleEmptyCellIdsForPlayer = shuffleArray(emptyCellIdsForPlayer).map((ceil, i) => ({
-      id: ceil,
-      state: characters[i] ? characters[i] : null,
-    }));
+    const shuffleEmptyCeilIdsForPlayer = shuffleArray(emptyCeilIdsForPlayer)
+      .map((ceil, i) => ({
+        id: ceil,
+        state: characters[i] ? characters[i] : null,
+      }));
 
     const newGameFieldWithPlayers = gameFieldMatrix.map((row) => row.map((ceil) => {
-      const emptyCeilContent = shuffleEmptyCellIdsForPlayer.find((item) => item.id === ceil.id);
+      const emptyCeilContent = shuffleEmptyCeilIdsForPlayer.find((item) => item.id === ceil.id);
       if (emptyCeilContent && emptyCeilContent.state) {
         return { ...ceil, state: emptyCeilContent.state };
       }
@@ -58,9 +58,13 @@ const GameField = () => {
     }));
     const newGameField = newGameFieldWithPlayers.map((row) => row.map((ceil) => {
       const emptyCeilContent = shuffleEmptyCells.find((item) => item.id === ceil.id);
-      if (emptyCeilContent?.state && !useCharactersTypes.includes(emptyCeilContent.state.type)) {
+
+      if (emptyCeilContent?.state
+        && !useCharactersTypes.includes(emptyCeilContent.state.type)
+        && ceil.state === null) {
         return { ...ceil, state: emptyCeilContent.state };
       }
+
       return ceil;
     }));
     dispatch(setNewGameField(newGameField));
@@ -97,14 +101,23 @@ const GameField = () => {
       }
     }
   }, [isNearbyEnemy, value]);
+
   return (
     <div className="field">
       {gameFieldMatrix.map((row, i) => (
           <div className="field__row" key={`rowId${i}`}>
-            {row.map((item) => (
+            {row.map((item, j) => (
               item.state && useCharactersTypes.includes(item.state.type)
-                ? <FieldCardForPlayer key={item.id} heightField={heightField} item={item} />
-                : <FieldCard key={item.id} heightField={heightField} item={item} />
+                ? <FieldCardForPlayer
+                    position={{ row: i, col: j }}
+                    key={item.id}
+                    heightField={heightField}
+                    item={item} />
+                : <FieldCard
+                    position={{ row: i, col: j }}
+                    key={item.id}
+                    heightField={heightField}
+                    item={item} />
             ))}
           </div>
       ))}

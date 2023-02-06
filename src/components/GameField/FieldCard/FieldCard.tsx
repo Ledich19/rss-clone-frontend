@@ -9,6 +9,7 @@ import { addToPlayerInventory } from '../../../reducers/playersReducer';
 type PropsType = {
   heightField: number;
   item: BoardItemType;
+  position: { row: number, col: number }
 };
 type ToMovieItem = { id: string, movie: number };
 
@@ -185,7 +186,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       ) : (
         <div ref={movieInfo}>
           {/* <div className='_movie-text'>{item.id}</div> */}
-          <div className='_small-text'>{item.id}</div>
+          {/* <div className='_small-text'>{item.id}</div> */}
         </div>
       )}
     </div>
