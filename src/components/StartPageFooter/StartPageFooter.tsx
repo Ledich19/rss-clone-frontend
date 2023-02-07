@@ -4,12 +4,13 @@ import './StartPageFooter.scss';
 
 const StartPageFooter = () => (
   <div className="start-footer">
-    <div className="start-footer__item"></div>
-    <div className="start-footer__item start-footer__item_second">
+    <div className="start-footer__item start-footer__item_first">
       <a className="start-footer__rs-link" href="https://rs.school/">
         <img className="start-footer__rs-img" src="./images/rss.svg" alt="RS School" />
       </a>
       <div className="start-footer__year" >2023</div>
+    </div>
+    <div className="start-footer__item start-footer__item_second">
     </div>
     <div className="start-footer__item start-footer__item_third">
       <a href="https://github.com/Ledich19">
