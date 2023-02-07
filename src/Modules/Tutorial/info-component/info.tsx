@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import Item from '../goal-component/Item';
+import Item from '../Goal-component/Item';
 import './Info.scss';
 
 const Info = () => {
