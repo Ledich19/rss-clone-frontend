@@ -1,10 +1,10 @@
 import { useAppSelector } from '../../app/hooks';
-import Item from './Goal-component/Item';
-import InBox from './InBox-component/InBox';
+import Item from './Item/Item';
+import InBox from './InBox/InBox';
 import Cards from './Cards/Cards';
-import Info from './Info-component/Info';
+import Info from './Info/Info';
 import Questions from './Questions/Questions';
-
+import AboutSpinner from './AboutSpinner/AboutSpinner';
 import './Tutorial.scss';
 
 const Tutorial = () => {
@@ -18,9 +18,9 @@ const Tutorial = () => {
             <div className='rules__block'>
               <img src="images/tutorial_page/zombie.png" alt="zombie" className="rules__img" />
               <div className="rules__table table">
-                            <ul className="table__list">
-                              {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
-                            </ul>
+                <ul className="table__list">
+                  {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
+                </ul>
               </div>
             </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
@@ -28,9 +28,10 @@ const Tutorial = () => {
         </div>
         <div className='rules__body'>
           <div className='rules__items'>
-            <Item title={rules.goal.title} text={rules.goal.text} />
+            <Item title={rules.goal.title} text={rules.goal.text}/>
             <InBox />
             <Cards />
+            <AboutSpinner />
             <Info />
           </div>
           <div className="rules__answer qa">

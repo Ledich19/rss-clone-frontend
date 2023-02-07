@@ -1,0 +1,19 @@
+.about-spinner{
+  &__img{
+    max-width: 250px;
+    margin:0 auto;
+    display: block;
+  }
+  &__title{
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  &__list{
+    margin-bottom: 10px;
+  }
+  &__rule{
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
+  }
+}

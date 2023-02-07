@@ -193,4 +193,8 @@ export type Rules = {
     title: string,
     text: QA[],
   },
+  aboutSpinner: {
+    title: string,
+    text: string[],
+  },
 };

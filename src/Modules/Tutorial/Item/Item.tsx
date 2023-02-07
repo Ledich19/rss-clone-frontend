@@ -6,7 +6,7 @@ const Item = (props:ContentRules) => {
   const [visible, setVisibility] = useState('item__text');
   const [activity, setActivity] = useState('rotate(0deg)');
 
-  const changeVisibility = () => {
+  const changeVisibility = (e: React.MouseEvent) => {
     if (visible === 'item__text') {
       setVisibility('item__text visible');
       setActivity('rotate(180deg)');
