@@ -2,7 +2,7 @@ import './StartPage.scss';
 import Spinner from '../../components/Spinner/Spinner';
 
 const StartPage = () => (
-    <div className="game">
+    <div className="start">
       {<Spinner />}
     </div>
 );
