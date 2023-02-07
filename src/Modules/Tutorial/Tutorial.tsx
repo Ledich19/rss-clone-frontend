@@ -1,9 +1,9 @@
 import { useAppSelector } from '../../app/hooks';
-import Item from './Goal-component/Item';
-import InBox from './InBox-component/InBox';
-import Cards from './Cards/Cards';
-import Info from './Info-component/Info';
-import Questions from './Questions/Questions';
+import Item from './goal-component/item';
+import InBox from './inBox-component/inBox';
+import Cards from './cards/cards';
+import Info from './info-component/info';
+import Questions from './questions/questions';
 
 import './Tutorial.scss';
 

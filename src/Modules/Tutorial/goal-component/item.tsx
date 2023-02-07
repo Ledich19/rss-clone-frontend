@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ContentRules } from '../../../app/types';
-import './Item.scss';
+import './item.scss';
 
 const Item = (props:ContentRules) => {
   const [visible, setVisibility] = useState('item__text');

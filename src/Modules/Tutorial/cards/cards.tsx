@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import './Cards.scss';
+import './cards.scss';
 
 const Cards = () => {
   const [visible, setVisibility] = useState('cards__content');
