@@ -49,6 +49,7 @@ const initialState: Players = {
   ],
   activePlayer: 'boris',
   canPlayerMove: true,
+  amount: '1',
 };
 
 const playersSlice = createSlice({
@@ -100,10 +101,16 @@ const playersSlice = createSlice({
       const activePlayer = state.characters[nextPlayerIndex].type;
       return { ...state, activePlayer };
     },
+    setAmount(state, actions : {
+      payload: string;
+      type: string;
+    }) {
+      return { ...state, amount: actions.payload };
+    },
   },
 });
 
 export const {
-  addToPlayerInventory, decrementHealth, setCanPlayerMove, setNextActivePlayer,
+  addToPlayerInventory, decrementHealth, setCanPlayerMove, setNextActivePlayer, setAmount,
 } = playersSlice.actions;
 export default playersSlice.reducer;

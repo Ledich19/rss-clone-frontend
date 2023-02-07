@@ -1,5 +1,44 @@
+.amount-label {
+  color: #bddb44;
+}
 .amount {
-  height: 20px;
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+  box-sizing: border-box;
   width: 100%;
-  background: #c02828;
+
+  &__btn {
+    outline: solid 3px #955931;
+    cursor: pointer;
+    color: #bddb44;
+    font-family: 'Creepster';
+    padding: 0 15px;
+    font-size: 2rem;
+    border-radius: 5px;
+    display: inline-block;
+    background-image: url(./../../../public/images/metal1.jpeg);
+  }
+  &__input {
+    width: 100px;
+    font-size: 2rem;
+    color: #bddb44;
+    font-family: 'Creepster';
+    padding: 3px;
+    border-radius: 5px;
+    background-image: url(./../../../public/images/metal1.jpeg);
+    background-size: 100%;
+    outline: solid 3px #955931;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+    &:active,
+    &:focus {
+      outline: solid 3px #5e260c;
+    }
+  }
 }

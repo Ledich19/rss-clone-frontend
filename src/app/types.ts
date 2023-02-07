@@ -23,6 +23,7 @@ export type Players = {
   characters: CharacterType[],
   activePlayer: string,
   canPlayerMove: boolean,
+  amount: string;
 };
 
 export type CharacterType = {
