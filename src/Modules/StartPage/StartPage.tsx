@@ -1,10 +1,10 @@
-import './StartPage.scss';
-import Spinner from '../../components/Spinner/Spinner';
+import s from './StartPage.module.scss';
+import StartPageMenu from '../../components/StartPageMenu/StartPageMenu';
 
 const StartPage = () => (
-    <div className="start">
-      {<Spinner />}
-    </div>
+  <div className={s.start}>
+    <StartPageMenu />
+  </div>
 );
 
 export default StartPage;

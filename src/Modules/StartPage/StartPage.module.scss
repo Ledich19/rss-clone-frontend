@@ -1,4 +1,7 @@
 .start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-image: url(./../../../public/images/start_bg.png);
   background-repeat: no-repeat;
   background-size: cover;
