@@ -5,6 +5,7 @@ import Tutorial from './Modules/Tutorial/Tutorial';
 import StartPage from './Modules/StartPage/StartPage';
 import GameBoard from './Modules/GameBoard/GameBoard';
 import './App.scss';
+import StartGameOption from './Modules/StartGameOption/StartGameOption';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/game" element={<GameBoard />} />
+        <Route path="/start" element={<StartGameOption />} />
         <Route path="/tutorial" element={<Tutorial />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
