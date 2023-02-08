@@ -6,25 +6,17 @@ const InBox = () => {
   const rules = useAppSelector((state) => state.rules);
   const { inBox } = rules;
   const cardsKeys = Object.keys(inBox.cards);
-  const [visible, setVisibility] = useState('inbox__content');
-  const [activity, setActivity] = useState('rotate(0deg)');
 
-  const changeVisibility = () => {
-    if (visible === 'inbox__content') {
-      setVisibility('inbox__content visible-box');
-      setActivity('rotate(180deg)');
-    } else {
-      setVisibility('inbox__content');
-      setActivity('rotate(0deg)');
-    }
-  };
+  const [visible, setVisibility] = useState(false);
+  const changeVisibility = () => (visible ? setVisibility(false) : setVisibility(true));
+
   return (
     <div className="inbox item">
       <div className="item__top">
         <h4 className="item__title" onClick={changeVisibility}>{inBox.title}</h4>
-        <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
+        <button style={{ transform: visible ? 'rotate(180deg)' : 'rotate(0deg)' }} className="item__btn" onClick={changeVisibility}></button>
       </div >
-      <div className={visible}>
+      <div className={visible ? 'inbox__content visible-box' : 'inbox__content'}>
         {Object.values(inBox.cards).map((category, index) => (
               <div key={index} className="inbox__element element">
                 <h5 className="element__title">{category.title}</h5>

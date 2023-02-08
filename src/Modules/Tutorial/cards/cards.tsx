@@ -3,17 +3,8 @@ import { useAppSelector } from '../../../app/hooks';
 import './Cards.scss';
 
 const Cards = () => {
-  const [visible, setVisibility] = useState('cards__content');
-  const [activity, setActivity] = useState('rotate(0deg)');
-  const changeVisibility = () => {
-    if (visible === 'cards__content') {
-      setVisibility('cards__content visible-cards');
-      setActivity('rotate(180deg)');
-    } else {
-      setVisibility('cards__content');
-      setActivity('rotate(0deg)');
-    }
-  };
+  const [visible, setVisibility] = useState(false);
+  const changeVisibility = () => (visible ? setVisibility(false) : setVisibility(true));
 
   const { cards } = useAppSelector((state) => state.gameSet);
 
@@ -21,9 +12,9 @@ const Cards = () => {
     <div className="item cards">
       <div className="item__top">
         <h4 className="item__title" onClick={changeVisibility}>Карточки</h4>
-        <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
+        <button style={{ transform: visible ? 'rotate(180deg)' : 'rotate(0deg)' }} className="item__btn" onClick={changeVisibility}></button>
         </div>
-      <div className={visible}>
+      <div className={visible ? 'cards__content visible-cards' : 'cards__content'}>
         <div className="cards__items">
           <h5 className="cards__label">Персонажи</h5>
           <ul className="cards__list">

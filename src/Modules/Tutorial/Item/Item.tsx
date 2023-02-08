@@ -3,25 +3,15 @@ import { ContentRules } from '../../../app/types';
 import './Item.scss';
 
 const Item = (props:ContentRules) => {
-  const [visible, setVisibility] = useState('item__text');
-  const [activity, setActivity] = useState('rotate(0deg)');
-
-  const changeVisibility = (e: React.MouseEvent) => {
-    if (visible === 'item__text') {
-      setVisibility('item__text visible');
-      setActivity('rotate(180deg)');
-    } else {
-      setVisibility('item__text');
-      setActivity('rotate(0deg)');
-    }
-  };
+  const [visible, setVisibility] = useState(false);
+  const changeVisibility = () => (visible ? setVisibility(false) : setVisibility(true));
   return (
     <div className="item">
       <div className="item__top">
         <h4 className="item__title" onClick={changeVisibility}>{props.title}</h4>
-        <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
+        <button style={{ transform: visible ? 'rotate(180deg)' : 'rotate(0deg)' }} className="item__btn" onClick={changeVisibility}></button>
         </div>
-      <div className={visible} >
+      <div className={visible ? 'item__text visible' : 'item__text'} >
         {props.text && <p className='item__subtitle'>{props.text}</p>}
         <ul className='item__list'>
           {props.items && props.items.map((item, index) => <li className='item__element' key={index}>{item}</li>)}
