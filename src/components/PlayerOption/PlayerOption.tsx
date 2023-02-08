@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './PlayerOption.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { CharacterType } from '../../app/types';
-import { addPlayer, chengePlayer } from '../../reducers/playersReducer';
+import { addPlayer, chengePlayer, setPlayerName } from '../../reducers/playersReducer';
 
 type PropertyType = {
   player: CharacterType;
@@ -24,6 +24,7 @@ const PlayerOption = ({ player }: PropertyType) => {
     } else {
       dispatch(
         chengePlayer({
+          id: player.id,
           category: 'character',
           isVisible: true,
           active: true,
@@ -40,17 +41,28 @@ const PlayerOption = ({ player }: PropertyType) => {
     }
   };
 
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    dispatch(setPlayerName({ id: player.id, value }));
+  };
   return (
     <div className="player-option">
       <div className="player-option__box">
         <img className="player-option__image" src={`./images/${player.img}`} alt="" />
         <div className="player-option__control">
           <input
+            onChange={handleName}
             className="player-option__player-name"
             type="text"
+            value={player.playerName}
             placeholder={`${player.playerName}`}
           />
-          <select value={player.type} onChange={handleChoose} className="player-option__choose" name="select">
+          <select
+            value={player.type}
+            onChange={handleChoose}
+            className="player-option__choose"
+            name="select"
+          >
             <option value="empty"> empty </option>
             {charactersList.map((character) => (
               <option key={character.type} value={character.type}>

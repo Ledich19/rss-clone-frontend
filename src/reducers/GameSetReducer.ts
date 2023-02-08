@@ -1487,6 +1487,7 @@ const initialState: GameSetType = {
   cards: {
     characters: [
       {
+        id: '1',
         playerName: '',
         category: 'character',
         type: 'boris',
@@ -1500,6 +1501,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        id: '2',
         playerName: '',
         category: 'character',
         type: 'sasha',
@@ -1513,6 +1515,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        id: '3',
         playerName: '',
         category: 'character',
         type: 'nastya',
@@ -1526,6 +1529,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        id: '4',
         playerName: '',
         category: 'character',
         type: 'maks',
@@ -1539,6 +1543,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        id: '5',
         playerName: '',
         category: 'character',
         type: 'nadya',

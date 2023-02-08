@@ -27,6 +27,7 @@ export type Players = {
 };
 
 export type CharacterType = {
+  id: string;
   category: string;
   isVisible: boolean;
   active: boolean;

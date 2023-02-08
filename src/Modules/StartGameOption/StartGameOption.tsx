@@ -22,13 +22,14 @@ const StartGameOption = () => {
       for (let i = 0; i < count; i += 1) {
         dispatch(
           addPlayer({
+            id: `playrrId${characters.length + 1 + i}`,
             category: 'character',
             isVisible: true,
             active: true,
             type: 'empty',
             name: 'Player',
             img: 'things/plank.png',
-            playerName: `Playrr ${characters.length + 1}`,
+            playerName: `Playrr ${characters.length + 1 + i}`,
             description: '',
             count: 0,
             health: 0,
