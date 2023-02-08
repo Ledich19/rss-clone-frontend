@@ -74,11 +74,10 @@ const GameField = () => {
     const gameFieldArr = gameFieldMatrix.flat(1);
     const player = characters.find((ceil) => ceil.type === activePlayer);
     const playerPosition = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
-    const playerWeapon = (player?.inventory?.filter((e) => e.category === 'weapon') as WeaponType[])
-      .map((weapon) => weapon.use);
+    const playerWeaponObj = (player?.inventory?.filter((e) => e.category === 'weapon') as WeaponType[]);
     // fight
-    console.log(isNearbyEnemy, player, playerPosition);
-    if (isNearbyEnemy && player && playerPosition) {
+    if (isNearbyEnemy && player && playerPosition && playerWeaponObj) {
+      const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
       switch (true) {
         case value === 1:
           dispatch(setCanPlayerMove(true));

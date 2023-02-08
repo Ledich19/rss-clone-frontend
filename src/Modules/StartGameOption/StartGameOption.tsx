@@ -1,6 +1,7 @@
 import { log } from 'console';
 import React, { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import ButtonBlock from '../../components/ButtonBlock/ButtonBlock';
 import ChooseAmount from '../../components/ChooseAmount/ChooseAmount';
 import PlayerOption from '../../components/PlayerOption/PlayerOption';
 import { addPlayer, removeLastPlayer, setAmount } from '../../reducers/playersReducer';
@@ -56,13 +57,9 @@ const StartGameOption = () => {
           ))}
         </div>
         <div className="options__wrapper">
-        <div className="options__game-board"></div>
+          <div className="options__game-board"></div>
 
-        <div className="btn-bloc">
-          <button className="btn-start">start</button>
-          <button className="btn-back">back</button>
-        </div>
-
+          <ButtonBlock/>
         </div>
       </div>
     </div>

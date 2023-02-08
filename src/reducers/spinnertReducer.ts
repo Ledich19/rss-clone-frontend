@@ -11,7 +11,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  value: 4,
+  value: 0,
   isNearbyEnemy: null,
   ranges: [
     {
