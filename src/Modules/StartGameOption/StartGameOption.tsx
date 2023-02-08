@@ -52,8 +52,9 @@ const StartGameOption = () => {
           ))}
         </div>
         <div className="options__wrapper">
-          <div className="options__game-board"></div>
-
+          <div className="options__game-board">
+            <img src='./images/maps/zvdkarta3.jpg' ></img>
+          </div>
           <ButtonBlock/>
         </div>
       </div>

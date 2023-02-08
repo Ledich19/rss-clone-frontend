@@ -43,3 +43,14 @@
     justify-content: space-between;
   }
 }
+.options__game-board{
+  padding: 20px;
+  border-radius: 5px;
+  background-image: url(./../../../public/images/metal1.jpeg);
+  background-size: 30% 100%;
+  img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
