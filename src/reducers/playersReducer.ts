@@ -80,7 +80,7 @@ const playersSlice = createSlice({
 
       return { ...state, characters: newCharacters };
     },
-    chengePlayer(state, actions: {
+    changePlayer(state, actions: {
       payload: CharacterType;
       type: string;
     }) {
@@ -154,7 +154,7 @@ const playersSlice = createSlice({
 
 export const {
   addPlayer,
-  chengePlayer,
+  changePlayer,
   setPlayerName,
   removeLastPlayer,
   addToPlayerInventory,

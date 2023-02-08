@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './PlayerOption.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { CharacterType } from '../../app/types';
-import { addPlayer, chengePlayer, setPlayerName } from '../../reducers/playersReducer';
+import { changePlayer, setPlayerName } from '../../reducers/playersReducer';
 
 type PropertyType = {
   player: CharacterType;
@@ -20,10 +20,10 @@ const PlayerOption = ({ player }: PropertyType) => {
   const handleChoose = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const choosedPlayer = charactersCards.find((character) => character.type === e.target.value);
     if (choosedPlayer) {
-      dispatch(chengePlayer({ ...choosedPlayer, playerName: player.playerName }));
+      dispatch(changePlayer({ ...choosedPlayer, playerName: player.playerName }));
     } else {
       dispatch(
-        chengePlayer({
+        changePlayer({
           id: player.id,
           category: 'character',
           isVisible: true,

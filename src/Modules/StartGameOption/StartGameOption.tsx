@@ -1,5 +1,4 @@
-import { log } from 'console';
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import ButtonBlock from '../../components/ButtonBlock/ButtonBlock';
 import ChooseAmount from '../../components/ChooseAmount/ChooseAmount';
@@ -10,14 +9,9 @@ import './StartGameOption.scss';
 const StartGameOption = () => {
   const dispatch = useAppDispatch();
   const { amount, characters } = useAppSelector((state) => state.characters);
-  const charactersCards = useAppSelector((state) => state.gameSet.cards.characters);
 
   useEffect(() => {
     const count = parseInt(amount, 10) - characters.length;
-    const choosePlayers = characters.map((character) => character.type);
-    const availablePlayers = charactersCards.filter(
-      (character) => !choosePlayers.includes(character.type),
-    );
     if (count >= 1) {
       for (let i = 0; i < count; i += 1) {
         dispatch(

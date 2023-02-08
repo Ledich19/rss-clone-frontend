@@ -140,7 +140,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       );
     const canMovie = player ? canIMove(player.id) : null;
     if (canMovie && canPlayerMove) {
-      // setInfo(canMovie.movie.toString());
       const parentElement = e.target.closest('.field-card');
       (parentElement as HTMLElement).style.background = 'rgba(0, 255, 26, 0.3';
 
@@ -157,7 +156,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       return;
     }
     const parentElement = e.target.closest('.field-card');
-    if (item.value) {
+    if (item.value === 'finish') {
       (parentElement as HTMLElement).style.background = 'rgba(232, 248, 5, 0.3)';
     } else {
       (parentElement as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';
