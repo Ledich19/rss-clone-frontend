@@ -1,7 +1,8 @@
-.btn-bloc{
+.btn-bloc {
   display: flex;
   gap: 20px;
-  &__start, &__back {
+  &__start,
+  &__back {
     width: 100%;
     font-size: 2rem;
     color: #41514a;
@@ -18,8 +19,15 @@
       color: #1c523a;
       transform: scale(1.1);
     }
+    &:disabled {
+      background-blend-mode: multiply;
+    background-image: url(./../../../public/images/planck2darck.png);
+      background-color: #60695e00;
+      transform: scale(1);
+      color: #a9b5b0;
+    }
   }
-  &__link{
+  &__link {
     flex: 1 1 auto;
   }
 }

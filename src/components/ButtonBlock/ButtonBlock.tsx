@@ -6,9 +6,7 @@ const ButtonBlock = () => {
   const navigate = useNavigate();
   const { characters } = useAppSelector((state) => state.characters);
   const handleStart = () => {
-    if (!characters.some((ch) => ch.type === 'empty')) {
-      navigate('/game');
-    }
+    navigate('/game');
   };
 
   return (
@@ -17,7 +15,11 @@ const ButtonBlock = () => {
         <button className="btn-bloc__back">back</button>
       </Link>
       <a className="btn-bloc__link">
-        <button onClick={handleStart} className="btn-bloc__start">
+        <button
+          disabled={characters.some((ch) => ch.type === 'empty')}
+          onClick={handleStart}
+          className="btn-bloc__start"
+        >
           start
         </button>
       </a>
