@@ -11,7 +11,7 @@ const ChooseAmount = () => {
   const handleEmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const num = parseInt(value, 10);
-    if ((num < characters.length && num > 1) || value === '') {
+    if ((num <= characters.length && num >= 1) || value === '') {
       dispatch(setAmount(value));
     }
   };

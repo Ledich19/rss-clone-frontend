@@ -15,14 +15,27 @@
     width: 80%;
     border-radius: 10px;
     background-image: url(./../../../public/images/wood.png);
-  background-size: 30% 100%;
+    background-size: 30% 100%;
     background-repeat: repeat;
   }
-  &__players{
+  &__players {
+    overflow: auto;
     width: 50%;
     padding: 5px;
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+    &::-webkit-scrollbar-track {
+      background: #c5733c; 
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #5c361d;
+      border-radius: 20px;
+      border: 1px solid #eb8a49;
+    }
   }
-  &__game-board{
+  &__game-board {
     padding: 5px;
     width: 50%;
   }
