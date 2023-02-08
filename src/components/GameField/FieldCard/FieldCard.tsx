@@ -141,14 +141,14 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     const canMovie = player ? canIMove(player.id) : null;
     if (canMovie && canPlayerMove) {
       const parentElement = e.target.closest('.field-card');
-      (parentElement as HTMLElement).style.background = 'rgba(0, 255, 26, 0.3';
+      (parentElement as HTMLElement).style.background = 'rgba(189, 219, 68, 0.573)';
 
       if (movieInfo.current) {
         movieInfo.current.innerHTML = `${canMovie.movie}`;
       }
     } else {
       const parentElement = e.target.closest('.field-card');
-      (parentElement as HTMLElement).style.background = 'rgba(248, 5, 5, 0.3)';
+      (parentElement as HTMLElement).style.background = 'rgba(202, 17, 48, 0.554)';
     }
   };
   const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
