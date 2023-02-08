@@ -64,6 +64,18 @@ const playersSlice = createSlice({
     }) {
       return { ...state, characters: state.characters.concat(actions.payload) };
     },
+    chengePlayer(state, actions: {
+      payload: CharacterType;
+      type: string;
+    }) {
+      const newCharacters = state.characters.map((character) => {
+        if (character.playerName === actions.payload.playerName) {
+          return actions.payload;
+        }
+        return character;
+      });
+      return { ...state, characters: newCharacters };
+    },
     removeLastPlayer(state) {
       return {
         ...state,
@@ -126,6 +138,7 @@ const playersSlice = createSlice({
 
 export const {
   addPlayer,
+  chengePlayer,
   removeLastPlayer,
   addToPlayerInventory,
   decrementHealth,

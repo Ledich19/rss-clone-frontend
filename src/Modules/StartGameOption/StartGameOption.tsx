@@ -19,7 +19,21 @@ const StartGameOption = () => {
     );
     if (count >= 1) {
       for (let i = 0; i < count; i += 1) {
-        dispatch(addPlayer(availablePlayers[0]));
+        dispatch(
+          addPlayer({
+            category: 'character',
+            isVisible: true,
+            active: true,
+            type: 'empty',
+            name: 'Player',
+            img: 'things/plank.png',
+            playerName: `Playrr ${characters.length + 1}`,
+            description: '',
+            count: 0,
+            health: 0,
+            inventory: [],
+          }),
+        );
       }
     }
     if (count < 0) {
@@ -37,11 +51,19 @@ const StartGameOption = () => {
       <div className="options__board">
         <div className="options__players">
           <ChooseAmount />
-          {characters.map((player) => (
-            <PlayerOption key={player.type} player={player} />
+          {characters.map((player, i) => (
+            <PlayerOption key={`${player.type}${i}`} player={player} />
           ))}
         </div>
+        <div className="options__wrapper">
         <div className="options__game-board"></div>
+
+        <div className="btn-bloc">
+          <button className="btn-start">start</button>
+          <button className="btn-back">back</button>
+        </div>
+
+        </div>
       </div>
     </div>
   );
