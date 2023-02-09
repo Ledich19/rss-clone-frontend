@@ -1,11 +1,14 @@
 import './ButtonBlock.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { setActivePlayer } from '../../reducers/playersReducer';
 
 const ButtonBlock = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { characters } = useAppSelector((state) => state.characters);
   const handleStart = () => {
+    dispatch(setActivePlayer(characters[0].type));
     navigate('/game');
   };
 
