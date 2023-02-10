@@ -55,7 +55,7 @@ const Tutorial = () => {
           </div>
         </div>
       </div>
-      <button style={{ visibility: scroll ? 'visible' : 'hidden' }} className="rules__up" onClick={scrollToUp}>UP</button>
+      <button style={{ visibility: scroll ? 'visible' : 'hidden' }} className="rules__up" onClick={scrollToUp}></button>
     </div>
   );
 };
