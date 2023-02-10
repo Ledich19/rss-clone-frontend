@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import './Cards.scss';
 
 const Cards = () => {
-  const [visible, setVisibility] = useState(false);
-  const changeVisibility = () => (visible ? setVisibility(false) : setVisibility(true));
+  const contentRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  const changeVisibility = () => {
+    const content = contentRef.current as unknown as HTMLElement;
+    const button = buttonRef.current as unknown as HTMLElement;
+    if (!content.classList.contains('visible')) {
+      content.classList.add('visible');
+      button.style.transform = 'rotate(180deg)';
+    } else {
+      content.classList.remove('visible');
+      button.style.transform = 'rotate(0deg)';
+    }
+  };
 
   const { cards } = useAppSelector((state) => state.gameSet);
 
   return (
     <div className="item cards">
-      <div className="item__top">
-        <h4 className="item__title" onClick={changeVisibility}>Карточки</h4>
-        <button style={{ transform: visible ? 'rotate(180deg)' : 'rotate(0deg)' }} className="item__btn" onClick={changeVisibility}></button>
+      <div className="item__top" onClick={changeVisibility}>
+        <h4 className="item__title" >Карточки</h4>
+        <button ref={buttonRef} className="item__btn"></button>
         </div>
-      <div className={visible ? 'cards__content visible-cards' : 'cards__content'}>
+      <div ref={contentRef} className="cards__content">
         <div className="cards__items">
           <h5 className="cards__label">Персонажи</h5>
           <ul className="cards__list">

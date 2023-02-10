@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import './InBox.scss';
 
@@ -7,16 +7,28 @@ const InBox = () => {
   const { inBox } = rules;
   const cardsKeys = Object.keys(inBox.cards);
 
-  const [visible, setVisibility] = useState(false);
-  const changeVisibility = () => (visible ? setVisibility(false) : setVisibility(true));
+  const contentRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  const changeVisibility = () => {
+    const content = contentRef.current as unknown as HTMLElement;
+    const button = buttonRef.current as unknown as HTMLElement;
+    if (!content.classList.contains('visible')) {
+      content.classList.add('visible');
+      button.style.transform = 'rotate(180deg)';
+    } else {
+      content.classList.remove('visible');
+      button.style.transform = 'rotate(0deg)';
+    }
+  };
 
   return (
     <div className="inbox item">
-      <div className="item__top">
-        <h4 className="item__title" onClick={changeVisibility}>{inBox.title}</h4>
-        <button style={{ transform: visible ? 'rotate(180deg)' : 'rotate(0deg)' }} className="item__btn" onClick={changeVisibility}></button>
+      <div className="item__top" onClick={changeVisibility}>
+        <h4 className="item__title">{inBox.title}</h4>
+        <button className="item__btn" ref={buttonRef}></button>
       </div >
-      <div className={visible ? 'inbox__content visible-box' : 'inbox__content'}>
+      <div className="inbox__content" ref={contentRef}>
         {Object.values(inBox.cards).map((category, index) => (
               <div key={index} className="inbox__element element">
                 <h5 className="element__title">{category.title}</h5>

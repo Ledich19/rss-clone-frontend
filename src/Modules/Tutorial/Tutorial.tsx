@@ -1,7 +1,8 @@
+import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
-import Cards from './Cards/Cards';
+import Cards from './Cards/cards';
 import Info from './Info/Info';
 import Questions from './Questions/Questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';
@@ -10,6 +11,20 @@ import './Tutorial.scss';
 
 const Tutorial = () => {
   const rules = useAppSelector((state) => state.rules);
+  const [scroll, setScroll] = useState(false);
+
+  useEffect(() => window.addEventListener('scroll', () => (window.scrollY > 800 ? setScroll(true) : setScroll(false))));
+
+  const scrollToUp = () => {
+    const openedItems = document.querySelectorAll('.visible');
+    openedItems.forEach((item) => {
+      const button = item.previousElementSibling?.lastElementChild as HTMLElement;
+      item.classList.remove('visible');
+      button.style.transform = 'rotate(0deg)';
+    });
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="rules">
       <div className="rules__container">
@@ -40,6 +55,7 @@ const Tutorial = () => {
           </div>
         </div>
       </div>
+      <button style={{ visibility: scroll ? 'visible' : 'hidden' }} className="rules__up" onClick={scrollToUp}>UP</button>
     </div>
   );
 };
