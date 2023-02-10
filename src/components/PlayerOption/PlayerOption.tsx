@@ -3,6 +3,7 @@ import './PlayerOption.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { CharacterType } from '../../app/types';
 import { changePlayer, setPlayerName } from '../../reducers/playersReducer';
+import Random from './Random/Random';
 
 type PropertyType = {
   player: CharacterType;
@@ -71,6 +72,7 @@ const PlayerOption = ({ player }: PropertyType) => {
             ))}
           </select>
         </div>
+        <Random list={charactersList} playerName={player.playerName}/>
       </div>
       <div className="player-option__description">{player.description}</div>
     </div>
