@@ -5,12 +5,12 @@ import './AboutSpinner.scss';
 const AboutSpinner = () => {
   const { aboutSpinner } = useAppSelector((state) => state.rules);
 
-  const contentRef = useRef(null);
-  const buttonRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const changeVisibility = () => {
-    const content = contentRef.current as unknown as HTMLElement;
-    const button = buttonRef.current as unknown as HTMLElement;
+    const content = contentRef.current as HTMLElement;
+    const button = buttonRef.current as HTMLElement;
     if (!content.classList.contains('visible')) {
       content.classList.add('visible');
       button.style.transform = 'rotate(180deg)';
