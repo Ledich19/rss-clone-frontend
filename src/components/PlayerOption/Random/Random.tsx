@@ -11,19 +11,25 @@ type PropertyType = {
 
 const Random = ({ list, playerName }: PropertyType) => {
   const dispatch = useAppDispatch();
+  const dice = useRef<HTMLDivElement>(null);
   function getRandomInt(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   const handleChoose = () => {
-    const number = getRandomInt(0, list.length - 1);
-    dispatch(changePlayer({ ...list[number], playerName }));
+    if (dice.current) dice.current.style.animation = 'spin 1s infinite linear';
+    const setPlayer = () => {
+      if (dice.current) dice.current.style.animation = 'spin 10s infinite linear';
+      const number = getRandomInt(0, list.length - 1);
+      dispatch(changePlayer({ ...list[number], playerName }));
+    };
+    setTimeout(setPlayer, 1000);
   };
   return (
     <button title='random player' onClick={handleChoose} className="random">
       <div id="wrapper">
         <div id="platform">
-          <div id="dice">
+          <div ref={dice} id="dice">
             <div className="side front">
               <div className="dot center"></div>
             </div>
