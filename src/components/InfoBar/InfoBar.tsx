@@ -25,18 +25,12 @@ const InfoBar = () => {
         <span>Ход игрока: {currentPlayer.name}</span>
       </div>
       <div className="info__players">
-        <PlayersCards characters={characters} />
+        <PlayersCards characters={characters} active={activePlayer} />
       </div>
-{/*       <div className="info__active-player_image">
-        <img src={`./images/${currentPlayer.img}`} alt="playerImage" />
-        <Health health={currentPlayer.health}/>
-      </div> */}
-      <div className="info__active-player_weapons">
-        <Inventory title={'оружие'} inv={currentPlayerWeapons}/>
+      <div className="info__active-inventory">
+        <Inventory inv={currentPlayer.inventory}/>
       </div>
-      <div className="info__active-player_things">
-        <Inventory title={'вещи'} inv={currentPlayerThings}/>
-      </div>
+      <div className="info__endOfStroke">конец хода</div>
     </div>
   );
 };
