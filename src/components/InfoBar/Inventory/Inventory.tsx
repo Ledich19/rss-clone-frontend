@@ -10,7 +10,6 @@ const Inventory = (props: Props) => {
   if (props.inv && props.inv.length < 10) {
     emptyCells = new Array(10 - props.inv.length).fill(1);
   }
-  console.log(emptyCells);
   return (
     <div className="inventory" >
       <img className="inventory__background" src={'./images/info/fabric.jpg'} alt="background" />

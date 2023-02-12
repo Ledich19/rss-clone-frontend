@@ -15,7 +15,6 @@ const InfoBar = () => {
     currentPlayerWeapons = currentPlayer.inventory.filter((el) => el.category === 'weapon');
     currentPlayerThings = currentPlayer.inventory.filter((el) => el.category === 'things');
   }
-  console.log(activePlayer);
   return (
     <div className="info" >
       <img className="info__background" src={'./images/info/wood.jpg'} alt="background" />
@@ -28,6 +27,7 @@ const InfoBar = () => {
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer.inventory}/>
       </div>
+      <div className="info__endOfStroke">конец хода</div>
     </div>
   );
 };
