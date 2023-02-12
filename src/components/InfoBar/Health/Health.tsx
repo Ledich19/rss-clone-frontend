@@ -1,4 +1,5 @@
 import Heart from './Heart';
+import './Health.scss';
 
 interface Props {
   health: number

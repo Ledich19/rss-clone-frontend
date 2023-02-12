@@ -3,7 +3,6 @@ import './InfoBar.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Inventory from './Inventory/Inventory';
 import { ThingType, WeaponType } from '../../app/types';
-import Health from './Health/Health';
 import PlayersCards from './Players/PlayersCards';
 
 const InfoBar = () => {
@@ -19,19 +18,22 @@ const InfoBar = () => {
   console.log(characters);
   return (
     <div className="info" >
+      <img className="info__background" src={'./images/info/wood.jpg'} alt="background" />
+      <div className="info__active-player_name">
+        <span>Ход игрока: {currentPlayer.name}</span>
+      </div>
       <div className="info__players">
         <PlayersCards characters={characters} />
       </div>
-      <h3 className="info__active-player_name">Ход игрока: {currentPlayer.name}</h3>
-      <div className="info__active-player_image">
+{/*       <div className="info__active-player_image">
         <img src={`./images/${currentPlayer.img}`} alt="playerImage" />
         <Health health={currentPlayer.health}/>
-      </div>
+      </div> */}
       <div className="info__active-player_weapons">
-        <Inventory inv={currentPlayerWeapons}/>
+        <Inventory title={'оружие'} inv={currentPlayerWeapons}/>
       </div>
       <div className="info__active-player_things">
-        <Inventory inv={currentPlayerThings}/>
+        <Inventory title={'вещи'} inv={currentPlayerThings}/>
       </div>
     </div>
   );
