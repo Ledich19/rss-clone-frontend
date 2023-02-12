@@ -3,11 +3,12 @@ import Health from '../Health/Health';
 
 interface Props {
   character: CharacterType
+  active: string
 }
 
 const PlayerCard = (props: Props) => {
   let active = '';
-  if (props.character.active) active = 'player-card-active';
+  if (props.active === props.character.type) active = 'player-card-active';
   return (
     <div className={ `player-card ${active}` } >
         <img src={`./images/${props.character.img}`} alt="playerImage" />

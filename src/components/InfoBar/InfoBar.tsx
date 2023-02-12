@@ -15,7 +15,7 @@ const InfoBar = () => {
     currentPlayerWeapons = currentPlayer.inventory.filter((el) => el.category === 'weapon');
     currentPlayerThings = currentPlayer.inventory.filter((el) => el.category === 'things');
   }
-  console.log(characters);
+  console.log(activePlayer);
   return (
     <div className="info" >
       <img className="info__background" src={'./images/info/wood.jpg'} alt="background" />
@@ -23,17 +23,10 @@ const InfoBar = () => {
         <span>Ход игрока: {currentPlayer.name}</span>
       </div>
       <div className="info__players">
-        <PlayersCards characters={characters} />
+        <PlayersCards characters={characters} active={activePlayer} />
       </div>
-{/*       <div className="info__active-player_image">
-        <img src={`./images/${currentPlayer.img}`} alt="playerImage" />
-        <Health health={currentPlayer.health}/>
-      </div> */}
-      <div className="info__active-player_weapons">
-        <Inventory title={'оружие'} inv={currentPlayerWeapons}/>
-      </div>
-      <div className="info__active-player_things">
-        <Inventory title={'вещи'} inv={currentPlayerThings}/>
+      <div className="info__active-inventory">
+        <Inventory inv={currentPlayer.inventory}/>
       </div>
     </div>
   );

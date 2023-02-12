@@ -6,7 +6,7 @@
 .player-card {
   border-radius: 1rem;
   overflow: hidden;
-  margin: 0.5rem 0 0.5rem 0.5rem;
+  margin: 0.5rem 0.5rem 0.5rem 1rem;
   width: 75px;
   height: 75px;
   position: relative;
@@ -20,5 +20,5 @@
 
 .player-card-active {
   border: 2px solid green;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
