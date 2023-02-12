@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka+One&display=swap');
+
+.info {
+  width: 100%;
+  position: relative;
+
+  &__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  &__active-player_name {
+    font-family: 'Creepster';
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+    background-color: rgba($color: #ffffff, $alpha: 0.5);
+    width: 100%;  
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+   &__active-player_image {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  }
+
+  &__active-player_image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    }
+}
