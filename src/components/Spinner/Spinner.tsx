@@ -14,6 +14,7 @@ const Spinner = () => {
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
   const dispatch = useAppDispatch();
+  const audioSpin = new Audio('spinner.mp3');
 
   const topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/number-1.png';
   const topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/number-2.png';
@@ -41,12 +42,15 @@ const Spinner = () => {
         setResultImage(topLeftImage);
       }
       dispatch(setSpinnerValue(result));
+      audioSpin.pause();
+      audioSpin.currentTime = 0;
     }
     setTimeout(delay, time);
   }
 
   function spin() {
-    const random = Math.random() * 1000;
+    audioSpin.play();
+    const random = Math.random() * 1000 + 1000;
     if ((timeProgress + random) % 360 < 180) {
       setArrowTransitionStyle(180);
       setArrowRotateStyle(startAngle + 180);
