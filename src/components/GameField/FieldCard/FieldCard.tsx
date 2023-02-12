@@ -140,16 +140,15 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       );
     const canMovie = player ? canIMove(player.id) : null;
     if (canMovie && canPlayerMove) {
-      // setInfo(canMovie.movie.toString());
       const parentElement = e.target.closest('.field-card');
-      (parentElement as HTMLElement).style.background = 'rgba(0, 255, 26, 0.3';
+      (parentElement as HTMLElement).style.background = 'rgba(189, 219, 68, 0.573)';
 
       if (movieInfo.current) {
         movieInfo.current.innerHTML = `${canMovie.movie}`;
       }
     } else {
       const parentElement = e.target.closest('.field-card');
-      (parentElement as HTMLElement).style.background = 'rgba(248, 5, 5, 0.3)';
+      (parentElement as HTMLElement).style.background = 'rgba(202, 17, 48, 0.554)';
     }
   };
   const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
@@ -157,7 +156,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       return;
     }
     const parentElement = e.target.closest('.field-card');
-    if (item.value) {
+    if (item.value === 'finish') {
       (parentElement as HTMLElement).style.background = 'rgba(232, 248, 5, 0.3)';
     } else {
       (parentElement as HTMLElement).style.background = 'rgba(0, 0, 0, 0)';

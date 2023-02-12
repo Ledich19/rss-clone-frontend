@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import Item from '../goal-component/item';
-import './info.scss';
+import Item from '../Item/Item';
+import './Info.scss';
 
 const Info = () => {
   const { info } = useAppSelector((state) => state.rules);

@@ -1,0 +1,32 @@
+.start-footer {
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  &__item {
+    display: flex;
+    justify-content: center;
+    flex-basis: 33%;
+    &_first {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    &_third {
+      justify-content: flex-end;
+    }
+  }
+  &__developer,
+  &__rs-img {
+    height: 50px;
+    cursor: pointer;
+  }
+  &__rs-img {
+    height: 40px;
+  }
+  &__year {
+    color: #DF8844;
+    margin-left: 30px;
+    font-weight: bold;
+  }
+}

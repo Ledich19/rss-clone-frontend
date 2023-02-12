@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { WeaponType } from '../../app/types';
 import { moveCharacter, removeCardState, setNewGameField } from '../../reducers/gameBoardReducer';
 import { decrementHealth, setCanPlayerMove } from '../../reducers/playersReducer';
-import { setIsNearEnemy, setSpinnerValue } from '../../reducers/spinnertReducer';
+import { setSpinnerValue } from '../../reducers/spinnertReducer';
 import FieldCard from './FieldCard/FieldCard';
 import FieldCardForPlayer from './FieldCardForPlayer/FieldCardForPlayer';
 import './GameField.scss';
 
 const GameField = () => {
   const gameFieldMatrix = useAppSelector((state) => state.game);
+  const gameFieldNewMatrix = useAppSelector((state) => state.gameSet.board);
   const gameCardsSet = useAppSelector((state) => state.gameSet.cards);
-  const { characters, activePlayer, canPlayerMove } = useAppSelector((state) => state.characters);
-  const { isNearbyEnemy, value, ranges } = useAppSelector((state) => state.spinner);
+  const { characters, activePlayer } = useAppSelector((state) => state.characters);
+  const { isNearbyEnemy, value } = useAppSelector((state) => state.spinner);
   const dispatch = useAppDispatch();
   const heightField = gameFieldMatrix.length;
   const useCharactersTypes = characters.map((character) => character.type);
@@ -33,7 +34,7 @@ const GameField = () => {
         state: characters[i] ? characters[i] : null,
       }));
 
-    const newGameFieldWithPlayers = gameFieldMatrix.map((row) => row.map((ceil) => {
+    const newGameFieldWithPlayers = gameFieldNewMatrix.map((row) => row.map((ceil) => {
       const emptyCeilContent = shuffleEmptyCeilIdsForPlayer.find((item) => item.id === ceil.id);
       if (emptyCeilContent && emptyCeilContent.state) {
         return { ...ceil, state: emptyCeilContent.state };
@@ -74,11 +75,10 @@ const GameField = () => {
     const gameFieldArr = gameFieldMatrix.flat(1);
     const player = characters.find((ceil) => ceil.type === activePlayer);
     const playerPosition = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
-    const playerWeapon = (player?.inventory?.filter((e) => e.category === 'weapon') as WeaponType[])
-      .map((weapon) => weapon.use);
+    const playerWeaponObj = (player?.inventory?.filter((e) => e.category === 'weapon') as WeaponType[]);
     // fight
-    console.log(isNearbyEnemy, player, playerPosition);
-    if (isNearbyEnemy && player && playerPosition) {
+    if (isNearbyEnemy && player && playerPosition && playerWeaponObj) {
+      const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
       switch (true) {
         case value === 1:
           dispatch(setCanPlayerMove(true));

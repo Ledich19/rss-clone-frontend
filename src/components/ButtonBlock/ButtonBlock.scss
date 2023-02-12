@@ -1,0 +1,33 @@
+.btn-bloc {
+  display: flex;
+  gap: 20px;
+  &__start,
+  &__back {
+    width: 100%;
+    font-size: 2rem;
+    color: #41514a;
+    font-family: 'Creepster';
+    padding: 20px 0px;
+    border-radius: 30px;
+    background-image: url(./../../../public/images/planck2.png);
+    background-color: #00000000;
+    background-size: cover;
+    cursor: pointer;
+    transition: all 0.3s;
+    //outline: solid 3px #603a20;
+    &:hover {
+      color: #1c523a;
+      transform: scale(1.1);
+    }
+    &:disabled {
+      background-blend-mode: multiply;
+    background-image: url(./../../../public/images/planck2darck.png);
+      background-color: #60695e00;
+      transform: scale(1);
+      color: #a9b5b0;
+    }
+  }
+  &__link {
+    flex: 1 1 auto;
+  }
+}

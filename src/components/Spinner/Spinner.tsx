@@ -6,6 +6,10 @@ import { setSpinnerValue } from '../../reducers/spinnertReducer';
 const Spinner = () => {
   const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const [resultImage, setResultImage] = useState('./images/spinner/push.png');
+  const [arrowRotateStyle, setArrowRotateStyle] = useState(0);
+  const [progressTransitionStyle, setProgressTransitionStyle] = useState(0);
+  const [progressHightStyle, setProgressHightStyle] = useState(100);
+  const [arrowTransitionStyle, setArrowTransitionStyle] = useState(0);
   let startTime = performance.now();
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
@@ -46,16 +50,13 @@ const Spinner = () => {
 
   function spin() {
     audioSpin.play();
-    const random = Math.random() * 3000 + 1000;
-    const arrow: HTMLElement | null = document.querySelector('.spinner__arrow');
-    if (arrow) {
-      if ((timeProgress + random) % 360 < 180) {
-        arrow.style.transition = '180ms';
-        arrow.style.transform = `rotate(${startAngle + 180}deg)`;
-      }
-      arrow.style.transition = `${timeProgress + random}ms`;
-      arrow.style.transform = `rotate(${startAngle + timeProgress + random}deg)`;
+    const random = Math.random() * 1000 + 1000;
+    if ((timeProgress + random) % 360 < 180) {
+      setArrowTransitionStyle(180);
+      setArrowRotateStyle(startAngle + 180);
     }
+    setArrowTransitionStyle(timeProgress + random);
+    setArrowRotateStyle(startAngle + timeProgress + random);
     const angle = (startAngle + timeProgress + random + 90);
     setStartAngle((startAngle + timeProgress + random) % 360);
     checkResult(angle);
@@ -64,36 +65,24 @@ const Spinner = () => {
   function renderProgress() {
     startTime = performance.now();
     setResultImage('./images/spinner/push.png');
-    const arrow: HTMLElement | null = document.querySelector('.spinner__arrow');
-    if (arrow) {
-      arrow.style.transition = '0ms';
-      arrow.style.transform = `rotate(${startAngle}deg)`;
-    }
-    const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
-    if (progressBar) {
-      timeProgress = 0;
-      progressBar.style.transition = '3000ms';
-      progressBar.style.height = '0%';
-    }
+    setArrowTransitionStyle(0);
+    setArrowRotateStyle(startAngle);
+    timeProgress = 0;
+    setProgressTransitionStyle(3000);
+    setProgressHightStyle(0);
   }
 
   function startSpin() {
     timeProgress = performance.now() - startTime;
     if (timeProgress > 3000) timeProgress = 3000;
-    const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
-    if (progressBar) {
-      progressBar.style.transition = `${timeProgress}ms`;
-      progressBar.style.height = '100%';
-    }
+    setProgressTransitionStyle(timeProgress);
+    setProgressHightStyle(100);
     spin();
   }
 
   function stopSpin() {
-    const progressBar: HTMLElement | null = document.querySelector('.spinner__progress');
-    if (progressBar) {
-      progressBar.style.transition = `${timeProgress}ms`;
-      progressBar.style.height = '100%';
-    }
+    setProgressTransitionStyle(timeProgress);
+    setProgressHightStyle(100);
     timeProgress = 0;
   }
 
@@ -127,14 +116,14 @@ const Spinner = () => {
             </div>
           </div>
         </div>
-        <div className="spinner__arrow">
+        <div className="spinner__arrow" style={{ transform: `rotate(${arrowRotateStyle}deg)`, transition: `${arrowTransitionStyle}ms` }}>
           <img src={'./images/spinner/arrow.png'} alt="" />
         </div>
         <div className="spinner__result">
           <img src={ resultImage } alt="result" />
         </div>
       </div>
-      <div className="spinner__progress"></div>
+      <div className="spinner__progress" style={{ height: `${progressHightStyle}%`, transition: `${progressTransitionStyle}ms` }}></div>
     </div>
   );
 };

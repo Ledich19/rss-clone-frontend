@@ -23,9 +23,11 @@ export type Players = {
   characters: CharacterType[],
   activePlayer: string,
   canPlayerMove: boolean,
+  amount: string;
 };
 
 export type CharacterType = {
+  id: string;
   category: string;
   isVisible: boolean;
   active: boolean;
@@ -193,5 +195,9 @@ export type Rules = {
   questions: {
     title: string,
     text: QA[],
+  },
+  aboutSpinner: {
+    title: string,
+    text: string[],
   },
 };

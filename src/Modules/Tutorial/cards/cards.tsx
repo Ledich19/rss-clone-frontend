@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import './cards.scss';
+import './Cards.scss';
 
 const Cards = () => {
-  const [visible, setVisibility] = useState('cards__content');
-  const [activity, setActivity] = useState('rotate(0deg)');
+  const contentRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   const changeVisibility = () => {
-    if (visible === 'cards__content') {
-      setVisibility('cards__content visible-cards');
-      setActivity('rotate(180deg)');
+    const content = contentRef.current as HTMLElement;
+    const button = buttonRef.current as HTMLElement;
+    if (!content.classList.contains('visible')) {
+      content.classList.add('visible');
+      button.style.transform = 'rotate(180deg)';
     } else {
-      setVisibility('cards__content');
-      setActivity('rotate(0deg)');
+      content.classList.remove('visible');
+      button.style.transform = 'rotate(0deg)';
     }
   };
 
@@ -19,11 +22,11 @@ const Cards = () => {
 
   return (
     <div className="item cards">
-      <div className="item__top">
-        <h4 className="item__title" onClick={changeVisibility}>Карточки</h4>
-        <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
+      <div className="item__top" onClick={changeVisibility}>
+        <h4 className="item__title" >Карточки</h4>
+        <button ref={buttonRef} className="item__btn"></button>
         </div>
-      <div className={visible}>
+      <div ref={contentRef} className="cards__content">
         <div className="cards__items">
           <h5 className="cards__label">Персонажи</h5>
           <ul className="cards__list">
