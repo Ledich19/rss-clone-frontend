@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
-import Cards from './Cards/Cards';
+import Cards from './Cards/cards';
 import Info from './Info/Info';
 import Questions from './Questions/Questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';
@@ -31,12 +32,29 @@ const Tutorial = () => {
         <div className="rules__header">
           <img src="images/tutorial_page/logo.png" alt="logo" className="rules__logo" />
           <div className='rules__info'>
+            {/* <div className="rules__buttons">
+              <Link rel="stylesheet" to={'/start'}>
+              <button className="start-menu__btn">Start</button>
+              </Link>
+              <Link rel="stylesheet" to={'/'}>
+              <button className="start-menu__btn">Home</button>
+              </Link>
+            </div> */}
+
             <div className='rules__block'>
               <img src="images/tutorial_page/zombie.png" alt="zombie" className="rules__img" />
               <div className="rules__table table">
                 <ul className="table__list">
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
+              </div>
+              <div className="rules__buttons">
+                <Link rel="stylesheet" to={'/start'}>
+                <button className="start-menu__btn">Start</button>
+                </Link>
+                <Link rel="stylesheet" to={'/'}>
+                <button className="start-menu__btn">Home</button>
+                </Link>
               </div>
             </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
