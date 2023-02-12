@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Inventory from './Inventory/Inventory';
 import { ThingType, WeaponType } from '../../app/types';
 import Health from './Health/Health';
+import PlayersCards from './Players/PlayersCards';
 
 const InfoBar = () => {
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
@@ -15,9 +16,12 @@ const InfoBar = () => {
     currentPlayerWeapons = currentPlayer.inventory.filter((el) => el.category === 'weapon');
     currentPlayerThings = currentPlayer.inventory.filter((el) => el.category === 'things');
   }
-  console.log(currentPlayer);
+  console.log(characters);
   return (
     <div className="info" >
+      <div className="info__players">
+        <PlayersCards characters={characters} />
+      </div>
       <h3 className="info__active-player_name">Ход игрока: {currentPlayer.name}</h3>
       <div className="info__active-player_image">
         <img src={`./images/${currentPlayer.img}`} alt="playerImage" />

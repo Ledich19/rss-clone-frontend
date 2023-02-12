@@ -1,0 +1,16 @@
+.players-cards {
+  display: flex;
+}
+
+.player-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-right: 1rem;
+  width: 75px;
+  height: 75px;
+}
+
+.player-card img{
+  width: 100%;
+  height: 100%;
+}
