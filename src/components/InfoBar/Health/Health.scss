@@ -1,0 +1,19 @@
+.health{
+  display: flex;
+  position: absolute;
+  bottom: 5%;
+  right: 0;
+  justify-content: right;
+  width: 100%;
+  height: 20%;
+}
+
+.heart {
+  width: 17%;
+  height: 75%;
+}
+
+.heart img{
+  width: 100%;
+  height: 100%;
+}

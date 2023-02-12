@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useAppSelector } from '../../../app/hooks';
 import Item from '../Item/Item';
 import './Info.scss';
