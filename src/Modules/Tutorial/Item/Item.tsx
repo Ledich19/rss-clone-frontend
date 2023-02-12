@@ -1,27 +1,29 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { ContentRules } from '../../../app/types';
 import './Item.scss';
 
 const Item = (props:ContentRules) => {
-  const [visible, setVisibility] = useState('item__text');
-  const [activity, setActivity] = useState('rotate(0deg)');
+  const contentRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const changeVisibility = (e: React.MouseEvent) => {
-    if (visible === 'item__text') {
-      setVisibility('item__text visible');
-      setActivity('rotate(180deg)');
+  const changeVisibility = () => {
+    const content = contentRef.current as HTMLElement;
+    const button = buttonRef.current as HTMLElement;
+    if (!content.classList.contains('visible')) {
+      content.classList.add('visible');
+      button.style.transform = 'rotate(180deg)';
     } else {
-      setVisibility('item__text');
-      setActivity('rotate(0deg)');
+      content.classList.remove('visible');
+      button.style.transform = 'rotate(0deg)';
     }
   };
   return (
     <div className="item">
-      <div className="item__top">
-        <h4 className="item__title" onClick={changeVisibility}>{props.title}</h4>
-        <button style={{ transform: activity }} className="item__btn" onClick={changeVisibility}></button>
+      <div className="item__top" onClick={changeVisibility}>
+        <h4 className="item__title" >{props.title}</h4>
+        <button ref={buttonRef} className="item__btn" ></button>
         </div>
-      <div className={visible} >
+      <div ref={contentRef} className="item__text" >
         {props.text && <p className='item__subtitle'>{props.text}</p>}
         <ul className='item__list'>
           {props.items && props.items.map((item, index) => <li className='item__element' key={index}>{item}</li>)}
