@@ -1487,6 +1487,7 @@ const initialState: GameSetType = {
   cards: {
     characters: [
       {
+        id: '1',
         playerName: '',
         category: 'character',
         type: 'boris',
@@ -1500,6 +1501,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        id: '2',
         playerName: '',
         category: 'character',
         type: 'sasha',
@@ -1510,9 +1512,19 @@ const initialState: GameSetType = {
         active: false,
         count: 1,
         health: 3,
-        inventory: [],
+        inventory: [{
+          category: 'weapon',
+          type: 'knife',
+          name: 'Нож',
+          img: 'weapon/knife.png',
+          description: 'Холодное оружие: может убить монстра, если вертушка показывает перекрещенные шпаги.',
+          use: 'sword',
+          isVisible: false,
+          count: 1,
+        }],
       },
       {
+        id: '3',
         playerName: '',
         category: 'character',
         type: 'nastya',
@@ -1526,6 +1538,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        id: '4',
         playerName: '',
         category: 'character',
         type: 'maks',
@@ -1539,6 +1552,7 @@ const initialState: GameSetType = {
         inventory: [],
       },
       {
+        id: '5',
         playerName: '',
         category: 'character',
         type: 'nadya',
@@ -1549,7 +1563,16 @@ const initialState: GameSetType = {
         active: false,
         count: 1,
         health: 3,
-        inventory: [],
+        inventory: [{
+          category: 'weapon',
+          type: 'gun',
+          name: 'Пистолет',
+          img: 'weapon/gun.png',
+          description: 'Огнестрельное оружие: может убить одного монстра, если вертушка показывает прицел.',
+          use: 'aim',
+          isVisible: false,
+          count: 1,
+        }],
       },
     ],
     enemies: [

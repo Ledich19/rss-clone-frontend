@@ -34,7 +34,6 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
 
     if (checkItemsEnemy.length > 0) {
       dispatch(setIsNearEnemy(checkItemsEnemy));
-      console.log('danger near is enemy');
     } else {
       dispatch(setIsNearEnemy(null));
     }
