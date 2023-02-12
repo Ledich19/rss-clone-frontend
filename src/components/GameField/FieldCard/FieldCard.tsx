@@ -4,7 +4,7 @@ import { BoardItemType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { decrementSpinnerValue, setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
-import { addToPlayerInventory, setCanPlayerMove } from '../../../reducers/playersReducer';
+import { addToPlayerInventory, setCanPlayerMove, setNextActivePlayer } from '../../../reducers/playersReducer';
 
 type PropsType = {
   heightField: number;
@@ -97,6 +97,9 @@ const FieldCard = ({ heightField, item }: PropsType) => {
         const body = characters.find((character) => character.type === activePlayer) || null;
         dispatch(moveCharacter({ from: player.id, to: id, body }));
         dispatch(decrementSpinnerValue(canMovie.movie));
+        if ((spinnerValue - canMovie.movie) === 0) {
+          dispatch(setNextActivePlayer());
+        }
       }
     }
   };
@@ -114,7 +117,8 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           dispatch(removeCardState(id));
           const body = characters.find((character) => character.type === activePlayer) || null;
           dispatch(moveCharacter({ from: player.id, to: id, body }));
-        }, 5000);
+          dispatch(setNextActivePlayer());
+        }, 3000);
         dispatch(addToPlayerInventory({
           player: activePlayer, value: thingCeil.state,
         }));

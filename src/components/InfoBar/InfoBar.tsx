@@ -9,13 +9,15 @@ const InfoBar = () => {
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
   const Arr = characters.filter((el) => el.type === activePlayer);
   const currentPlayer = Arr[0];
+  if (!currentPlayer) {
+    return null;
+  }
   let currentPlayerWeapons: Array<ThingType | WeaponType> = [];
   let currentPlayerThings: Array<ThingType | WeaponType> = [];
-  if (currentPlayer.inventory) {
+  if (currentPlayer && currentPlayer.inventory) {
     currentPlayerWeapons = currentPlayer.inventory.filter((el) => el.category === 'weapon');
     currentPlayerThings = currentPlayer.inventory.filter((el) => el.category === 'things');
   }
-  console.log(characters);
   return (
     <div className="info" >
       <img className="info__background" src={'./images/info/wood.jpg'} alt="background" />

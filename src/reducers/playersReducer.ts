@@ -139,7 +139,7 @@ const playersSlice = createSlice({
     },
     setNextActivePlayer(state) {
       const activeIndex = state.characters.map((ch) => ch.type).indexOf(state.activePlayer);
-      const nextPlayerIndex = activeIndex === state.characters.length ? activeIndex + 1 : 0;
+      const nextPlayerIndex = activeIndex === state.characters.length - 1 ? 0 : activeIndex + 1;
       const activePlayer = state.characters[nextPlayerIndex].type;
       return { ...state, activePlayer };
     },
