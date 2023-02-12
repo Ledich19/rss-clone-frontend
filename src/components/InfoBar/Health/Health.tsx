@@ -4,9 +4,14 @@ interface Props {
   health: number
 }
 
-const Health = (props: Props) => (
+const Health = (props: Props) => {
+  const size: number[] = new Array(props.health).fill(0);
+  return (
     <div className="health" >
-      <Heart />
+      {size.map((el, idx) => (
+          <Heart key={idx}/>
+      ))}
     </div>
-);
+  );
+};
 export default Health;

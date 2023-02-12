@@ -18,7 +18,6 @@ const InfoBar = () => {
   console.log(currentPlayer);
   return (
     <div className="info" >
-      <h2 className="info__round">Раунд:</h2>
       <h3 className="info__active-player_name">Ход игрока: {currentPlayer.name}</h3>
       <div className="info__active-player_image">
         <img src={`./images/${currentPlayer.img}`} alt="playerImage" />
