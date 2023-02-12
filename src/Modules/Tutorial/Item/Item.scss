@@ -1,4 +1,4 @@
-$colorTitle: #6d0101;
+$colorTitle: #AD1705;
 
 .item{
   position: relative;
@@ -47,6 +47,12 @@ $colorTitle: #6d0101;
     transition: all 0.5s ease;
   }
   &__text{
+    & ,.visible {
+      background-image: url(../../../../public/images/tutorial_page/paper.jpg);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    background-size: 400%;
     border-radius: 10px;
     padding: 0px;
     max-height: 0;
