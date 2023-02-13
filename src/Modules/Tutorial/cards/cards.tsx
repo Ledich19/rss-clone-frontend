@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useAppSelector } from '../../../app/hooks';
-import './Cards.scss';
+import './cards.scss';
 
 const Cards = () => {
   const contentRef = useRef<HTMLDivElement>(null);
