@@ -16,6 +16,7 @@ const InventoryItem = (props: Props) => {
 
   function useFirstAidKit() {
     dispatch(incrementHealth(props.activePlayer));
+    if (props.activePlayer === 'nastya') dispatch(incrementHealth(props.activePlayer));
     dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'firstAidKit' }));
   }
 
