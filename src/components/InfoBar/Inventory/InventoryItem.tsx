@@ -10,7 +10,39 @@ interface Props {
 const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
 
+  function useFirstAidKit() {
+    console.log('fak');
+  }
+
+  function usePlank() {
+    console.log('plank');
+  }
+
+  function useGrenade() {
+    console.log('grenade');
+  }
+
+  function useGrenadeGun() {
+    console.log('grenadeGun');
+  }
+
   function useItem() {
+    switch (props.type) {
+      case 'firstAidKit':
+        useFirstAidKit();
+        break;
+      case 'plank':
+        usePlank();
+        break;
+      case 'grenade':
+        useGrenade();
+        break;
+      case 'grenadeGun':
+        useGrenadeGun();
+        break;
+      default:
+        break;
+    }
   }
 
   function showPopup() {
