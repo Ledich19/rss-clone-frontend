@@ -4,6 +4,7 @@ import InventoryItem from './InventoryItem';
 
 interface Props {
   inv?: Array<ThingType | WeaponType>
+  activePlayer: string
 }
 
 const Inventory = (props: Props) => {
@@ -18,7 +19,7 @@ const Inventory = (props: Props) => {
       <div className='inventory__title'>ИНВЕНТАРЬ</div>
       <div className='inventory__items'>
         {props.inv && props.inv.map((item, index) => (
-          <InventoryItem key={index} img={item.img} type={item.type} descr={item.description} />
+          <InventoryItem key={index} img={item.img} type={item.type} descr={item.description} activePlayer={props.activePlayer} />
         ))}
         {emptyCells && emptyCells.map((item, index) => (
           <div className="inventory__empy-cell" key={index} ></div>

@@ -1,17 +1,22 @@
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import PopupInventory from './PopupInventory';
+import { incrementHealth, deleteFromPlayerInventory } from '../../../reducers/playersReducer';
 
 interface Props {
   img: string
   type: string
   descr: string
+  activePlayer: string
 }
 
 const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
+  const dispatch = useAppDispatch();
 
   function useFirstAidKit() {
-    console.log('fak');
+    dispatch(incrementHealth(props.activePlayer));
+    dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'firstAidKit' }));
   }
 
   function usePlank() {
