@@ -20,3 +20,103 @@
   background-color: #d8d9cc;
   padding: 5px;
 }
+:root[data-theme="default"] {
+  --background-rules-page: #bbdd33;
+  --color-text-rules-page: #AD1705;
+  --color-text-qa-question: #000;
+  --color-text-qa-answer: #000;
+  --color-rules-burger-span: #301c07;
+  --background-item-btn: url(../public/images/tutorial_page/arrow-down.svg);
+  --background-rules-up-btn: url(../public/images/tutorial_page/arrow-top2.png)center no-repeat,#a4d649;
+  --background-rules-up-btn-hover:#9bb913;
+  --color-text-item-subtitle: #000;
+  --background-item-text: url(../public/images/tutorial_page/paper.jpg);
+}
+:root[data-theme="dark"] {
+  --background-rules-page: #0b0027;
+  --color-text-rules-page: #b9b9b9;
+  --color-text-qa-question: #fff;
+  --color-text-qa-answer: #b9b9b9;
+  --color-rules-burger-span: #fff;
+  --background-item-btn: url(../public/images/tutorial_page/arrow-down-dark.svg);
+  --background-rules-up-btn: url('../public/images/tutorial_page/arrow-top2-dark.png')center no-repeat,#c9c9c9;
+  --background-rules-up-btn-hover:#ffffff;
+  --color-text-item-subtitle: #b9b9b9;
+  --background-item-text: url(../public/images/tutorial_page/paper-dark.jpg);
+}
+
+.rules{
+  background-color: var(--background-rules-page);
+  &__about-game{
+    color: var(--color-text-rules-page);
+  }
+  &__span{
+    background-color: var(--color-rules-burger-span);
+  }
+  &__up{
+    background: var(--background-rules-up-btn);
+    &:hover{
+      background-color: var(--background-rules-up-btn-hover);
+    }
+  }
+}
+.item{
+  &__title{
+    color: var(--color-text-rules-page);
+    &::before{
+      background-color: var(--color-text-rules-page);
+    }
+  }
+  &__subtitle{
+    color: var(--color-text-item-subtitle);
+  }
+  &__element{
+    color: var(--color-text-item-subtitle);
+  }
+  &__btn{
+    background-image: var(--background-item-btn);
+  }
+  &__text{
+    background: var(--background-item-text);
+  }
+}
+.qa{
+  &__title{
+    color: var(--color-text-rules-page);
+  }
+  &__question{
+    color: var(--color-text-qa-question);
+    &:before{
+      background-color: var(--color-text-rules-page);
+    }
+  }
+  &__answer{
+    color: var(--color-text-qa-answer);
+  }
+}
+.inbox{
+  &__content{
+    background: var(--background-item-text);
+  }
+}
+.cards{
+  &__items{
+    background: var(--background-item-text);
+  }
+}
+.about-spinner{
+  &__title{
+    color: var(--color-text-qa-question);
+  }
+  &__rule{
+    color: var(--color-text-qa-answer);
+  }
+}
+.element{
+  &__title{
+    color: var(--color-text-qa-question);
+  }
+  &__item-list{
+    color: var(--color-text-qa-answer);
+  }
+}

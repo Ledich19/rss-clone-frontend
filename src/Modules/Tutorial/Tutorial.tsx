@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { set } from '../../reducers/themeReducer';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
 import Cards from './Cards/cards';
@@ -17,13 +18,26 @@ const Tutorial = () => {
 
   const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
 
+  const theme = useAppSelector((state) => state.theme);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const handleChange = () => {
+    const next = theme === 'dark' ? 'default' : 'dark';
+    dispatch(set(next));
+  };
+
   const changeMenu = () => {
     if (openMenu) {
       setOpenMenu(false);
-      window.onscroll = () => window.scrollTo();
+      // window.onscroll = () => window.scrollTo();
     } else {
       setOpenMenu(true);
-      window.onscroll = () => window.scrollTo(0, TopScroll);
+      // window.onscroll = () => window.scrollTo(0, TopScroll);
     }
   };
 
@@ -52,14 +66,15 @@ const Tutorial = () => {
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
               </div>
-              <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'}
-              onClick={changeMenu}>
+              <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'}>
                 <Link className='rules__btn' rel="stylesheet" to={'/start'}>
                 <button className="start-menu__btn">Start</button>
                 </Link>
                 <Link className='rules__btn' rel="stylesheet" to={'/'}>
                 <button className="start-menu__btn">Home</button>
                 </Link>
+                <input type="radio" className="test__input" name='colors' id='light' onClick={handleChange}/>
+                <input type="radio" className="test__input" name='colors' id='dark' onClick={handleChange}/>
               </div>
               <div className="rules__burger" onClick={changeMenu} style={openMenu ? { zIndex: '11' } : { zIndex: '0' }}>
                 <span className="rules__span rules__span_top"
