@@ -13,6 +13,19 @@ import './Tutorial.scss';
 const Tutorial = () => {
   const rules = useAppSelector((state) => state.rules);
   const [scroll, setScroll] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+  const changeMenu = () => {
+    if (openMenu) {
+      setOpenMenu(false);
+      window.onscroll = () => window.scrollTo();
+    } else {
+      setOpenMenu(true);
+      window.onscroll = () => window.scrollTo(0, TopScroll);
+    }
+  };
 
   useEffect(() => window.addEventListener('scroll', () => (window.scrollY > 800 ? setScroll(true) : setScroll(false))));
 
@@ -32,15 +45,6 @@ const Tutorial = () => {
         <div className="rules__header">
           <img src="images/tutorial_page/logo.png" alt="logo" className="rules__logo" />
           <div className='rules__info'>
-            {/* <div className="rules__buttons">
-              <Link rel="stylesheet" to={'/start'}>
-              <button className="start-menu__btn">Start</button>
-              </Link>
-              <Link rel="stylesheet" to={'/'}>
-              <button className="start-menu__btn">Home</button>
-              </Link>
-            </div> */}
-
             <div className='rules__block'>
               <img src="images/tutorial_page/zombie.png" alt="zombie" className="rules__img" />
               <div className="rules__table table">
@@ -48,14 +52,26 @@ const Tutorial = () => {
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
               </div>
-              <div className="rules__buttons">
-                <Link rel="stylesheet" to={'/start'}>
+              <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'}>
+                <Link className='rules__btn' rel="stylesheet" to={'/start'}>
                 <button className="start-menu__btn">Start</button>
                 </Link>
-                <Link rel="stylesheet" to={'/'}>
+                <Link className='rules__btn' rel="stylesheet" to={'/'}>
                 <button className="start-menu__btn">Home</button>
                 </Link>
               </div>
+              <div className="rules__burger" onClick={changeMenu} style={openMenu ? { zIndex: '11' } : { zIndex: '0' }}>
+                <span className="rules__span rules__span_top"
+                style={openMenu ? { transform: 'rotate(40deg) translateY(11px)', backgroundColor: 'red' }
+                  : { transform: 'none' } }></span>
+                <span className="rules__span rules__span_middle"
+                style={openMenu ? { opacity: '0' }
+                  : { opacity: '1' } }></span>
+                <span className="rules__span rules__span_bottom"
+                style={openMenu ? { transform: 'rotate(-40deg) translateY(-11px)', backgroundColor: 'red' }
+                  : { transform: 'none' } }></span>
+              </div>
+
             </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
           </div>

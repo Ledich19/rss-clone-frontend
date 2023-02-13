@@ -90,8 +90,46 @@ $colorText: #AD1705;
   &__buttons{
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
-    order: 3;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #000000a6;
+    transition: all 0.5s ease;
+    // opacity: 0;
+    transform: translateY(-100vh);
+  }
+  &__btn{
+    width: 250px;
+  }
+  &__burger{
+    width: 40px;
+    height: 20px;
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &__span{
+    height: 3px;
+    background-color: #301c07;
+    transition: all 0.5s ease;
+    &_top{
+      width: 20px;
+    }
+    &_middle{
+      width: 14px;
+    }
+    &_bottom{
+      width: 20px;
+    }
   }
 }
 .table{
@@ -130,4 +168,9 @@ $colorText: #AD1705;
       left: 0;
     }
   }
+}
+.open-menu{
+  opacity: 1;
+  z-index: 10;
+  transform: translateY(0);
 }
