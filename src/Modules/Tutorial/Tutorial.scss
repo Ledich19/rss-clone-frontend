@@ -6,8 +6,6 @@ $colorText: #AD1705;
   padding-left: 20px;
 }
 .rules{
-  // background-color: #d7f35d;
-  // #BDDB44
   background-image: linear-gradient(#BDDB44, #bbdd33, #b4da1d);
   position: relative;
   &__container{
@@ -24,7 +22,8 @@ $colorText: #AD1705;
     max-width: 250px;
     order: 2;
     position: relative;
-    z-index: 2;
+    transform: translateX(-31px);
+    z-index: 0;
   }
   &__header{
     display: flex;
@@ -38,7 +37,6 @@ $colorText: #AD1705;
   &__block{
     display: flex;
     flex: 1 1 50%;
-    // justify-content: space-around;
     margin-bottom: 10px;
   }
   &__table{
@@ -89,12 +87,18 @@ $colorText: #AD1705;
       background-color: #9bb913;
     }
   }
+  &__buttons{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    order: 3;
+  }
 }
 .table{
   display: flex;
   justify-content: flex-end;
   background: url(../../../public/images/tutorial_page/table.png)center / contain no-repeat;
-  transform: translate(128px, -15px) rotate(-71deg);
+  transform: translate(70px, -15px) rotate(-71deg);
   width: 250px;
   padding: 20px;
   position: relative;
