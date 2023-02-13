@@ -52,7 +52,8 @@ const Tutorial = () => {
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
               </div>
-              <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'} onClick={() => setOpenMenu(false)}>
+              <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'}
+              onClick={changeMenu}>
                 <Link className='rules__btn' rel="stylesheet" to={'/start'}>
                 <button className="start-menu__btn">Start</button>
                 </Link>
