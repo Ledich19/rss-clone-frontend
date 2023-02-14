@@ -22,6 +22,7 @@ export type Player = {
 export type Players = {
   characters: CharacterType[],
   activePlayer: string,
+  zombieMaster: string | null,
   canPlayerMove: boolean,
   amount: string;
 };
@@ -30,7 +31,7 @@ export type CharacterType = {
   id: string;
   category: string;
   isVisible: boolean;
-  active: boolean;
+  isAlive: boolean;
   type: string,
   name: string,
   img: string,

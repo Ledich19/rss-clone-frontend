@@ -36,7 +36,7 @@ const GameField = () => {
 
     const newGameFieldWithPlayers = gameFieldNewMatrix.map((row) => row.map((ceil) => {
       const emptyCeilContent = shuffleEmptyCeilIdsForPlayer.find((item) => item.id === ceil.id);
-      if (emptyCeilContent && emptyCeilContent.state) {
+      if (emptyCeilContent && emptyCeilContent.state && emptyCeilContent.state.isAlive) {
         return { ...ceil, state: emptyCeilContent.state };
       }
       return ceil;

@@ -50,6 +50,7 @@ const initialState: Players = {
     // },
   ],
   activePlayer: 'boris',
+  zombieMaster: null,
   canPlayerMove: true,
   amount: '0',
 };

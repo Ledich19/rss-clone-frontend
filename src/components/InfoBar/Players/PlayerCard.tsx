@@ -4,8 +4,8 @@ import Health from '../Health/Health';
 import Popup from './Popup';
 
 interface Props {
-  character: CharacterType
-  active: string
+  character: CharacterType;
+  active: string;
 }
 
 const PlayerCard = (props: Props) => {
@@ -22,10 +22,21 @@ const PlayerCard = (props: Props) => {
   }
 
   return (
-    <div className={ `player-card ${active}` } onMouseEnter={() => showPopup()} onMouseLeave={() => hidePopup()}>
-        <img src={`./images/${props.character.img}`} alt="playerImage" />
-        <Health health={props.character.health}/>
-        {isPopup && <Popup inv={props.character.inventory} />}
+    <div
+      className={`player-card ${active}`}
+      onMouseEnter={() => showPopup()}
+      onMouseLeave={() => hidePopup()}
+    >
+      <img
+        src={
+          props.character.isAlive
+            ? `./images/${props.character.img}`
+            : './images/characters/died.png'
+        }
+        alt="playerImage"
+      />
+      <Health health={props.character.health} />
+      {isPopup && <Popup inv={props.character.inventory} />}
     </div>
   );
 };

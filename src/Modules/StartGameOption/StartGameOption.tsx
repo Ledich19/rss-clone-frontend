@@ -19,7 +19,7 @@ const StartGameOption = () => {
             id: `playrrId${characters.length + 1 + i}`,
             category: 'character',
             isVisible: true,
-            active: true,
+            isAlive: true,
             type: 'empty',
             name: 'Player',
             img: 'things/plank.png',
