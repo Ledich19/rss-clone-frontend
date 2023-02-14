@@ -49,7 +49,7 @@ const Spinner = () => {
   }
 
   function spin() {
-    audioSpin.play();
+    // audioSpin.play();
     const random = Math.random() * 1000 + 1000;
     if ((timeProgress + random) % 360 < 180) {
       setArrowTransitionStyle(180);

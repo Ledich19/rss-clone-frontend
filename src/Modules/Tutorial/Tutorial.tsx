@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
-import Cards from './Cards/cards';
+import Cards from './Cards/Cards';
 import Info from './Info/Info';
 import Questions from './Questions/Questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';
@@ -49,11 +49,11 @@ const Tutorial = () => {
                 </ul>
               </div>
               <div className="rules__buttons">
-                <Link rel="stylesheet" to={'/start'}>
-                <button className="start-menu__btn">Start</button>
-                </Link>
                 <Link rel="stylesheet" to={'/'}>
                 <button className="start-menu__btn">Home</button>
+                </Link>
+                <Link rel="stylesheet" to={'/game'}>
+                <button className="start-menu__btn">Game</button>
                 </Link>
               </div>
             </div >

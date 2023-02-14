@@ -1,7 +1,9 @@
 .field-player {
   border-radius: 5px;
 
-  border: solid 3px rgb(255, 251, 1);
+  &._active {
+    border: solid 3px rgb(255, 251, 1);
+  }
   font-size: 0.6rem;
   //border: solid 1px yellow;
   //background: rgba(21, 139, 186, 0.313);

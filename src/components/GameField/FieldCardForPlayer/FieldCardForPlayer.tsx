@@ -4,6 +4,7 @@ import { BoardItemType, CharacterType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
+import useSetNotify from '../../../hooks/useSetNotify';
 
 type PropsType = {
   heightField: number;
@@ -12,8 +13,10 @@ type PropsType = {
 };
 
 const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
-  const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
+  const notify = useSetNotify();
+  const gameField = useAppSelector((state) => state.game);
+  const { activePlayer } = useAppSelector((state) => state.characters);
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
@@ -31,7 +34,6 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
     const checkItemsEnemy = gameFieldArray.filter((ceil) => checkItemsId
       .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
       .map((e) => e.id);
-
     if (checkItemsEnemy.length > 0) {
       dispatch(setIsNearEnemy(checkItemsEnemy));
     } else {
@@ -44,8 +46,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
         .flat(1)
         .filter(
           (ceil) => ceil.state
-            && (ceil.state.type === 'boris' || ceil.state.type === 'sasha')
-            && (ceil.state as CharacterType).inventory
+            && ceil.state.category === 'character'
             && ceil.value === 'finish',
         ).map((ceil) => ceil.state);
 
@@ -55,8 +56,10 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
           .flat(1);
         const stuffList = charactersStuff.map((thing) => thing?.type);
         if (stuffList.includes('canister') && stuffList.includes('key')) {
-          // console.log('playersOnFinish', playersOnFinish);
-          // console.log('check finish', stuffList);
+          notify({
+            type: 'success',
+            text: 'Победа ',
+          });
         }
       }
     }
@@ -71,7 +74,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   };
 
   return (
-    <div onClick={handleOpen} style={style} className="field-player">
+    <div onClick={handleOpen} style={style} className={`field-player ${item.state?.type === activePlayer ? '_active' : ''}`}>
       {item.state ? (
               <img src={`./images/${item.state.img}`} alt="back card" />
       ) : (

@@ -84,7 +84,8 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     return movementOptions[0];
   };
 
-  const handleMove = (id: string) => {
+  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+    const id = e.currentTarget.getAttribute('data-ceil-id');
     const player = gameField
       .flat(1)
       .find(
@@ -92,7 +93,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       );
     const canMovie = player ? canIMove(player.id) : null;
 
-    if (player && canMovie && canPlayerMove) {
+    if (player && canMovie && canPlayerMove && id) {
       if (spinnerValue) {
         const body = characters.find((character) => character.type === activePlayer) || null;
         dispatch(moveCharacter({ from: player.id, to: id, body }));
@@ -104,12 +105,14 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     }
   };
 
-  const handleOpenCard = (id: string) => {
+  const handleOpenCard = (e: React.MouseEvent<HTMLElement>) => {
+    const id = e.currentTarget.getAttribute('data-ceil-id');
+
     const gameFieldArr = gameField.flat(1);
     const player = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
     const thingCeil = gameFieldArr.find((ceil) => ceil.id === id);
     const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
-    if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state) {
+    if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
       dispatch(setSpinnerValue(0));
       if ((thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing')) {
@@ -171,9 +174,10 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   };
   return (
     <div
+      data-ceil-id={item.id}
       onMouseOver={handleMouseEnter}
       onMouseOut={handleMouseLeave}
-      onClick={() => handler(item.id)}
+      onClick={ handler }
       style={style}
       className="field-card"
     >
