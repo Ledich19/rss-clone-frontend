@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { set } from '../../reducers/themeReducer';
+import useScrollBlock from '../../hooks/useScrollBlock';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
 import Cards from './Cards/cards';
@@ -15,7 +16,7 @@ const Tutorial = () => {
   const rules = useAppSelector((state) => state.rules);
   const [scroll, setScroll] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-
+  const [blockScroll, allowScroll] = useScrollBlock();
   const theme = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
@@ -29,15 +30,13 @@ const Tutorial = () => {
     dispatch(set(next));
   };
 
-  const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
-
   const changeMenu = () => {
     if (openMenu) {
       setOpenMenu(false);
-      // window.onscroll = () => window.scrollTo();
+      allowScroll();
     } else {
       setOpenMenu(true);
-      // window.onscroll = () => window.scrollTo(0, TopScroll);
+      blockScroll();
     }
   };
 
