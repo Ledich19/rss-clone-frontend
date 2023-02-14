@@ -5,7 +5,7 @@ import Item from './Item/Item';
 import InBox from './InBox/InBox';
 import Cards from './Cards/cards';
 import Info from './Info/Info';
-import Questions from './Questions/Questions';
+import Questions from './questions/questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';
 
 import './Tutorial.scss';
