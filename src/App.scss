@@ -31,6 +31,10 @@
   --background-rules-up-btn-hover:#9bb913;
   --color-text-item-subtitle: #000;
   --background-item-text: url(../public/images/tutorial_page/paper.jpg);
+  --background-card-item: #bdaa7d;
+  --color-text-card-item: #000;
+  --background-card-item-desc: #fff;
+  --colot-text-card-item-desc: #000;
 }
 :root[data-theme="dark"] {
   --background-rules-page: #0b0027;
@@ -43,6 +47,10 @@
   --background-rules-up-btn-hover:#ffffff;
   --color-text-item-subtitle: #b9b9b9;
   --background-item-text: url(../public/images/tutorial_page/paper-dark.jpg);
+  --background-card-item: #2a2a65;
+  --color-text-card-item: #fff;
+  --background-card-item-desc: #10022f;
+  --colot-text-card-item-desc: #fff;
 }
 
 .rules{
@@ -103,6 +111,16 @@
   &__items{
     background: var(--background-item-text);
   }
+  &__item{
+    background-color: var(--background-card-item);
+  }
+  &__info-item{
+    color:  var(--color-text-card-item);
+  }
+  &__desc{
+    color:var(--colot-text-card-item-desc);
+    background-color: var(--background-card-item-desc);
+  }
 }
 .about-spinner{
   &__title{
@@ -119,4 +137,7 @@
   &__item-list{
     color: var(--color-text-qa-answer);
   }
+}
+.cards{
+
 }
