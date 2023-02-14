@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BoardItemType, CharacterType, Player } from '../app/types';
+import {
+  BoardItemType, CharacterType, EnemyType,
+} from '../app/types';
 
 const initialState: BoardItemType[][] = [
   [
@@ -1512,7 +1514,7 @@ const gameBoardSlice = createSlice({
       payload: {
         from: string,
         to: string,
-        body: CharacterType | null
+        body: CharacterType | EnemyType | null
       };
       type: string;
     }) {

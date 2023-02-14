@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  CharacterType, Players, ThingType, WeaponType,
+  CharacterType, EnemyType, Players, ThingType, WeaponType,
 } from '../app/types';
 
 const initialState: Players = {
@@ -50,7 +50,7 @@ const initialState: Players = {
     // },
   ],
   activePlayer: 'boris',
-  zombieMaster: null,
+  enemyChoose: null,
   canPlayerMove: true,
   amount: '0',
 };
@@ -142,6 +142,7 @@ const playersSlice = createSlice({
       const activeIndex = state.characters.map((ch) => ch.type).indexOf(state.activePlayer);
       const nextPlayerIndex = activeIndex === state.characters.length - 1 ? 0 : activeIndex + 1;
       const activePlayer = state.characters[nextPlayerIndex].type;
+      console.log(state);
       return { ...state, activePlayer };
     },
     setActivePlayer(state, actions: {
@@ -155,6 +156,15 @@ const playersSlice = createSlice({
       type: string;
     }) {
       return { ...state, amount: actions.payload };
+    },
+    setActiveEnemy(state, actions: {
+      payload: {
+        id: string,
+        value: EnemyType,
+      } | null;
+      type: string,
+    }) {
+      return { ...state, enemyChoose: actions.payload };
     },
   },
 });
@@ -170,5 +180,6 @@ export const {
   setActivePlayer,
   setNextActivePlayer,
   setAmount,
+  setActiveEnemy,
 } = playersSlice.actions;
 export default playersSlice.reducer;

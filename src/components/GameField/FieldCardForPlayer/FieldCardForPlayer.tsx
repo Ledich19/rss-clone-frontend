@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
 import useSetNotify from '../../../hooks/useSetNotify';
+import { setActiveEnemy, setNextActivePlayer } from '../../../reducers/playersReducer';
 
 type PropsType = {
   heightField: number;
@@ -16,7 +17,8 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   const dispatch = useAppDispatch();
   const notify = useSetNotify();
   const gameField = useAppSelector((state) => state.game);
-  const { activePlayer } = useAppSelector((state) => state.characters);
+  const spinnerValue = useAppSelector((state) => state.spinner.value);
+  const { activePlayer, enemyChoose } = useAppSelector((state) => state.characters);
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
@@ -35,6 +37,11 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
       .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
       .map((e) => e.id);
     if (checkItemsEnemy.length > 0) {
+      if (enemyChoose && spinnerValue > 0) {
+        console.log(' dispatch(setNextActivePlayer());');
+        dispatch(setNextActivePlayer());
+      }
+      dispatch(setActiveEnemy(null));
       dispatch(setIsNearEnemy(checkItemsEnemy));
       dispatch(setSpinnerValue(0));
     } else {
@@ -68,7 +75,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   useEffect(() => {
     checkIsNearEnemy(item.id);
     checkIsFinish();
-  }, []);
+  }, [activePlayer, enemyChoose]);
 
   const handleOpen = () => {
     dispatch(setVisibleCard(item.id));

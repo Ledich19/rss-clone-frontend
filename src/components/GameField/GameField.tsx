@@ -2,9 +2,14 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { WeaponType } from '../../app/types';
 import { moveCharacter, removeCardState, setNewGameField } from '../../reducers/gameBoardReducer';
-import { decrementHealth, setCanPlayerMove, setNextActivePlayer } from '../../reducers/playersReducer';
+import {
+  decrementHealth,
+  setCanPlayerMove,
+  setNextActivePlayer,
+} from '../../reducers/playersReducer';
 import { setSpinnerValue } from '../../reducers/spinnertReducer';
 import FieldCard from './FieldCard/FieldCard';
+import FieldCardForEnemy from './FieldCardForEnemy/FieldCardForEnemy';
 import FieldCardForPlayer from './FieldCardForPlayer/FieldCardForPlayer';
 import './GameField.scss';
 
@@ -28,11 +33,10 @@ const GameField = () => {
       .flat(1)
       .filter((ceil) => ceil.value === 'player')
       .map((ceil) => ceil.id);
-    const shuffleEmptyCeilIdsForPlayer = shuffleArray(emptyCeilIdsForPlayer)
-      .map((ceil, i) => ({
-        id: ceil,
-        state: characters[i] ? characters[i] : null,
-      }));
+    const shuffleEmptyCeilIdsForPlayer = shuffleArray(emptyCeilIdsForPlayer).map((ceil, i) => ({
+      id: ceil,
+      state: characters[i] ? characters[i] : null,
+    }));
 
     const newGameFieldWithPlayers = gameFieldNewMatrix.map((row) => row.map((ceil) => {
       const emptyCeilContent = shuffleEmptyCeilIdsForPlayer.find((item) => item.id === ceil.id);
@@ -60,9 +64,11 @@ const GameField = () => {
     const newGameField = newGameFieldWithPlayers.map((row) => row.map((ceil) => {
       const emptyCeilContent = shuffleEmptyCells.find((item) => item.id === ceil.id);
 
-      if (emptyCeilContent?.state
-        && !useCharactersTypes.includes(emptyCeilContent.state.type)
-        && ceil.state === null) {
+      if (
+        emptyCeilContent?.state
+          && !useCharactersTypes.includes(emptyCeilContent.state.type)
+          && ceil.state === null
+      ) {
         return { ...ceil, state: emptyCeilContent.state };
       }
 
@@ -75,7 +81,9 @@ const GameField = () => {
     const gameFieldArr = gameFieldMatrix.flat(1);
     const player = characters.find((ceil) => ceil.type === activePlayer);
     const playerPosition = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
-    const playerWeaponObj = (player?.inventory?.filter((e) => e.category === 'weapon') as WeaponType[]);
+    const playerWeaponObj = player?.inventory?.filter(
+      (e) => e.category === 'weapon',
+    ) as WeaponType[];
     // fight
     if (isNearbyEnemy && player && playerPosition && playerWeaponObj) {
       const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
@@ -107,21 +115,48 @@ const GameField = () => {
   return (
     <div className="field">
       {gameFieldMatrix.map((row, i) => (
-          <div className="field__row" key={`rowId${i}`}>
-            {row.map((item, j) => (
-              item.state && useCharactersTypes.includes(item.state.type)
-                ? <FieldCardForPlayer
-                    position={{ row: i, col: j }}
-                    key={item.id}
-                    heightField={heightField}
-                    item={item} />
-                : <FieldCard
-                    position={{ row: i, col: j }}
-                    key={item.id}
-                    heightField={heightField}
-                    item={item} />
-            ))}
-          </div>
+        <div className="field__row" key={`rowId${i}`}>
+          {row.map((item, j) => {
+            if (item.state && useCharactersTypes.includes(item.state.type)) {
+              return (
+                <FieldCardForPlayer
+                  position={{ row: i, col: j }}
+                  key={item.id}
+                  heightField={heightField}
+                  item={item}
+                />
+              );
+            }
+            if (item.state && item.state.category === 'enemy') {
+              return <FieldCardForEnemy
+                position={{ row: i, col: j }}
+                key={item.id}
+                heightField={heightField}
+                item={item}
+              />;
+            }
+            return (
+              <FieldCard
+                position={{ row: i, col: j }}
+                key={item.id}
+                heightField={heightField}
+                item={item}
+              />
+            );
+
+            // item.state && useCharactersTypes.includes(item.state.type)
+            //   ? <FieldCardForPlayer
+            //       position={{ row: i, col: j }}
+            //       key={item.id}
+            //       heightField={heightField}
+            //       item={item} />
+            //   : <FieldCard
+            //       position={{ row: i, col: j }}
+            //       key={item.id}
+            //       heightField={heightField}
+            //       item={item} />
+          })}
+        </div>
       ))}
     </div>
   );

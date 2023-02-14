@@ -22,7 +22,10 @@ export type Player = {
 export type Players = {
   characters: CharacterType[],
   activePlayer: string,
-  zombieMaster: string | null,
+  enemyChoose: {
+    id: string,
+    value: EnemyType,
+  } | null,
   canPlayerMove: boolean,
   amount: string;
 };

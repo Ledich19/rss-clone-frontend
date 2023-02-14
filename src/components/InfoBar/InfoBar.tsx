@@ -4,8 +4,10 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Inventory from './Inventory/Inventory';
 import { ThingType, WeaponType } from '../../app/types';
 import PlayersCards from './Players/PlayersCards';
+import { setNextActivePlayer } from '../../reducers/playersReducer';
 
 const InfoBar = () => {
+  const dispatch = useAppDispatch();
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
   const Arr = characters.filter((el) => el.type === activePlayer);
   const currentPlayer = Arr[0];
@@ -30,7 +32,7 @@ const InfoBar = () => {
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer.inventory}/>
       </div>
-      <div className="info__endOfStroke">конец хода</div>
+      <div onClick={() => dispatch(setNextActivePlayer())} className="info__endOfStroke">конец хода</div>
     </div>
   );
 };
