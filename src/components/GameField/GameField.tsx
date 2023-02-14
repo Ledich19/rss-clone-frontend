@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { WeaponType } from '../../app/types';
 import { moveCharacter, removeCardState, setNewGameField } from '../../reducers/gameBoardReducer';
-import { decrementHealth, setCanPlayerMove } from '../../reducers/playersReducer';
+import { decrementHealth, setCanPlayerMove, setNextActivePlayer } from '../../reducers/playersReducer';
 import { setSpinnerValue } from '../../reducers/spinnertReducer';
 import FieldCard from './FieldCard/FieldCard';
 import FieldCardForPlayer from './FieldCardForPlayer/FieldCardForPlayer';
@@ -12,7 +12,7 @@ const GameField = () => {
   const gameFieldMatrix = useAppSelector((state) => state.game);
   const gameFieldNewMatrix = useAppSelector((state) => state.gameSet.board);
   const gameCardsSet = useAppSelector((state) => state.gameSet.cards);
-  const { characters, activePlayer } = useAppSelector((state) => state.characters);
+  const { characters, activePlayer, canPlayerMove } = useAppSelector((state) => state.characters);
   const { isNearbyEnemy, value } = useAppSelector((state) => state.spinner);
   const dispatch = useAppDispatch();
   const heightField = gameFieldMatrix.length;
@@ -83,18 +83,20 @@ const GameField = () => {
         case value === 1:
           dispatch(setCanPlayerMove(true));
           break;
-        case value === 2:
+        case value === 2 && !canPlayerMove:
           dispatch(decrementHealth(activePlayer));
           break;
-        case value === 3 && playerWeapon?.includes('sword'):
+        case value === 3 && playerWeapon?.includes('sword') && !canPlayerMove:
           dispatch(removeCardState(isNearbyEnemy[0]));
           dispatch(setSpinnerValue(0));
           dispatch(moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: player }));
+          dispatch(setNextActivePlayer());
           break;
-        case value === 4 && playerWeapon?.includes('aim'):
+        case value === 4 && playerWeapon?.includes('aim') && !canPlayerMove:
           dispatch(removeCardState(isNearbyEnemy[0]));
           dispatch(setSpinnerValue(0));
           dispatch(moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: player }));
+          dispatch(setNextActivePlayer());
           break;
         default:
           break;

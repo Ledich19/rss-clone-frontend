@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { BoardItemType, CharacterType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setVisibleCard } from '../../../reducers/gameBoardReducer';
-import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
+import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
 import useSetNotify from '../../../hooks/useSetNotify';
 
 type PropsType = {
@@ -36,6 +36,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
       .map((e) => e.id);
     if (checkItemsEnemy.length > 0) {
       dispatch(setIsNearEnemy(checkItemsEnemy));
+      dispatch(setSpinnerValue(0));
     } else {
       dispatch(setIsNearEnemy(null));
     }

@@ -14,8 +14,11 @@ type PropsType = {
 type ToMovieItem = { id: string, movie: number };
 
 const FieldCard = ({ heightField, item }: PropsType) => {
-  const { characters, activePlayer, canPlayerMove } = useAppSelector((state) => state.characters);
+  const {
+    characters, activePlayer, canPlayerMove,
+  } = useAppSelector((state) => state.characters);
   const spinnerValue = useAppSelector((state) => state.spinner.value);
+  const isNearbyEnemy = useAppSelector((state) => state.spinner.isNearbyEnemy);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
   const movieInfo = useRef<HTMLDivElement>(null);
