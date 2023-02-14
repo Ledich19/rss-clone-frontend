@@ -16,8 +16,6 @@ const Tutorial = () => {
   const [scroll, setScroll] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
-  const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
-
   const theme = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
@@ -31,6 +29,8 @@ const Tutorial = () => {
     dispatch(set(next));
   };
 
+  const TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+
   const changeMenu = () => {
     if (openMenu) {
       setOpenMenu(false);
@@ -41,7 +41,14 @@ const Tutorial = () => {
     }
   };
 
-  useEffect(() => window.addEventListener('scroll', () => (window.scrollY > 800 ? setScroll(true) : setScroll(false))));
+  const showButton = () => (window.scrollY > 800 ? setScroll(true) : setScroll(false));
+
+  useEffect(() => {
+    window.addEventListener('scroll', showButton);
+    return () => {
+      window.removeEventListener('click', showButton);
+    };
+  });
 
   const scrollToUp = () => {
     const openedItems = document.querySelectorAll('.visible');

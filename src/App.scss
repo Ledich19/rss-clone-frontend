@@ -35,6 +35,10 @@
   --color-text-card-item: #000;
   --background-card-item-desc: #fff;
   --colot-text-card-item-desc: #000;
+  --background-start-page: url(../public/images/start_bg.png);
+  --start-menu-btn: url(../public/images/planck.png);
+  --colot-start-menu-btn: #41514a;
+  --color-start-menu-btn-hover:#1c523a;
 }
 :root[data-theme="dark"] {
   --background-rules-page: #0b0027;
@@ -51,6 +55,10 @@
   --color-text-card-item: #fff;
   --background-card-item-desc: #10022f;
   --colot-text-card-item-desc: #fff;
+  --background-start-page: url(../public/images/home-dark-bg.jpg);
+  --start-menu-btn: url(../public/images/planck2darck.png);
+  --colot-start-menu-btn: #34647a;
+  --colot-start-menu-btn-hover: #4abbf0;
 }
 
 .rules{
@@ -138,6 +146,18 @@
     color: var(--color-text-qa-answer);
   }
 }
-.cards{
-
+.StartPage_start__qQ1Xv{
+  background-image: var(--background-start-page);
+}
+.options{
+  background-image: var(--background-start-page);
+}
+.start-menu{
+  &__btn{
+    background-image: var(--start-menu-btn);
+    color: #34647a;
+    &:hover{
+      color: var(--colot-start-menu-btn-hover);
+    }
+  }
 }
