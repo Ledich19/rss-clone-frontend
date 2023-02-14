@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
-import Cards from './Cards/cards';
+import Cards from './cards/cards';
 import Info from './Info/Info';
 import Questions from './questions/questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';

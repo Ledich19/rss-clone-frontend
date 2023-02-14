@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import PopupInventory from './PopupInventory';
 import { incrementHealth, deleteFromPlayerInventory } from '../../../reducers/playersReducer';
+import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
+import { removeCardState } from '../../../reducers/gameBoardReducer';
 
 interface Props {
   img: string
@@ -12,6 +14,7 @@ interface Props {
 
 const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
+  const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const dispatch = useAppDispatch();
 
   function useFirstAidKit() {
@@ -25,7 +28,10 @@ const InventoryItem = (props: Props) => {
   }
 
   function useGrenade() {
-    console.log('grenade');
+    if (isNearbyEnemy) {
+      dispatch(removeCardState(isNearbyEnemy[0]));
+      dispatch(setIsNearEnemy(isNearbyEnemy.filter((el, idx) => idx !== 0)));
+    }
   }
 
   function useGrenadeGun() {
