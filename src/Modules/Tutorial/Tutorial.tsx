@@ -11,12 +11,11 @@ import Questions from './Questions/Questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';
 
 import './Tutorial.scss';
+import BurgerMenu from '../../components/BurgerMenu/BurgerMenu';
 
 const Tutorial = () => {
   const rules = useAppSelector((state) => state.rules);
   const [scroll, setScroll] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false);
-  const [blockScroll, allowScroll] = useScrollBlock();
   const theme = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
@@ -28,16 +27,6 @@ const Tutorial = () => {
   const handleChange = () => {
     const next = theme === 'dark' ? 'default' : 'dark';
     dispatch(set(next));
-  };
-
-  const changeMenu = () => {
-    if (openMenu) {
-      setOpenMenu(false);
-      allowScroll();
-    } else {
-      setOpenMenu(true);
-      blockScroll();
-    }
   };
 
   const showButton = () => (window.scrollY > 800 ? setScroll(true) : setScroll(false));
@@ -72,31 +61,9 @@ const Tutorial = () => {
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
               </div>
-              <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'}>
-                <Link className='rules__btn' rel="stylesheet" to={'/start'}>
-                  <button className="start-menu__btn">Start</button>
-                </Link>
-                <Link className='rules__btn' rel="stylesheet" to={'/'}>
-                  <button className="start-menu__btn">Home</button>
-                </Link>
-                <Link className='rules__btn' rel="stylesheet" to={'/options'}>
-                  <button className="start-menu__btn">Options</button>
-                </Link>
-                <input type="radio" className="test__input" name='colors' id='light' onClick={handleChange}/>
-                <input type="radio" className="test__input" name='colors' id='dark' onClick={handleChange}/>
-              </div>
-              <div className="rules__burger" onClick={changeMenu} style={openMenu ? { zIndex: '11' } : { zIndex: '0' }}>
-                <span className="rules__span rules__span_top"
-                style={openMenu ? { transform: 'rotate(40deg) translateY(11px)', backgroundColor: 'red' }
-                  : { transform: 'none' } }></span>
-                <span className="rules__span rules__span_middle"
-                style={openMenu ? { opacity: '0' }
-                  : { opacity: '1' } }></span>
-                <span className="rules__span rules__span_bottom"
-                style={openMenu ? { transform: 'rotate(-40deg) translateY(-11px)', backgroundColor: 'red' }
-                  : { transform: 'none' } }></span>
-              </div>
-
+              <BurgerMenu/>
+              <input type="radio" className="test__input" name='colors' id='light' onClick={handleChange}/>
+              <input type="radio" className="test__input" name='colors' id='dark' onClick={handleChange}/>
             </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
           </div>
