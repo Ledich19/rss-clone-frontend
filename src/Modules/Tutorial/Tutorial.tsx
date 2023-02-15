@@ -74,10 +74,13 @@ const Tutorial = () => {
               </div>
               <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'}>
                 <Link className='rules__btn' rel="stylesheet" to={'/start'}>
-                <button className="start-menu__btn">Start</button>
+                  <button className="start-menu__btn">Start</button>
                 </Link>
                 <Link className='rules__btn' rel="stylesheet" to={'/'}>
-                <button className="start-menu__btn">Home</button>
+                  <button className="start-menu__btn">Home</button>
+                </Link>
+                <Link className='rules__btn' rel="stylesheet" to={'/options'}>
+                  <button className="start-menu__btn">Options</button>
                 </Link>
                 <input type="radio" className="test__input" name='colors' id='light' onClick={handleChange}/>
                 <input type="radio" className="test__input" name='colors' id='dark' onClick={handleChange}/>

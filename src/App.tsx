@@ -9,6 +9,7 @@ import StartGameOption from './Modules/StartGameOption/StartGameOption';
 import NotifyComponent from './components/NotifyComponent/NotifyComponent';
 import { useAppSelector } from './app/hooks';
 import './App.scss';
+import OptionsPage from './Modules/OptionsPage/OptionsPage';
 
 function App() {
   const theme = useAppSelector((state) => state.theme);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/game" element={<GameBoard />} />
         <Route path="/start" element={<StartGameOption />} />
         <Route path="/tutorial" element={<Tutorial />} />
+        <Route path="/options" element={<OptionsPage />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
     </div>
