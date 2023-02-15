@@ -15,6 +15,7 @@ const Spinner = () => {
   let timeProgress = 0;
   const dispatch = useAppDispatch();
   const audioSpin = new Audio('spinner.mp3');
+  audioSpin.volume = 1;
 
   const topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/number-1.png';
   const topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/number-2.png';

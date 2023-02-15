@@ -15,6 +15,7 @@ interface Props {
 const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
   const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
+  const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 
   function useFirstAidKit() {
@@ -24,7 +25,27 @@ const InventoryItem = (props: Props) => {
   }
 
   function usePlank() {
-    console.log('plank');
+    function applyPlank(e:Event) {
+      const target = (e.target as HTMLInputElement);
+      const player = gameField.flat(1).find(
+        (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
+      );
+      if (target && player) {
+        const cell = target.getAttribute('data-tag');
+        const canPut:string[] = [];
+        const playerCell = player.id.split('-');
+        if (player?.bottom) canPut.push(`${Number(playerCell[0]) + 1}-${playerCell[1]}`);
+        if (player?.left) canPut.push(`${playerCell[0]}-${Number(playerCell[1]) - 1}`);
+        if (player?.top) canPut.push(`${Number(playerCell[0]) - 1}-${playerCell[1]}`);
+        if (player?.right) canPut.push(`${playerCell[0]}-${Number(playerCell[1]) + 1}`);
+        if (cell && canPut.includes(cell)) console.log('put');
+      }
+    }
+    const root = document.querySelector('#root');
+    if (root) {
+      root.addEventListener('click', (e) => applyPlank(e), { once: true });
+      console.log('plank');
+    }
   }
 
   function useGrenade() {

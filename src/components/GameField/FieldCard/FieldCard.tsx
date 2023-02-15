@@ -172,6 +172,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       onClick={() => handler(item.id)}
       style={style}
       className="field-card"
+      data-tag={item.id}
     >
       {item.state && typeof item.state === 'object' ? (
         <div className={'flip-container'}>
