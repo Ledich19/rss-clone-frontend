@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { set } from '../../reducers/themeReducer';
+import useScrollBlock from '../../hooks/useScrollBlock';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
 import Cards from './Cards/cards';
@@ -9,12 +11,32 @@ import Questions from './questions/questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';
 
 import './Tutorial.scss';
+import BurgerMenu from '../../components/BurgerMenu/BurgerMenu';
 
 const Tutorial = () => {
   const rules = useAppSelector((state) => state.rules);
   const [scroll, setScroll] = useState(false);
+  const theme = useAppSelector((state) => state.theme);
+  const dispatch = useAppDispatch();
 
-  useEffect(() => window.addEventListener('scroll', () => (window.scrollY > 800 ? setScroll(true) : setScroll(false))));
+  React.useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const handleChange = () => {
+    const next = theme === 'dark' ? 'default' : 'dark';
+    dispatch(set(next));
+  };
+
+  const showButton = () => (window.scrollY > 800 ? setScroll(true) : setScroll(false));
+
+  useEffect(() => {
+    window.addEventListener('scroll', showButton);
+    return () => {
+      window.removeEventListener('click', showButton);
+    };
+  });
 
   const scrollToUp = () => {
     const openedItems = document.querySelectorAll('.visible');
@@ -32,15 +54,6 @@ const Tutorial = () => {
         <div className="rules__header">
           <img src="images/tutorial_page/logo.png" alt="logo" className="rules__logo" />
           <div className='rules__info'>
-            {/* <div className="rules__buttons">
-              <Link rel="stylesheet" to={'/start'}>
-              <button className="start-menu__btn">Start</button>
-              </Link>
-              <Link rel="stylesheet" to={'/'}>
-              <button className="start-menu__btn">Home</button>
-              </Link>
-            </div> */}
-
             <div className='rules__block'>
               <img src="images/tutorial_page/zombie.png" alt="zombie" className="rules__img" />
               <div className="rules__table table">
@@ -48,14 +61,9 @@ const Tutorial = () => {
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
               </div>
-              <div className="rules__buttons">
-                <Link rel="stylesheet" to={'/start'}>
-                <button className="start-menu__btn">Start</button>
-                </Link>
-                <Link rel="stylesheet" to={'/'}>
-                <button className="start-menu__btn">Home</button>
-                </Link>
-              </div>
+              <BurgerMenu/>
+              <input type="radio" className="test__input" name='colors' id='light' onClick={handleChange}/>
+              <input type="radio" className="test__input" name='colors' id='dark' onClick={handleChange}/>
             </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
           </div>
