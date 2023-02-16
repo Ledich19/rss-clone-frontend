@@ -14,6 +14,7 @@ import {
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../../reducers/playersReducer';
+import { getNextPlayer } from '../../../app/healpers';
 
 type PropsType = {
   heightField: number;
@@ -127,7 +128,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           }));
         }
         if (spinnerValue - canMovie.movie === 0) {
-          dispatch(setNextActivePlayer());
+          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
         }
       }
     }
@@ -148,7 +149,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           dispatch(removeCardState(id));
           const body = characters.find((character) => character.type === activePlayer) || null;
           dispatch(moveCharacter({ from: player.id, to: id, body }));
-          dispatch(setNextActivePlayer());
+          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
         }, 3000);
         dispatch(
           addToPlayerInventory({

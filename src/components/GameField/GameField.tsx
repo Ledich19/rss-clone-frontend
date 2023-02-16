@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { getNextPlayer } from '../../app/healpers';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { WeaponType } from '../../app/types';
 import { moveCharacter, removeCardState, setNewGameField } from '../../reducers/gameBoardReducer';
@@ -98,13 +99,13 @@ const GameField = () => {
           dispatch(removeCardState(isNearbyEnemy[0]));
           dispatch(setSpinnerValue(0));
           dispatch(moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: player }));
-          dispatch(setNextActivePlayer());
+          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
           break;
         case value === 4 && playerWeapon?.includes('aim') && !canPlayerMove:
           dispatch(removeCardState(isNearbyEnemy[0]));
           dispatch(setSpinnerValue(0));
           dispatch(moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: player }));
-          dispatch(setNextActivePlayer());
+          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
           break;
         default:
           break;

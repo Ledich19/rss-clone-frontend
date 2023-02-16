@@ -10,6 +10,7 @@ import {
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../../reducers/playersReducer';
+import { getNextPlayer } from '../../../app/healpers';
 
 type PropsType = {
   heightField: number;
@@ -44,8 +45,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
       dispatch(setIsNearEnemy(checkItemsPlayer));
       if (spinnerValue > 0) {
         console.log('spinnerValue > 0', spinnerValue > 0);
-        // const nextPlayer = ''
-        // dispatch(setNextActivePlayer(nextPlayer));
+        dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
       }
       dispatch(setSpinnerValue(0));
     } else {
@@ -90,7 +90,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
           dispatch(removeCardState(id));
           const body = characters.find((character) => character.type === activePlayer) || null;
           dispatch(moveCharacter({ from: player.id, to: id, body }));
-          dispatch(setNextActivePlayer());
+          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
         }, 3000);
         dispatch(
           addToPlayerInventory({

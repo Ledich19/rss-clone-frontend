@@ -177,13 +177,12 @@ const playersSlice = createSlice({
     }) {
       return { ...state, canPlayerMove: actions.payload };
     },
-    setNextActivePlayer(state) {
+    setNextActivePlayer(state, actions: {
+      payload: string;
+      type: string;
+    }) {
       console.log('setNextActivePlayer');
-      const activeIndex = state.characters.map((ch) => ch.type).indexOf(state.activePlayer);
-      const nextPlayerIndex = activeIndex === state.characters.length - 1 ? 0 : activeIndex + 1;
-      const activePlayer = state.characters[nextPlayerIndex].type;
-      console.log(state);
-      return { ...state, activePlayer };
+      return { ...state, activePlayer: actions.payload };
     },
     setActivePlayer(state, actions: {
       payload: string;

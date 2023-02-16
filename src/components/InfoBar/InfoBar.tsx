@@ -4,6 +4,7 @@ import Inventory from './Inventory/Inventory';
 import { ThingType, WeaponType } from '../../app/types';
 import PlayersCards from './Players/PlayersCards';
 import { setNextActivePlayer } from '../../reducers/playersReducer';
+import { getNextPlayer } from '../../app/healpers';
 
 const InfoBar = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +32,7 @@ const InfoBar = () => {
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer.inventory} activePlayer={activePlayer} />
       </div>
-      <div onClick={() => dispatch(setNextActivePlayer())} className="info__endOfStroke">конец хода</div>
+      <div onClick={() => dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)))} className="info__endOfStroke">конец хода</div>
     </div>
   );
 };
