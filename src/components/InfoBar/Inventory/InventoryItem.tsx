@@ -4,6 +4,7 @@ import PopupInventory from './PopupInventory';
 import { incrementHealth, deleteFromPlayerInventory, setCanPlayerMove } from '../../../reducers/playersReducer';
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 import { removeCardState, addPlankState } from '../../../reducers/gameBoardReducer';
+import { BoardItemType } from '../../../app/types';
 
 interface Props {
   img: string
@@ -73,6 +74,39 @@ const InventoryItem = (props: Props) => {
 
   function useGrenadeGun() {
     console.log('grenadeGun');
+    let cell: BoardItemType | undefined = undefined;
+    const player = gameField.flat(1).find(
+      (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
+    );
+    if (player) {
+      const playerCell = player.id.split('-');
+      if ((player?.bottom)) {
+        cell = gameField.flat(1).find(
+        (ceil) => ceil.id === `${Number(playerCell[0]) + 1}-${playerCell[1]}` && ceil.state?.type === 'boss',);
+      }
+      if ((player?.left)) {
+        cell = gameField.flat(1).find(
+        (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) - 1}` && ceil.state?.type === 'boss',);
+      }
+      if ((player?.top)) {
+        cell = gameField.flat(1).find(
+        (ceil) => ceil.id === `${Number(playerCell[0]) - 1}-${playerCell[1]}` && ceil.state?.type === 'boss',);
+      }
+      if ((player?.right)) {
+        cell = gameField.flat(1).find(
+        (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) + 1}` && ceil.state?.type === 'boss',);
+      }
+    }
+    if (cell) {
+      dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenadeGun' }));
+      dispatch(removeCardState(cell.id));
+      if (isNearbyEnemy) {
+        const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el, idx) => el !== cell?.id);
+        if (newIsNearbyEnemy.length) {
+          dispatch(setIsNearEnemy(newIsNearbyEnemy));
+        } else dispatch(setIsNearEnemy(null));
+      }
+    }
   }
 
   function useItem() {
