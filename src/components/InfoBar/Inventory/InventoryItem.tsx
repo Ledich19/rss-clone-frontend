@@ -64,7 +64,10 @@ const InventoryItem = (props: Props) => {
     if (isNearbyEnemy) {
       dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenade' }));
       dispatch(removeCardState(isNearbyEnemy[0]));
-      dispatch(setIsNearEnemy(isNearbyEnemy.filter((el, idx) => idx !== 0)));
+      const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el, idx) => idx !== 0);
+      if (newIsNearbyEnemy.length) {
+        dispatch(setIsNearEnemy(newIsNearbyEnemy));
+      } else dispatch(setIsNearEnemy(null));
     }
   }
 
