@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import PopupInventory from './PopupInventory';
 import { incrementHealth, deleteFromPlayerInventory } from '../../../reducers/playersReducer';
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
-import { removeCardState } from '../../../reducers/gameBoardReducer';
+import { removeCardState, addPlankState } from '../../../reducers/gameBoardReducer';
 
 interface Props {
   img: string
@@ -38,7 +38,10 @@ const InventoryItem = (props: Props) => {
         if (player?.left) canPut.push(`${playerCell[0]}-${Number(playerCell[1]) - 1}`);
         if (player?.top) canPut.push(`${Number(playerCell[0]) - 1}-${playerCell[1]}`);
         if (player?.right) canPut.push(`${playerCell[0]}-${Number(playerCell[1]) + 1}`);
-        if (cell && canPut.includes(cell)) console.log('put');
+        if (cell && canPut.includes(cell)) {
+          dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'plank' }));
+          dispatch(addPlankState(cell));
+        }
       }
     }
     const root = document.querySelector('#root');
@@ -50,6 +53,7 @@ const InventoryItem = (props: Props) => {
 
   function useGrenade() {
     if (isNearbyEnemy) {
+      dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenade' }));
       dispatch(removeCardState(isNearbyEnemy[0]));
       dispatch(setIsNearEnemy(isNearbyEnemy.filter((el, idx) => idx !== 0)));
     }
