@@ -12,6 +12,9 @@ const StartPageMenu = () => {
       <Link rel="stylesheet" to={'/tutorial'}>
         <button className="start-menu__btn">Tutorial</button>
       </Link>
+      <Link rel="stylesheet" to={'/options'}>
+        <button className="start-menu__btn">Options</button>
+      </Link>
     </div>
   );
 };

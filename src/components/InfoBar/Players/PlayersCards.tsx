@@ -4,13 +4,13 @@ import './Players.scss';
 
 interface Props {
   characters: CharacterType[]
-  active: string;
+  activePlayer: string;
 }
 
 const PlayersCards = (props: Props) => (
     <div className="players-cards" >
       {props.characters.map((el, idx) => (
-          <PlayerCard character={el} active={props.active} key={idx}/>
+          <PlayerCard character={el} active={props.activePlayer} key={idx}/>
       ))}
     </div>
 );

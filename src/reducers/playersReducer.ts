@@ -117,6 +117,30 @@ const playersSlice = createSlice({
       const newState = { ...state, characters: newCharacters };
       return newState;
     },
+    deleteFromPlayerInventory(state, actions: {
+      payload: {
+        player: string,
+        type: string,
+      };
+      type: string;
+    }) {
+      const newCharacters = state.characters.map((character) => {
+        let index = -1;
+        if (character.type === actions.payload.player) {
+          character.inventory?.forEach((el, idx) => {
+            if (el.type === actions.payload.type) index = idx;
+          });
+          if (index >= 0) {
+            return {
+              ...character, inventory: character.inventory?.filter((el, idx) => idx !== index),
+            };
+          }
+        }
+        return character;
+      });
+      const newState = { ...state, characters: newCharacters };
+      return newState;
+    },
     decrementHealth(state, actions: {
       payload: string;
       type: string;
@@ -132,6 +156,21 @@ const playersSlice = createSlice({
       const newState = { ...state, characters: newCharacters };
       return newState;
     },
+    incrementHealth(state, actions: {
+      payload: string;
+      type: string;
+    }) {
+      const newCharacters = state.characters.map((character) => {
+        if (character.type === actions.payload) {
+          return {
+            ...character, health: character.health + 1,
+          };
+        }
+        return character;
+      });
+      const newState = { ...state, characters: newCharacters };
+      return newState;
+    },
     setCanPlayerMove(state, actions: {
       payload: boolean;
       type: string;
@@ -139,6 +178,7 @@ const playersSlice = createSlice({
       return { ...state, canPlayerMove: actions.payload };
     },
     setNextActivePlayer(state) {
+      console.log('setNextActivePlayer');
       const activeIndex = state.characters.map((ch) => ch.type).indexOf(state.activePlayer);
       const nextPlayerIndex = activeIndex === state.characters.length - 1 ? 0 : activeIndex + 1;
       const activePlayer = state.characters[nextPlayerIndex].type;
@@ -175,7 +215,9 @@ export const {
   setPlayerName,
   removeLastPlayer,
   addToPlayerInventory,
+  deleteFromPlayerInventory,
   decrementHealth,
+  incrementHealth,
   setCanPlayerMove,
   setActivePlayer,
   setNextActivePlayer,

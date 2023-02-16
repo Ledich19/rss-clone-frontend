@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
 import useSetNotify from '../../../hooks/useSetNotify';
-import { setActiveEnemy, setNextActivePlayer } from '../../../reducers/playersReducer';
+import { setCanPlayerMove } from '../../../reducers/playersReducer';
 
 type PropsType = {
   heightField: number;
@@ -17,35 +17,38 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   const dispatch = useAppDispatch();
   const notify = useSetNotify();
   const gameField = useAppSelector((state) => state.game);
-  const spinnerValue = useAppSelector((state) => state.spinner.value);
-  const { activePlayer, enemyChoose } = useAppSelector((state) => state.characters);
+  const { activePlayer } = useAppSelector((state) => state.characters);
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
   };
 
   const checkIsNearEnemy = (id: string) => {
-    const [i, j] = id.split('-');
-    const gameFieldArray = gameField.flat(1);
-    const checkItemsId = [
-      `${parseInt(i, 10) - 1}-${j}`,
-      `${parseInt(i, 10) + 1}-${j}`,
-      `${i}-${parseInt(j, 10) + 1}`,
-      `${i}-${parseInt(j, 10) - 1}`,
-    ];
-    const checkItemsEnemy = gameFieldArray.filter((ceil) => checkItemsId
-      .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
-      .map((e) => e.id);
-    if (checkItemsEnemy.length > 0) {
-      if (enemyChoose && spinnerValue > 0) {
-        console.log(' dispatch(setNextActivePlayer());');
-        dispatch(setNextActivePlayer());
+    const playerId = gameField
+      .flat(1)
+      .find(
+        (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === activePlayer,
+      )?.id;
+
+    if (playerId) {
+      const [i, j] = playerId.split('-');
+      const gameFieldArray = gameField.flat(1);
+      const checkItemsId = [
+        `${parseInt(i, 10) - 1}-${j}`,
+        `${parseInt(i, 10) + 1}-${j}`,
+        `${i}-${parseInt(j, 10) + 1}`,
+        `${i}-${parseInt(j, 10) - 1}`,
+      ];
+      const checkItemsEnemy = gameFieldArray.filter((ceil) => checkItemsId
+        .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
+        .map((e) => e.id);
+      if (checkItemsEnemy.length > 0) {
+        dispatch(setIsNearEnemy(checkItemsEnemy));
+        dispatch(setSpinnerValue(0));
+        dispatch(setCanPlayerMove(false));
+      } else {
+        dispatch(setIsNearEnemy(null));
       }
-      dispatch(setActiveEnemy(null));
-      dispatch(setIsNearEnemy(checkItemsEnemy));
-      dispatch(setSpinnerValue(0));
-    } else {
-      dispatch(setIsNearEnemy(null));
     }
   };
   const checkIsFinish = () => {
@@ -75,7 +78,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   useEffect(() => {
     checkIsNearEnemy(item.id);
     checkIsFinish();
-  }, [activePlayer, enemyChoose]);
+  }, [activePlayer]);
 
   const handleOpen = () => {
     dispatch(setVisibleCard(item.id));

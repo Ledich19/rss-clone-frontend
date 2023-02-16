@@ -1,4 +1,5 @@
 import './FieldCardForEnemy.scss';
+import { useEffect } from 'react';
 import { BoardItemType, EnemyType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
@@ -25,6 +26,36 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
   };
+
+  const checkIsNearbyPlayer = (id: string) => {
+    const [i, j] = id.split('-');
+    const gameFieldArray = gameField.flat(1);
+    const checkItemsId = [
+      `${parseInt(i, 10) - 1}-${j}`,
+      `${parseInt(i, 10) + 1}-${j}`,
+      `${i}-${parseInt(j, 10) + 1}`,
+      `${i}-${parseInt(j, 10) - 1}`,
+    ];
+    const checkItemsPlayer = gameFieldArray.filter((ceil) => checkItemsId
+      .includes(ceil.id) && ceil.state?.category === 'character')
+      .map((e) => e.id);
+
+    if (checkItemsPlayer.length > 0) {
+      dispatch(setIsNearEnemy(checkItemsPlayer));
+      if (spinnerValue > 0) {
+        console.log('spinnerValue > 0', spinnerValue > 0);
+        // const nextPlayer = ''
+        // dispatch(setNextActivePlayer(nextPlayer));
+      }
+      dispatch(setSpinnerValue(0));
+    } else {
+      dispatch(setIsNearEnemy(null));
+    }
+  };
+
+  useEffect(() => {
+    checkIsNearbyPlayer(item.id);
+  }, []);
 
   const createNearCeil = (element: BoardItemType | undefined, i: number, j: number) => [
     element && element.top ? `${i - 1}-${j}` : 'none',
