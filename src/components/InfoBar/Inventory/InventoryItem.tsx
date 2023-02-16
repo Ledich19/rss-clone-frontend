@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import PopupInventory from './PopupInventory';
-import { incrementHealth, deleteFromPlayerInventory } from '../../../reducers/playersReducer';
+import { incrementHealth, deleteFromPlayerInventory, setCanPlayerMove } from '../../../reducers/playersReducer';
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 import { removeCardState, addPlankState } from '../../../reducers/gameBoardReducer';
 
@@ -16,6 +16,7 @@ const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
   const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
+  const { canPlayerMove } = useAppSelector((state) => state.characters);
   const dispatch = useAppDispatch();
 
   function useFirstAidKit() {
@@ -25,6 +26,7 @@ const InventoryItem = (props: Props) => {
   }
 
   function usePlank() {
+    let isChangeCanPlayerMove = false;
     function applyPlank(e:Event) {
       const target = (e.target as HTMLInputElement);
       const player = gameField.flat(1).find(
@@ -43,11 +45,18 @@ const InventoryItem = (props: Props) => {
           dispatch(addPlankState(cell));
         }
       }
+      if (isChangeCanPlayerMove) {
+        isChangeCanPlayerMove = false;
+        dispatch(setCanPlayerMove(true));
+      }
     }
     const root = document.querySelector('#root');
     if (root) {
+      if (canPlayerMove) {
+        isChangeCanPlayerMove = true;
+        dispatch(setCanPlayerMove(false));
+      }
       root.addEventListener('click', (e) => applyPlank(e), { once: true });
-      console.log('plank');
     }
   }
 
