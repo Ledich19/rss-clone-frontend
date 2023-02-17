@@ -16,7 +16,7 @@ const Inventory = (props: Props) => {
   return (
     <div className="inventory" >
       <img className="inventory__background" src={'./images/info/fabric.jpg'} alt="background" />
-      <div className='inventory__title'>ИНВЕНТАРЬ</div>
+      <div className='inventory__title'>INVENTORY</div>
       <div className='inventory__items'>
         {props.inv && props.inv.map((item, index) => (
           <InventoryItem

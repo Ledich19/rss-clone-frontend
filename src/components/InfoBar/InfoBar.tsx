@@ -16,9 +16,9 @@ const InfoBar = () => {
   }
   return (
     <div className="info" >
-      <img className="info__background" src={'./images/info/wood.jpg'} alt="background" />
+      <img className="info__background" src={'./images/metal3.jpg'} alt="background" />
       <div className="info__active-player_name">
-        <span>Ход игрока: {currentPlayer.name}</span>
+        <span>Player turn: {currentPlayer.type}</span>
       </div>
       <div className="info__players">
         <PlayersCards characters={characters} activePlayer={activePlayer} />
