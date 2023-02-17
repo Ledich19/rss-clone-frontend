@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './InfoBar.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Inventory from './Inventory/Inventory';
@@ -22,10 +21,10 @@ const InfoBar = () => {
         <span>Ход игрока: {currentPlayer.name}</span>
       </div>
       <div className="info__players">
-        <PlayersCards characters={characters} active={activePlayer} />
+        <PlayersCards characters={characters} activePlayer={activePlayer} />
       </div>
       <div className="info__active-inventory">
-        <Inventory inv={currentPlayer.inventory}/>
+        <Inventory inv={currentPlayer.inventory} activePlayer={activePlayer} />
       </div>
       <div className="info__endOfStroke">конец хода</div>
     </div>

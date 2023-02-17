@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CharacterType } from '../../../app/types';
 import Health from '../Health/Health';
-import Popup from './Popup';
+import PopupPlayer from './PopupPlayer';
 
 interface Props {
   character: CharacterType
@@ -25,7 +25,7 @@ const PlayerCard = (props: Props) => {
     <div className={ `player-card ${active}` } onMouseEnter={() => showPopup()} onMouseLeave={() => hidePopup()}>
         <img src={`./images/${props.character.img}`} alt="playerImage" />
         <Health health={props.character.health}/>
-        {isPopup && <Popup inv={props.character.inventory} />}
+        {isPopup && <PopupPlayer inv={props.character.inventory} />}
     </div>
   );
 };

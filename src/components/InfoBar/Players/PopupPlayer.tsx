@@ -4,7 +4,7 @@ interface Props {
   inv?: Array<ThingType | WeaponType>
 }
 
-const Popup = (props: Props) => (
+const PopupPlayer = (props: Props) => (
     <div className="popup" >
       {props.inv && props.inv.map((item, index) => (
         <div className="popup__image" key={index} >
@@ -14,4 +14,4 @@ const Popup = (props: Props) => (
     </div>
 );
 
-export default Popup;
+export default PopupPlayer;
