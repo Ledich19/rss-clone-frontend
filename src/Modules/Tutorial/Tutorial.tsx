@@ -46,7 +46,7 @@ const Tutorial = () => {
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
               </div>
-              <BurgerMenu/>
+              <BurgerMenu tutorial='none'/>
             </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
           </div>

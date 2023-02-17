@@ -8,10 +8,10 @@ const OptionsPage = () => (
       <div className="options-page__board">
         <h3 className="options-page__title">Options</h3>
         <div className="options-page__item">
-          <SwitcherTheme />
+          <SwitcherTheme/>
         </div>
       </div>
-      <BurgerMenu/>
+      <BurgerMenu options='none'/>
     </div>
 );
 export default OptionsPage;
