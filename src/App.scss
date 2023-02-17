@@ -151,7 +151,7 @@
 .StartPage_start__qQ1Xv{
   background-image: var(--background-start-page);
 }
-.options{
+.options, .options-page{
   background-image: var(--background-start-page);
   &__board{
     background-image: var(--background-options-board);
@@ -174,4 +174,7 @@
       color: var(--color-start-menu-btn-hover);
     }
   }
+}
+.options-page{
+  background-image: var(--background-start-page);
 }
