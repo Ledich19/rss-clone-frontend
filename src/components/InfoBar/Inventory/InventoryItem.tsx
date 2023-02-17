@@ -74,34 +74,40 @@ const InventoryItem = (props: Props) => {
 
   function useGrenadeGun() {
     console.log('grenadeGun');
-    let cell: BoardItemType | undefined = undefined;
+    let cell: BoardItemType | undefined;
     const player = gameField.flat(1).find(
       (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
     );
     if (player) {
       const playerCell = player.id.split('-');
-      if ((player?.bottom)) {
+      if (player?.bottom) {
         cell = gameField.flat(1).find(
-        (ceil) => ceil.id === `${Number(playerCell[0]) + 1}-${playerCell[1]}` && ceil.state?.type === 'boss',);
+          (ceil) => ceil.id === `${Number(playerCell[0]) + 1}-${playerCell[1]}` && ceil.state?.type === 'boss',
+        );
       }
-      if ((player?.left)) {
+      if (player?.left && !cell) {
         cell = gameField.flat(1).find(
-        (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) - 1}` && ceil.state?.type === 'boss',);
+          (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) - 1}` && ceil.state?.type === 'boss',
+        );
       }
-      if ((player?.top)) {
+      if ((player?.top && !cell)) {
         cell = gameField.flat(1).find(
-        (ceil) => ceil.id === `${Number(playerCell[0]) - 1}-${playerCell[1]}` && ceil.state?.type === 'boss',);
+          (ceil) => ceil.id === `${Number(playerCell[0]) - 1}-${playerCell[1]}` && ceil.state?.type === 'boss',
+        );
       }
-      if ((player?.right)) {
+      if ((player?.right && !cell)) {
         cell = gameField.flat(1).find(
-        (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) + 1}` && ceil.state?.type === 'boss',);
+          (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) + 1}` && ceil.state?.type === 'boss',
+        );
       }
     }
     if (cell) {
       dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenadeGun' }));
       dispatch(removeCardState(cell.id));
       if (isNearbyEnemy) {
-        const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el, idx) => el !== cell?.id);
+        const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter(
+          (el, idx) => el !== cell?.id,
+        );
         if (newIsNearbyEnemy.length) {
           dispatch(setIsNearEnemy(newIsNearbyEnemy));
         } else dispatch(setIsNearEnemy(null));
