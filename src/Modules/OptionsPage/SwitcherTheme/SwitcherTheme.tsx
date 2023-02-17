@@ -25,7 +25,7 @@ const SwitcherTheme = () => {
       onClick={handleChange}
       style={theme === 'default'
         ? { transform: 'translateX(0px)', backgroundColor: 'rgb(255, 157, 0)' }
-        : { transform: 'translateX(50px)', backgroundColor: 'rgb(22, 1, 58)' }
+        : { transform: 'translateX(50px)', backgroundColor: '#2caac6' }
       }></div>
     </div>
   </div>

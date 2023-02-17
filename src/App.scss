@@ -25,7 +25,7 @@
   --color-text-rules-page: #AD1705;
   --color-text-qa-question: #000;
   --color-text-qa-answer: #000;
-  --color-rules-burger-span: #301c07;
+  --color-rules-burger-span: #5d4400;
   --background-item-btn: url(../public/images/tutorial_page/arrow-down.svg);
   --background-rules-up-btn: url(../public/images/tutorial_page/arrow-top2.png)center no-repeat,#a4d649;
   --background-rules-up-btn-hover:#9bb913;
@@ -41,13 +41,21 @@
   --color-start-menu-btn: #41514a;
   --color-start-menu-btn-hover:#1c523a;
   --background-options-board: url(../public/images/wood.png);
+  --background-player-option: #5c341bb6;
+  --color-amount-label: #bddb44;
+  --color-amount-inputs: #bddb44;
+  --background-rss-logo: url(../public/images/rss.svg)0 0 / 100% no-repeat;
+  --color-text-start-footer-year: #DF8844;
+  --background-start-footer-hand: url(../public/images/zombieIconForGit.png)0 0 / 100% no-repeat;
+  --colot-text-options:#ff9900;
+  --border-color-switcher-box: #ff9900;
 }
 :root[data-theme="dark"] {
   --background-rules-page: #0b0027;
   --color-text-rules-page: #b9b9b9;
   --color-text-qa-question: #fff;
   --color-text-qa-answer: #b9b9b9;
-  --color-rules-burger-span: #fff;
+  --color-rules-burger-span: #2caac6;
   --background-item-btn: url(../public/images/tutorial_page/arrow-down-dark.svg);
   --background-rules-up-btn: url('../public/images/tutorial_page/arrow-top2-dark.png')center no-repeat,#c9c9c9;
   --background-rules-up-btn-hover:#ffffff;
@@ -63,6 +71,14 @@
   --color-start-menu-btn: #0d353d;
   --color-start-menu-btn-hover: 	#081c22;
   --background-options-board: url(../public/images/board-dark.jpg);
+  --background-player-option: #0f5a6d78;
+  --color-amount-label: #66e1fc;
+  --color-amount-inputs: #19292d;
+  --background-rss-logo: url(../public/images/rss-dark.svg)0 0 / 100% no-repeat;
+  --color-text-start-footer-year: #0f5a6d;
+  --background-start-footer-hand: url(../public/images/hand-dark.png)0 0 / 100% no-repeat;
+  --colot-text-options:#2caac6;
+  --border-color-switcher-box: #2caac6;
 }
 
 .rules{
@@ -182,4 +198,43 @@
 }
 .options-page{
   background-image: var(--background-start-page);
+  &__item{
+    background-color:var(--background-player-option) ;
+  }
+}
+.player-option{
+  background: var(--background-player-option);
+  &__description{
+    color:var(--color-amount-label);
+  }
+}
+.amount-label{
+  color:var(--color-amount-label);
+}
+.amount{
+  &__btn, &__input{
+    color:var(--color-amount-inputs);
+  }
+}
+.start-footer{
+  &__rs-link{
+    background: var(--background-rss-logo);
+  }
+  &__year{
+    color: var(--color-text-start-footer-year);
+  }
+  &__developer{
+    background: var(--background-start-footer-hand);
+  }
+}
+.switcher, .options-page{
+  &__title{
+    color:var(--colot-text-options);
+  }
+}
+.switcher{
+  &__box{
+    // background-color:var(--background-player-option) ;
+    border: 1px solid var(--border-color-switcher-box);
+  }
 }

@@ -25,9 +25,13 @@
     font-size: 36px;
     color: #ffbb00;
     align-self: center;
+    transition: all 0.3 ease;
+    margin-bottom: 20px;
   }
   &__item{
-
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #5c341bb6;
   }
   &__label-item{
     color: #ff9900;
