@@ -6,6 +6,7 @@ import { setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
 import useSetNotify from '../../../hooks/useSetNotify';
 import { setCanPlayerMove } from '../../../reducers/playersReducer';
+import { checkItemsId, getActivePlayerCeil } from '../../../app/healpers';
 
 type PropsType = {
   heightField: number;
@@ -23,24 +24,15 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
     width: `calc(100vh / ${heightField})`,
   };
 
-  const checkIsNearEnemy = (id: string) => {
-    const playerId = gameField
-      .flat(1)
-      .find(
-        (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === activePlayer,
-      )?.id;
+  const checkIsNearEnemy = () => {
+    const playerId = getActivePlayerCeil(gameField, activePlayer)?.id;
 
     if (playerId) {
       const [i, j] = playerId.split('-');
       const gameFieldArray = gameField.flat(1);
-      const checkItemsId = [
-        `${parseInt(i, 10) - 1}-${j}`,
-        `${parseInt(i, 10) + 1}-${j}`,
-        `${i}-${parseInt(j, 10) + 1}`,
-        `${i}-${parseInt(j, 10) - 1}`,
-      ];
-      const checkItemsEnemy = gameFieldArray.filter((ceil) => checkItemsId
-        .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
+      const checkItemsEnemy = gameFieldArray
+        .filter((ceil) => checkItemsId(parseInt(i, 10), parseInt(j, 10))
+          .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
         .map((e) => e.id);
       if (checkItemsEnemy.length > 0) {
         dispatch(setIsNearEnemy(checkItemsEnemy));
@@ -76,7 +68,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
     }
   };
   useEffect(() => {
-    checkIsNearEnemy(item.id);
+    checkIsNearEnemy();
     checkIsFinish();
   }, [activePlayer]);
 

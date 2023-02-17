@@ -10,7 +10,9 @@ import {
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../../reducers/playersReducer';
-import { getNextPlayer } from '../../../app/healpers';
+import {
+  checkItemsId, createNearCeil, getActivePlayerCeil, getNextPlayer,
+} from '../../../app/healpers';
 
 type PropsType = {
   heightField: number;
@@ -31,20 +33,15 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
   const checkIsNearbyPlayer = (id: string) => {
     const [i, j] = id.split('-');
     const gameFieldArray = gameField.flat(1);
-    const checkItemsId = [
-      `${parseInt(i, 10) - 1}-${j}`,
-      `${parseInt(i, 10) + 1}-${j}`,
-      `${i}-${parseInt(j, 10) + 1}`,
-      `${i}-${parseInt(j, 10) - 1}`,
-    ];
-    const checkItemsPlayer = gameFieldArray.filter((ceil) => checkItemsId
-      .includes(ceil.id) && ceil.state?.category === 'character')
+
+    const checkItemsPlayer = gameFieldArray
+      .filter((ceil) => checkItemsId(parseInt(i, 10), parseInt(j, 10))
+        .includes(ceil.id) && ceil.state?.category === 'character')
       .map((e) => e.id);
 
     if (checkItemsPlayer.length > 0) {
       dispatch(setIsNearEnemy(checkItemsPlayer));
       if (spinnerValue > 0) {
-        console.log('spinnerValue > 0', spinnerValue > 0);
         dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
       }
       dispatch(setSpinnerValue(0));
@@ -57,30 +54,21 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     checkIsNearbyPlayer(item.id);
   }, []);
 
-  const createNearCeil = (element: BoardItemType | undefined, i: number, j: number) => [
-    element && element.top ? `${i - 1}-${j}` : 'none',
-    element && element.bottom ? `${i + 1}-${j}` : 'none',
-    element && element.right ? `${i}-${j + 1}` : 'none',
-    element && element.left ? `${i}-${j - 1}` : 'none',
-  ];
-
   const canIOpen = (player: string, id: string) => {
     const [i, j] = player.split('-');
     const gameFieldArray = gameField.flat(1);
     const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
-    const checkItemsId = createNearCeil(ceilElement, +i, +j);
+    const checkItemId = createNearCeil(ceilElement, +i, +j);
     const checkItemsObj = gameFieldArray
-      .filter((ceil) => checkItemsId.includes(ceil.id) && ceil.state)
+      .filter((ceil) => checkItemId.includes(ceil.id) && ceil.state)
       .map((e) => e.id);
     return checkItemsObj.includes(id);
   };
 
   const handleOpenCard = (e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute('data-ceil-id');
-
-    const gameFieldArr = gameField.flat(1);
-    const player = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
-    const thingCeil = gameFieldArr.find((ceil) => ceil.id === id);
+    const player = getActivePlayerCeil(gameField, activePlayer);
+    const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
     const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
@@ -115,7 +103,6 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
 
   const handler = item.state && !item.state.isVisible ? handleOpenCard : handleChoose;
 
-  // <div style={style} className={'field-player _active'}>
   return (
     <div
       data-ceil-id={item.id}

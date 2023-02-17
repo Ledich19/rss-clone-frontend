@@ -14,7 +14,7 @@ import {
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../../reducers/playersReducer';
-import { getNextPlayer } from '../../../app/healpers';
+import { createNearCeil, getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
 
 type PropsType = {
   heightField: number;
@@ -28,7 +28,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     characters, activePlayer, canPlayerMove, enemyChoose,
   } = useAppSelector((state) => state.characters);
   const spinnerValue = useAppSelector((state) => state.spinner.value);
-  const isNearbyEnemy = useAppSelector((state) => state.spinner.isNearbyEnemy);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
   const movieInfo = useRef<HTMLDivElement>(null);
@@ -39,13 +38,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     background:
       item.value && item.value === 'finish' ? 'rgba(232, 248, 5, 0.3)' : 'rgba(0, 0, 0, 0)',
   };
-
-  const createNearCeil = (element: BoardItemType | undefined, i: number, j: number) => [
-    element && element.top ? `${i - 1}-${j}` : 'none',
-    element && element.bottom ? `${i + 1}-${j}` : 'none',
-    element && element.right ? `${i}-${j + 1}` : 'none',
-    element && element.left ? `${i}-${j - 1}` : 'none',
-  ];
 
   const CheckOptionMove = (i: number, j: number, move: number) => {
     const gameFieldArray = gameField.flat(1);
@@ -108,11 +100,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       playerId = enemyChoose.id;
       body = enemyChoose.value;
     } else {
-      playerId = gameField
-        .flat(1)
-        .find(
-          (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === activePlayer,
-        )?.id;
+      playerId = getActivePlayerCeil(gameField, activePlayer)?.id;
       body = characters.find((character) => character.type === activePlayer) || null;
     }
 
@@ -136,10 +124,9 @@ const FieldCard = ({ heightField, item }: PropsType) => {
 
   const handleOpenCard = (e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute('data-ceil-id');
+    const player = getActivePlayerCeil(gameField, activePlayer);
 
-    const gameFieldArr = gameField.flat(1);
-    const player = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
-    const thingCeil = gameFieldArr.find((ceil) => ceil.id === id);
+    const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
     const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
@@ -178,11 +165,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     if (isDied && id && enemyChoose) {
       playerId = enemyChoose.id;
     } else {
-      playerId = gameField
-        .flat(1)
-        .find(
-          (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === activePlayer,
-        )?.id;
+      playerId = getActivePlayerCeil(gameField, activePlayer)?.id;
     }
 
     const canMovie = playerId ? canIMove(playerId, spinnerValue) : null;

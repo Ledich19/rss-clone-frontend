@@ -5,6 +5,7 @@ import { incrementHealth, deleteFromPlayerInventory, setCanPlayerMove } from '..
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 import { removeCardState, addPlankState } from '../../../reducers/gameBoardReducer';
 import { BoardItemType } from '../../../app/types';
+import { getActivePlayerCeil } from '../../../app/healpers';
 
 interface Props {
   img: string
@@ -39,9 +40,8 @@ const InventoryItem = (props: Props) => {
     let isChangeCanPlayerMove = false;
     function applyPlank(e:Event) {
       const target = (e.target as HTMLInputElement);
-      const player = gameField.flat(1).find(
-        (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
-      );
+      const player = getActivePlayerCeil(gameField, props.activePlayer);
+
       if (target && player) {
         const cell = target.getAttribute('data-tag');
         const canPut:string[] = [];
@@ -86,9 +86,7 @@ const InventoryItem = (props: Props) => {
   function useGrenadeGun() {
     console.log('grenadeGun');
     let cell: BoardItemType | undefined;
-    const player = gameField.flat(1).find(
-      (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
-    );
+    const player = getActivePlayerCeil(gameField, props.activePlayer);
     if (player) {
       const playerCell = player.id.split('-');
       if (player?.bottom) {
