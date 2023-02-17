@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './FieldCard.scss';
-import { BoardItemType, CharacterType, EnemyType } from '../../../app/types';
+import { BoardItemType, EnemyType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
 import {
@@ -220,6 +220,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       onClick={handler}
       style={style}
       className="field-card"
+      data-tag={item.id}
     >
       {item.state && typeof item.state === 'object' ? (
         <div className={'flip-container'}>

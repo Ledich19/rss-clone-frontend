@@ -4,7 +4,7 @@ import InfoBar from '../../components/InfoBar/InfoBar';
 
 const Aside = () => (
     <div className="aside">
-      <img className="aside__background" src={'./images/info/steel.jpg'} alt="background" />
+      <img className="aside__background" src={'./images/info/wood.jpg'} alt="background" />
       <InfoBar />
       <Spinner />
     </div>

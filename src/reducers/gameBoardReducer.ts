@@ -1546,10 +1546,33 @@ const gameBoardSlice = createSlice({
 
       return newState;
     },
+    addPlankState(state, actions: {
+      payload: string;
+      type: string;
+    }) {
+      const plank = {
+        category: 'thing',
+        type: 'plank',
+        name: 'Доски',
+        img: 'things/plank.png',
+        description: 'С их помощью можно забить окно или дверь. Для этого, пройдя через дверь или окно, игрок кладёт карточку досок (найденную раньше) на клетку с изображением двери или окна',
+        isVisible: true,
+        count: 8,
+      };
+      const newState = state.map((row) => row.map((ceil) => {
+        if (ceil.id === actions.payload) {
+          const newCeil = { ...ceil, state: plank };
+          return newCeil;
+        }
+        return ceil;
+      }));
+
+      return newState;
+    },
   },
 });
 
 export const {
-  setNewGameField, setVisibleCard, moveCharacter, removeCardState,
+  setNewGameField, setVisibleCard, moveCharacter, removeCardState, addPlankState,
 } = gameBoardSlice.actions;
 export default gameBoardSlice.reducer;
