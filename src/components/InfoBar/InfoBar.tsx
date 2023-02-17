@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './InfoBar.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Inventory from './Inventory/Inventory';
@@ -26,7 +27,17 @@ const InfoBar = () => {
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer.inventory} activePlayer={activePlayer} />
       </div>
-      <div className="info__endOfStroke">конец хода</div>
+      <div className="info__buttons">
+        <Link rel="stylesheet" to={'/'}>
+          <div className="info__button">HOME</div>
+        </Link>
+        <Link rel="stylesheet" to={'/tutorial'}>
+          <div className="info__button">TUTORIAL</div>
+        </Link>
+        <Link rel="stylesheet" to={'/options'}>
+          <div className="info__button">OPTIONS</div>
+        </Link>
+      </div>
     </div>
   );
 };
