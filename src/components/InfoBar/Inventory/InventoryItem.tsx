@@ -19,8 +19,17 @@ const InventoryItem = (props: Props) => {
   const gameField = useAppSelector((state) => state.game);
   const { canPlayerMove } = useAppSelector((state) => state.characters);
   const dispatch = useAppDispatch();
+  const audioFirstAidKit = new Audio('fak.mp3');
+  const audioPlank = new Audio('plank.mp3');
+  const audioGrenade = new Audio('grenade.mp3');
+  const audioGrenadeGun = new Audio('grenadeGun.mp3');
+  audioFirstAidKit.volume = 1;
+  audioPlank.volume = 1;
+  audioGrenade.volume = 1;
+  audioGrenadeGun.volume = 1;
 
   function useFirstAidKit() {
+    audioFirstAidKit.play();
     dispatch(incrementHealth(props.activePlayer));
     if (props.activePlayer === 'nastya') dispatch(incrementHealth(props.activePlayer));
     dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'firstAidKit' }));
@@ -42,6 +51,7 @@ const InventoryItem = (props: Props) => {
         if (player?.top) canPut.push(`${Number(playerCell[0]) - 1}-${playerCell[1]}`);
         if (player?.right) canPut.push(`${playerCell[0]}-${Number(playerCell[1]) + 1}`);
         if (cell && canPut.includes(cell)) {
+          audioPlank.play();
           dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'plank' }));
           dispatch(addPlankState(cell));
         }
@@ -63,6 +73,7 @@ const InventoryItem = (props: Props) => {
 
   function useGrenade() {
     if (isNearbyEnemy) {
+      audioGrenade.play();
       dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenade' }));
       dispatch(removeCardState(isNearbyEnemy[0]));
       const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el, idx) => idx !== 0);
