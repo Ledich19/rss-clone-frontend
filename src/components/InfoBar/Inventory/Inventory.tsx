@@ -9,8 +9,8 @@ interface Props {
 
 const Inventory = (props: Props) => {
   let emptyCells = [];
-  if (props.inv && props.inv.length < 10) {
-    emptyCells = new Array(10 - props.inv.length).fill(1);
+  if (props.inv && props.inv.length < 15) {
+    emptyCells = new Array(15 - props.inv.length).fill(1);
   }
 
   return (
