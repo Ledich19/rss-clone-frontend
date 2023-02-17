@@ -25,7 +25,7 @@
   --color-text-rules-page: #AD1705;
   --color-text-qa-question: #000;
   --color-text-qa-answer: #000;
-  --color-rules-burger-span: #5d4400;
+  --color-rules-burger-span: #bc7a00;
   --background-item-btn: url(../public/images/tutorial_page/arrow-down.svg);
   --background-rules-up-btn: url(../public/images/tutorial_page/arrow-top2.png)center no-repeat,#a4d649;
   --background-rules-up-btn-hover:#9bb913;
@@ -49,22 +49,24 @@
   --background-start-footer-hand: url(../public/images/zombieIconForGit.png)0 0 / 100% no-repeat;
   --colot-text-options:#ff9900;
   --border-color-switcher-box: #ff9900;
+  --image-card-item-clothes:url(../public/images/tutorial_page/clothes.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-players:url(../public/images/tutorial_page/user.svg)0 0/ 12px 12px no-repeat;
 }
 :root[data-theme="dark"] {
-  --background-rules-page: #0b0027;
-  --color-text-rules-page: #b9b9b9;
-  --color-text-qa-question: #fff;
-  --color-text-qa-answer: #b9b9b9;
+  --background-rules-page: 	#001318;
+  --color-text-rules-page: 	#22d3ff;
+  --color-text-qa-question: #2c6abb;
+  --color-text-qa-answer: #22d3ff;
   --color-rules-burger-span: #2caac6;
   --background-item-btn: url(../public/images/tutorial_page/arrow-down-dark.svg);
   --background-rules-up-btn: url('../public/images/tutorial_page/arrow-top2-dark.png')center no-repeat,#c9c9c9;
   --background-rules-up-btn-hover:#ffffff;
-  --color-text-item-subtitle: #b9b9b9;
+  --color-text-item-subtitle: #22d3ff;
   --background-item-text: url(../public/images/tutorial_page/paper-dark.jpg);
   --background-card-item: #2a2a65;
-  --color-text-card-item: #fff;
+  --color-text-card-item: #22d3ff;
   --background-card-item-desc: #10022f;
-  --colot-text-card-item-desc: #fff;
+  --colot-text-card-item-desc: #22d3ff;
   --background-start-page: url(../public/images/home-dark-bg.jpg);
   --start-menu-btn: url(../public/images/planck-dark.png);
   --start-menu-btn-disabled: url(../public/images/planck-dark-2.png);
@@ -79,6 +81,10 @@
   --background-start-footer-hand: url(../public/images/hand-dark.png)0 0 / 100% no-repeat;
   --colot-text-options:#2caac6;
   --border-color-switcher-box: #2caac6;
+  --image-card-item-clothes:url(../public/images/tutorial_page/clothes-dark.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-players:url(../public/images/tutorial_page/user-dark.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-weapons:url(../public/images/tutorial_page/weapons-dark.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-monstrs:url(../public/images/tutorial_page/monster-dark.png)0 0/ 12px 12px no-repeat;
 }
 
 .rules{
@@ -149,6 +155,9 @@
     color:var(--colot-text-card-item-desc);
     background-color: var(--background-card-item-desc);
   }
+  &__label{
+    color:var(--colot-text-card-item-desc);
+  }
 }
 .about-spinner{
   &__title{
@@ -164,6 +173,26 @@
   }
   &__item-list{
     color: var(--color-text-qa-answer);
+    &_clothes{
+      &:before{
+        background: var(--image-card-item-clothes);
+      }
+    }
+    &_weapons{
+      &:before{
+        background: var(--image-card-item-weapons);
+      }
+    }
+    &_monstrs{
+      &:before{
+        background: var(--image-card-item-monstrs);
+      }
+    }
+    &_players{
+      &:before{
+        background: var(--image-card-item-players);
+      }
+    }
   }
 }
 .StartPage_start__qQ1Xv{
