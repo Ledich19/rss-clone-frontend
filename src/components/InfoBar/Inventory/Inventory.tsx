@@ -9,20 +9,20 @@ interface Props {
 
 const Inventory = (props: Props) => {
   let emptyCells = [];
-  if (props.inv && props.inv.length < 10) {
-    emptyCells = new Array(10 - props.inv.length).fill(1);
+  if (props.inv && props.inv.length < 15) {
+    emptyCells = new Array(15 - props.inv.length).fill(1);
   }
 
   return (
     <div className="inventory" >
       <img className="inventory__background" src={'./images/info/fabric.jpg'} alt="background" />
-      <div className='inventory__title'>ИНВЕНТАРЬ</div>
+      <div className='inventory__title'>INVENTORY</div>
       <div className='inventory__items'>
         {props.inv && props.inv.map((item, index) => (
-          <InventoryItem key={index}
-          img={item.img} type={item.type}
-          descr={item.description}
-          activePlayer={props.activePlayer} />
+          <InventoryItem
+          key={index}
+          img={item.img}
+          type={item.type} descr={item.description} activePlayer={props.activePlayer} />
         ))}
         {emptyCells && emptyCells.map((item, index) => (
           <div className="inventory__empy-cell" key={index} ></div>

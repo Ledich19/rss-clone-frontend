@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../app/hooks';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
+import Cards from './cards/cards';
+
 import Info from './Info/Info';
 import Cards from './Cards/Cards';
 import Questions from './Questions/Questions';

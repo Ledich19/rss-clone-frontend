@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './InfoBar.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import Inventory from './Inventory/Inventory';
@@ -16,9 +17,9 @@ const InfoBar = () => {
   }
   return (
     <div className="info" >
-      <img className="info__background" src={'./images/info/wood.jpg'} alt="background" />
+      <img className="info__background" src={'./images/metal3.jpg'} alt="background" />
       <div className="info__active-player_name">
-        <span>Ход игрока: {currentPlayer.name}</span>
+        <span>Player turn: {currentPlayer.type}</span>
       </div>
       <div className="info__players">
         <PlayersCards characters={characters} activePlayer={activePlayer} />
@@ -26,7 +27,17 @@ const InfoBar = () => {
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer.inventory} activePlayer={activePlayer} />
       </div>
-      <div className="info__endOfStroke">конец хода</div>
+      <div className="info__buttons">
+        <Link rel="stylesheet" to={'/'}>
+          <div className="info__button">HOME</div>
+        </Link>
+        <Link rel="stylesheet" to={'/tutorial'}>
+          <div className="info__button">TUTORIAL</div>
+        </Link>
+        <Link rel="stylesheet" to={'/options'}>
+          <div className="info__button">OPTIONS</div>
+        </Link>
+      </div>
     </div>
   );
 };
