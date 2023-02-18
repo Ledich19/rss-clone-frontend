@@ -16,8 +16,9 @@ export type Player = {
   playerName: string,
   name: string,
   health: number,
-  inventory?: Array<ThingType | WeaponType>
+  inventory?: InventoryType
 };
+export type InventoryType = Array<ThingType | WeaponType>;
 
 export type Players = {
   characters: CharacterType[],
@@ -42,7 +43,7 @@ export type CharacterType = {
   description: string,
   count: number,
   health: number,
-  inventory?: Array<ThingType | WeaponType>,
+  inventory?: InventoryType,
 };
 export type EnemyType = {
   category: string;
@@ -73,15 +74,22 @@ export type WeaponType = {
   use: 'sword' | 'aim' | 'free',
   count: number,
 };
-export type StateArrType = WeaponType | ThingType | EnemyType | CharacterType;
+export type CeilInventoriType = {
+  type: string,
+  category: string,
+  img: string,
+  isVisible: boolean;
+  value: InventoryType,
+};
+
 export type BoardItemType = {
   top: boolean,
   right: boolean,
   bottom: boolean,
   left: boolean,
-  state: StateArrType[] | null,
-  id: string,
-  value?: string,
+  state: WeaponType | ThingType | EnemyType | CharacterType | null | CeilInventoriType
+  id: string
+  value?: string
 };
 
 export type GameSetType = {

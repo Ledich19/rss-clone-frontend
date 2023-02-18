@@ -1,6 +1,6 @@
 import './FieldCardForEnemy.scss';
 import { useEffect } from 'react';
-import { BoardItemType, EnemyType } from '../../../app/types';
+import { BoardItemType, EnemyType, ThingType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
 import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
@@ -83,7 +83,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
         dispatch(
           addToPlayerInventory({
             player: activePlayer,
-            value: thingCeil.state,
+            value: thingCeil.state as ThingType,
           }),
         );
       }

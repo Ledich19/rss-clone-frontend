@@ -8,7 +8,7 @@ import {
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../reducers/playersReducer';
-import { setSpinnerValue } from '../../reducers/spinnertReducer';
+import { setIsNearEnemy, setSpinnerValue } from '../../reducers/spinnertReducer';
 import FieldCard from './FieldCard/FieldCard';
 import FieldCardForEnemy from './FieldCardForEnemy/FieldCardForEnemy';
 import FieldCardForPlayer from './FieldCardForPlayer/FieldCardForPlayer';
@@ -39,14 +39,13 @@ const GameField = () => {
       state: characters[i] ? characters[i] : null,
     }));
 
-    const newGameFieldWithPlayers = gameFieldNewMatrix.map((row) => row
-      .map((ceil) => {
-        const emptyCeilContent = shuffleEmptyCeilIdsForPlayer.find((item) => item.id === ceil.id);
-        if (emptyCeilContent && emptyCeilContent.state && emptyCeilContent.state.isAlive) {
-          return { ...ceil, state: emptyCeilContent.state };
-        }
-        return ceil;
-      }));
+    const newGameFieldWithPlayers = gameFieldNewMatrix.map((row) => row.map((ceil) => {
+      const emptyCeilContent = shuffleEmptyCeilIdsForPlayer.find((item) => item.id === ceil.id);
+      if (emptyCeilContent && emptyCeilContent.state && emptyCeilContent.state.isAlive) {
+        return { ...ceil, state: emptyCeilContent.state };
+      }
+      return ceil;
+    }));
 
     //  add another items
     const gameCards = Object.values(gameCardsSet)
@@ -63,29 +62,24 @@ const GameField = () => {
       id: ceil,
       state: gameCards[i] ? gameCards[i] : null,
     }));
-    const newGameField = newGameFieldWithPlayers.map((row) => row
-      .map((ceil) => {
-        const emptyCeilContent = shuffleEmptyCells.find((item) => item.id === ceil.id);
-
-        if (
-          emptyCeilContent?.state
+    const newGameField = newGameFieldWithPlayers.map((row) => row.map((ceil) => {
+      const emptyCeilContent = shuffleEmptyCells.find((item) => item.id === ceil.id);
+      if (
+        emptyCeilContent?.state
           && !useCharactersTypes.includes(emptyCeilContent.state.type)
           && ceil.state === null
-        ) {
-          return { ...ceil, state: emptyCeilContent.state };
-        }
-
-        return ceil;
-      }));
+      ) {
+        return { ...ceil, state: emptyCeilContent.state };
+      }
+      return ceil;
+    }));
     dispatch(setNewGameField(newGameField));
   }, []);
 
   useEffect(() => {
     const gameFieldArr = gameFieldMatrix.flat(1);
     const player = characters.find((ceil) => ceil.type === activePlayer);
-    const playerPosition = gameFieldArr.find(
-      (ceil) => ceil.state && ceil.state[0].type === activePlayer,
-    );
+    const playerPosition = gameFieldArr.find((ceil) => ceil.state?.type === activePlayer);
     const playerWeaponObj = player?.inventory?.filter(
       (e) => e.category === 'weapon',
     ) as WeaponType[];
@@ -95,26 +89,26 @@ const GameField = () => {
       switch (true) {
         case value === 1:
           dispatch(setCanPlayerMove(true));
+          dispatch(setSpinnerValue(0));
           break;
         case value === 2 && !canPlayerMove:
-          console.log('bit', characters);
           dispatch(decrementHealth(activePlayer));
+          dispatch(setSpinnerValue(0));
+          dispatch(setIsNearEnemy([...isNearbyEnemy]));
           break;
         case value === 3 && playerWeapon?.includes('sword') && !canPlayerMove:
           dispatch(removeCardState(isNearbyEnemy[0]));
           dispatch(setSpinnerValue(0));
-          dispatch(
-            moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: [player] }),
-          );
+          dispatch(moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: player }));
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+          dispatch(setCanPlayerMove(true));
           break;
         case value === 4 && playerWeapon?.includes('aim') && !canPlayerMove:
           dispatch(removeCardState(isNearbyEnemy[0]));
           dispatch(setSpinnerValue(0));
-          dispatch(
-            moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: [player] }),
-          );
+          dispatch(moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: player }));
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+          dispatch(setCanPlayerMove(true));
           break;
         default:
           break;
@@ -127,7 +121,7 @@ const GameField = () => {
       {gameFieldMatrix.map((row, i) => (
         <div className="field__row" key={`rowId${i}`}>
           {row.map((item, j) => {
-            if (item.state && useCharactersTypes.includes(item.state[0].type)) {
+            if (item.state && useCharactersTypes.includes(item.state.type)) {
               return (
                 <FieldCardForPlayer
                   position={{ row: i, col: j }}
@@ -137,15 +131,13 @@ const GameField = () => {
                 />
               );
             }
-            if (item.state && item.state[0].category === 'enemy') {
-              return (
-                <FieldCardForEnemy
-                  position={{ row: i, col: j }}
-                  key={item.id}
-                  heightField={heightField}
-                  item={item}
-                />
-              );
+            if (item.state && item.state.category === 'enemy') {
+              return <FieldCardForEnemy
+                position={{ row: i, col: j }}
+                key={item.id}
+                heightField={heightField}
+                item={item}
+              />;
             }
             return (
               <FieldCard

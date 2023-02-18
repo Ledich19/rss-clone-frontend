@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import './FieldCard.scss';
-import { BoardItemType, EnemyType } from '../../../app/types';
+import {
+  BoardItemType, CeilInventoriType, EnemyType, ThingType,
+} from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
 import {
@@ -26,7 +28,9 @@ type ToMovieItem = { id: string; movie: number };
 const FieldCard = ({ heightField, item }: PropsType) => {
   const {
     characters, activePlayer, canPlayerMove, enemyChoose,
-  } = useAppSelector((state) => state.characters);
+  } = useAppSelector(
+    (state) => state.characters,
+  );
   const spinnerValue = useAppSelector((state) => state.spinner.value);
   const gameField = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
@@ -110,10 +114,12 @@ const FieldCard = ({ heightField, item }: PropsType) => {
         dispatch(moveCharacter({ from: playerId, to: id, body }));
         dispatch(decrementSpinnerValue(canMovie.movie));
         if (isDied && id && enemyChoose) {
-          dispatch(setActiveEnemy({
-            id,
-            value: body as EnemyType,
-          }));
+          dispatch(
+            setActiveEnemy({
+              id,
+              value: body as EnemyType,
+            }),
+          );
         }
         if (spinnerValue - canMovie.movie === 0) {
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
@@ -131,23 +137,33 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
       dispatch(setSpinnerValue(0));
-      if (thingCeil.state[0].category === 'weapon' || thingCeil.state[0].category === 'thing') {
+      if (thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing') {
         setTimeout(() => {
           dispatch(removeCardState(id));
           const body = characters.find((character) => character.type === activePlayer) || null;
-          dispatch(moveCharacter({ from: player.id, to: id, body: body ? [body] : null }));
+          dispatch(moveCharacter({ from: player.id, to: id, body }));
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
         }, 3000);
         dispatch(
           addToPlayerInventory({
             player: activePlayer,
-            value: thingCeil.state[0],
+            value: thingCeil.state as ThingType,
           }),
         );
       }
-      if (thingCeil.state[0].category === 'enemy') {
+      if (thingCeil.state.category === 'enemy') {
         dispatch(setIsNearEnemy([thingCeil.id]));
         dispatch(setCanPlayerMove(false));
+      }
+      if (thingCeil.state.category === 'deadBody') {
+        (thingCeil.state as CeilInventoriType).value.forEach((el) => {
+          dispatch(
+            addToPlayerInventory({
+              player: activePlayer,
+              value: el,
+            }),
+          );
+        });
       }
     }
   };
@@ -207,12 +223,12 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     >
       {item.state && typeof item.state === 'object' ? (
         <div className={'flip-container'}>
-          <div className={`flipper ${item.state[0].isVisible ? '_front' : ''}`}>
+          <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
             <div className="front">
               <img src={'./images/backCard.png'} alt="back card" />
             </div>
             <div className="back">
-              <img src={`./images/${item.state[0].img}`} alt="back card" />
+              <img src={`./images/${item.state.img}`} alt="back card" />
             </div>
           </div>
         </div>

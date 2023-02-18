@@ -1514,7 +1514,7 @@ const gameBoardSlice = createSlice({
       payload: {
         from: string,
         to: string,
-        body: Array<CharacterType | EnemyType> | null
+        body: CharacterType | EnemyType | null
       };
       type: string;
     }) {
@@ -1561,7 +1561,7 @@ const gameBoardSlice = createSlice({
       };
       const newState = state.map((row) => row.map((ceil) => {
         if (ceil.id === actions.payload) {
-          const newCeil = { ...ceil, state: [plank] };
+          const newCeil = { ...ceil, state: plank };
           return newCeil;
         }
         return ceil;
