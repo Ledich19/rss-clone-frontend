@@ -20,3 +20,250 @@
   background-color: #d8d9cc;
   padding: 5px;
 }
+:root[data-theme="default"] {
+  --background-rules-page: #bbdd33;
+  --color-text-rules-page: #AD1705;
+  --color-text-qa-question: #000;
+  --color-text-qa-answer: #000;
+  --color-rules-burger-span: #bc7a00;
+  --background-item-btn: url(../public/images/tutorial_page/arrow-down.svg);
+  --background-rules-up-btn: url(../public/images/tutorial_page/arrow-top2.png)center no-repeat,#a4d649;
+  --background-rules-up-btn-hover:#9bb913;
+  --color-text-item-subtitle: #000;
+  --background-item-text: url(../public/images/tutorial_page/paper.jpg);
+  --background-card-item: #bdaa7d;
+  --color-text-card-item: #000;
+  --background-card-item-desc: #fff;
+  --colot-text-card-item-desc: #000;
+  --background-start-page: url(../public/images/start_bg.png);
+  --start-menu-btn: url(../public/images/planck.png);
+  --start-menu-btn-disabled: url(../public/images/planck2darck.png);
+  --color-start-menu-btn: #41514a;
+  --color-start-menu-btn-hover:#1c523a;
+  --background-options-board: url(../public/images/wood.png);
+  --background-player-option: #5c341bb6;
+  --color-amount-label: #bddb44;
+  --color-amount-inputs: #bddb44;
+  --background-rss-logo: url(../public/images/rss.svg)0 0 / 100% no-repeat;
+  --color-text-start-footer-year: #DF8844;
+  --background-start-footer-hand: url(../public/images/zombieIconForGit.png)0 0 / 100% no-repeat;
+  --colot-text-options:#ff9900;
+  --border-color-switcher-box: #ff9900;
+  --image-card-item-clothes:url(../public/images/tutorial_page/clothes.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-players:url(../public/images/tutorial_page/user.svg)0 0/ 12px 12px no-repeat;
+}
+:root[data-theme="dark"] {
+  --background-rules-page: 	#001318;
+  --color-text-rules-page: 	#22d3ff;
+  --color-text-qa-question: #2c6abb;
+  --color-text-qa-answer: #22d3ff;
+  --color-rules-burger-span: #2caac6;
+  --background-item-btn: url(../public/images/tutorial_page/arrow-down-dark.svg);
+  --background-rules-up-btn: url('../public/images/tutorial_page/arrow-top2-dark.png')center no-repeat,#c9c9c9;
+  --background-rules-up-btn-hover:#ffffff;
+  --color-text-item-subtitle: #22d3ff;
+  --background-item-text: url(../public/images/tutorial_page/paper-dark.jpg);
+  --background-card-item: #2a2a65;
+  --color-text-card-item: #22d3ff;
+  --background-card-item-desc: #10022f;
+  --colot-text-card-item-desc: #22d3ff;
+  --background-start-page: url(../public/images/home-dark-bg.jpg);
+  --start-menu-btn: url(../public/images/planck-dark.png);
+  --start-menu-btn-disabled: url(../public/images/planck-dark-2.png);
+  --color-start-menu-btn: #0d353d;
+  --color-start-menu-btn-hover: 	#081c22;
+  --background-options-board: url(../public/images/board-dark.jpg);
+  --background-player-option: #0f5a6d78;
+  --color-amount-label: #66e1fc;
+  --color-amount-inputs: #19292d;
+  --background-rss-logo: url(../public/images/rss-dark.svg)0 0 / 100% no-repeat;
+  --color-text-start-footer-year: #0f5a6d;
+  --background-start-footer-hand: url(../public/images/hand-dark.png)0 0 / 100% no-repeat;
+  --colot-text-options:#2caac6;
+  --border-color-switcher-box: #2caac6;
+  --image-card-item-clothes:url(../public/images/tutorial_page/clothes-dark.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-players:url(../public/images/tutorial_page/user-dark.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-weapons:url(../public/images/tutorial_page/weapons-dark.svg)0 0/ 12px 12px no-repeat;
+  --image-card-item-monstrs:url(../public/images/tutorial_page/monster-dark.png)0 0/ 12px 12px no-repeat;
+}
+
+.rules{
+  background-color: var(--background-rules-page);
+  &__about-game{
+    color: var(--color-text-rules-page);
+  }
+  &__span{
+    background-color: var(--color-rules-burger-span);
+  }
+  &__up{
+    background: var(--background-rules-up-btn);
+    &:hover{
+      background-color: var(--background-rules-up-btn-hover);
+    }
+  }
+}
+.item{
+  &__title{
+    color: var(--color-text-rules-page);
+    &::before{
+      background-color: var(--color-text-rules-page);
+    }
+  }
+  &__subtitle{
+    color: var(--color-text-item-subtitle);
+  }
+  &__element{
+    color: var(--color-text-item-subtitle);
+  }
+  &__btn{
+    background-image: var(--background-item-btn);
+  }
+  &__text{
+    background: var(--background-item-text);
+  }
+}
+.qa{
+  &__title{
+    color: var(--color-text-rules-page);
+  }
+  &__question{
+    color: var(--color-text-qa-question);
+    &:before{
+      background-color: var(--color-text-rules-page);
+    }
+  }
+  &__answer{
+    color: var(--color-text-qa-answer);
+  }
+}
+.inbox{
+  &__content{
+    background: var(--background-item-text);
+  }
+}
+.cards{
+  &__items{
+    background: var(--background-item-text);
+  }
+  &__item{
+    background-color: var(--background-card-item);
+  }
+  &__info-item{
+    color:  var(--color-text-card-item);
+  }
+  &__desc{
+    color:var(--colot-text-card-item-desc);
+    background-color: var(--background-card-item-desc);
+  }
+  &__label{
+    color:var(--colot-text-card-item-desc);
+  }
+}
+.about-spinner{
+  &__title{
+    color: var(--color-text-qa-question);
+  }
+  &__rule{
+    color: var(--color-text-qa-answer);
+  }
+}
+.element{
+  &__title{
+    color: var(--color-text-qa-question);
+  }
+  &__item-list{
+    color: var(--color-text-qa-answer);
+    &_clothes{
+      &:before{
+        background: var(--image-card-item-clothes);
+      }
+    }
+    &_weapons{
+      &:before{
+        background: var(--image-card-item-weapons);
+      }
+    }
+    &_monstrs{
+      &:before{
+        background: var(--image-card-item-monstrs);
+      }
+    }
+    &_players{
+      &:before{
+        background: var(--image-card-item-players);
+      }
+    }
+  }
+}
+.StartPage_start__qQ1Xv{
+  background-image: var(--background-start-page);
+}
+.options, .options-page{
+  background-image: var(--background-start-page);
+  &__board{
+    background-image: var(--background-options-board);
+  }
+}
+.start-menu{
+  &__btn{
+    background-image: var(--start-menu-btn);
+    color: var(--color-start-menu-btn);
+    &:hover{
+      color: var(--color-start-menu-btn-hover);
+    }
+  }
+}
+.btn-bloc{
+  &__start, &__back{
+    background-image: var(--start-menu-btn);
+    color: var(--color-start-menu-btn);
+    &:hover{
+      color: var(--color-start-menu-btn-hover);
+    }
+    &:disabled{
+      background-image: var(--start-menu-btn-disabled);
+    }
+  }
+}
+.options-page{
+  background-image: var(--background-start-page);
+  &__item{
+    background-color:var(--background-player-option) ;
+  }
+}
+.player-option{
+  background: var(--background-player-option);
+  &__description{
+    color:var(--color-amount-label);
+  }
+}
+.amount-label{
+  color:var(--color-amount-label);
+}
+.amount{
+  &__btn, &__input{
+    color:var(--color-amount-inputs);
+  }
+}
+.start-footer{
+  &__rs-link{
+    background: var(--background-rss-logo);
+  }
+  &__year{
+    color: var(--color-text-start-footer-year);
+  }
+  &__developer{
+    background: var(--background-start-footer-hand);
+  }
+}
+.switcher, .options-page{
+  &__title{
+    color:var(--colot-text-options);
+  }
+}
+.switcher{
+  &__box{
+    // background-color:var(--background-player-option) ;
+    border: 1px solid var(--border-color-switcher-box);
+  }
+}

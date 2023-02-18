@@ -6,7 +6,9 @@ $colorText: #AD1705;
   padding-left: 20px;
 }
 .rules{
-  background-image: linear-gradient(#BDDB44, #bbdd33, #b4da1d);
+  // background-image: linear-gradient(#BDDB44, #bbdd33, #b4da1d);
+  background-color: #bbdd33;
+  transition: all 0.25s ease;
   position: relative;
   &__container{
     margin: 0 auto;
@@ -47,6 +49,7 @@ $colorText: #AD1705;
     font-weight: 500;
     font-size: 24px;
     text-align: left;
+    transition: all 0.5s ease;
   }
   &__items{
     flex: 0 1 51%;
@@ -69,20 +72,6 @@ $colorText: #AD1705;
     transition: all 0.5s ease;
     border: 1px solid #000;
     background: url(../../../public/images/tutorial_page/arrow-top2.png)center no-repeat,#a4d649;
-    &::before{
-      content: '';
-      width: 0%;
-      height: 100%;
-      background-color: #c12d0c;
-      position: absolute;
-      z-index: -1;
-      transition: all 0.5s ease;
-    }
-    &::before{
-      bottom: 0;
-      right: 0;
-      border-radius: 10%;
-    }
     &:hover{
       background-color: #9bb913;
     }
@@ -90,8 +79,46 @@ $colorText: #AD1705;
   &__buttons{
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
-    order: 3;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #000000a6;
+    transition: all 0.5s ease;
+    // opacity: 0;
+    transform: translateY(-100vh);
+  }
+  &__btn{
+    width: 250px;
+  }
+  &__burger{
+    width: 40px;
+    height: 20px;
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &__span{
+    height: 3px;
+    background-color: #301c07;
+    transition: all 0.5s ease;
+    &_top{
+      width: 20px;
+    }
+    &_middle{
+      width: 14px;
+    }
+    &_bottom{
+      width: 20px;
+    }
   }
 }
 .table{
@@ -120,14 +147,16 @@ $colorText: #AD1705;
     text-shadow: -6px 3px 6px #bc4a00;
     font-weight: 700;
     font-size: 16px;
-    &:before{
-      // content: '';
-      width: 10px;
-      height: 2px;
-      background-color: $colorText;
-      position: absolute;
-      top: 8px;
-      left: 0;
-    }
   }
+}
+.open-menu{
+  opacity: 1;
+  z-index: 10;
+  transform: translateY(0);
+}
+
+.test__input{
+  width: 50px;
+  height: 50px;
+  display: block;
 }

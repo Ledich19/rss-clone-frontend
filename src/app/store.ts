@@ -7,6 +7,7 @@ import gameRulesReducer from '../reducers/gameRulesReducer';
 import playersReducer from '../reducers/playersReducer';
 import spinnertReducer from '../reducers/spinnertReducer';
 import notifyReducer from '../reducers/notifyReducer';
+import themeReducer from '../reducers/themeReducer';
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     example: exampleReducer,
     rules: gameRulesReducer,
     notify: notifyReducer,
+    theme: themeReducer,
   },
 });
 
