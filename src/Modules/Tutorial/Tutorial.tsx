@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { set } from '../../reducers/themeReducer';
-import useScrollBlock from '../../hooks/useScrollBlock';
+import { useAppSelector } from '../../app/hooks';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
 import Cards from './Cards/Cards';
@@ -16,18 +13,6 @@ import BurgerMenu from '../../components/BurgerMenu/BurgerMenu';
 const Tutorial = () => {
   const rules = useAppSelector((state) => state.rules);
   const [scroll, setScroll] = useState(false);
-  const theme = useAppSelector((state) => state.theme);
-  const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const handleChange = () => {
-    const next = theme === 'dark' ? 'default' : 'dark';
-    dispatch(set(next));
-  };
 
   const showButton = () => (window.scrollY > 800 ? setScroll(true) : setScroll(false));
 
@@ -61,10 +46,7 @@ const Tutorial = () => {
                   {rules.table.text.map((rule, index) => <li key={index} className="table__item">{rule}</li>)}
                 </ul>
               </div>
-              <BurgerMenu/>
-              <input type="radio" className="test__input" name='colors' id='light' onClick={handleChange}/>
-              <input type="radio" className="test__input" name='colors' id='dark' onClick={handleChange}/>
-
+              <BurgerMenu tutorial='none'/>
             </div >
             <p className="rules__about-game">{rules.aboutGame}</p>
           </div>

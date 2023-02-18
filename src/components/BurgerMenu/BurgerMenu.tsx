@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 import useScrollBlock from '../../hooks/useScrollBlock';
 import './BurgerMenu.scss';
 
-const BurgerMenu = () => {
+type BurgerButtons = {
+  start?: string,
+  home?: string,
+  game?: string,
+  tutorial?:string,
+  options?:string,
+};
+
+const BurgerMenu = (props: BurgerButtons) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [blockScroll, allowScroll] = useScrollBlock();
   const changeMenu = () => {
@@ -19,16 +27,19 @@ const BurgerMenu = () => {
   return (
     <div className="burger-menu">
       <div className={openMenu ? 'rules__buttons open-menu' : 'rules__buttons'}>
-        <Link onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/start'}>
+        <Link style={{ display: props.start }} onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/start'}>
           <button className="start-menu__btn">Start</button>
         </Link>
-        <Link onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/'}>
+        <Link style={{ display: props.home }} onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/'}>
           <button className="start-menu__btn">Home</button>
         </Link>
-        <Link onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/tutorial'}>
+        <Link style={{ display: props.game }} onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/game'}>
+          <button className="start-menu__btn">Game</button>
+        </Link>
+        <Link style={{ display: props.tutorial }} onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/tutorial'}>
           <button className="start-menu__btn">Tutorial</button>
         </Link>
-        <Link onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/options'}>
+        <Link style={{ display: props.options }} onClick={changeMenu} className='rules__btn' rel="stylesheet" to={'/options'}>
           <button className="start-menu__btn">Options</button>
         </Link>
       </div>
