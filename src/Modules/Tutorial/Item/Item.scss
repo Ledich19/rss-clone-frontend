@@ -12,6 +12,7 @@ $colorTitle: #AD1705;
     font-size: 26px;
     font-weight: 500;
     margin-bottom: 10px;
+    transition: all 0.5s ease;
     cursor: pointer;
     position: relative;
     &::before{
