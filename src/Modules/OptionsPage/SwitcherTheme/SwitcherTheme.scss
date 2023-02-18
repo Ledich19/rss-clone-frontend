@@ -1,0 +1,27 @@
+.switcher{
+  &__title{
+    color: #ff9900;
+    font-size: 20px;
+    margin-bottom: 10px;
+    transition: all 0.3 ease;
+  }
+  &__box{
+    width: 80px;
+    height: 30px;
+    border-radius: 25px;
+    // background-color: #ff990042;
+    border: 1px solid #ff9900;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 2px;
+  }
+  &__ball{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    // background-color: rgb(255, 157, 0);
+    cursor: pointer;
+    transition: all 1s ease;
+  }
+}
