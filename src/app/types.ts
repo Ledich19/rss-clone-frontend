@@ -73,14 +73,15 @@ export type WeaponType = {
   use: 'sword' | 'aim' | 'free',
   count: number,
 };
+export type StateArrType = WeaponType | ThingType | EnemyType | CharacterType;
 export type BoardItemType = {
   top: boolean,
   right: boolean,
   bottom: boolean,
   left: boolean,
-  state: WeaponType | ThingType | EnemyType | CharacterType | null,
-  id: string
-  value?: string
+  state: StateArrType[] | null,
+  id: string,
+  value?: string,
 };
 
 export type GameSetType = {

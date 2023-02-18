@@ -131,21 +131,21 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
       dispatch(setSpinnerValue(0));
-      if (thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing') {
+      if (thingCeil.state[0].category === 'weapon' || thingCeil.state[0].category === 'thing') {
         setTimeout(() => {
           dispatch(removeCardState(id));
           const body = characters.find((character) => character.type === activePlayer) || null;
-          dispatch(moveCharacter({ from: player.id, to: id, body }));
+          dispatch(moveCharacter({ from: player.id, to: id, body: body ? [body] : null }));
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
         }, 3000);
         dispatch(
           addToPlayerInventory({
             player: activePlayer,
-            value: thingCeil.state,
+            value: thingCeil.state[0],
           }),
         );
       }
-      if (thingCeil.state.category === 'enemy') {
+      if (thingCeil.state[0].category === 'enemy') {
         dispatch(setIsNearEnemy([thingCeil.id]));
         dispatch(setCanPlayerMove(false));
       }
@@ -207,12 +207,12 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     >
       {item.state && typeof item.state === 'object' ? (
         <div className={'flip-container'}>
-          <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
+          <div className={`flipper ${item.state[0].isVisible ? '_front' : ''}`}>
             <div className="front">
               <img src={'./images/backCard.png'} alt="back card" />
             </div>
             <div className="back">
-              <img src={`./images/${item.state.img}`} alt="back card" />
+              <img src={`./images/${item.state[0].img}`} alt="back card" />
             </div>
           </div>
         </div>

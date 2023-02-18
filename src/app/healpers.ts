@@ -24,5 +24,5 @@ export const checkItemsId = (i: number, j: number): string[] => [
 export const getActivePlayerCeil = (gameField: BoardItemType[][], player: string) => gameField
   .flat(1)
   .find(
-    (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === player,
+    (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state[0].type === player,
   );
