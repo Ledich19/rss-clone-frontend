@@ -71,9 +71,6 @@ const InventoryItem = (props: Props) => {
     }
   }
 
-  console.log(gameField.flat(1).find((ceil) => ceil.state?.type === 'grenade'));
-  console.log(gameField.flat(1).find((ceil) => ceil.state?.type === 'boss'));
-
   function useGrenade() {
     if (isNearbyEnemy) {
       const enemy = gameField.flat(1).find(
