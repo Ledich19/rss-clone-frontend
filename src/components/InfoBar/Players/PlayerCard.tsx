@@ -6,6 +6,7 @@ import PopupPlayer from './PopupPlayer';
 interface Props {
   character: CharacterType
   active: string
+  theme: 'default' | 'dark'
 }
 
 const PlayerCard = (props: Props) => {
@@ -25,7 +26,7 @@ const PlayerCard = (props: Props) => {
     <div className={ `player-card ${active}` } onMouseEnter={() => showPopup()} onMouseLeave={() => hidePopup()}>
         <img src={`./images/${props.character.img}`} alt="playerImage" />
         <Health health={props.character.health}/>
-        {isPopup && <PopupPlayer inv={props.character.inventory} />}
+        {isPopup && <PopupPlayer inv={props.character.inventory} theme={props.theme}/>}
     </div>
   );
 };
