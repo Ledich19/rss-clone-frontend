@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { set } from '../../../reducers/themeReducer';
+import { setTheme } from '../../../reducers/optionsReducer';
 import './SwitcherTheme.scss';
 
 const SwitcherTheme = () => {
-  const theme = useAppSelector((state) => state.theme);
+  const theme = useAppSelector((state) => state.options.theme);
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
@@ -14,7 +14,7 @@ const SwitcherTheme = () => {
 
   const handleChange = () => {
     const next = theme === 'dark' ? 'default' : 'dark';
-    dispatch(set(next));
+    dispatch(setTheme(next));
   };
   return (
   <div className="switcher">

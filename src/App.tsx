@@ -12,7 +12,7 @@ import { useAppSelector } from './app/hooks';
 import './App.scss';
 
 function App() {
-  const theme = useAppSelector((state) => state.theme);
+  const theme = useAppSelector((state) => state.options.theme);
 
   React.useEffect(() => {
     document.documentElement.dataset.theme = theme;
