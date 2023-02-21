@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getNextPlayer, getActivePlayerCeil } from '../../app/healpers';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { BoardItemType, CharacterType, WeaponType } from '../../app/types';
+import { WeaponType } from '../../app/types';
 import {
   moveCharacter, removeCardState, setDiedBodyInventory, setNewGameField,
 } from '../../reducers/gameBoardReducer';
@@ -153,7 +153,6 @@ const GameField = () => {
                 item={item}
                 />;
             }
-            console.log(item.state);
             if (item.state && item.state.category === 'deadBody') {
               return <FieldCardDeadBody
                   position={{ row: i, col: j }}

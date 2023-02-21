@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import './FieldCard.scss';
 import {
-  BoardItemType, CeilInventoriType, EnemyType, ThingType,
+  BoardItemType, EnemyType, ThingType,
 } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';

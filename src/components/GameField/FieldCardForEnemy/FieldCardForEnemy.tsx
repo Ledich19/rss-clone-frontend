@@ -12,7 +12,7 @@ import {
 } from '../../../reducers/playersReducer';
 import {
   canIOpen,
-  checkItemsId, createNearCeil, getActivePlayerCeil, getNextPlayer,
+  checkItemsId, getActivePlayerCeil, getNextPlayer,
 } from '../../../app/healpers';
 
 type PropsType = {

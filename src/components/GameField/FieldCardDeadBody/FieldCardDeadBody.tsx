@@ -1,11 +1,9 @@
 import './FieldCardDeadBody.scss';
-import { useEffect } from 'react';
 import { BoardItemType, CeilInventoriType, ThingType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
-import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
-import useSetNotify from '../../../hooks/useSetNotify';
-import { addToPlayerInventory, setCanPlayerMove, setNextActivePlayer } from '../../../reducers/playersReducer';
+import { moveCharacter, removeCardState } from '../../../reducers/gameBoardReducer';
+import { setSpinnerValue } from '../../../reducers/spinnertReducer';
+import { addToPlayerInventory, setNextActivePlayer } from '../../../reducers/playersReducer';
 import { canIOpen, getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
 
 type PropsType = {
@@ -16,7 +14,7 @@ type PropsType = {
 
 const FieldCardDeadBody = ({ heightField, item }: PropsType) => {
   const {
-    characters, activePlayer, canPlayerMove, enemyChoose,
+    characters, activePlayer,
   } = useAppSelector(
     (state) => state.characters,
   );

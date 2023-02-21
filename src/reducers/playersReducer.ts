@@ -181,7 +181,6 @@ const playersSlice = createSlice({
       payload: string;
       type: string;
     }) {
-      console.log('setNextActivePlayer');
       return { ...state, activePlayer: actions.payload };
     },
     setActivePlayer(state, actions: {
