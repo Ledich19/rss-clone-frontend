@@ -1,3 +1,6 @@
+export type InventoryItemType = ThingType | WeaponType;
+export type InventoryType = InventoryItemType[];
+
 export type PromoCodeState = {
   promoCodes: {
     code: string;
@@ -8,17 +11,40 @@ export type PromoCodeState = {
     discount: number;
   }[],
 };
-export type Player = {
-  category: string,
-  type: string,
+
+interface BaseType {
+  category: string;
   isVisible: boolean;
+  type: string;
+  name: string;
+  img: string;
+  description: string;
+  count: number;
+}
+
+export interface CharacterType extends BaseType {
+  id: string;
+  isAlive: boolean;
+  playerName: string;
+  health: number;
+  inventory?: InventoryType;
+}
+
+export interface EnemyType extends BaseType {
   active: boolean;
-  playerName: string,
-  name: string,
-  health: number,
-  inventory?: InventoryType
-};
-export type InventoryType = Array<ThingType | WeaponType>;
+}
+
+export type ThingType = BaseType;
+
+export interface WeaponType extends BaseType {
+  use: 'sword' | 'aim' | 'free';
+}
+
+export interface Player extends BaseType {
+  playerName: string;
+  health: number;
+  inventory?: InventoryType;
+}
 
 export type Players = {
   characters: CharacterType[],
@@ -31,49 +57,6 @@ export type Players = {
   amount: string;
 };
 
-export type CharacterType = {
-  id: string;
-  category: string;
-  isVisible: boolean;
-  isAlive: boolean;
-  type: string,
-  name: string,
-  img: string,
-  playerName: string,
-  description: string,
-  count: number,
-  health: number,
-  inventory?: InventoryType,
-};
-export type EnemyType = {
-  category: string;
-  isVisible: boolean;
-  active: boolean;
-  type: string,
-  name: string,
-  img: string,
-  description: string,
-  count: number,
-};
-export type ThingType = {
-  category: string;
-  isVisible: boolean;
-  type: string,
-  name: string,
-  img: string,
-  description: string,
-  count: number,
-};
-export type WeaponType = {
-  category: string;
-  isVisible: boolean;
-  type: string,
-  name: string,
-  img: string,
-  description: string,
-  use: 'sword' | 'aim' | 'free',
-  count: number,
-};
 export type CeilInventoriType = {
   type: string,
   category: string,

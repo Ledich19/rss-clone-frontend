@@ -45,7 +45,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
 
   const CheckOptionMove = (i: number, j: number, move: number) => {
     const gameFieldArray = gameField.flat(1);
-    const ceilElement = gameFieldArray.find((ceil) => ceil.id === `${i}-${j}`);
+    const ceilElement = gameFieldArray[i * gameField[0].length + j];
     const checkItemsId = createNearCeil(ceilElement, i, j);
     const checkItemsObj = gameFieldArray.filter(
       (ceil) => checkItemsId.includes(ceil.id) && ceil.state === null,
@@ -64,14 +64,11 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     return checkItemsObj.includes(id);
   };
 
-  const checkPossibilityMoveArray = (arr: ToMovieItem[], move: number): ToMovieItem[] => {
-    let resultArray: ToMovieItem[] = [];
-    arr.forEach((e) => {
+  const checkPossibilityMoveArray = (arr: ToMovieItem[], move: number): ToMovieItem[] => arr
+    .flatMap((e) => {
       const [i, j] = e.id.split('-');
-      resultArray = resultArray.concat(CheckOptionMove(parseInt(i, 10), parseInt(j, 10), move));
+      return CheckOptionMove(parseInt(i, 10), parseInt(j, 10), move);
     });
-    return resultArray;
-  };
 
   const canIMove = (id: string, spinner: number) => {
     let resultArray = [{ id, movie: 0 }];
@@ -96,9 +93,9 @@ const FieldCard = ({ heightField, item }: PropsType) => {
 
   const handleMove = (e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute('data-ceil-id');
+    const isDied = characters.find((ch) => !ch.isAlive && ch.type === activePlayer);
     let playerId = null;
     let body = null;
-    const isDied = characters.find((ch) => !ch.isAlive && ch.type === activePlayer);
 
     if (isDied && id && enemyChoose) {
       playerId = enemyChoose.id;
@@ -109,21 +106,19 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     }
 
     const canMovie = playerId ? canIMove(playerId, spinnerValue) : null;
-    if (playerId && canMovie && canPlayerMove && id) {
-      if (spinnerValue) {
-        dispatch(moveCharacter({ from: playerId, to: id, body }));
-        dispatch(decrementSpinnerValue(canMovie.movie));
-        if (isDied && id && enemyChoose) {
-          dispatch(
-            setActiveEnemy({
-              id,
-              value: body as EnemyType,
-            }),
-          );
-        }
-        if (spinnerValue - canMovie.movie === 0) {
-          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-        }
+    if (playerId && canMovie && canPlayerMove && id && spinnerValue) {
+      dispatch(moveCharacter({ from: playerId, to: id, body }));
+      dispatch(decrementSpinnerValue(canMovie.movie));
+      if (spinnerValue - canMovie.movie === 0) {
+        dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+      }
+      if (isDied && id && enemyChoose) {
+        dispatch(
+          setActiveEnemy({
+            id,
+            value: body as EnemyType,
+          }),
+        );
       }
     }
   };
@@ -137,43 +132,47 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
       dispatch(setSpinnerValue(0));
-      if (thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing') {
-        setTimeout(() => {
-          dispatch(removeCardState(id));
-          const body = characters.find((character) => character.type === activePlayer) || null;
-          dispatch(moveCharacter({ from: player.id, to: id, body }));
-          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-        }, 3000);
-        dispatch(
-          addToPlayerInventory({
-            player: activePlayer,
-            value: thingCeil.state as ThingType,
-          }),
-        );
-      }
-      if (thingCeil.state.category === 'enemy') {
-        dispatch(setIsNearEnemy([thingCeil.id]));
-        dispatch(setCanPlayerMove(false));
-      }
-      if (thingCeil.state.category === 'deadBody') {
-        (thingCeil.state as CeilInventoriType).value.forEach((el) => {
+
+      const { category } = thingCeil.state;
+      switch (category) {
+        case 'weapon':
+        case 'thing':
           dispatch(
             addToPlayerInventory({
               player: activePlayer,
-              value: el,
+              value: thingCeil.state as ThingType,
             }),
           );
-        });
+          setTimeout(() => {
+            const body = characters.find((character) => character.type === activePlayer) || null;
+            dispatch(removeCardState(id));
+            dispatch(moveCharacter({ from: player.id, to: id, body }));
+            dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+          }, 3000);
+          break;
+        case 'enemy':
+          dispatch(setIsNearEnemy([thingCeil.id]));
+          dispatch(setCanPlayerMove(false));
+          break;
+        case 'deadBody':
+          (thingCeil.state as CeilInventoriType).value.forEach((el) => {
+            dispatch(
+              addToPlayerInventory({
+                player: activePlayer,
+                value: el,
+              }),
+            );
+          });
+          break;
+        default:
+          break;
       }
     }
   };
   const handler = item.state ? handleOpenCard : handleMove;
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
-    if (!(e.target instanceof HTMLElement)) {
-      return;
-    }
-
+    const target = e.target as HTMLElement;
     const id = e.currentTarget.getAttribute('data-ceil-id');
     let playerId = null;
     const isDied = characters.find((ch) => !ch.isAlive && ch.type === activePlayer);
@@ -186,14 +185,14 @@ const FieldCard = ({ heightField, item }: PropsType) => {
 
     const canMovie = playerId ? canIMove(playerId, spinnerValue) : null;
     if (canMovie && canPlayerMove) {
-      const parentElement = e.target.closest('.field-card');
+      const parentElement = target.closest('.field-card');
       (parentElement as HTMLElement).style.background = 'rgba(189, 219, 68, 0.573)';
 
       if (movieInfo.current) {
         movieInfo.current.innerHTML = `${canMovie.movie}`;
       }
     } else {
-      const parentElement = e.target.closest('.field-card');
+      const parentElement = target.closest('.field-card');
       (parentElement as HTMLElement).style.background = 'rgba(202, 17, 48, 0.554)';
     }
   };

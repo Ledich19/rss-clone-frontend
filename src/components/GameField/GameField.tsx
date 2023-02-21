@@ -31,8 +31,7 @@ const GameField = () => {
   useEffect(() => {
     //  add characters
     const emptyCeilIdsForPlayer = gameFieldMatrix
-      .flat(1)
-      .filter((ceil) => ceil.value === 'player')
+      .flatMap((row) => row.filter((ceil) => ceil.value === 'player'))
       .map((ceil) => ceil.id);
     const shuffleEmptyCeilIdsForPlayer = shuffleArray(emptyCeilIdsForPlayer).map((ceil, i) => ({
       id: ceil,
@@ -76,6 +75,8 @@ const GameField = () => {
     dispatch(setNewGameField(newGameField));
   }, []);
 
+  const dropInventory =() => {};
+
   useEffect(() => {
     const gameFieldArr = gameFieldMatrix.flat(1);
     const player = characters.find((ceil) => ceil.type === activePlayer);
@@ -86,6 +87,7 @@ const GameField = () => {
     // fight
     if (isNearbyEnemy && player && playerPosition && playerWeaponObj) {
       const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
+      const health = characters.find((ch) => ch.type === activePlayer)?.health;
       switch (true) {
         case value === 1:
           dispatch(setCanPlayerMove(true));
@@ -95,6 +97,9 @@ const GameField = () => {
           dispatch(decrementHealth(activePlayer));
           dispatch(setSpinnerValue(0));
           dispatch(setIsNearEnemy([...isNearbyEnemy]));
+          if (health && health <= 1) {
+            console.log('isDead');
+          }
           break;
         case value === 3 && playerWeapon?.includes('sword') && !canPlayerMove:
           dispatch(removeCardState(isNearbyEnemy[0]));
