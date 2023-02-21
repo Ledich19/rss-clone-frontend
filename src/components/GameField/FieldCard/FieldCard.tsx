@@ -16,7 +16,9 @@ import {
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../../reducers/playersReducer';
-import { createNearCeil, getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
+import {
+  canIOpen, createNearCeil, getActivePlayerCeil, getNextPlayer,
+} from '../../../app/healpers';
 
 type PropsType = {
   heightField: number;
@@ -51,17 +53,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       (ceil) => checkItemsId.includes(ceil.id) && ceil.state === null,
     );
     return checkItemsObj.map((e) => ({ id: e.id, movie: move }));
-  };
-
-  const canIOpen = (player: string, id: string) => {
-    const [i, j] = player.split('-');
-    const gameFieldArray = gameField.flat(1);
-    const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
-    const checkItemsId = createNearCeil(ceilElement, +i, +j);
-    const checkItemsObj = gameFieldArray
-      .filter((ceil) => checkItemsId.includes(ceil.id) && ceil.state)
-      .map((e) => e.id);
-    return checkItemsObj.includes(id);
   };
 
   const checkPossibilityMoveArray = (arr: ToMovieItem[], move: number): ToMovieItem[] => arr
@@ -128,7 +119,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     const player = getActivePlayerCeil(gameField, activePlayer);
 
     const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
-    const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
+    const canOpen = player && thingCeil ? canIOpen(gameField, player.id, thingCeil.id) : null;
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
       dispatch(setSpinnerValue(0));

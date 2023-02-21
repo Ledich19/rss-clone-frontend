@@ -11,6 +11,7 @@ import {
   setNextActivePlayer,
 } from '../../../reducers/playersReducer';
 import {
+  canIOpen,
   checkItemsId, createNearCeil, getActivePlayerCeil, getNextPlayer,
 } from '../../../app/healpers';
 
@@ -54,22 +55,11 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     checkIsNearbyPlayer(item.id);
   }, []);
 
-  const canIOpen = (player: string, id: string) => {
-    const [i, j] = player.split('-');
-    const gameFieldArray = gameField.flat(1);
-    const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
-    const checkItemId = createNearCeil(ceilElement, +i, +j);
-    const checkItemsObj = gameFieldArray
-      .filter((ceil) => checkItemId.includes(ceil.id) && ceil.state)
-      .map((e) => e.id);
-    return checkItemsObj.includes(id);
-  };
-
   const handleOpenCard = (e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute('data-ceil-id');
     const player = getActivePlayerCeil(gameField, activePlayer);
     const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
-    const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
+    const canOpen = player && thingCeil ? canIOpen(gameField, player.id, thingCeil.id) : null;
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
       dispatch(setSpinnerValue(0));

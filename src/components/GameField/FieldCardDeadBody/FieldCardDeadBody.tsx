@@ -6,7 +6,7 @@ import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducer
 import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
 import useSetNotify from '../../../hooks/useSetNotify';
 import { addToPlayerInventory, setCanPlayerMove, setNextActivePlayer } from '../../../reducers/playersReducer';
-import { createNearCeil, getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
+import { canIOpen, getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
 
 type PropsType = {
   heightField: number;
@@ -30,23 +30,11 @@ const FieldCardDeadBody = ({ heightField, item }: PropsType) => {
     width: `calc(100vh / ${heightField})`,
   };
 
-  const canIOpen = (player: string, id: string) => {
-    const [i, j] = player.split('-');
-    const gameFieldArray = gameField.flat(1);
-    const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
-    const checkItemsId = createNearCeil(ceilElement, +i, +j);
-    const checkItemsObj = gameFieldArray
-      .filter((ceil) => checkItemsId.includes(ceil.id) && ceil.state)
-      .map((e) => e.id);
-    return checkItemsObj.includes(id);
-  };
-
   const handleGetInventory = (e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute('data-ceil-id');
     const player = getActivePlayerCeil(gameField, activePlayer);
     const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
-    console.log(id, player, thingCeil);
-    const canOpen = player && thingCeil ? canIOpen(player.id, thingCeil.id) : null;
+    const canOpen = player && thingCeil ? canIOpen(gameField, player.id, thingCeil.id) : null;
 
     if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state?.category === 'deadBody' && id) {
       dispatch(setSpinnerValue(0));

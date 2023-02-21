@@ -26,3 +26,14 @@ export const getActivePlayerCeil = (gameField: BoardItemType[][], player: string
   .find(
     (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === player,
   );
+
+export const canIOpen = (gameField: BoardItemType[][], player: string, id: string) => {
+  const [i, j] = player.split('-');
+  const gameFieldArray = gameField.flat(1);
+  const ceilElement = gameFieldArray.find((ceil) => ceil.id === player);
+  const nearCeil = createNearCeil(ceilElement, +i, +j);
+  const checkItemsObj = gameFieldArray
+    .filter((ceil) => nearCeil.includes(ceil.id) && ceil.state)
+    .map((e) => e.id);
+  return checkItemsObj.includes(id);
+};
