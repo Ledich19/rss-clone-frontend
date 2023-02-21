@@ -10,6 +10,7 @@ const Spinner = () => {
   const [progressTransitionStyle, setProgressTransitionStyle] = useState(0);
   const [progressHightStyle, setProgressHightStyle] = useState(100);
   const [arrowTransitionStyle, setArrowTransitionStyle] = useState(0);
+  const theme = useAppSelector((state) => state.options.theme);
   let startTime = performance.now();
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
@@ -94,24 +95,24 @@ const Spinner = () => {
       onMouseUp={ () => startSpin() }
       onMouseLeave={ () => stopSpin() }>
         <div className="spinner__field_top">
-          <div className="spinner__field_top-left">
+          <div className="spinner__field_top-left" style={theme === 'default' ? { background: 'linear-gradient(120deg, rgba(255,132,0,1) 0%, rgba(232,255,0,1) 100%)' } : { backgroundImage: 'url(./images/spinner/yellow.png)' }} >
             <div className="spinner__image_top-left">
               <img src={ topLeftImage } alt="1" />
             </div>
           </div>
-          <div className="spinner__field_top-right">
+          <div className="spinner__field_top-right" style={theme === 'default' ? { background: 'linear-gradient(60deg, rgba(112,255,0,1) 0%, rgba(0,255,239,1) 100%)' } : { backgroundImage: 'url(./images/spinner/green.jpg)' }}>
             <div className="spinner__image_top-right">
               <img src={ topRightImage } alt="2" />
             </div>
           </div>
         </div>
         <div className="spinner__field_bottom">
-          <div className="spinner__field_bottom-left">
+          <div className="spinner__field_bottom-left" style={theme === 'default' ? { background: 'linear-gradient(195deg, rgba(255,0,0,1) 0%, rgba(239,0,255,1) 100%)' } : { backgroundImage: 'url(./images/spinner/red.jpg)' }}>
             <div className="spinner__image_bottom-left">
               <img src={ bottomLeftImage } alt="4" />
             </div>
           </div>
-          <div className="spinner__field_bottom-right">
+          <div className="spinner__field_bottom-right" style={theme === 'default' ? { background: 'linear-gradient(150deg, rgba(0,65,255,1) 0%, rgba(149,0,255,1) 100%)' } : { backgroundImage: 'url(./images/spinner/blue.jpg)' }}>
             <div className="spinner__image_bottom-right">
               <img src={ bottomRightImage } alt="3" />
             </div>

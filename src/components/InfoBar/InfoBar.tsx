@@ -30,13 +30,13 @@ const InfoBar = () => {
       </div>
       <div className="info__buttons">
         <Link rel="stylesheet" to={'/'}>
-          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck2.png)' } : { backgroundImage: 'url(./images/planck2darck.png)' } }>HOME</div>
+          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck.png)' } : { backgroundImage: 'url(./images/planck-dark.png)' } }>HOME</div>
         </Link>
         <Link rel="stylesheet" to={'/tutorial'}>
-          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck2.png)' } : { backgroundImage: 'url(./images/planck2darck.png)' } }>TUTORIAL</div>
+          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck.png)' } : { backgroundImage: 'url(./images/planck-dark.png)' } }>TUTORIAL</div>
         </Link>
         <Link rel="stylesheet" to={'/options'}>
-          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck2.png)' } : { backgroundImage: 'url(./images/planck2darck.png)' } }>OPTIONS</div>
+          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck.png)' } : { backgroundImage: 'url(./images/planck-dark.png)' } }>OPTIONS</div>
         </Link>
       </div>
     </div>
