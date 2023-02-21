@@ -1,15 +1,19 @@
 import { useEffect } from 'react';
-import { getNextPlayer } from '../../app/healpers';
+import { getNextPlayer, getActivePlayerCeil } from '../../app/healpers';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { WeaponType } from '../../app/types';
-import { moveCharacter, removeCardState, setNewGameField } from '../../reducers/gameBoardReducer';
+import { BoardItemType, CharacterType, WeaponType } from '../../app/types';
+import {
+  moveCharacter, removeCardState, setDiedBodyInventory, setNewGameField,
+} from '../../reducers/gameBoardReducer';
 import {
   decrementHealth,
+  setAlivePlayer,
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../reducers/playersReducer';
 import { setIsNearEnemy, setSpinnerValue } from '../../reducers/spinnertReducer';
 import FieldCard from './FieldCard/FieldCard';
+import FieldCardDeadBody from './FieldCardDeadBody/FieldCardDeadBody';
 import FieldCardForEnemy from './FieldCardForEnemy/FieldCardForEnemy';
 import FieldCardForPlayer from './FieldCardForPlayer/FieldCardForPlayer';
 import './GameField.scss';
@@ -75,8 +79,6 @@ const GameField = () => {
     dispatch(setNewGameField(newGameField));
   }, []);
 
-  const dropInventory =() => {};
-
   useEffect(() => {
     const gameFieldArr = gameFieldMatrix.flat(1);
     const player = characters.find((ceil) => ceil.type === activePlayer);
@@ -98,7 +100,14 @@ const GameField = () => {
           dispatch(setSpinnerValue(0));
           dispatch(setIsNearEnemy([...isNearbyEnemy]));
           if (health && health <= 1) {
-            console.log('isDead');
+            const playerId = getActivePlayerCeil(gameFieldMatrix, activePlayer)?.id;
+            const activePlayerNow = characters.find((ch) => ch.type === activePlayer);
+            if (activePlayerNow && activePlayerNow.inventory && playerId) {
+              dispatch(setDiedBodyInventory({ id: playerId, value: activePlayerNow.inventory }));
+              dispatch(setAlivePlayer({ type: activePlayer, value: false }));
+              dispatch(setCanPlayerMove(true));
+              dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+            }
           }
           break;
         case value === 3 && playerWeapon?.includes('sword') && !canPlayerMove:
@@ -129,10 +138,10 @@ const GameField = () => {
             if (item.state && useCharactersTypes.includes(item.state.type)) {
               return (
                 <FieldCardForPlayer
-                  position={{ row: i, col: j }}
-                  key={item.id}
-                  heightField={heightField}
-                  item={item}
+                position={{ row: i, col: j }}
+                key={item.id}
+                heightField={heightField}
+                item={item}
                 />
               );
             }
@@ -142,6 +151,15 @@ const GameField = () => {
                 key={item.id}
                 heightField={heightField}
                 item={item}
+                />;
+            }
+            console.log(item.state);
+            if (item.state && item.state.category === 'deadBody') {
+              return <FieldCardDeadBody
+                  position={{ row: i, col: j }}
+                  key={item.id}
+                  heightField={heightField}
+                  item={item}
               />;
             }
             return (

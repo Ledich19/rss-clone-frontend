@@ -154,16 +154,16 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           dispatch(setIsNearEnemy([thingCeil.id]));
           dispatch(setCanPlayerMove(false));
           break;
-        case 'deadBody':
-          (thingCeil.state as CeilInventoriType).value.forEach((el) => {
-            dispatch(
-              addToPlayerInventory({
-                player: activePlayer,
-                value: el,
-              }),
-            );
-          });
-          break;
+        // case 'deadBody':
+        //   (thingCeil.state as CeilInventoriType).value.forEach((el) => {
+        //     dispatch(
+        //       addToPlayerInventory({
+        //         player: activePlayer,
+        //         value: el,
+        //       }),
+        //     );
+        //   });
+        //   break;
         default:
           break;
       }

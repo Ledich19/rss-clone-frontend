@@ -196,6 +196,24 @@ const playersSlice = createSlice({
     }) {
       return { ...state, amount: actions.payload };
     },
+    setAlivePlayer(state, actions: {
+      payload: {
+        type: string,
+        value: boolean,
+      };
+      type: string;
+    }) {
+      const newCharacters = state.characters.map((character) => {
+        if (character.type === actions.payload.type) {
+          return {
+            ...character, isAlive: actions.payload.value,
+          };
+        }
+        return character;
+      });
+      const newState = { ...state, characters: newCharacters };
+      return newState;
+    },
     setActiveEnemy(state, actions: {
       payload: {
         id: string,
@@ -222,5 +240,6 @@ export const {
   setNextActivePlayer,
   setAmount,
   setActiveEnemy,
+  setAlivePlayer,
 } = playersSlice.actions;
 export default playersSlice.reducer;
