@@ -12,12 +12,13 @@ import { useAppSelector } from './app/hooks';
 import './App.scss';
 
 function App() {
-  const theme = useAppSelector((state) => state.options.theme);
+  const options = useAppSelector((state) => state.options);
 
   React.useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    document.documentElement.dataset.theme = options.theme;
+    const data = JSON.stringify(options);
+    localStorage.setItem('options', data);
+  }, [options]);
 
   return (
     <div className="App">
