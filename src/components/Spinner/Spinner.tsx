@@ -10,18 +10,26 @@ const Spinner = () => {
   const [progressTransitionStyle, setProgressTransitionStyle] = useState(0);
   const [progressHightStyle, setProgressHightStyle] = useState(100);
   const [arrowTransitionStyle, setArrowTransitionStyle] = useState(0);
-  const theme = useAppSelector((state) => state.options.theme);
+  const { theme, sound, spinnerVolume } = useAppSelector((state) => state.options);
   let startTime = performance.now();
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
   const dispatch = useAppDispatch();
-  const audioSpin = new Audio('spinner.mp3');
-  audioSpin.volume = 1;
+  const audioSpinMax = new Audio('spinner.mp3');
+  const audioSpin = new Audio('spinner-1.mp3');
+  audioSpinMax.volume = spinnerVolume;
+  audioSpin.volume = spinnerVolume;
 
-  const topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/number-1.png';
-  const topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/number-2.png';
-  const bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/number-4.png';
-  const bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/number-3.png';
+  let topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/number-1.png';
+  let topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/number-2.png';
+  let bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/number-4.png';
+  let bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/number-3.png';
+  if (theme === 'dark') {
+    topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/1-dark.png';
+    topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/2-dark.png';
+    bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/4-dark.png';
+    bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/3-dark.png';
+  }
 
   function checkResult(time: number) {
     const angle = time % 360;
@@ -46,12 +54,19 @@ const Spinner = () => {
       dispatch(setSpinnerValue(result));
       audioSpin.pause();
       audioSpin.currentTime = 0;
+      audioSpinMax.pause();
+      audioSpinMax.currentTime = 0;
     }
     setTimeout(delay, time);
   }
 
   function spin() {
-    audioSpin.play();
+    if (timeProgress === 3000 && sound) {
+      audioSpinMax.play();
+    }
+    if (timeProgress < 3000 && sound) {
+      audioSpin.play();
+    }
     const random = Math.random() * 1000 + 1000;
     if ((timeProgress + random) % 360 < 180) {
       setArrowTransitionStyle(180);
