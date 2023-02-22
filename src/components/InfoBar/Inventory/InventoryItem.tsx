@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import PopupInventory from './PopupInventory';
-import { incrementHealth, deleteFromPlayerInventory, setCanPlayerMove } from '../../../reducers/playersReducer';
+import {
+  incrementHealth, deleteFromPlayerInventory, setCanPlayerMove, setNextActivePlayer,
+} from '../../../reducers/playersReducer';
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 import { removeCardState, addPlankState } from '../../../reducers/gameBoardReducer';
 import { BoardItemType } from '../../../app/types';
-import { getActivePlayerCeil } from '../../../app/healpers';
+import { getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
 
 interface Props {
   img: string
@@ -18,7 +20,7 @@ const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
   const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
-  const { canPlayerMove } = useAppSelector((state) => state.characters);
+  const { canPlayerMove, characters, activePlayer } = useAppSelector((state) => state.characters);
   const { sound, gameVolume } = useAppSelector((state) => state.options);
   const dispatch = useAppDispatch();
   const audioFirstAidKit = new Audio('fak.mp3');
@@ -84,7 +86,10 @@ const InventoryItem = (props: Props) => {
         const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el) => el !== enemy.id);
         if (newIsNearbyEnemy.length) {
           dispatch(setIsNearEnemy(newIsNearbyEnemy));
-        } else dispatch(setIsNearEnemy(null));
+        } else {
+          dispatch(setIsNearEnemy(null));
+          dispatch(setCanPlayerMove(true));
+        }
       }
     }
   }
@@ -118,9 +123,8 @@ const InventoryItem = (props: Props) => {
       }
       return cell;
     }
-    const player = gameField.flat(1).find(
-      (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
-    );
+    const player = getActivePlayerCeil(gameField, props.activePlayer);
+
     let cell = checkIsNextToSomeone(player, ['boss']);
     if (!cell) cell = checkIsNextToSomeone(player, ['zombie', 'hellHound', 'spiderMutant']);
     if (cell) {
@@ -133,7 +137,10 @@ const InventoryItem = (props: Props) => {
         );
         if (newIsNearbyEnemy.length) {
           dispatch(setIsNearEnemy(newIsNearbyEnemy));
-        } else dispatch(setIsNearEnemy(null));
+        } else {
+          dispatch(setIsNearEnemy(null));
+          dispatch(setCanPlayerMove(true));
+        }
       }
     }
   }

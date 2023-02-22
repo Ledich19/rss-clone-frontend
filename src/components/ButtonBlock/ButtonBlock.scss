@@ -9,7 +9,7 @@
     font-family: 'Creepster';
     padding: 15px 0px;
     border-radius: 30px;
-    background-image: var(--start-menu-btn);
+    background-image: var(--start-btn);
     background-color: #00000000;
     background-size: cover;
     cursor: pointer;
@@ -21,10 +21,13 @@
     }
     &:disabled {
       background-blend-mode: multiply;
-      background-image: var(--start-menu-btn-disabled);
+      background-image: var(--start-btn-disabled);
       background-color: #60695e00;
       transform: scale(1);
       color: #a9b5b0;
+      &:hover {
+        transform: scale(1);
+      }
     }
   }
   &__link {

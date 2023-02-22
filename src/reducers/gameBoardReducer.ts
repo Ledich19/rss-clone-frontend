@@ -1577,13 +1577,13 @@ const gameBoardSlice = createSlice({
       };
       type: string;
     }) {
-      const newCeilState = {
+      const newCeilState = actions.payload.value.length > 1 ? {
         type: 'deadBody',
         category: 'deadBody',
         img: '',
         isVisible: true,
         value: actions.payload.value,
-      };
+      } : null;
 
       const newState = state.map((row) => row.map((ceil) => {
         if (ceil.id === actions.payload.id) {

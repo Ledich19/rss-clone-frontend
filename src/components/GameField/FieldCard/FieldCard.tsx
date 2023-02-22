@@ -97,6 +97,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     }
 
     const canMovie = playerId ? canIMove(playerId, spinnerValue) : null;
+    console.log(playerId, canMovie, canPlayerMove, id, spinnerValue);
     if (playerId && canMovie && canPlayerMove && id && spinnerValue) {
       dispatch(moveCharacter({ from: playerId, to: id, body }));
       dispatch(decrementSpinnerValue(canMovie.movie));
