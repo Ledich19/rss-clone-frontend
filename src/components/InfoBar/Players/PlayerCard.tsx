@@ -4,8 +4,9 @@ import Health from '../Health/Health';
 import PopupPlayer from './PopupPlayer';
 
 interface Props {
-  character: CharacterType;
-  active: string;
+  character: CharacterType
+  active: string
+  theme: 'default' | 'dark'
 }
 
 const PlayerCard = (props: Props) => {
@@ -30,7 +31,7 @@ const PlayerCard = (props: Props) => {
             : './images/characters/died.png'
         } alt="playerImage" />
         <Health health={props.character.health}/>
-        {isPopup && <PopupPlayer inv={props.character.inventory} />}
+        {isPopup && <PopupPlayer inv={props.character.inventory} theme={props.theme}/>}
     </div>
   );
 };

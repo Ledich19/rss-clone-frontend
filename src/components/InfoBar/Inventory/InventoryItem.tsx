@@ -19,18 +19,19 @@ const InventoryItem = (props: Props) => {
   const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
   const { canPlayerMove } = useAppSelector((state) => state.characters);
+  const { sound, gameVolume } = useAppSelector((state) => state.options);
   const dispatch = useAppDispatch();
   const audioFirstAidKit = new Audio('fak.mp3');
   const audioPlank = new Audio('plank.mp3');
   const audioGrenade = new Audio('grenade.mp3');
   const audioGrenadeGun = new Audio('grenadeGun.mp3');
-  audioFirstAidKit.volume = 1;
-  audioPlank.volume = 1;
-  audioGrenade.volume = 1;
-  audioGrenadeGun.volume = 1;
+  audioFirstAidKit.volume = gameVolume;
+  audioPlank.volume = gameVolume;
+  audioGrenade.volume = gameVolume;
+  audioGrenadeGun.volume = gameVolume;
 
   function useFirstAidKit() {
-    audioFirstAidKit.play();
+    if (sound) audioFirstAidKit.play();
     dispatch(incrementHealth(props.activePlayer));
     if (props.activePlayer === 'nastya') dispatch(incrementHealth(props.activePlayer));
     dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'firstAidKit' }));
@@ -51,7 +52,7 @@ const InventoryItem = (props: Props) => {
         if (player?.top) canPut.push(`${Number(playerCell[0]) - 1}-${playerCell[1]}`);
         if (player?.right) canPut.push(`${playerCell[0]}-${Number(playerCell[1]) + 1}`);
         if (cell && canPut.includes(cell)) {
-          audioPlank.play();
+          if (sound) audioPlank.play();
           dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'plank' }));
           dispatch(addPlankState(cell));
         }
@@ -73,44 +74,57 @@ const InventoryItem = (props: Props) => {
 
   function useGrenade() {
     if (isNearbyEnemy) {
-      audioGrenade.play();
-      dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenade' }));
-      dispatch(removeCardState(isNearbyEnemy[0]));
-      const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el, idx) => idx !== 0);
-      if (newIsNearbyEnemy.length) {
-        dispatch(setIsNearEnemy(newIsNearbyEnemy));
-      } else dispatch(setIsNearEnemy(null));
+      const enemy = gameField.flat(1).find(
+        (ceil) => isNearbyEnemy.includes(ceil.id) && ceil.state?.type !== 'boss',
+      );
+      if (enemy) {
+        if (sound) audioGrenade.play();
+        dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenade' }));
+        dispatch(removeCardState(enemy.id));
+        const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el) => el !== enemy.id);
+        if (newIsNearbyEnemy.length) {
+          dispatch(setIsNearEnemy(newIsNearbyEnemy));
+        } else dispatch(setIsNearEnemy(null));
+      }
     }
   }
 
   function useGrenadeGun() {
-    console.log('grenadeGun');
-    let cell: BoardItemType | undefined;
-    const player = getActivePlayerCeil(gameField, props.activePlayer);
-    if (player) {
-      const playerCell = player.id.split('-');
-      if (player?.bottom) {
-        cell = gameField.flat(1).find(
-          (ceil) => ceil.id === `${Number(playerCell[0]) + 1}-${playerCell[1]}` && ceil.state?.type === 'boss',
-        );
+    function checkIsNextToSomeone(player: BoardItemType | undefined, someone: string[])
+      : BoardItemType | undefined {
+      let cell: BoardItemType | undefined;
+      const playerCell = player?.id.split('-');
+      if (playerCell) {
+        if (player?.bottom) {
+          cell = gameField.flat(1).find(
+            (ceil) => ceil.id === `${Number(playerCell[0]) + 1}-${playerCell[1]}` && ceil.state?.type && someone.includes(ceil.state.type),
+          );
+        }
+        if (player?.left && !cell) {
+          cell = gameField.flat(1).find(
+            (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) - 1}` && ceil.state?.type && someone.includes(ceil.state.type),
+          );
+        }
+        if ((player?.top && !cell)) {
+          cell = gameField.flat(1).find(
+            (ceil) => ceil.id === `${Number(playerCell[0]) - 1}-${playerCell[1]}` && ceil.state?.type && someone.includes(ceil.state.type),
+          );
+        }
+        if ((player?.right && !cell)) {
+          cell = gameField.flat(1).find(
+            (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) + 1}` && ceil.state?.type && someone.includes(ceil.state.type),
+          );
+        }
       }
-      if (player?.left && !cell) {
-        cell = gameField.flat(1).find(
-          (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) - 1}` && ceil.state?.type === 'boss',
-        );
-      }
-      if ((player?.top && !cell)) {
-        cell = gameField.flat(1).find(
-          (ceil) => ceil.id === `${Number(playerCell[0]) - 1}-${playerCell[1]}` && ceil.state?.type === 'boss',
-        );
-      }
-      if ((player?.right && !cell)) {
-        cell = gameField.flat(1).find(
-          (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) + 1}` && ceil.state?.type === 'boss',
-        );
-      }
+      return cell;
     }
+    const player = gameField.flat(1).find(
+      (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
+    );
+    let cell = checkIsNextToSomeone(player, ['boss']);
+    if (!cell) cell = checkIsNextToSomeone(player, ['zombie', 'hellHound', 'spiderMutant']);
     if (cell) {
+      if (sound) audioGrenadeGun.play();
       dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenadeGun' }));
       dispatch(removeCardState(cell.id));
       if (isNearbyEnemy) {

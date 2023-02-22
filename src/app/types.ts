@@ -197,3 +197,10 @@ export type Rules = {
     text: string[],
   },
 };
+
+export type Options = {
+  theme: 'default' | 'dark',
+  sound: boolean,
+  gameVolume: number,
+  spinnerVolume: number,
+};

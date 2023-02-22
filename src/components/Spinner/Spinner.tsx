@@ -10,17 +10,26 @@ const Spinner = () => {
   const [progressTransitionStyle, setProgressTransitionStyle] = useState(0);
   const [progressHightStyle, setProgressHightStyle] = useState(100);
   const [arrowTransitionStyle, setArrowTransitionStyle] = useState(0);
+  const { theme, sound, spinnerVolume } = useAppSelector((state) => state.options);
   let startTime = performance.now();
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
   const dispatch = useAppDispatch();
-  const audioSpin = new Audio('spinner.mp3');
-  audioSpin.volume = 1;
+  const audioSpinMax = new Audio('spinner.mp3');
+  const audioSpin = new Audio('spinner-1.mp3');
+  audioSpinMax.volume = spinnerVolume;
+  audioSpin.volume = spinnerVolume;
 
-  const topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/number-1.png';
-  const topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/number-2.png';
-  const bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/number-4.png';
-  const bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/number-3.png';
+  let topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/number-1.png';
+  let topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/number-2.png';
+  let bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/number-4.png';
+  let bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/number-3.png';
+  if (theme === 'dark') {
+    topLeftImage = isNearbyEnemy ? './images/spinner/run.png' : './images/spinner/1-dark.png';
+    topRightImage = isNearbyEnemy ? './images/spinner/bite.png' : './images/spinner/2-dark.png';
+    bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/4-dark.png';
+    bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/3-dark.png';
+  }
 
   function checkResult(time: number) {
     const angle = time % 360;
@@ -45,12 +54,19 @@ const Spinner = () => {
       dispatch(setSpinnerValue(result));
       audioSpin.pause();
       audioSpin.currentTime = 0;
+      audioSpinMax.pause();
+      audioSpinMax.currentTime = 0;
     }
     setTimeout(delay, time);
   }
 
   function spin() {
-    // audioSpin.play();
+    if (timeProgress === 3000 && sound) {
+      audioSpinMax.play();
+    }
+    if (timeProgress < 3000 && sound) {
+      audioSpin.play();
+    }
     const random = Math.random() * 1000 + 1000;
     if ((timeProgress + random) % 360 < 180) {
       setArrowTransitionStyle(180);
@@ -94,24 +110,24 @@ const Spinner = () => {
       onMouseUp={ () => startSpin() }
       onMouseLeave={ () => stopSpin() }>
         <div className="spinner__field_top">
-          <div className="spinner__field_top-left">
+          <div className="spinner__field_top-left" style={theme === 'default' ? { background: 'linear-gradient(120deg, rgba(255,132,0,1) 0%, rgba(232,255,0,1) 100%)' } : { backgroundImage: 'url(./images/spinner/yellow.png)' }} >
             <div className="spinner__image_top-left">
               <img src={ topLeftImage } alt="1" />
             </div>
           </div>
-          <div className="spinner__field_top-right">
+          <div className="spinner__field_top-right" style={theme === 'default' ? { background: 'linear-gradient(60deg, rgba(112,255,0,1) 0%, rgba(0,255,239,1) 100%)' } : { backgroundImage: 'url(./images/spinner/green.jpg)' }}>
             <div className="spinner__image_top-right">
               <img src={ topRightImage } alt="2" />
             </div>
           </div>
         </div>
         <div className="spinner__field_bottom">
-          <div className="spinner__field_bottom-left">
+          <div className="spinner__field_bottom-left" style={theme === 'default' ? { background: 'linear-gradient(195deg, rgba(255,0,0,1) 0%, rgba(239,0,255,1) 100%)' } : { backgroundImage: 'url(./images/spinner/red.jpg)' }}>
             <div className="spinner__image_bottom-left">
               <img src={ bottomLeftImage } alt="4" />
             </div>
           </div>
-          <div className="spinner__field_bottom-right">
+          <div className="spinner__field_bottom-right" style={theme === 'default' ? { background: 'linear-gradient(150deg, rgba(0,65,255,1) 0%, rgba(149,0,255,1) 100%)' } : { backgroundImage: 'url(./images/spinner/blue.jpg)' }}>
             <div className="spinner__image_bottom-right">
               <img src={ bottomRightImage } alt="3" />
             </div>
