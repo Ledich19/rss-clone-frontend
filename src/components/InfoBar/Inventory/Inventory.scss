@@ -31,7 +31,6 @@
     font-family: 'Creepster', cursive;
     letter-spacing: 0.2rem;
     width: calc(100% - 1rem);
-    background-image: url(./../../../../public/images/planck2.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
@@ -75,7 +74,6 @@
     aspect-ratio: 1;
     border-radius: 1rem;
     overflow: hidden;
-    background: rgba(140, 206, 40, 0.5);
   }
 
   &__popup {
