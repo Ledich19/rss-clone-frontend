@@ -1,6 +1,8 @@
-// .App {
-//   text-align: center;
-// }
+.App {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka+One&display=swap');
 // font-family: 'Creepster', cursive;
 
@@ -36,7 +38,7 @@
   --background-card-item-desc: #fff;
   --colot-text-card-item-desc: #000;
   --background-start-page: url(../public/images/start_bg.png);
-  --start-menu-btn: url(../public/images/planck.png);
+  --start-menu-btn: url(../public/images/planck2.png);
   --start-menu-btn-disabled: url(../public/images/planck2darck.png);
   --color-start-menu-btn: #41514a;
   --color-start-menu-btn-hover:#1c523a;
@@ -213,18 +215,7 @@
     }
   }
 }
-.btn-bloc{
-  &__start, &__back{
-    background-image: var(--start-menu-btn);
-    color: var(--color-start-menu-btn);
-    &:hover{
-      color: var(--color-start-menu-btn-hover);
-    }
-    &:disabled{
-      background-image: var(--start-menu-btn-disabled);
-    }
-  }
-}
+
 .options-page{
   background-image: var(--background-start-page);
   &__item{
