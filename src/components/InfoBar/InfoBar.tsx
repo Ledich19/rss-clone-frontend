@@ -7,6 +7,7 @@ import PlayersCards from './Players/PlayersCards';
 
 const InfoBar = () => {
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
+  const { value } = useAppSelector((state) => state.spinner);
   const theme = useAppSelector((state) => state.options.theme);
   const currentPlayer = characters.find((el) => el.type === activePlayer);
   let currentPlayerWeapons: Array<ThingType | WeaponType> = [];
@@ -24,6 +25,9 @@ const InfoBar = () => {
       </div>
       <div className="info__players">
         <PlayersCards characters={characters} activePlayer={activePlayer} theme={theme}/>
+      </div>
+      <div className="info__active-player_steps" style={theme === 'default' ? { backgroundImage: 'url(./images/planck2.png)' } : { backgroundImage: 'url(./images/planck2darck.png)' } }>
+        <span>Steps left: {value}</span>
       </div>
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer?.inventory} activePlayer={activePlayer} theme={theme}/>

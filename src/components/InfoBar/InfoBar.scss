@@ -10,7 +10,8 @@
     z-index: -1;
   }
 
-  &__active-player_name {
+  &__active-player_name,
+  &__active-player_steps {
     font-family: 'Creepster';
     font-weight: 700;
     text-transform: uppercase;
@@ -25,6 +26,10 @@
     letter-spacing: 0.2rem;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+  }
+
+  &__active-player_steps {
+    margin: 0.5rem 0 0 0;
   }
 
   &__active-player_image {
