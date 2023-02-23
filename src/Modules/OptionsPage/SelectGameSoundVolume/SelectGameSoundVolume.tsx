@@ -19,12 +19,13 @@ const SelectGameSoundVolume = () => {
   <div className="switcher">
     <h5 className="switcher__title">3. Game sound volume: {`${Math.floor(options.gameVolume * 100)}%`}</h5>
     <input
-      className='switcher__range'
+      className={ options.theme === 'default' ? 'switcher__range' : 'switcher__range-dark' }
       type="range"
       min="0" max="1"
       value={options.gameVolume}
       onChange={(e) => handleChange(e.target.value)}
-      step="0.01"/>
+      step="0.01"
+      />
   </div>
   );
 };
