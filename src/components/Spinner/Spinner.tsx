@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setSpinnerValue } from '../../reducers/spinnertReducer';
 
 const Spinner = () => {
-  const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
+  const { isNearbyEnemy, active } = useAppSelector((state) => state.spinner);
   const [resultImage, setResultImage] = useState('./images/spinner/push.png');
   const [arrowRotateStyle, setArrowRotateStyle] = useState(0);
   const [progressTransitionStyle, setProgressTransitionStyle] = useState(0);
@@ -80,21 +80,25 @@ const Spinner = () => {
   }
 
   function renderProgress() {
-    startTime = performance.now();
-    setResultImage('./images/spinner/push.png');
-    setArrowTransitionStyle(0);
-    setArrowRotateStyle(startAngle);
-    timeProgress = 0;
-    setProgressTransitionStyle(3000);
-    setProgressHightStyle(0);
+    if (active) {
+      startTime = performance.now();
+      setResultImage('./images/spinner/push.png');
+      setArrowTransitionStyle(0);
+      setArrowRotateStyle(startAngle);
+      timeProgress = 0;
+      setProgressTransitionStyle(3000);
+      setProgressHightStyle(0);
+    }
   }
 
   function startSpin() {
-    timeProgress = performance.now() - startTime;
-    if (timeProgress > 3000) timeProgress = 3000;
-    setProgressTransitionStyle(timeProgress);
-    setProgressHightStyle(100);
-    spin();
+    if (active) {
+      timeProgress = performance.now() - startTime;
+      if (timeProgress > 3000) timeProgress = 3000;
+      setProgressTransitionStyle(timeProgress);
+      setProgressHightStyle(100);
+      spin();
+    }
   }
 
   function stopSpin() {
@@ -104,7 +108,7 @@ const Spinner = () => {
   }
 
   return (
-    <div className="spinner" >
+    <div className="spinner" style={active ? { filter: 'none' } : { filter: 'grayscale(50%) blur(1px)' }}>
       <div className="spinner__field"
       onMouseDown={ () => renderProgress() }
       onMouseUp={ () => startSpin() }
