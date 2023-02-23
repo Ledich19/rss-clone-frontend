@@ -15,8 +15,8 @@ const Spinner = () => {
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
   const dispatch = useAppDispatch();
-  const audioSpinMax = new Audio('spinner.mp3');
-  const audioSpin = new Audio('spinner-1.mp3');
+  const audioSpinMax = new Audio('./sounds/spinner.mp3');
+  const audioSpin = new Audio('./sounds/spinner-1.mp3');
   audioSpinMax.volume = spinnerVolume;
   audioSpin.volume = spinnerVolume;
 
