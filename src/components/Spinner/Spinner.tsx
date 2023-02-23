@@ -30,6 +30,7 @@ const Spinner = () => {
     bottomLeftImage = isNearbyEnemy ? './images/spinner/rifle.png' : './images/spinner/4-dark.png';
     bottomRightImage = isNearbyEnemy ? './images/spinner/knife.png' : './images/spinner/3-dark.png';
   }
+  const background = theme === 'default' ? './images/info/wood.jpg' : './images/info/wood-dark.png';
 
   function checkResult(time: number) {
     const angle = time % 360;
@@ -108,7 +109,9 @@ const Spinner = () => {
   }
 
   return (
-    <div className="spinner" style={active ? { filter: 'none' } : { filter: 'grayscale(50%) blur(1px)' }}>
+    <div className="spinner__wrapper">
+      <img className="spinner__background" src={background} alt="background" />
+      <div className="spinner" style={active ? { filter: 'none' } : { filter: 'grayscale(50%) blur(1px)' }}>
       <div className="spinner__field"
       onMouseDown={ () => renderProgress() }
       onMouseUp={ () => startSpin() }
@@ -145,6 +148,7 @@ const Spinner = () => {
         </div>
       </div>
       <div className="spinner__progress" style={{ height: `${progressHightStyle}%`, transition: `${progressTransitionStyle}ms` }}></div>
+      </div>
     </div>
   );
 };
