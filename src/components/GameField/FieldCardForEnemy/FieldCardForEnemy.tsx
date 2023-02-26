@@ -26,6 +26,9 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
   const { characters, activePlayer, enemyChoose } = useAppSelector((state) => state.characters);
   const spinnerValue = useAppSelector((state) => state.spinner.value);
   const gameField = useAppSelector((state) => state.game);
+  if (!item || !item.state) {
+    return null;
+  }
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
@@ -50,10 +53,6 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
       dispatch(setIsNearEnemy(null));
     }
   };
-
-  useEffect(() => {
-    checkIsNearbyPlayer(item.id);
-  }, []);
 
   const handleOpenCard = (e: React.MouseEvent<HTMLElement>) => {
     const id = e.currentTarget.getAttribute('data-ceil-id');
@@ -97,6 +96,10 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     }
   };
 
+  useEffect(() => {
+    checkIsNearbyPlayer(item.id);
+  }, []);
+
   const handler = item.state && !item.state.isVisible ? handleOpenCard : handleChoose;
 
   return (
@@ -106,7 +109,6 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
       style={style}
       className={`field-enemy ${enemyChoose?.id === item.id ? '_active' : ''}`}
     >
-      {item.state && typeof item.state === 'object' ? (
         <div className={'flip-container'}>
           <div className={`flipper ${item.state.isVisible ? '_front' : ''}`}>
             <div className="front">
@@ -117,12 +119,6 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
             </div>
           </div>
         </div>
-      ) : (
-        <div>
-          {/* <div className='_movie-text'>{item.id}</div> */}
-          {/* <div className='_small-text'>{item.id}</div> */}
-        </div>
-      )}
     </div>
   );
 };
