@@ -58,8 +58,11 @@ const GameField = () => {
             }
           }
           break;
-        case value === 3 && playerWeapon?.includes('sword') && !canPlayerMove:
-        case value === 4 && playerWeapon?.includes('aim') && !canPlayerMove:
+        case value === 3 && playerWeapon?.includes('sword'):
+        case value === 4 && playerWeapon?.includes('aim'):
+          if (isNearbyEnemy[0].type !== 'boss' || canPlayerMove) {
+            break;
+          }
           dispatch(removeCardState(isNearbyEnemy[0].id));
           dispatch(setSpinnerValue(0));
           dispatch(
