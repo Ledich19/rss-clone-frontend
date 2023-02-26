@@ -10,7 +10,8 @@
     z-index: -1;
   }
 
-  &__active-player_name {
+  &__active-player_name,
+  &__active-player_steps {
     font-family: 'Creepster';
     font-weight: 700;
     text-transform: uppercase;
@@ -25,6 +26,10 @@
     letter-spacing: 0.2rem;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+  }
+
+  &__active-player_steps {
+    margin: 1rem 0 0 0;
   }
 
   &__active-player_image {
@@ -49,7 +54,6 @@
     font-size: 1.2rem;
     margin: 0.2rem auto;
     font-family: 'Creepster', cursive;
-    color: #41514a;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     display: flex;
@@ -60,7 +64,7 @@
     cursor: pointer;
     transition: all 0.3s;
     &:hover {
-      color: #1c523a;
+      color: #081c22;
       transform: scale(1.1);
     }
     &:active {

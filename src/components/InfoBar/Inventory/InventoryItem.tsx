@@ -20,10 +20,10 @@ const InventoryItem = (props: Props) => {
   const { canPlayerMove } = useAppSelector((state) => state.characters);
   const { sound, gameVolume } = useAppSelector((state) => state.options);
   const dispatch = useAppDispatch();
-  const audioFirstAidKit = new Audio('fak.mp3');
-  const audioPlank = new Audio('plank.mp3');
-  const audioGrenade = new Audio('grenade.mp3');
-  const audioGrenadeGun = new Audio('grenadeGun.mp3');
+  const audioFirstAidKit = new Audio('./sounds/fak.mp3');
+  const audioPlank = new Audio('./sounds/plank.mp3');
+  const audioGrenade = new Audio('./sounds/grenade.mp3');
+  const audioGrenadeGun = new Audio('./sounds/grenadeGun.mp3');
   audioFirstAidKit.volume = gameVolume;
   audioPlank.volume = gameVolume;
   audioGrenade.volume = gameVolume;

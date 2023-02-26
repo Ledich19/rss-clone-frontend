@@ -7,6 +7,7 @@ import PlayersCards from './Players/PlayersCards';
 
 const InfoBar = () => {
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
+  const { value } = useAppSelector((state) => state.spinner);
   const theme = useAppSelector((state) => state.options.theme);
   const currentPlayer = characters.find((el) => el.type === activePlayer);
   let currentPlayerWeapons: Array<ThingType | WeaponType> = [];
@@ -25,18 +26,27 @@ const InfoBar = () => {
       <div className="info__players">
         <PlayersCards characters={characters} activePlayer={activePlayer} theme={theme}/>
       </div>
+      <div className="info__active-player_steps" style={theme === 'default' ? { backgroundImage: 'url(./images/planck2.png)' } : { backgroundImage: 'url(./images/planck2darck.png)' } }>
+        <span>Steps left: {value}</span>
+      </div>
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer?.inventory} activePlayer={activePlayer} theme={theme}/>
       </div>
       <div className="info__buttons">
         <Link rel="stylesheet" to={'/'}>
-          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck.png)' } : { backgroundImage: 'url(./images/planck-dark.png)' } }>HOME</div>
+          <div className="info__button" style={theme === 'default'
+            ? { backgroundImage: 'url(./images/planck.png)', color: '#41514a' }
+            : { backgroundImage: 'url(./images/planck-dark.png)', color: '#0d353d' } }>HOME</div>
         </Link>
         <Link rel="stylesheet" to={'/tutorial'}>
-          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck.png)' } : { backgroundImage: 'url(./images/planck-dark.png)' } }>TUTORIAL</div>
+          <div className="info__button" style={theme === 'default'
+            ? { backgroundImage: 'url(./images/planck.png)', color: '#41514a' }
+            : { backgroundImage: 'url(./images/planck-dark.png)', color: '#0d353d' } }>TUTORIAL</div>
         </Link>
         <Link rel="stylesheet" to={'/options'}>
-          <div className="info__button" style={theme === 'default' ? { backgroundImage: 'url(./images/planck.png)' } : { backgroundImage: 'url(./images/planck-dark.png)' } }>OPTIONS</div>
+          <div className="info__button" style={theme === 'default'
+            ? { backgroundImage: 'url(./images/planck.png)', color: '#41514a' }
+            : { backgroundImage: 'url(./images/planck-dark.png)', color: '#0d353d' } }>OPTIONS</div>
         </Link>
       </div>
     </div>

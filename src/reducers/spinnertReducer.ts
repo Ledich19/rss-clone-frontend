@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 type InitialState = {
   value: number,
   isNearbyEnemy: string[] | null,
+  active: boolean,
   ranges: {
     range: number[],
     value: number,
@@ -13,6 +14,7 @@ type InitialState = {
 const initialState: InitialState = {
   value: 0,
   isNearbyEnemy: null,
+  active: true,
   ranges: [
     {
       range: [0, 30],
@@ -58,10 +60,15 @@ const spinnerSlice = createSlice({
     }) {
       return { ...state, isNearbyEnemy: actions.payload };
     },
+    setIsSpinnerActive(state, actions: {
+      payload: boolean; type: string;
+    }) {
+      return { ...state, active: actions.payload };
+    },
   },
 });
 
 export const {
-  decrementSpinnerValue, setSpinnerValue, setIsNearEnemy,
+  decrementSpinnerValue, setSpinnerValue, setIsNearEnemy, setIsSpinnerActive,
 } = spinnerSlice.actions;
 export default spinnerSlice.reducer;
