@@ -18,7 +18,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
   const dispatch = useAppDispatch();
   const notify = useSetNotify();
   const gameField = useAppSelector((state) => state.game);
-  const { activePlayer } = useAppSelector((state) => state.characters);
+  const { activePlayer, characters } = useAppSelector((state) => state.characters);
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
@@ -67,9 +67,19 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
       }
     }
   };
+  const checkIsAlivePlayers = () => {
+    const chack = characters.map((character) => character.health).every((health) => health <= 0);
+    if (chack) {
+      notify({
+        type: 'info',
+        text: 'Ви проиграли все игроки погибли',
+      });
+    }
+  };
   useEffect(() => {
     checkIsNearEnemy();
     checkIsFinish();
+    checkIsAlivePlayers();
   }, [activePlayer]);
 
   const handleOpen = () => {

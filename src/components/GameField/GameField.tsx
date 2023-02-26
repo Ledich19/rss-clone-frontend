@@ -76,6 +76,19 @@ const GameField = () => {
       }
     }
   }, [isNearbyEnemy, value]);
+  // check next player
+  useEffect(() => {
+    const isEnemy = gameFieldMatrix
+      .flat(1)
+      .find(
+        (ceil) => ceil.state && ceil.state.category === 'enemy' && ceil.state.isVisible,
+      );
+    const isPlayerDied = characters
+      .find((character) => character.type === activePlayer && !character.isAlive);
+    if (!isEnemy && isPlayerDied) {
+      dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+    }
+  }, [activePlayer]);
 
   return (
     <div className="field">
