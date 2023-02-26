@@ -38,7 +38,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     const checkItemsPlayer = gameFieldArray
       .filter((ceil) => checkItemsId(parseInt(i, 10), parseInt(j, 10))
         .includes(ceil.id) && ceil.state?.category === 'character')
-      .map((e) => e.id);
+      .map((e) => ({ id: e.id, type: e.state?.type as string }));
 
     if (checkItemsPlayer.length > 0) {
       dispatch(setIsNearEnemy(checkItemsPlayer));
@@ -78,7 +78,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
         );
       }
       if (thingCeil.state.category === 'enemy') {
-        dispatch(setIsNearEnemy([thingCeil.id]));
+        dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
         dispatch(setCanPlayerMove(false));
       }
     }

@@ -175,7 +175,6 @@ const playersSlice = createSlice({
       payload: boolean;
       type: string;
     }) {
-      console.log('setCanPlayerMove');
       return { ...state, canPlayerMove: actions.payload };
     },
     setNextActivePlayer(state, actions: {

@@ -33,7 +33,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
       const checkItemsEnemy = gameFieldArray
         .filter((ceil) => checkItemsId(parseInt(i, 10), parseInt(j, 10))
           .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
-        .map((e) => e.id);
+        .map((e) => ({ id: e.id, type: e.state?.type as string }));
       if (checkItemsEnemy.length > 0) {
         dispatch(setIsNearEnemy(checkItemsEnemy));
         dispatch(setSpinnerValue(0));

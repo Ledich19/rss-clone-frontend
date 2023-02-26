@@ -3,7 +3,9 @@ import { getNextPlayer, getActivePlayerCeil } from '../../app/healpers';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { WeaponType } from '../../app/types';
 import {
-  moveCharacter, removeCardState, setDiedBodyInventory,
+  moveCharacter,
+  removeCardState,
+  setDiedBodyInventory,
 } from '../../reducers/gameBoardReducer';
 import {
   decrementHealth,
@@ -58,9 +60,11 @@ const GameField = () => {
           break;
         case value === 3 && playerWeapon?.includes('sword') && !canPlayerMove:
         case value === 4 && playerWeapon?.includes('aim') && !canPlayerMove:
-          dispatch(removeCardState(isNearbyEnemy[0]));
+          dispatch(removeCardState(isNearbyEnemy[0].id));
           dispatch(setSpinnerValue(0));
-          dispatch(moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0], body: player }));
+          dispatch(
+            moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0].id, body: player }),
+          );
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
           dispatch(setCanPlayerMove(true));
           break;
@@ -78,28 +82,32 @@ const GameField = () => {
             if (item.state && useCharactersTypes.includes(item.state.type)) {
               return (
                 <FieldCardForPlayer
-                position={{ row: i, col: j }}
-                key={item.id}
-                heightField={heightField}
-                item={item}
-                />
-              );
-            }
-            if (item.state && item.state.category === 'enemy') {
-              return <FieldCardForEnemy
-                position={{ row: i, col: j }}
-                key={item.id}
-                heightField={heightField}
-                item={item}
-                />;
-            }
-            if (item.state && item.state.category === 'deadBody') {
-              return <FieldCardDeadBody
                   position={{ row: i, col: j }}
                   key={item.id}
                   heightField={heightField}
                   item={item}
-              />;
+                />
+              );
+            }
+            if (item.state && item.state.category === 'enemy') {
+              return (
+                <FieldCardForEnemy
+                  position={{ row: i, col: j }}
+                  key={item.id}
+                  heightField={heightField}
+                  item={item}
+                />
+              );
+            }
+            if (item.state && item.state.category === 'deadBody') {
+              return (
+                <FieldCardDeadBody
+                  position={{ row: i, col: j }}
+                  key={item.id}
+                  heightField={heightField}
+                  item={item}
+                />
+              );
             }
             return (
               <FieldCard

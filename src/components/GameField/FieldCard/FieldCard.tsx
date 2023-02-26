@@ -143,7 +143,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           }, 3000);
           break;
         case 'enemy':
-          dispatch(setIsNearEnemy([thingCeil.id]));
+          dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
           dispatch(setCanPlayerMove(false));
           break;
         // case 'deadBody':
