@@ -40,7 +40,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
-    lineHeight: `calc(100vh / ${heightField})`,
+    // lineHeight: `calc(100vh / ${heightField})`,
     background:
       item.value && item.value === 'finish' ? 'rgba(232, 248, 5, 0.3)' : 'rgba(0, 0, 0, 0)',
   };

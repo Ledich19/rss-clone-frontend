@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
+  background: var(--background-start-page);
 }
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka+One&display=swap');
 // font-family: 'Creepster', cursive;
@@ -24,21 +25,21 @@
 }
 :root[data-theme='default'] {
   --color-text-qa-question: #000;
+  --color-rules-burger-span: #ff9900;
+  --color-text-start-footer-year: #ff9900;
+  --colot-text-options: #ff9900;
+  --border-color-switcher-box: #ff9900;
   --txt-base-color: #000;
   --background-rules-page: #bbdd33;
   --color-amount-label: #bddb44;
   --color-amount-inputs: #bddb44;
   --color-text-rules-page: #ad1705;
-  --color-rules-burger-span: #bc7a00;
   --background-rules-up-btn-hover: #9bb913;
   --background-card-item: #bdaa7d;
   --background-card-item-desc: #fff;
   --color-start-menu-btn: #41514a;
   --color-start-menu-btn-hover: #1c523a;
   --background-player-option: #5c341bb6;
-  --color-text-start-footer-year: #df8844;
-  --colot-text-options: #ff9900;
-  --border-color-switcher-box: #ff9900;
   --background-item-text: url(../public/images/tutorial_page/paper.jpg);
   --background-item-btn: url(../public/images/tutorial_page/arrow-down.svg);
   --background-rules-up-btn: url(../public/images/tutorial_page/arrow-top2.png) center no-repeat,
