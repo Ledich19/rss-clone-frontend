@@ -7,7 +7,7 @@ $colorText: #AD1705;
 }
 .rules{
   // background-image: linear-gradient(#BDDB44, #bbdd33, #b4da1d);
-  background-color: #bbdd33;
+  background-color: var(--background-rules-page);
   transition: all 0.25s ease;
   position: relative;
   &__container{
@@ -45,7 +45,7 @@ $colorText: #AD1705;
     border-radius: 10px;
   }
   &__about-game{
-    color: $colorText;
+    color: var(--color-text-rules-page);
     font-weight: 500;
     font-size: 24px;
     text-align: left;
@@ -71,9 +71,9 @@ $colorText: #AD1705;
     opacity: 1;
     transition: all 0.5s ease;
     border: 1px solid #000;
-    background: url(../../../public/images/tutorial_page/arrow-top2.png)center no-repeat,#a4d649;
+    background: var(--background-rules-up-btn);
     &:hover{
-      background-color: #9bb913;
+      background-color: var(--background-rules-up-btn-hover);
     }
   }
   &__buttons{
@@ -108,7 +108,7 @@ $colorText: #AD1705;
   }
   &__span{
     height: 3px;
-    background-color: #301c07;
+    background-color: var(--color-rules-burger-span);
     transition: all 0.5s ease;
     &_top{
       width: 20px;

@@ -1,5 +1,5 @@
 .amount-label {
-  color: #bddb44;
+  color:var(--color-amount-label);
 }
 .amount {
   margin-top: 5px;
@@ -11,7 +11,7 @@
   &__btn {
     outline: solid 3px #955931;
     cursor: pointer;
-    color: #bddb44;
+    color:var(--color-amount-inputs);
     font-family: 'Creepster';
     padding: 0 15px;
     font-size: 2rem;
@@ -22,7 +22,7 @@
   &__input {
     width: 100px;
     font-size: 2rem;
-    color: #bddb44;
+    color:var(--color-amount-inputs);
     font-family: 'Creepster';
     padding: 3px;
     border-radius: 5px;
