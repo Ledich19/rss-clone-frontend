@@ -33,17 +33,17 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
 
   const checkIsNearbyPlayer = (id: string) => {
     const [i, j] = id.split('-');
+    const nearCeils = checkItemsId(parseInt(i, 10), parseInt(j, 10));
     const gameFieldArray = gameField.flat(1);
 
     const checkItemsPlayer = gameFieldArray
-      .filter((ceil) => checkItemsId(parseInt(i, 10), parseInt(j, 10))
-        .includes(ceil.id) && ceil.state?.category === 'character')
+      .filter((ceil) => nearCeils.includes(ceil.id) && ceil.state?.category === 'character')
       .map((e) => ({ id: e.id, type: e.state?.type as string }));
-
     if (checkItemsPlayer.length > 0) {
       dispatch(setIsNearEnemy(checkItemsPlayer));
       if (spinnerValue > 0) {
-        dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+        const nextPlayer = getNextPlayer(characters, activePlayer);
+        dispatch(setNextActivePlayer(nextPlayer));
       }
       dispatch(setSpinnerValue(0));
     } else {
@@ -60,27 +60,30 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     const player = getActivePlayerCeil(gameField, activePlayer);
     const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
     const canOpen = player && thingCeil ? canIOpen(gameField, player.id, thingCeil.id) : null;
-    if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
-      dispatch(setVisibleCard(id));
-      dispatch(setSpinnerValue(0));
-      if (thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing') {
-        setTimeout(() => {
-          dispatch(removeCardState(id));
-          const body = characters.find((character) => character.type === activePlayer) || null;
-          dispatch(moveCharacter({ from: player.id, to: id, body }));
-          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-        }, 3000);
-        dispatch(
-          addToPlayerInventory({
-            player: activePlayer,
-            value: thingCeil.state as ThingType,
-          }),
-        );
-      }
-      if (thingCeil.state.category === 'enemy') {
-        dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
-        dispatch(setCanPlayerMove(false));
-      }
+    if (!player || spinnerValue <= 0 || !canOpen || !thingCeil || !thingCeil.state || !id) {
+      return;
+    }
+
+    dispatch(setVisibleCard(id));
+    dispatch(setSpinnerValue(0));
+
+    if (thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing') {
+      setTimeout(() => {
+        dispatch(removeCardState(id));
+        const body = characters.find((character) => character.type === activePlayer) || null;
+        dispatch(moveCharacter({ from: player.id, to: id, body }));
+        dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+      }, 3000);
+      dispatch(
+        addToPlayerInventory({
+          player: activePlayer,
+          value: thingCeil.state as ThingType,
+        }),
+      );
+    }
+    if (thingCeil.state.category === 'enemy') {
+      dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
+      dispatch(setCanPlayerMove(false));
     }
   };
 
@@ -89,7 +92,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
       return;
     }
     const id = e.currentTarget.getAttribute('data-ceil-id');
-    if (id && item.state && item.state.category === 'enemy') {
+    if (id && item.state?.category === 'enemy') {
       dispatch(setActiveEnemy({ id, value: item.state as EnemyType }));
     }
   };
