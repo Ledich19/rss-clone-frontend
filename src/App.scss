@@ -25,7 +25,6 @@
 :root[data-theme='default'] {
   --color-text-qa-question: #000;
   --txt-base-color: #000;
- 
   --background-rules-page: #bbdd33;
   --color-amount-label: #bddb44;
   --color-amount-inputs: #bddb44;
@@ -59,11 +58,11 @@
 :root[data-theme='dark'] {
   --color-text-qa-question: #2c6abb;
   --txt-base-color: #22d3ff;
-  
+  --color-text-start-footer-year: #0f5a6d;
+  --colot-text-options: #2caac6;
   --color-text-rules-page: #22d3ff;
   --color-amount-label: #66e1fc;
   --border-color-switcher-box: #2caac6;
-  --colot-text-options: #2caac6;
   --color-rules-burger-span: #2caac6;
   --background-rules-page: #001318;
   --background-rules-up-btn-hover: #ffffff;
@@ -73,7 +72,6 @@
   --color-start-menu-btn-hover: #081c22;
   --background-player-option: #0f5a6d78;
   --color-amount-inputs: #19292d;
-  --color-text-start-footer-year: #0f5a6d;
   --background-item-btn: url(../public/images/tutorial_page/arrow-down-dark.svg);
   --background-rules-up-btn: url('../public/images/tutorial_page/arrow-top2-dark.png') center
       no-repeat,
@@ -91,4 +89,3 @@
   --image-card-item-weapons: url(../public/images/tutorial_page/weapons-dark.svg) 0 0/ 12px 12px no-repeat;
   --image-card-item-monstrs: url(../public/images/tutorial_page/monster-dark.png) 0 0/ 12px 12px no-repeat;
 }
-

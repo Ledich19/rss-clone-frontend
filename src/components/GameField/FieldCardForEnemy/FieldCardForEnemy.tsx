@@ -85,6 +85,9 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
   };
 
   const handleChoose = (e: React.MouseEvent<HTMLElement>) => {
+    if (spinnerValue > 0 && enemyChoose) {
+      return;
+    }
     const id = e.currentTarget.getAttribute('data-ceil-id');
     if (id && item.state && item.state.category === 'enemy') {
       dispatch(setActiveEnemy({ id, value: item.state as EnemyType }));
