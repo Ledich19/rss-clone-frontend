@@ -37,3 +37,7 @@ export const canIOpen = (gameField: BoardItemType[][], player: string, id: strin
     .map((e) => e.id);
   return checkItemsObj.includes(id);
 };
+
+export function shuffleArray<Type>(arr: Type[]): Type[] {
+  return arr.sort(() => Math.round(Math.random() * 100) - 50);
+}
