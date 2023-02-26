@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
 import './InfoBar.scss';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import Inventory from './Inventory/Inventory';
 import { ThingType, WeaponType } from '../../app/types';
 import PlayersCards from './Players/PlayersCards';
-import { setNextActivePlayer } from '../../reducers/playersReducer';
-import { getNextPlayer } from '../../app/healpers';
 
 const InfoBar = () => {
-  const dispatch = useAppDispatch();
   const { characters, activePlayer } = useAppSelector((state) => state.characters);
   const { value } = useAppSelector((state) => state.spinner);
   const theme = useAppSelector((state) => state.options.theme);
@@ -38,8 +35,6 @@ const InfoBar = () => {
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer?.inventory} activePlayer={activePlayer} theme={theme}/>
       </div>
-      {/* ! need delete */}
-       <div onClick={() => dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)))} className="info__endOfStroke">конец хода</div>
       <div className="info__buttons">
         <Link rel="stylesheet" to={'/'}>
           <div className="info__button" style={theme === 'default'
