@@ -5,14 +5,15 @@ import { setIsSpinnerActive, setSpinnerValue } from '../../reducers/spinnertRedu
 
 const Spinner = () => {
   const { isNearbyEnemy, active } = useAppSelector((state) => state.spinner);
+  const { theme, sound, spinnerVolume } = useAppSelector((state) => state.options);
+  const { enemyChoose } = useAppSelector((state) => state.characters);
   const [resultImage, setResultImage] = useState('./images/spinner/push.png');
   const [arrowRotateStyle, setArrowRotateStyle] = useState(0);
   const [progressTransitionStyle, setProgressTransitionStyle] = useState(0);
   const [progressHightStyle, setProgressHightStyle] = useState(100);
   const [arrowTransitionStyle, setArrowTransitionStyle] = useState(0);
-  const { theme, sound, spinnerVolume } = useAppSelector((state) => state.options);
-  let startTime = performance.now();
   const [startAngle, setStartAngle] = useState(0);
+  let startTime = performance.now();
   let timeProgress = 0;
   let isSpinning = false;
   const dispatch = useAppDispatch();
@@ -53,6 +54,8 @@ const Spinner = () => {
         result = 1;
         setResultImage(topLeftImage);
       }
+      if (enemyChoose?.value.type === 'zombie') result -= 1;
+      if (enemyChoose?.value.type === 'hellHound') result += 1;
       dispatch(setSpinnerValue(result));
       dispatch(setIsSpinnerActive(false));
       isSpinning = false;
