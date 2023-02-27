@@ -1495,7 +1495,7 @@ const initialState: GameSetType = {
         img: 'characters/boris.png',
         description: 'Невероятно здоровый и выносливый: в начале игры у него на две жизни больше, чем у остальных',
         isVisible: false,
-        isAlive: false,
+        isAlive: true,
         count: 1,
         health: 5,
         inventory: [],

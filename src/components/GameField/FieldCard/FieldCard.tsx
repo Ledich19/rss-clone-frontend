@@ -8,6 +8,7 @@ import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducer
 import {
   decrementSpinnerValue,
   setIsNearEnemy,
+  setIsSpinnerActive,
   setSpinnerValue,
 } from '../../../reducers/spinnertReducer';
 import {
@@ -102,6 +103,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       dispatch(decrementSpinnerValue(canMovie.movie));
       if (spinnerValue - canMovie.movie === 0) {
         dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+        dispatch(setIsSpinnerActive(true));
         dispatch(setActiveEnemy(null));
       }
       if (isDied && id && enemyChoose) {
@@ -140,6 +142,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
             dispatch(removeCardState(id));
             dispatch(moveCharacter({ from: player.id, to: id, body }));
             dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+            dispatch(setIsSpinnerActive(true));
           }, 3000);
           break;
         case 'enemy':

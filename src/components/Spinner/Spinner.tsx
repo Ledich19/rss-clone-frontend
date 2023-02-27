@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Spinner.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setSpinnerValue } from '../../reducers/spinnertReducer';
+import { setIsSpinnerActive, setSpinnerValue } from '../../reducers/spinnertReducer';
 
 const Spinner = () => {
   const { isNearbyEnemy, active } = useAppSelector((state) => state.spinner);
@@ -78,6 +78,7 @@ const Spinner = () => {
     const angle = (startAngle + timeProgress + random + 90);
     setStartAngle((startAngle + timeProgress + random) % 360);
     checkResult(angle);
+    dispatch(setIsSpinnerActive(false));
   }
 
   function renderProgress() {
