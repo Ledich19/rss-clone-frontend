@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BoardItemType, CharacterType, Player } from '../app/types';
+import {
+  BoardItemType, CharacterType, EnemyType, InventoryType,
+} from '../app/types';
 
 const initialState: BoardItemType[][] = [
   [
@@ -1512,7 +1514,7 @@ const gameBoardSlice = createSlice({
       payload: {
         from: string,
         to: string,
-        body: CharacterType | null
+        body: CharacterType | EnemyType | null
       };
       type: string;
     }) {
@@ -1567,10 +1569,37 @@ const gameBoardSlice = createSlice({
 
       return newState;
     },
+
+    setDiedBodyInventory(state, actions: {
+      payload: {
+        id: string;
+        value: InventoryType
+      };
+      type: string;
+    }) {
+      const newCeilState = actions.payload.value.length > 1 ? {
+        type: 'deadBody',
+        category: 'deadBody',
+        img: '',
+        isVisible: true,
+        value: actions.payload.value,
+      } : null;
+
+      const newState = state.map((row) => row.map((ceil) => {
+        if (ceil.id === actions.payload.id) {
+          const newCeil = { ...ceil, state: newCeilState };
+          return newCeil;
+        }
+        return ceil;
+      }));
+
+      return newState;
+    },
   },
 });
 
 export const {
-  setNewGameField, setVisibleCard, moveCharacter, removeCardState, addPlankState,
+  setNewGameField,
+  setVisibleCard, moveCharacter, removeCardState, addPlankState, setDiedBodyInventory,
 } = gameBoardSlice.actions;
 export default gameBoardSlice.reducer;

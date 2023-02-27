@@ -28,7 +28,7 @@ const PlayerOption = ({ player }: PropertyType) => {
           id: player.id,
           category: 'character',
           isVisible: true,
-          active: true,
+          isAlive: true,
           type: 'empty',
           name: 'Player',
           img: 'things/plank.png',

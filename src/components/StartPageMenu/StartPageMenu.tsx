@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import './StartPageMenu.scss';
 
-const StartPageMenu = () => {
-  console.log('');
-  return (
+const StartPageMenu = () => (
     <div className="start-menu">
       <Link rel="stylesheet" to={'/start'}>
         <button className="start-menu__btn">Start</button>
@@ -16,6 +14,5 @@ const StartPageMenu = () => {
         <button className="start-menu__btn">Options</button>
       </Link>
     </div>
-  );
-};
+);
 export default StartPageMenu;

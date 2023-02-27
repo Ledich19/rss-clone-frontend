@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  CharacterType, Players, ThingType, WeaponType,
+  CharacterType, EnemyType, Players, ThingType, WeaponType,
 } from '../app/types';
 
 const initialState: Players = {
@@ -50,6 +50,7 @@ const initialState: Players = {
     // },
   ],
   activePlayer: 'boris',
+  enemyChoose: null,
   canPlayerMove: true,
   amount: '0',
 };
@@ -176,11 +177,11 @@ const playersSlice = createSlice({
     }) {
       return { ...state, canPlayerMove: actions.payload };
     },
-    setNextActivePlayer(state) {
-      const activeIndex = state.characters.map((ch) => ch.type).indexOf(state.activePlayer);
-      const nextPlayerIndex = activeIndex === state.characters.length ? activeIndex + 1 : 0;
-      const activePlayer = state.characters[nextPlayerIndex].type;
-      return { ...state, activePlayer };
+    setNextActivePlayer(state, actions: {
+      payload: string;
+      type: string;
+    }) {
+      return { ...state, activePlayer: actions.payload };
     },
     setActivePlayer(state, actions: {
       payload: string;
@@ -193,6 +194,33 @@ const playersSlice = createSlice({
       type: string;
     }) {
       return { ...state, amount: actions.payload };
+    },
+    setAlivePlayer(state, actions: {
+      payload: {
+        type: string,
+        value: boolean,
+      };
+      type: string;
+    }) {
+      const newCharacters = state.characters.map((character) => {
+        if (character.type === actions.payload.type) {
+          return {
+            ...character, isAlive: actions.payload.value,
+          };
+        }
+        return character;
+      });
+      const newState = { ...state, characters: newCharacters };
+      return newState;
+    },
+    setActiveEnemy(state, actions: {
+      payload: {
+        id: string,
+        value: EnemyType,
+      } | null;
+      type: string,
+    }) {
+      return { ...state, enemyChoose: actions.payload };
     },
   },
 });
@@ -210,5 +238,7 @@ export const {
   setActivePlayer,
   setNextActivePlayer,
   setAmount,
+  setActiveEnemy,
+  setAlivePlayer,
 } = playersSlice.actions;
 export default playersSlice.reducer;

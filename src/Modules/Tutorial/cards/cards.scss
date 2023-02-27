@@ -8,6 +8,7 @@
     transition: all .5s ease;
   }
   &__items{
+    background: var(--background-item-text);
     padding: 20px;
     & ,.visible {
       background-image: url(../../../../public/images/tutorial_page/paper.jpg);
@@ -16,6 +17,7 @@
     }
   }
   &__label{
+    color:var(--txt-base-color);
     font-weight: 500;
     margin-bottom: 20px;
     font-size: 18px;
@@ -31,7 +33,7 @@
     text-align: center;
     padding: 15px;
     border-radius: 10px;
-    background-color: #bdaa7d;
+    background-color: var(--background-card-item);
     position: relative;
     overflow: hidden;
     &:before{
@@ -49,6 +51,13 @@
     &:hover::before{
       opacity: 1;
     }
+  }
+  &__desc{
+    color:var(--txt-base-color);
+    background-color: var(--background-card-item-desc);
+  }
+  &__info-item{
+    color:  var(--txt-base-color);
   }
   &__item:hover &__desc{
     top: 50%;

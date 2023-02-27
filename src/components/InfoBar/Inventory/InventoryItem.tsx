@@ -1,23 +1,29 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import PopupInventory from './PopupInventory';
-import { incrementHealth, deleteFromPlayerInventory, setCanPlayerMove } from '../../../reducers/playersReducer';
+import {
+  incrementHealth,
+  deleteFromPlayerInventory,
+  setCanPlayerMove,
+  setNextActivePlayer,
+} from '../../../reducers/playersReducer';
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 import { removeCardState, addPlankState } from '../../../reducers/gameBoardReducer';
 import { BoardItemType } from '../../../app/types';
+import { getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
 
 interface Props {
-  img: string
-  type: string
-  descr: string
-  activePlayer: string
+  img: string;
+  type: string;
+  descr: string;
+  activePlayer: string;
 }
 
 const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
   const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
-  const { canPlayerMove } = useAppSelector((state) => state.characters);
+  const { canPlayerMove, characters, activePlayer } = useAppSelector((state) => state.characters);
   const { sound, gameVolume } = useAppSelector((state) => state.options);
   const dispatch = useAppDispatch();
   const audioFirstAidKit = new Audio('./sounds/fak.mp3');
@@ -38,14 +44,13 @@ const InventoryItem = (props: Props) => {
 
   function usePlank() {
     let isChangeCanPlayerMove = false;
-    function applyPlank(e:Event) {
-      const target = (e.target as HTMLInputElement);
-      const player = gameField.flat(1).find(
-        (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
-      );
+    function applyPlank(e: Event) {
+      const target = e.target as HTMLInputElement;
+      const player = getActivePlayerCeil(gameField, props.activePlayer);
+
       if (target && player) {
         const cell = target.getAttribute('data-tag');
-        const canPut:string[] = [];
+        const canPut: string[] = [];
         const playerCell = player.id.split('-');
         if (player?.bottom) canPut.push(`${Number(playerCell[0]) + 1}-${playerCell[1]}`);
         if (player?.left) canPut.push(`${playerCell[0]}-${Number(playerCell[1]) - 1}`);
@@ -74,53 +79,77 @@ const InventoryItem = (props: Props) => {
 
   function useGrenade() {
     if (isNearbyEnemy) {
-      const enemy = gameField.flat(1).find(
-        (ceil) => isNearbyEnemy.includes(ceil.id) && ceil.state?.type !== 'boss',
-      );
+      const enemy = gameField
+        .flat(1)
+        .find(
+          (ceil) => isNearbyEnemy.map((e) => e.id).includes(ceil.id) && ceil.state?.type !== 'boss',
+        );
       if (enemy) {
         if (sound) audioGrenade.play();
         dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenade' }));
         dispatch(removeCardState(enemy.id));
-        const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter((el) => el !== enemy.id);
+        const newIsNearbyEnemy: { id: string; type: string }[] | null = isNearbyEnemy.filter(
+          (el) => el.id !== enemy.id,
+        );
         if (newIsNearbyEnemy.length) {
           dispatch(setIsNearEnemy(newIsNearbyEnemy));
-        } else dispatch(setIsNearEnemy(null));
+        } else {
+          dispatch(setIsNearEnemy(null));
+          dispatch(setCanPlayerMove(true));
+        }
       }
     }
   }
 
   function useGrenadeGun() {
-    function checkIsNextToSomeone(player: BoardItemType | undefined, someone: string[])
-      : BoardItemType | undefined {
+    function checkIsNextToSomeone(
+      player: BoardItemType | undefined,
+      someone: string[],
+    ): BoardItemType | undefined {
       let cell: BoardItemType | undefined;
       const playerCell = player?.id.split('-');
       if (playerCell) {
         if (player?.bottom) {
-          cell = gameField.flat(1).find(
-            (ceil) => ceil.id === `${Number(playerCell[0]) + 1}-${playerCell[1]}` && ceil.state?.type && someone.includes(ceil.state.type),
-          );
+          cell = gameField
+            .flat(1)
+            .find(
+              (ceil) => ceil.id === `${Number(playerCell[0]) + 1}-${playerCell[1]}`
+              && ceil.state?.type
+              && someone.includes(ceil.state.type),
+            );
         }
         if (player?.left && !cell) {
-          cell = gameField.flat(1).find(
-            (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) - 1}` && ceil.state?.type && someone.includes(ceil.state.type),
-          );
+          cell = gameField
+            .flat(1)
+            .find(
+              (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) - 1}`
+                && ceil.state?.type
+                && someone.includes(ceil.state.type),
+            );
         }
-        if ((player?.top && !cell)) {
-          cell = gameField.flat(1).find(
-            (ceil) => ceil.id === `${Number(playerCell[0]) - 1}-${playerCell[1]}` && ceil.state?.type && someone.includes(ceil.state.type),
-          );
+        if (player?.top && !cell) {
+          cell = gameField
+            .flat(1)
+            .find(
+              (ceil) => ceil.id === `${Number(playerCell[0]) - 1}-${playerCell[1]}`
+              && ceil.state?.type
+              && someone.includes(ceil.state.type),
+            );
         }
-        if ((player?.right && !cell)) {
-          cell = gameField.flat(1).find(
-            (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) + 1}` && ceil.state?.type && someone.includes(ceil.state.type),
-          );
+        if (player?.right && !cell) {
+          cell = gameField
+            .flat(1)
+            .find(
+              (ceil) => ceil.id === `${playerCell[0]}-${Number(playerCell[1]) + 1}`
+              && ceil.state?.type
+              && someone.includes(ceil.state.type),
+            );
         }
       }
       return cell;
     }
-    const player = gameField.flat(1).find(
-      (ceil) => ceil.state && typeof ceil.state === 'object' && ceil.state.type === props.activePlayer,
-    );
+    const player = getActivePlayerCeil(gameField, props.activePlayer);
+
     let cell = checkIsNextToSomeone(player, ['boss']);
     if (!cell) cell = checkIsNextToSomeone(player, ['zombie', 'hellHound', 'spiderMutant']);
     if (cell) {
@@ -128,12 +157,15 @@ const InventoryItem = (props: Props) => {
       dispatch(deleteFromPlayerInventory({ player: props.activePlayer, type: 'grenadeGun' }));
       dispatch(removeCardState(cell.id));
       if (isNearbyEnemy) {
-        const newIsNearbyEnemy: string[] | null = isNearbyEnemy.filter(
-          (el, idx) => el !== cell?.id,
+        const newIsNearbyEnemy: { id: string, type: string }[] | null = isNearbyEnemy.filter(
+          (el, idx) => el.id !== cell?.id,
         );
         if (newIsNearbyEnemy.length) {
           dispatch(setIsNearEnemy(newIsNearbyEnemy));
-        } else dispatch(setIsNearEnemy(null));
+        } else {
+          dispatch(setIsNearEnemy(null));
+          dispatch(setCanPlayerMove(true));
+        }
       }
     }
   }
@@ -166,7 +198,12 @@ const InventoryItem = (props: Props) => {
   }
 
   return (
-    <div className="inventory__image" onClick={() => useItem()} onMouseEnter={() => showPopup()} onMouseLeave={() => hidePopup()} >
+    <div
+      className="inventory__image"
+      onClick={() => useItem()}
+      onMouseEnter={() => showPopup()}
+      onMouseLeave={() => hidePopup()}
+    >
       <img src={`./images/${props.img}`} alt="cardImage" />
       {isPopup && <PopupInventory descr={props.descr} />}
     </div>
