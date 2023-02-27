@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 type InitialState = {
-  value: number,
+  value: {
+    num: number
+  },
   isNearbyEnemy: { id: string, type: string }[] | null,
   active: boolean,
   ranges: {
@@ -12,7 +14,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  value: 0,
+  value: { num: 0 },
   isNearbyEnemy: null,
   active: true,
   ranges: [
@@ -44,13 +46,13 @@ const spinnerSlice = createSlice({
   initialState,
   reducers: {
     decrementSpinnerValue(state, actions: {
-      payload: number;
+      payload: number ;
       type: string;
     }) {
-      return { ...state, value: state.value - actions.payload };
+      return { ...state, value: { num: state.value.num - actions.payload } };
     },
     setSpinnerValue(state, actions: {
-      payload: number;
+      payload: { num: number };
       type: string;
     }) {
       return { ...state, value: actions.payload };
@@ -58,6 +60,7 @@ const spinnerSlice = createSlice({
     setIsNearEnemy(state, actions: {
       payload: { id: string, type: string }[] | null; type: string;
     }) {
+      console.log('ine', actions.payload);
       return { ...state, isNearbyEnemy: actions.payload };
     },
     setIsSpinnerActive(state, actions: {

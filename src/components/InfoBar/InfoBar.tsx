@@ -30,7 +30,7 @@ const InfoBar = () => {
         <PlayersCards characters={characters} activePlayer={activePlayer} theme={theme}/>
       </div>
       <div className="info__active-player_steps" style={theme === 'default' ? { backgroundImage: 'url(./images/planck2.png)' } : { backgroundImage: 'url(./images/planck2darck.png)' } }>
-        <span>Steps left: {value}</span>
+        <span>Steps left: {value.num}</span>
       </div>
       <div className="info__active-inventory">
         <Inventory inv={currentPlayer?.inventory} activePlayer={activePlayer} theme={theme}/>

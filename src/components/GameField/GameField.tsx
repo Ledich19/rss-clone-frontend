@@ -36,23 +36,23 @@ const GameField = () => {
     const playerWeaponObj = player?.inventory?.filter(
       (e) => e.category === 'weapon',
     ) as WeaponType[];
-    console.log('playerWeaponObj', playerWeaponObj);
-    console.log('isNearbyEnemy', isNearbyEnemy);
-    console.log('player', player);
-    console.log('playerPosition', playerPosition);
+    // console.log('playerWeaponObj', playerWeaponObj);
+    console.log('isNearbyEnemy F', isNearbyEnemy);
+    // console.log('player', player);
+    // console.log('playerPosition', playerPosition);
     if (isNearbyEnemy && player && playerPosition) {
-      dispatch(setIsSpinnerActive(true));
+      console.log('fight start');
       const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
       const health = characters.find((ch) => ch.type === activePlayer)?.health;
       switch (true) {
-        case value === 1:
+        case value.num === 1:
           dispatch(setCanPlayerMove(true));
           break;
-        case value === 2 && !canPlayerMove:
+        case value.num === 2 && !canPlayerMove:
           dispatch(decrementHealth(activePlayer));
-          dispatch(setSpinnerValue(0));
-          dispatch(setIsNearEnemy([...isNearbyEnemy]));
-          if (health && health <= 1) {
+          dispatch(setSpinnerValue({ num: 0 }));
+          if (health && (health === 1)) {
+            console.log('drop');
             const playerId = getActivePlayerCeil(gameFieldMatrix, activePlayer)?.id;
             const activePlayerNow = characters.find((ch) => ch.type === activePlayer);
             if (activePlayerNow && activePlayerNow.inventory && playerId) {
@@ -60,27 +60,28 @@ const GameField = () => {
               dispatch(setAlivePlayer({ type: activePlayer, value: false }));
               dispatch(setCanPlayerMove(true));
               dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-              dispatch(setIsSpinnerActive(true));
             }
+          } else {
+            dispatch(setIsNearEnemy([...isNearbyEnemy]));
           }
           break;
-        case value === 3 && playerWeapon?.includes('sword'):
-        case value === 4 && playerWeapon?.includes('aim'):
+        case value.num === 3 && playerWeapon?.includes('sword'):
+        case value.num === 4 && playerWeapon?.includes('aim'):
           if (isNearbyEnemy[0].type === 'boss' || canPlayerMove) {
             break;
           }
           dispatch(removeCardState(isNearbyEnemy[0].id));
-          dispatch(setSpinnerValue(0));
+          dispatch(setSpinnerValue({ num: 0 }));
           dispatch(
             moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0].id, body: player }),
           );
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-          dispatch(setIsSpinnerActive(true));
           dispatch(setCanPlayerMove(true));
           break;
         default:
           break;
       }
+      dispatch(setIsSpinnerActive(true));
     }
   }, [isNearbyEnemy, value]);
   // check next player

@@ -45,12 +45,12 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
       .map((e) => ({ id: e.id, type: e.state?.type as string }));
     if (checkItemsPlayer.length > 0) {
       dispatch(setIsNearEnemy(checkItemsPlayer));
-      if (spinnerValue > 0) {
+      if (spinnerValue.num > 0) {
         const nextPlayer = getNextPlayer(characters, activePlayer);
         dispatch(setNextActivePlayer(nextPlayer));
         dispatch(setIsSpinnerActive(true));
       }
-      dispatch(setSpinnerValue(0));
+      dispatch(setSpinnerValue({ num: 0 }));
     } else {
       dispatch(setIsNearEnemy(null));
     }
@@ -61,48 +61,34 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     const player = getActivePlayerCeil(gameField, activePlayer);
     const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
     const canOpen = player && thingCeil ? canIOpen(gameField, player.id, thingCeil.id) : null;
-    if (!player || spinnerValue <= 0 || !canOpen || !thingCeil || !thingCeil.state || !id) {
+    if (!player || spinnerValue.num <= 0 || !canOpen || !thingCeil || !thingCeil.state || !id) {
       return;
     }
 
     dispatch(setVisibleCard(id));
-    dispatch(setSpinnerValue(0));
+    dispatch(setSpinnerValue({ num: 0 }));
 
-    if (thingCeil.state.category === 'weapon' || thingCeil.state.category === 'thing') {
-      setTimeout(() => {
-        dispatch(removeCardState(id));
-        const body = characters.find((character) => character.type === activePlayer) || null;
-        dispatch(moveCharacter({ from: player.id, to: id, body }));
-        dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-        dispatch(setIsSpinnerActive(true));
-      }, 3000);
-      dispatch(
-        addToPlayerInventory({
-          player: activePlayer,
-          value: thingCeil.state as ThingType,
-        }),
-      );
-    }
     if (thingCeil.state.category === 'enemy') {
-      dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
       dispatch(setCanPlayerMove(false));
+      dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
     }
   };
 
   const handleChoose = (e: React.MouseEvent<HTMLElement>) => {
-    if (spinnerValue > 0 && enemyChoose) {
+    const player = characters.find((ch) => ch.type === activePlayer);
+    if ((player && player.isAlive) || ((spinnerValue.num > 0) && enemyChoose)) {
       return;
     }
     const id = e.currentTarget.getAttribute('data-ceil-id');
     if (id && item.state?.category === 'enemy') {
       dispatch(setActiveEnemy({ id, value: item.state as EnemyType }));
     }
-    if (spinnerValue > 0 && item.state?.type === 'zombie') {
-      const value = spinnerValue > 1 ? spinnerValue - 1 : 1;
-      dispatch(setSpinnerValue(value));
+    if (spinnerValue.num > 0 && item.state?.type === 'zombie') {
+      const value = spinnerValue.num > 1 ? spinnerValue.num - 1 : 1;
+      dispatch(setSpinnerValue({ num: value }));
     }
-    if (spinnerValue > 0 && item.state?.type === 'hellHound') {
-      dispatch(setSpinnerValue(spinnerValue + 1));
+    if (spinnerValue.num > 0 && item.state?.type === 'hellHound') {
+      dispatch(setSpinnerValue({ num: spinnerValue.num + 1 }));
     }
   };
 

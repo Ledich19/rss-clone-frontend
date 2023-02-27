@@ -28,6 +28,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
     const playerId = getActivePlayerCeil(gameField, activePlayer)?.id;
 
     if (playerId) {
+      console.log('checkIsNearEnemy is1');
       const [i, j] = playerId.split('-');
       const gameFieldArray = gameField.flat(1);
       const checkItemsEnemy = gameFieldArray
@@ -35,8 +36,10 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
           .includes(ceil.id) && ceil.state?.category === 'enemy' && ceil.state.isVisible)
         .map((e) => ({ id: e.id, type: e.state?.type as string }));
       if (checkItemsEnemy.length > 0) {
+        console.log('checkIsNearEnemy is ', checkItemsEnemy);
+
         dispatch(setIsNearEnemy(checkItemsEnemy));
-        dispatch(setSpinnerValue(0));
+        dispatch(setSpinnerValue({ num: 0 }));
         dispatch(setCanPlayerMove(false));
       } else {
         dispatch(setIsNearEnemy(null));

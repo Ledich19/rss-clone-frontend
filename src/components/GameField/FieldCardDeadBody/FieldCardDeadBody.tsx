@@ -34,8 +34,8 @@ const FieldCardDeadBody = ({ heightField, item }: PropsType) => {
     const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
     const canOpen = player && thingCeil ? canIOpen(gameField, player.id, thingCeil.id) : null;
 
-    if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state?.category === 'deadBody' && id) {
-      dispatch(setSpinnerValue(0));
+    if (player && spinnerValue.num > 0 && canOpen && thingCeil && thingCeil.state?.category === 'deadBody' && id) {
+      dispatch(setSpinnerValue({ num: 0 }));
       state.value.forEach((el) => {
         dispatch(
           addToPlayerInventory({
