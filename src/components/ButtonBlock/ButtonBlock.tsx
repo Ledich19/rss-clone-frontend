@@ -48,7 +48,6 @@ const ButtonBlock = () => {
       return ceil;
     }));
 
-    //  add another items
     const gameCards = Object.values(gameCardsSet)
       .flat(1)
       .map((card) => Array(card.count).fill(card))

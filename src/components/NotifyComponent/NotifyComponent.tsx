@@ -18,7 +18,6 @@ const NotifyComponent = ({ className }: { className: string }) => {
         {notifyMessage.type !== 'warning' || <FaExclamationTriangle />}
       </i>
       <div className={`notify__text notify-${notifyMessage.type}`}>
-        {/* <span>{notifyMessage.title}</span> */}
         <span>{notifyMessage.text}</span>
       </div>
     </div>

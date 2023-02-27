@@ -41,7 +41,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
-    // lineHeight: `calc(100vh / ${heightField})`,
     background:
       item.value && item.value === 'finish' ? 'rgba(232, 248, 5, 0.3)' : 'rgba(0, 0, 0, 0)',
   };
@@ -97,25 +96,18 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       body = characters.find((character) => character.type === activePlayer) || null;
     }
 
-    const canMovie = playerId ? canIMove(playerId, spinnerValue) : null;
-    console.log(playerId, canMovie, canPlayerMove, id, spinnerValue);
+    const canMovie = playerId ? canIMove(playerId, spinnerValue.num) : null;
     if (playerId && canMovie && canPlayerMove && id && spinnerValue) {
       dispatch(moveCharacter({ from: playerId, to: id, body }));
       dispatch(decrementSpinnerValue(canMovie.movie));
-      if (spinnerValue - canMovie.movie === 0) {
-        dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-        dispatch(setIsSpinnerActive(true));
-        // dispatch(setCanPlayerMove(true));
+      if (isDied && enemyChoose) {
         dispatch(setActiveEnemy(null));
       }
-      if (isDied && id && enemyChoose) {
+      if ((spinnerValue.num - canMovie.movie) === 0) {
+        dispatch(setCanPlayerMove(true));
+        dispatch(setIsSpinnerActive(true));
         dispatch(setActiveEnemy(null));
-        // dispatch(
-        //   setActiveEnemy({
-        //     id,
-        //     value: body as EnemyType,
-        //   }),
-        // );
+        dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
       }
     }
   };
@@ -126,9 +118,9 @@ const FieldCard = ({ heightField, item }: PropsType) => {
 
     const thingCeil = gameField.flat(1).find((ceil) => ceil.id === id);
     const canOpen = player && thingCeil ? canIOpen(gameField, player.id, thingCeil.id) : null;
-    if (player && spinnerValue > 0 && canOpen && thingCeil && thingCeil.state && id) {
+    if (player && spinnerValue.num > 0 && canOpen && thingCeil && thingCeil.state && id) {
       dispatch(setVisibleCard(id));
-      dispatch(setSpinnerValue(0));
+      dispatch(setSpinnerValue({ num: 0 }));
 
       const { category } = thingCeil.state;
       switch (category) {
@@ -152,16 +144,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
           dispatch(setCanPlayerMove(false));
           break;
-        // case 'deadBody':
-        //   (thingCeil.state as CeilInventoriType).value.forEach((el) => {
-        //     dispatch(
-        //       addToPlayerInventory({
-        //         player: activePlayer,
-        //         value: el,
-        //       }),
-        //     );
-        //   });
-        //   break;
         default:
           break;
       }
@@ -181,7 +163,7 @@ const FieldCard = ({ heightField, item }: PropsType) => {
       playerId = getActivePlayerCeil(gameField, activePlayer)?.id;
     }
 
-    const canMovie = playerId ? canIMove(playerId, spinnerValue) : null;
+    const canMovie = playerId ? canIMove(playerId, spinnerValue.num) : null;
     if (canMovie && canPlayerMove) {
       const parentElement = target.closest('.field-card');
       (parentElement as HTMLElement).style.background = 'rgba(189, 219, 68, 0.573)';
@@ -231,8 +213,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
         </div>
       ) : (
         <div ref={movieInfo}>
-          {/* <div className='_movie-text'>{item.id}</div> */}
-          {/* <div className='_small-text'>{item.id}</div> */}
         </div>
       )}
     </div>

@@ -1,5 +1,5 @@
 .notify {
- margin-left: 50%;
+ margin-left: -100%;
   margin-top: 5vh;
   transform: translate(-50%, 50%);
   position: absolute;
@@ -11,21 +11,25 @@
   font-size: 0.9em;
   font-weight: 300;
   &.notify-error {
+    margin-left: 50%;
     color: #a44646;
     border: 1px solid darken(#ffcece, 30);
     background: linear-gradient(#ffcece, darken(#ffcece, 10));
   }
   &.notify-success {
+    margin-left: 50%;
     color: #0d8801;
     border: 1px solid darken(#cdecc2, 30);
     background: linear-gradient(#cdecc2, darken(#cdecc2, 10));
   }
   &.notify-info{
+    margin-left: 50%;
     color: #004d7e;
     border: 1px solid darken(#cae2ff, 30);
     background: linear-gradient(#cae2ff, darken(#cae2ff, 10));
   }
   &.notify-warning {
+    margin-left: 50%;
     color: #7a5f24;
     border: 1px solid darken(#ffdd9c, 30);
     background: linear-gradient(#ffdd9c, darken(#ffdd9c, 10));

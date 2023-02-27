@@ -13,10 +13,10 @@ const useScrollBlock = (): [() => void, () => void] => {
 
     const scrollBarWidth = window.innerWidth - html.clientWidth;
     const bodyPaddingRight = parseInt(window.getComputedStyle(body).getPropertyValue('padding-right'), 10) || 0;
-    html.style.position = 'relative'; /* [1] */
-    html.style.overflow = 'hidden'; /* [2] */
-    body.style.position = 'relative'; /* [1] */
-    body.style.overflow = 'hidden'; /* [2] */
+    html.style.position = 'relative';
+    html.style.overflow = 'hidden';
+    body.style.position = 'relative';
+    body.style.overflow = 'hidden';
     body.style.paddingRight = `${bodyPaddingRight + scrollBarWidth}px`;
 
     scrollBlocked.current = true;

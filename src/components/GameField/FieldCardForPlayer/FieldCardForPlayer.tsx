@@ -36,7 +36,7 @@ const FieldCardForPlayer = ({ heightField, item }: PropsType) => {
         .map((e) => ({ id: e.id, type: e.state?.type as string }));
       if (checkItemsEnemy.length > 0) {
         dispatch(setIsNearEnemy(checkItemsEnemy));
-        dispatch(setSpinnerValue(0));
+        dispatch(setSpinnerValue({ num: 0 }));
         dispatch(setCanPlayerMove(false));
       } else {
         dispatch(setIsNearEnemy(null));
