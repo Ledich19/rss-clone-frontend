@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url(./../../../public/images/start_bg.png);
+  background-image: var(--background-start-page);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -14,7 +14,7 @@
     height: 80%;
     width: 80%;
     border-radius: 10px;
-    background-image: url(./../../../public/images/wood.png);
+    background-image: var(--background-options-board);
     background-size: 30% 100%;
     background-repeat: repeat;
   }

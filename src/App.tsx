@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './Modules/Header/Header';
 import Error404 from './components/Error404/Error404';
 import Tutorial from './Modules/Tutorial/Tutorial';
 import StartPage from './Modules/StartPage/StartPage';
@@ -22,7 +21,6 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
       <NotifyComponent className={''} />
       <Routes>
         <Route path="/" element={<StartPage />} />

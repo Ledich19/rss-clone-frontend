@@ -10,6 +10,9 @@ const InfoBar = () => {
   const { value } = useAppSelector((state) => state.spinner);
   const theme = useAppSelector((state) => state.options.theme);
   const currentPlayer = characters.find((el) => el.type === activePlayer);
+  if (!currentPlayer) {
+    return null;
+  }
   let currentPlayerWeapons: Array<ThingType | WeaponType> = [];
   let currentPlayerThings: Array<ThingType | WeaponType> = [];
   if (currentPlayer?.inventory) {

@@ -23,8 +23,13 @@ const PlayerCard = (props: Props) => {
   }
 
   return (
+
     <div className={ `player-card ${active}` } onMouseEnter={() => showPopup()} onMouseLeave={() => hidePopup()}>
-        <img src={`./images/${props.character.img}`} alt="playerImage" />
+        <img src={
+          props.character.isAlive
+            ? `./images/${props.character.img}`
+            : './images/characters/died.png'
+        } alt="playerImage" />
         <Health health={props.character.health}/>
         {isPopup && <PopupPlayer inv={props.character.inventory} theme={props.theme}/>}
     </div>

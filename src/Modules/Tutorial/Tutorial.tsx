@@ -3,7 +3,6 @@ import { useAppSelector } from '../../app/hooks';
 import Item from './Item/Item';
 import InBox from './InBox/InBox';
 import Cards from './Cards/Cards';
-
 import Info from './Info/Info';
 import Questions from './Questions/Questions';
 import AboutSpinner from './AboutSpinner/AboutSpinner';

@@ -1,5 +1,3 @@
-$colorTitle: #AD1705;
-
 .item{
   position: relative;
   overflow: hidden;
@@ -8,7 +6,7 @@ $colorTitle: #AD1705;
     margin-bottom: 20px;
   }
   &__title{
-    color: $colorTitle;
+    color: var(--color-text-rules-page);
     font-size: 26px;
     font-weight: 500;
     margin-bottom: 10px;
@@ -19,7 +17,7 @@ $colorTitle: #AD1705;
       content: '';
       width: 0px;
       height: 2px;
-      background-color: $colorTitle;
+      background-color: var(--color-text-rules-page);
       position: absolute;
       left: 0;
       bottom: 0px;
@@ -38,7 +36,8 @@ $colorTitle: #AD1705;
   }
   &__btn{
     cursor: pointer;
-    color: $colorTitle;
+    color: var(--color-text-rules-page);
+    background-image: var(--background-item-btn);
     font-weight: 900;
     font-size: 20px;
     margin-top: -5px;
@@ -48,6 +47,7 @@ $colorTitle: #AD1705;
     transition: all 0.5s ease;
   }
   &__text{
+    background: var(--background-item-text);
     & ,.visible {
       background-image: url(../../../../public/images/tutorial_page/paper.jpg);
       background-repeat: no-repeat;
@@ -63,11 +63,13 @@ $colorTitle: #AD1705;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
   }
   &__element{
+    color: var(--txt-base-color);
     &:not(:last-child){
       margin-bottom: 10px;
     }
   }
   &__subtitle{
+    color: var(--txt-base-color);
     margin-bottom: 10px;
     font-size: 16px;
     font-weight: 500;

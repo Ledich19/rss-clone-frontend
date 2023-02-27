@@ -9,6 +9,7 @@
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
     max-height: 0;
     transition: all 0.5s ease;
+    background: var(--background-item-text);
     & ,.visible {
       background-image: url(../../../../public/images/tutorial_page/paper.jpg);
       background-repeat: no-repeat;
@@ -25,6 +26,7 @@
     position: relative;
     z-index: 5;
     margin-bottom: 10px;
+    color: var(--color-text-qa-question);
   }
   &__list{
     box-sizing: border-box;
@@ -32,6 +34,7 @@
   }
   &__item-list{
     position: relative;
+    color: var(--txt-base-color);
     &:before{
       content: "";
       width: 12px;
@@ -43,24 +46,24 @@
     }
     &_monstrs{
       &::before{
-        background:url(../../../../public/images/tutorial_page/monster.png)0 0/ 12px 12px no-repeat;
+        background: var(--image-card-item-monstrs);
       }
     }
     &_weapons{
       &::before{
-        background:url(../../../../public/images/tutorial_page/weapons.svg)0 0/ 12px 12px no-repeat;
+        background: var(--image-card-item-weapons);
         top: 6px;
         transform: rotate(-10deg);
       }
     }
     &_clothes{
       &::before{
-        background:url(../../../../public/images/tutorial_page/clothes.svg)0 0/ 12px 12px no-repeat;
+        background: var(--image-card-item-clothes);
       }
     }
     &_players{
       &::before{
-        background:url(../../../../public/images/tutorial_page/user.svg)0 0/ 12px 12px no-repeat;
+        background: var(--image-card-item-players);
       }
     }
   }
