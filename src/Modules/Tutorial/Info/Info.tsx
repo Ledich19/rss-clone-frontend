@@ -6,7 +6,7 @@ const Info = () => {
   const { info } = useAppSelector((state) => state.rules);
   const infoArr = Object.values(info);
   return (
-    <div className="info">
+    <div className="info-tutorial">
       {infoArr.map((item, index) => (
         <Item title={item.title} items={item.items} text={item.text} key={index}/>
       ))}
