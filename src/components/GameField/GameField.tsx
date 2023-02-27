@@ -36,7 +36,11 @@ const GameField = () => {
     const playerWeaponObj = player?.inventory?.filter(
       (e) => e.category === 'weapon',
     ) as WeaponType[];
-    if (isNearbyEnemy && player && playerPosition && playerWeaponObj) {
+    console.log('playerWeaponObj', playerWeaponObj);
+    console.log('isNearbyEnemy', isNearbyEnemy);
+    console.log('player', player);
+    console.log('playerPosition', playerPosition);
+    if (isNearbyEnemy && player && playerPosition) {
       dispatch(setIsSpinnerActive(true));
       const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
       const health = characters.find((ch) => ch.type === activePlayer)?.health;

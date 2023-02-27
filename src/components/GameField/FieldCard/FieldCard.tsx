@@ -98,21 +98,24 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     }
 
     const canMovie = playerId ? canIMove(playerId, spinnerValue) : null;
+    console.log(playerId, canMovie, canPlayerMove, id, spinnerValue);
     if (playerId && canMovie && canPlayerMove && id && spinnerValue) {
       dispatch(moveCharacter({ from: playerId, to: id, body }));
       dispatch(decrementSpinnerValue(canMovie.movie));
       if (spinnerValue - canMovie.movie === 0) {
         dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
         dispatch(setIsSpinnerActive(true));
+        // dispatch(setCanPlayerMove(true));
         dispatch(setActiveEnemy(null));
       }
       if (isDied && id && enemyChoose) {
-        dispatch(
-          setActiveEnemy({
-            id,
-            value: body as EnemyType,
-          }),
-        );
+        dispatch(setActiveEnemy(null));
+        // dispatch(
+        //   setActiveEnemy({
+        //     id,
+        //     value: body as EnemyType,
+        //   }),
+        // );
       }
     }
   };
