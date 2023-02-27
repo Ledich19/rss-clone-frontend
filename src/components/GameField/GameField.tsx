@@ -51,11 +51,13 @@ const GameField = () => {
         case value.num === 2 && !canPlayerMove:
           dispatch(decrementHealth(activePlayer));
           dispatch(setSpinnerValue({ num: 0 }));
+          console.log('health', health);
           if (health && (health === 1)) {
             console.log('drop');
             const playerId = getActivePlayerCeil(gameFieldMatrix, activePlayer)?.id;
             const activePlayerNow = characters.find((ch) => ch.type === activePlayer);
             if (activePlayerNow && activePlayerNow.inventory && playerId) {
+              console.log('drop', activePlayerNow.inventory);
               dispatch(setDiedBodyInventory({ id: playerId, value: activePlayerNow.inventory }));
               dispatch(setAlivePlayer({ type: activePlayer, value: false }));
               dispatch(setCanPlayerMove(true));
@@ -70,8 +72,9 @@ const GameField = () => {
           if (isNearbyEnemy[0].type === 'boss' || canPlayerMove) {
             break;
           }
-          dispatch(removeCardState(isNearbyEnemy[0].id));
           dispatch(setSpinnerValue({ num: 0 }));
+          dispatch(removeCardState(isNearbyEnemy[0].id));
+          console.log('kill', playerPosition.id, isNearbyEnemy[0].id, player);
           dispatch(
             moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0].id, body: player }),
           );
@@ -124,6 +127,7 @@ const GameField = () => {
               );
             }
             if (item.state && item.state.category === 'deadBody') {
+              console.log('deadBody iss');
               return (
                 <FieldCardDeadBody
                   position={{ row: i, col: j }}

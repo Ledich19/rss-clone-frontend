@@ -1577,7 +1577,7 @@ const gameBoardSlice = createSlice({
       };
       type: string;
     }) {
-      const newCeilState = actions.payload.value.length > 1 ? {
+      const newCeilState = actions.payload.value.length >= 1 ? {
         type: 'deadBody',
         category: 'deadBody',
         img: '',

@@ -54,7 +54,7 @@ const Spinner = () => {
         result = 1;
         setResultImage(topLeftImage);
       }
-      if (enemyChoose?.value.type === 'zombie') result -= 1;
+      if (enemyChoose?.value.type === 'zombie' && (result > 1)) result -= 1;
       if (enemyChoose?.value.type === 'hellHound') result += 1;
       console.log(result);
       dispatch(setSpinnerValue({ num: result }));
