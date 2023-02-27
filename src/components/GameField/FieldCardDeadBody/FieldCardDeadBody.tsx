@@ -2,7 +2,7 @@ import './FieldCardDeadBody.scss';
 import { BoardItemType, CeilInventoriType, ThingType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState } from '../../../reducers/gameBoardReducer';
-import { setSpinnerValue } from '../../../reducers/spinnertReducer';
+import { setIsSpinnerActive, setSpinnerValue } from '../../../reducers/spinnertReducer';
 import { addToPlayerInventory, setNextActivePlayer } from '../../../reducers/playersReducer';
 import { canIOpen, getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
 
@@ -49,7 +49,8 @@ const FieldCardDeadBody = ({ heightField, item }: PropsType) => {
         dispatch(removeCardState(id));
         dispatch(moveCharacter({ from: player.id, to: id, body }));
         dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-      }, 3000);
+        dispatch(setIsSpinnerActive(true));
+      }, 1000);
     }
   };
 

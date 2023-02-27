@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { BoardItemType, EnemyType, ThingType } from '../../../app/types';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { moveCharacter, removeCardState, setVisibleCard } from '../../../reducers/gameBoardReducer';
-import { setIsNearEnemy, setSpinnerValue } from '../../../reducers/spinnertReducer';
+import { setIsNearEnemy, setIsSpinnerActive, setSpinnerValue } from '../../../reducers/spinnertReducer';
 import {
   addToPlayerInventory,
   setActiveEnemy,
@@ -14,6 +14,7 @@ import {
   canIOpen,
   checkItemsId, getActivePlayerCeil, getNextPlayer,
 } from '../../../app/healpers';
+import { setSpinnerVolume } from '../../../reducers/optionsReducer';
 
 type PropsType = {
   heightField: number;
@@ -47,6 +48,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
       if (spinnerValue > 0) {
         const nextPlayer = getNextPlayer(characters, activePlayer);
         dispatch(setNextActivePlayer(nextPlayer));
+        dispatch(setIsSpinnerActive(true));
       }
       dispatch(setSpinnerValue(0));
     } else {
@@ -72,6 +74,7 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
         const body = characters.find((character) => character.type === activePlayer) || null;
         dispatch(moveCharacter({ from: player.id, to: id, body }));
         dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+        dispatch(setIsSpinnerActive(true));
       }, 3000);
       dispatch(
         addToPlayerInventory({
@@ -93,6 +96,13 @@ const FieldCardForEnemy = ({ heightField, item }: PropsType) => {
     const id = e.currentTarget.getAttribute('data-ceil-id');
     if (id && item.state?.category === 'enemy') {
       dispatch(setActiveEnemy({ id, value: item.state as EnemyType }));
+    }
+    if (spinnerValue > 0 && item.state?.type === 'zombie') {
+      const value = spinnerValue > 1 ? spinnerValue - 1 : 1;
+      dispatch(setSpinnerValue(value));
+    }
+    if (spinnerValue > 0 && item.state?.type === 'hellHound') {
+      dispatch(setSpinnerValue(spinnerValue + 1));
     }
   };
 

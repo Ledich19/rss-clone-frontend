@@ -13,7 +13,7 @@ import {
   setCanPlayerMove,
   setNextActivePlayer,
 } from '../../reducers/playersReducer';
-import { setIsNearEnemy, setSpinnerValue } from '../../reducers/spinnertReducer';
+import { setIsNearEnemy, setIsSpinnerActive, setSpinnerValue } from '../../reducers/spinnertReducer';
 import FieldCard from './FieldCard/FieldCard';
 import FieldCardDeadBody from './FieldCardDeadBody/FieldCardDeadBody';
 import FieldCardForEnemy from './FieldCardForEnemy/FieldCardForEnemy';
@@ -36,7 +36,12 @@ const GameField = () => {
     const playerWeaponObj = player?.inventory?.filter(
       (e) => e.category === 'weapon',
     ) as WeaponType[];
-    if (isNearbyEnemy && player && playerPosition && playerWeaponObj) {
+    console.log('playerWeaponObj', playerWeaponObj);
+    console.log('isNearbyEnemy', isNearbyEnemy);
+    console.log('player', player);
+    console.log('playerPosition', playerPosition);
+    if (isNearbyEnemy && player && playerPosition) {
+      dispatch(setIsSpinnerActive(true));
       const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
       const health = characters.find((ch) => ch.type === activePlayer)?.health;
       switch (true) {
@@ -55,6 +60,7 @@ const GameField = () => {
               dispatch(setAlivePlayer({ type: activePlayer, value: false }));
               dispatch(setCanPlayerMove(true));
               dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+              dispatch(setIsSpinnerActive(true));
             }
           }
           break;
@@ -69,6 +75,7 @@ const GameField = () => {
             moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0].id, body: player }),
           );
           dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+          dispatch(setIsSpinnerActive(true));
           dispatch(setCanPlayerMove(true));
           break;
         default:

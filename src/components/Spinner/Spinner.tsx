@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Spinner.scss';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { setSpinnerValue } from '../../reducers/spinnertReducer';
+import { setIsSpinnerActive, setSpinnerValue } from '../../reducers/spinnertReducer';
 
 const Spinner = () => {
   const { isNearbyEnemy, active } = useAppSelector((state) => state.spinner);
@@ -15,6 +15,7 @@ const Spinner = () => {
   const [startAngle, setStartAngle] = useState(0);
   let startTime = performance.now();
   let timeProgress = 0;
+  let isSpinning = false;
   const dispatch = useAppDispatch();
   const audioSpinMax = new Audio('./sounds/spinner.mp3');
   const audioSpin = new Audio('./sounds/spinner-1.mp3');
@@ -56,6 +57,8 @@ const Spinner = () => {
       if (enemyChoose?.value.type === 'zombie') result -= 1;
       if (enemyChoose?.value.type === 'hellHound') result += 1;
       dispatch(setSpinnerValue(result));
+      dispatch(setIsSpinnerActive(false));
+      isSpinning = false;
       audioSpin.pause();
       audioSpin.currentTime = 0;
       audioSpinMax.pause();
@@ -96,7 +99,8 @@ const Spinner = () => {
   }
 
   function startSpin() {
-    if (active) {
+    if (active && !isSpinning) {
+      isSpinning = true;
       timeProgress = performance.now() - startTime;
       if (timeProgress > 3000) timeProgress = 3000;
       setProgressTransitionStyle(timeProgress);
@@ -114,7 +118,7 @@ const Spinner = () => {
   return (
     <div className="spinner__wrapper">
       <img className="spinner__background" src={background} alt="background" />
-      <div className="spinner" style={active ? { filter: 'none' } : { filter: 'grayscale(50%) blur(1px)' }}>
+      <div className="spinner" style={active ? { filter: 'none' } : { filter: 'grayscale(35%)' }}>
       <div className="spinner__field"
       onMouseDown={ () => renderProgress() }
       onMouseUp={ () => startSpin() }
