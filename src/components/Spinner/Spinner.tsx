@@ -56,9 +56,7 @@ const Spinner = () => {
       }
       if (enemyChoose?.value.type === 'zombie' && (result > 1)) result -= 1;
       if (enemyChoose?.value.type === 'hellHound') result += 1;
-      console.log(result);
       dispatch(setSpinnerValue({ num: result }));
-      // dispatch(setIsSpinnerActive(false));
       isSpinning = false;
       audioSpin.pause();
       audioSpin.currentTime = 0;
@@ -100,11 +98,7 @@ const Spinner = () => {
   }
 
   function startSpin() {
-    console.log('spin');
-
     if (active && !isSpinning) {
-      console.log('no spin');
-
       dispatch(setIsSpinnerActive(false));
       isSpinning = true;
       timeProgress = performance.now() - startTime;

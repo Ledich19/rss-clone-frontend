@@ -41,7 +41,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
   const style = {
     height: `calc(100vh / ${heightField})`,
     width: `calc(100vh / ${heightField})`,
-    // lineHeight: `calc(100vh / ${heightField})`,
     background:
       item.value && item.value === 'finish' ? 'rgba(232, 248, 5, 0.3)' : 'rgba(0, 0, 0, 0)',
   };
@@ -98,19 +97,11 @@ const FieldCard = ({ heightField, item }: PropsType) => {
     }
 
     const canMovie = playerId ? canIMove(playerId, spinnerValue.num) : null;
-    // console.log(playerId, canMovie, canPlayerMove, id, spinnerValue);
     if (playerId && canMovie && canPlayerMove && id && spinnerValue) {
       dispatch(moveCharacter({ from: playerId, to: id, body }));
       dispatch(decrementSpinnerValue(canMovie.movie));
-      console.log(spinnerValue.num - canMovie.movie);
       if (isDied && enemyChoose) {
         dispatch(setActiveEnemy(null));
-        // dispatch(
-        //   setActiveEnemy({
-        //     id,
-        //     value: body as EnemyType,
-        //   }),
-        // );
       }
       if ((spinnerValue.num - canMovie.movie) === 0) {
         dispatch(setCanPlayerMove(true));
@@ -153,16 +144,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
           dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
           dispatch(setCanPlayerMove(false));
           break;
-        // case 'deadBody':
-        //   (thingCeil.state as CeilInventoriType).value.forEach((el) => {
-        //     dispatch(
-        //       addToPlayerInventory({
-        //         player: activePlayer,
-        //         value: el,
-        //       }),
-        //     );
-        //   });
-        //   break;
         default:
           break;
       }
@@ -232,8 +213,6 @@ const FieldCard = ({ heightField, item }: PropsType) => {
         </div>
       ) : (
         <div ref={movieInfo}>
-          {/* <div className='_movie-text'>{item.id}</div> */}
-          {/* <div className='_small-text'>{item.id}</div> */}
         </div>
       )}
     </div>

@@ -6,7 +6,6 @@ $colorText: #AD1705;
   padding-left: 20px;
 }
 .rules{
-  // background-image: linear-gradient(#BDDB44, #bbdd33, #b4da1d);
   background-color: var(--background-rules-page);
   transition: all 0.25s ease;
   position: relative;
@@ -88,7 +87,6 @@ $colorText: #AD1705;
     right: 0;
     background-color: #000000a6;
     transition: all 0.5s ease;
-    // opacity: 0;
     transform: translateY(-100vh);
   }
   &__btn{

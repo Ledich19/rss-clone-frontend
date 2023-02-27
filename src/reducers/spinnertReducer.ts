@@ -60,7 +60,6 @@ const spinnerSlice = createSlice({
     setIsNearEnemy(state, actions: {
       payload: { id: string, type: string }[] | null; type: string;
     }) {
-      console.log('ine', actions.payload);
       return { ...state, isNearbyEnemy: actions.payload };
     },
     setIsSpinnerActive(state, actions: {

@@ -28,7 +28,6 @@ const GameField = () => {
   const heightField = gameFieldMatrix.length;
   const useCharactersTypes = characters.map((character) => character.type);
 
-  // fight
   useEffect(() => {
     const gameFieldArr = gameFieldMatrix.flat(1);
     const player = characters.find((ceil) => ceil.type === activePlayer);
@@ -36,12 +35,7 @@ const GameField = () => {
     const playerWeaponObj = player?.inventory?.filter(
       (e) => e.category === 'weapon',
     ) as WeaponType[];
-    // console.log('playerWeaponObj', playerWeaponObj);
-    console.log('isNearbyEnemy F', isNearbyEnemy);
-    // console.log('player', player);
-    // console.log('playerPosition', playerPosition);
     if (isNearbyEnemy && player && playerPosition) {
-      console.log('fight start');
       const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
       const health = characters.find((ch) => ch.type === activePlayer)?.health;
       switch (true) {
@@ -51,13 +45,10 @@ const GameField = () => {
         case value.num === 2 && !canPlayerMove:
           dispatch(decrementHealth(activePlayer));
           dispatch(setSpinnerValue({ num: 0 }));
-          console.log('health', health);
           if (health && (health === 1)) {
-            console.log('drop');
             const playerId = getActivePlayerCeil(gameFieldMatrix, activePlayer)?.id;
             const activePlayerNow = characters.find((ch) => ch.type === activePlayer);
             if (activePlayerNow && activePlayerNow.inventory && playerId) {
-              console.log('drop', activePlayerNow.inventory);
               dispatch(setDiedBodyInventory({ id: playerId, value: activePlayerNow.inventory }));
               dispatch(setAlivePlayer({ type: activePlayer, value: false }));
               dispatch(setCanPlayerMove(true));
@@ -74,7 +65,6 @@ const GameField = () => {
           }
           dispatch(setSpinnerValue({ num: 0 }));
           dispatch(removeCardState(isNearbyEnemy[0].id));
-          console.log('kill', playerPosition.id, isNearbyEnemy[0].id, player);
           dispatch(
             moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0].id, body: player }),
           );
@@ -87,7 +77,6 @@ const GameField = () => {
       dispatch(setIsSpinnerActive(true));
     }
   }, [isNearbyEnemy, value]);
-  // check next player
   useEffect(() => {
     const isEnemy = gameFieldMatrix
       .flat(1)
@@ -127,7 +116,6 @@ const GameField = () => {
               );
             }
             if (item.state && item.state.category === 'deadBody') {
-              console.log('deadBody iss');
               return (
                 <FieldCardDeadBody
                   position={{ row: i, col: j }}

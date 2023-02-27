@@ -53,7 +53,6 @@ const FieldCardDeadBody = ({ heightField, item }: PropsType) => {
       }, 1000);
     }
   };
-  console.log('body', state);
 
   return (
     <div

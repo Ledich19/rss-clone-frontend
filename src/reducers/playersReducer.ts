@@ -4,51 +4,7 @@ import {
 } from '../app/types';
 
 const initialState: Players = {
-  characters: [
-    // {
-    //   category: 'character',
-    //   isVisible: true,
-    //   active: true,
-    //   type: 'boris',
-    //   name: 'Борис',
-    //   img: 'characters/boris.png',
-    //   playerName: '',
-    //   description: '',
-    //   count: 1,
-    //   health: 5,
-    //   inventory: [{
-    //     category: 'weapon',
-    //     isVisible: false,
-    //     type: 'axe',
-    //     name: 'Топор',
-    //     img: 'weapon/axe.png',
-    //     description: '',
-    //     use: 'sword',
-    //     count: 1,
-    //   }],
-    // },
-    // {
-    //   isVisible: true,
-    //   category: 'character',
-    //   active: true,
-    //   type: 'sasha',
-    //   name: 'Саша',
-    //   img: 'characters/sasha.png',
-    //   playerName: '',
-    //   description: '.',
-    //   count: 1,
-    //   health: 3,
-    //   inventory: [{
-    //     category: 'thing',
-    //     isVisible: false,
-    //     type: 'plank',
-    //     name: 'Доски',
-    //     img: 'things/plank.png',
-    //     description: '',
-    //     count: 8,
-    //   }],
-    // },
-  ],
+  characters: [],
   activePlayer: 'boris',
   enemyChoose: null,
   canPlayerMove: true,
@@ -175,7 +131,6 @@ const playersSlice = createSlice({
       payload: boolean;
       type: string;
     }) {
-      console.log('set canPlayerMove');
       return { ...state, canPlayerMove: actions.payload };
     },
     setNextActivePlayer(state, actions: {
