@@ -14,6 +14,7 @@ const Spinner = () => {
   let startTime = performance.now();
   const [startAngle, setStartAngle] = useState(0);
   let timeProgress = 0;
+  let isSpinning = false;
   const dispatch = useAppDispatch();
   const audioSpinMax = new Audio('./sounds/spinner.mp3');
   const audioSpin = new Audio('./sounds/spinner-1.mp3');
@@ -53,6 +54,8 @@ const Spinner = () => {
         setResultImage(topLeftImage);
       }
       dispatch(setSpinnerValue(result));
+      dispatch(setIsSpinnerActive(false));
+      isSpinning = false;
       audioSpin.pause();
       audioSpin.currentTime = 0;
       audioSpinMax.pause();
@@ -78,7 +81,6 @@ const Spinner = () => {
     const angle = (startAngle + timeProgress + random + 90);
     setStartAngle((startAngle + timeProgress + random) % 360);
     checkResult(angle);
-    dispatch(setIsSpinnerActive(false));
   }
 
   function renderProgress() {
@@ -94,7 +96,8 @@ const Spinner = () => {
   }
 
   function startSpin() {
-    if (active) {
+    if (active && !isSpinning) {
+      isSpinning = true;
       timeProgress = performance.now() - startTime;
       if (timeProgress > 3000) timeProgress = 3000;
       setProgressTransitionStyle(timeProgress);
@@ -112,7 +115,7 @@ const Spinner = () => {
   return (
     <div className="spinner__wrapper">
       <img className="spinner__background" src={background} alt="background" />
-      <div className="spinner" style={active ? { filter: 'none' } : { filter: 'grayscale(50%) blur(1px)' }}>
+      <div className="spinner" style={active ? { filter: 'none' } : { filter: 'grayscale(35%)' }}>
       <div className="spinner__field"
       onMouseDown={ () => renderProgress() }
       onMouseUp={ () => startSpin() }
