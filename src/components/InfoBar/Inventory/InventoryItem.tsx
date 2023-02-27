@@ -5,12 +5,11 @@ import {
   incrementHealth,
   deleteFromPlayerInventory,
   setCanPlayerMove,
-  setNextActivePlayer,
 } from '../../../reducers/playersReducer';
 import { setIsNearEnemy } from '../../../reducers/spinnertReducer';
 import { removeCardState, addPlankState } from '../../../reducers/gameBoardReducer';
 import { BoardItemType } from '../../../app/types';
-import { getActivePlayerCeil, getNextPlayer } from '../../../app/healpers';
+import { getActivePlayerCeil } from '../../../app/healpers';
 
 interface Props {
   img: string;
@@ -23,7 +22,7 @@ const InventoryItem = (props: Props) => {
   const [isPopup, setIsPopup] = useState(false);
   const { isNearbyEnemy } = useAppSelector((state) => state.spinner);
   const gameField = useAppSelector((state) => state.game);
-  const { canPlayerMove, characters, activePlayer } = useAppSelector((state) => state.characters);
+  const { canPlayerMove } = useAppSelector((state) => state.characters);
   const { sound, gameVolume } = useAppSelector((state) => state.options);
   const dispatch = useAppDispatch();
   const audioFirstAidKit = new Audio('./sounds/fak.mp3');
@@ -158,7 +157,7 @@ const InventoryItem = (props: Props) => {
       dispatch(removeCardState(cell.id));
       if (isNearbyEnemy) {
         const newIsNearbyEnemy: { id: string, type: string }[] | null = isNearbyEnemy.filter(
-          (el, idx) => el.id !== cell?.id,
+          (el) => el.id !== cell?.id,
         );
         if (newIsNearbyEnemy.length) {
           dispatch(setIsNearEnemy(newIsNearbyEnemy));

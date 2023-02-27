@@ -1,5 +1,3 @@
-import { ThingType, WeaponType } from '../../../app/types';
-
 interface Props {
   descr: string
 }
