@@ -77,6 +77,7 @@ const GameField = () => {
       dispatch(setIsSpinnerActive(true));
     }
   }, [isNearbyEnemy, value]);
+
   useEffect(() => {
     const isEnemy = gameFieldMatrix
       .flat(1)

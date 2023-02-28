@@ -140,6 +140,9 @@ const FieldCard = ({ heightField, item }: PropsType) => {
             dispatch(setIsSpinnerActive(true));
           }, 1000);
           break;
+        case 'character':
+          dispatch(setIsSpinnerActive(true));
+          break;
         case 'enemy':
           dispatch(setIsNearEnemy([{ id: thingCeil.id, type: thingCeil.state.type }]));
           dispatch(setCanPlayerMove(false));
