@@ -7,7 +7,6 @@ import { shuffleArray } from '../../app/healpers';
 import { setNewGameField } from '../../reducers/gameBoardReducer';
 
 const ButtonBlock = () => {
-  const gameFieldMatrix = useAppSelector((state) => state.game);
   const gameFieldNewMatrix = useAppSelector((state) => state.gameSet.board);
   const gameCardsSet = useAppSelector((state) => state.gameSet.cards);
   const { characters } = useAppSelector((state) => state.characters);
@@ -31,7 +30,7 @@ const ButtonBlock = () => {
     dispatch(setActivePlayer(characters[0].type));
     navigate('/game');
 
-    const emptyCeilIdsForPlayer = gameFieldMatrix
+    const emptyCeilIdsForPlayer = gameFieldNewMatrix
       .flatMap((row) => row.filter((ceil) => ceil.value === 'player'))
       .map((ceil) => ceil.id);
 
@@ -53,7 +52,7 @@ const ButtonBlock = () => {
       .map((card) => Array(card.count).fill(card))
       .flat(1);
 
-    const emptyCellIds = gameFieldMatrix
+    const emptyCellIds = gameFieldNewMatrix
       .flat(1)
       .filter((ceil) => !ceil.state)
       .map((ceil) => ceil.id);
