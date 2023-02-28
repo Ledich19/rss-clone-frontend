@@ -10,11 +10,6 @@
   &__items{
     background: var(--background-item-text);
     padding: 20px;
-    & ,.visible {
-      background-image: url(../../../../public/images/tutorial_page/paper.jpg);
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-    }
   }
   &__label{
     color:var(--txt-base-color);
