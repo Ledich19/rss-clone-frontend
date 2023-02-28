@@ -19,10 +19,8 @@ const InfoBar = () => {
     currentPlayerWeapons = currentPlayer.inventory.filter((el) => el.category === 'weapon');
     currentPlayerThings = currentPlayer.inventory.filter((el) => el.category === 'things');
   }
-  const background = theme === 'default' ? './images/metal3.jpg' : './images/metal1.jpeg';
   return (
     <div className="info" >
-      <img className="info__background" src={background} alt="background" />
       <div className="info__active-player_name" style={theme === 'default' ? { backgroundImage: 'url(./images/planck2.png)' } : { backgroundImage: 'url(./images/planck2darck.png)' } }>
         <span>Player turn: {currentPlayer?.type}</span>
       </div>
