@@ -37,18 +37,17 @@
   &__btn{
     cursor: pointer;
     color: var(--color-text-rules-page);
-    background-image: var(--background-item-btn);
+    // background-image: var(--background-item-btn);
     font-weight: 900;
     font-size: 20px;
     margin-top: -5px;
     width: 20px;
     height: 20px;
-    background: url(../../../../public/images/tutorial_page/arrow-down.svg)center/ 20px 20px no-repeat;
+    background: var(--background-item-btn) center/ 20px 20px no-repeat;
     transition: all 0.5s ease;
   }
   &__text{
     background: var(--background-item-text) repeat;
-    // background-size: 400%;
     border-radius: 10px;
     padding: 0px;
     max-height: 0;
