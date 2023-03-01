@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { getNextPlayer, getActivePlayerCeil } from '../../app/healpers';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { WeaponType } from '../../app/types';
+import { CharacterType, WeaponType } from '../../app/types';
 import {
   moveCharacter,
   removeCardState,
@@ -35,6 +35,32 @@ const GameField = () => {
     const playerWeaponObj = player?.inventory?.filter(
       (e) => e.category === 'weapon',
     ) as WeaponType[];
+    const useWeapon = (playerId: string, enemyId: string, playerObj: CharacterType) => {
+      dispatch(setSpinnerValue({ num: 0 }));
+      dispatch(removeCardState(enemyId));
+      dispatch(
+        moveCharacter({ from: playerId, to: enemyId, body: playerObj }),
+      );
+      dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+      dispatch(setCanPlayerMove(true));
+    };
+    const useBit = (nearbyEnemy: { id: string; type: string }[], health = 0) => {
+      dispatch(decrementHealth(activePlayer));
+      dispatch(setSpinnerValue({ num: 0 }));
+      if (health && (health === 1)) {
+        const playerId = getActivePlayerCeil(gameFieldMatrix, activePlayer)?.id;
+        const activePlayerNow = characters.find((ch) => ch.type === activePlayer);
+        if (activePlayerNow && activePlayerNow.inventory && playerId) {
+          dispatch(setDiedBodyInventory({ id: playerId, value: activePlayerNow.inventory }));
+          dispatch(setAlivePlayer({ type: activePlayer, value: false }));
+          dispatch(setCanPlayerMove(true));
+          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
+        }
+      } else {
+        dispatch(setIsNearEnemy([...nearbyEnemy]));
+      }
+    };
+
     if (isNearbyEnemy && player && playerPosition) {
       const playerWeapon = playerWeaponObj.map((weapon) => weapon.use);
       const health = characters.find((ch) => ch.type === activePlayer)?.health;
@@ -43,33 +69,12 @@ const GameField = () => {
           dispatch(setCanPlayerMove(true));
           break;
         case value.num === 2 && !canPlayerMove:
-          dispatch(decrementHealth(activePlayer));
-          dispatch(setSpinnerValue({ num: 0 }));
-          if (health && (health === 1)) {
-            const playerId = getActivePlayerCeil(gameFieldMatrix, activePlayer)?.id;
-            const activePlayerNow = characters.find((ch) => ch.type === activePlayer);
-            if (activePlayerNow && activePlayerNow.inventory && playerId) {
-              dispatch(setDiedBodyInventory({ id: playerId, value: activePlayerNow.inventory }));
-              dispatch(setAlivePlayer({ type: activePlayer, value: false }));
-              dispatch(setCanPlayerMove(true));
-              dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-            }
-          } else {
-            dispatch(setIsNearEnemy([...isNearbyEnemy]));
-          }
+          useBit(isNearbyEnemy, health);
           break;
         case value.num === 3 && playerWeapon?.includes('sword'):
         case value.num === 4 && playerWeapon?.includes('aim'):
-          if (isNearbyEnemy[0].type === 'boss' || canPlayerMove) {
-            break;
-          }
-          dispatch(setSpinnerValue({ num: 0 }));
-          dispatch(removeCardState(isNearbyEnemy[0].id));
-          dispatch(
-            moveCharacter({ from: playerPosition.id, to: isNearbyEnemy[0].id, body: player }),
-          );
-          dispatch(setNextActivePlayer(getNextPlayer(characters, activePlayer)));
-          dispatch(setCanPlayerMove(true));
+          if (isNearbyEnemy[0].type === 'boss' || canPlayerMove) break;
+          useWeapon(isNearbyEnemy[0].id, playerPosition.id, player);
           break;
         default:
           break;
