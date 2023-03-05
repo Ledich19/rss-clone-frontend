@@ -8,7 +8,7 @@
     transition: all .5s ease;
   }
   &__items{
-    background: var(--background-item-text);
+    background: var(--background-item-text) 0 0 / 100% no-repeat;
     padding: 20px;
   }
   &__label{
