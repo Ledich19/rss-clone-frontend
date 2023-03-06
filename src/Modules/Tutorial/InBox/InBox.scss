@@ -1,0 +1,70 @@
+
+.inbox{
+  &__content{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 0px;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    max-height: 0;
+    transition: all 0.5s ease;
+    background: var(--background-item-text)0 0 / cover no-repeat;
+  }
+}
+
+.element{
+  position: relative;
+  &__title{
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    z-index: 5;
+    margin-bottom: 10px;
+    color: var(--color-text-qa-question);
+  }
+  &__list{
+    box-sizing: border-box;
+    padding-left: 15px;
+  }
+  &__item-list{
+    position: relative;
+    color: var(--txt-base-color);
+    &:before{
+      content: "";
+      width: 12px;
+      height: 12px;
+      background:#000;
+      position: absolute;
+      top: 5px;
+      left: -15px;
+    }
+    &_monstrs{
+      &::before{
+        background: var(--image-card-item-monstrs);
+      }
+    }
+    &_weapons{
+      &::before{
+        background: var(--image-card-item-weapons);
+        top: 6px;
+        transform: rotate(-10deg);
+      }
+    }
+    &_clothes{
+      &::before{
+        background: var(--image-card-item-clothes);
+      }
+    }
+    &_players{
+      &::before{
+        background: var(--image-card-item-players);
+      }
+    }
+  }
+}
+.visible {
+  max-height: 2000px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.75);
+}

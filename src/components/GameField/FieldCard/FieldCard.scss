@@ -1,0 +1,53 @@
+.field-card {
+  border-radius: 5px;
+  border: solid 2px rgba(0, 0, 0, 0);
+  font-weight: bold;
+  font-size: 2em;
+  color: #854ca3;
+  font-family: 'Fredoka One', cursive;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  & ._small-text {
+    font-size: 0.6rem;
+  }
+  //border: solid 1px yellow;
+  //background: rgba(21, 139, 186, 0.313);
+  img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+
+
+.flip-container {
+  perspective: 1000;
+  }
+   
+  .flip-container   {
+    ._front {
+      transform: rotateY(180deg);
+    }
+  }
+   
+  .flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+   
+  position: relative;
+  }
+  .front, .back {
+  backface-visibility: hidden;
+   
+  position: absolute;
+  top: 0;
+  left: 0;
+  }
+  .front {
+  z-index: 2;
+  }
+  .back {
+  transform: rotateY(180deg);
+  }

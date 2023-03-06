@@ -1,0 +1,92 @@
+.App {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  background: var(--background-start-page);
+  background-size: cover;
+}
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka+One&display=swap');
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-float infinite 3s ease-in-out;
+  }
+}
+
+*[data-tooltip]:hover:after {
+  position: absolute;
+  transform: translate(0%, -100%);
+  content: attr(data-tooltip);
+  color: #916e62;
+  border-radius: 15px;
+  border: solid 1px #916e62;
+  background-color: #d8d9cc;
+  padding: 5px;
+}
+:root[data-theme='default'] {
+  --color-text-qa-question: #000;
+  --color-rules-burger-span: #ff9900;
+  --color-text-start-footer-year: #ff9900;
+  --colot-text-options: #ff9900;
+  --border-color-switcher-box: #ff9900;
+  --txt-base-color: #000;
+  --background-rules-page: #bbdd33;
+  --color-amount-label: #bddb44;
+  --color-amount-inputs: #bddb44;
+  --color-text-rules-page: #ad1705;
+  --background-rules-up-btn-hover: #9bb913;
+  --background-card-item: #bdaa7d;
+  --background-card-item-desc: #fff;
+  --color-start-menu-btn: #41514a;
+  --color-start-menu-btn-hover: #1c523a;
+  --background-player-option: #5c341bb6;
+  --background-item-text: url(../public/images/tutorial_page/paper.jpg);
+  --background-item-btn: url(../public/images/tutorial_page/arrow-down.svg);
+  --background-rules-up-btn: url(../public/images/tutorial_page/arrow-top2.png) center no-repeat,
+    #a4d649;
+  --background-start-page: url(../public/images/start_bg.png);
+  --start-menu-btn: url(../public/images/planck.png);
+  --start-btn: url(../public/images/planck2.png);
+  --start-btn-disabled: url(../public/images/planck2darck.png);
+  --background-options-board: url(../public/images/wood.png);
+  --background-rss-logo: url(../public/images/rss.svg) 0 0 / 100% no-repeat;
+  --background-start-footer-hand: url(../public/images/zombieIconForGit.png) 0 0 / 100% no-repeat;
+  --image-card-item-clothes: url(../public/images/tutorial_page/clothes.svg) 0 0/ 12px 12px no-repeat;
+  --image-card-item-players: url(../public/images/tutorial_page/user.svg) 0 0/ 12px 12px no-repeat;
+  --image-card-item-weapons: url(../public/images/tutorial_page/weapons.svg) 0 0/ 12px 12px no-repeat;
+  --image-card-item-monstrs: url(../public/images/tutorial_page/monster.png) 0 0/ 12px 12px no-repeat;
+}
+:root[data-theme='dark'] {
+  --color-text-qa-question: #2c6abb;
+  --txt-base-color: #22d3ff;
+  --color-text-start-footer-year: #0f5a6d;
+  --colot-text-options: #2caac6;
+  --color-text-rules-page: #22d3ff;
+  --color-amount-label: #66e1fc;
+  --border-color-switcher-box: #2caac6;
+  --color-rules-burger-span: #2caac6;
+  --background-rules-page: #001318;
+  --background-rules-up-btn-hover: #ffffff;
+  --background-card-item: #2a2a65;
+  --background-card-item-desc: #10022f;
+  --color-start-menu-btn: #0d353d;
+  --color-start-menu-btn-hover: #081c22;
+  --background-player-option: #0f5a6d78;
+  --color-amount-inputs: #19292d;
+  --background-item-btn: url(../public/images/tutorial_page/arrow-down-dark.svg);
+  --background-rules-up-btn: url('../public/images/tutorial_page/arrow-top2-dark.png') center
+      no-repeat,
+    #c9c9c9;
+  --background-item-text: url(../public/images/tutorial_page/paper-dark.jpg);
+  --background-start-page: url(../public/images/home-dark-bg.jpg);
+  --start-btn: url(../public/images/planck-dark.png);
+  --start-menu-btn: url(../public/images/planck-dark.png);
+  --start-btn-disabled: url(../public/images/planck-dark-2.png);
+  --background-options-board: url(../public/images/board-dark.jpg);
+  --background-rss-logo: url(../public/images/rss-dark.svg) 0 0 / 100% no-repeat;
+  --background-start-footer-hand: url(../public/images/hand-dark.png) 0 0 / 100% no-repeat;
+  --image-card-item-clothes: url(../public/images/tutorial_page/clothes-dark.svg) 0 0/ 12px 12px no-repeat;
+  --image-card-item-players: url(../public/images/tutorial_page/user-dark.svg) 0 0/ 12px 12px no-repeat;
+  --image-card-item-weapons: url(../public/images/tutorial_page/weapons-dark.svg) 0 0/ 12px 12px no-repeat;
+  --image-card-item-monstrs: url(../public/images/tutorial_page/monster-dark.png) 0 0/ 12px 12px no-repeat;
+}

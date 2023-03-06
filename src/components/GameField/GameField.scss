@@ -1,0 +1,15 @@
+.field {
+  background-image: url(./../../../public/images/maps/zvdkarta3.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  &__row{
+    display: flex;
+  }
+  &__item{
+   
+  }
+  &__img{
+    height: 50px;
+    width: 50px;
+  }
+}

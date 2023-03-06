@@ -1,0 +1,19 @@
+.dead-body {
+  border-radius: 5px;
+  font-size: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  cursor: pointer;
+  &:hover{
+    background: rgb(220, 217, 7);
+  }
+}
+.dead-body__item {
+  img {
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    }
+}

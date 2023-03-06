@@ -1,0 +1,35 @@
+.qa {
+  &__title{
+    color: var(--color-text-rules-page);
+    font-weight: 500;
+    font-size: 24px;
+    margin-left: -10px;
+    margin-bottom: 20px;
+    transition: all 0.5s ease;
+  }
+  &__item{
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+  &__question{
+    font-weight: 500;
+    font-size: 16px;
+    position: relative;
+    transition: all 0.5s ease;
+    color: var(--color-text-qa-question);
+    &:before{
+      content: '';
+      width: 20px;
+      height: 2px;
+      position: absolute;
+      left: -30px;
+      top: 10px;
+      background-color: var(--color-text-rules-page);
+    }
+  }
+  &__answer{
+    color: var(--txt-base-color);
+    font-size: 14px;
+    transition: all 0.5s ease;
+  }
+}

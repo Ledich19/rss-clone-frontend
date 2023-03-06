@@ -1,0 +1,10 @@
+.start {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-image: var(--background-start-page);
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}

@@ -1,0 +1,42 @@
+.start-footer {
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  &__item {
+    display: flex;
+    justify-content: center;
+    flex-basis: 33%;
+    &_first {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    &_third {
+      justify-content: flex-end;
+    }
+  }
+  &__developer{
+    background: var(--background-start-footer-hand);
+    width: 50px;
+    height: 50px;
+  }
+  &__developer,
+  &__rs-img {
+    height: 50px;
+    cursor: pointer;
+  }
+  &__rs-img {
+    height: 40px;
+  }
+  &__rs-link{
+    width: 110px;
+    height: 40px;
+    background: var(--background-rss-logo);
+  }
+  &__year {
+    color: var(--color-text-start-footer-year);
+    margin-left: 30px;
+    font-weight: bold;
+  }
+}
